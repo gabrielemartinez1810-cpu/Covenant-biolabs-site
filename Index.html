@@ -3,62 +3,107 @@
 <head>
   <title>Covenant Biolabs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
   <style>
     body {
       background:#0b0f1a;
       color:white;
-      font-family:sans-serif;
+      font-family:Arial, sans-serif;
       padding:20px;
     }
+
+    h1 {
+      text-align:center;
+      margin-bottom:10px;
+    }
+
+    p.top {
+      text-align:center;
+      color:#94a3b8;
+      margin-bottom:30px;
+    }
+
+    .grid {
+      display:grid;
+      gap:15px;
+    }
+
     .card {
       border:1px solid #1e293b;
       padding:15px;
-      margin-bottom:15px;
+      border-radius:8px;
+      background:#0f172a;
     }
+
     button {
       padding:10px;
-      background:cyan;
+      background:#06b6d4;
       border:none;
+      border-radius:5px;
       cursor:pointer;
+      margin-top:10px;
     }
+
+    .order-box {
+      margin-top:40px;
+      padding:20px;
+      border-top:1px solid #1e293b;
+    }
+
   </style>
 </head>
 
 <body>
 
 <h1>Covenant Biolabs</h1>
-<p>Research Use Only • Not For Human Consumption • 21+</p>
+<p class="top">Research Use Only • Not For Human Consumption • 21+</p>
 
-<div class="card">
-  <h2>Retatrutide 20mg</h2>
-  <p>$120</p>
-  <button onclick="order('Retatrutide 20mg')">Order</button>
+<div class="grid">
+
+  <div class="card">
+    <h2>Retatrutide 20mg</h2>
+    <p>$120</p>
+    <button onclick="order('Retatrutide 20mg')">Order</button>
+  </div>
+
+  <div class="card">
+    <h2>Cagrilintide 5mg</h2>
+    <p>$70</p>
+    <button onclick="order('Cagrilintide 5mg')">Order</button>
+  </div>
+
+  <div class="card">
+    <h2>IGF-1 LR3 1mg</h2>
+    <p>$75</p>
+    <button onclick="order('IGF-1 LR3 1mg')">Order</button>
+  </div>
+
+  <div class="card">
+    <h2>Tesamorelin 5mg</h2>
+    <p>$40</p>
+    <button onclick="order('Tesamorelin 5mg')">Order</button>
+  </div>
+
+  <div class="card">
+    <h2>SS-31 10mg</h2>
+    <p>$40</p>
+    <button onclick="order('SS-31 10mg')">Order</button>
+  </div>
+
+  <div class="card">
+    <h2>MOTS-c 10mg</h2>
+    <p>$40</p>
+    <button onclick="order('MOTS-c 10mg')">Order</button>
+  </div>
+
 </div>
 
-<div class="card">
-  <h2>Cagrilintide 5mg</h2>
-  <p>$70</p>
-  <button onclick="order('Cagrilintide 5mg')">Order</button>
+<div class="order-box">
+  <h2>Order Information</h2>
+  <p>Email: orders@covenantbiolabs.com</p>
+  <p>Zelle: orders@covenantbiolabs.com</p>
+  <p>Cash App: $covenantbiolabs</p>
 </div>
-
-<div class="card">
-  <h2>IGF-1 LR3 1mg</h2>
-  <p>$75</p>
-  <button onclick="order('IGF-1 LR3 1mg')">Order</button>
-</div>
-
-<div class="card">
-  <h2>TESAMORELIN 5mg</h2>
-  <p>$40</p>
-  <button onclick="order('Tesamorelin 5mg')">Order</button>
-</div>
-
-<hr>
-
-<h2>Order</h2>
-<p>Email: orders@covenantbiolabs.com</p>
-<p>Zelle: orders@covenantbiolabs.com</p>
-<p>Cash App: $covenantbiolabs</p>
 
 <script>
 function order(product){

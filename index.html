@@ -4,23 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Covenant Bio Labs</title>
-  <meta name="description" content="Covenant Bio Labs premium research catalog." />
+  <meta name="description" content="Premium research catalog." />
   <style>
     :root{
       --bg:#04070d;
       --bg2:#08111d;
-      --panel:rgba(8,12,22,.76);
-      --panel2:rgba(10,16,28,.92);
-      --line:rgba(103,182,255,.20);
-      --blue:#2c7fff;
-      --blue2:#6ec8ff;
-      --blue3:#b9e7ff;
+      --panel:rgba(7,12,22,.80);
+      --panel2:rgba(10,16,28,.96);
+      --line:rgba(103,182,255,.22);
+      --blue:#2b7dff;
+      --blue2:#67d5ff;
+      --blue3:#b9edff;
       --green:#65df87;
-      --white:#f4f8ff;
-      --muted:#b4bfd3;
-      --shadow:0 22px 55px rgba(0,0,0,.48);
-      --radius:22px;
-      --max:1320px;
+      --white:#f5f8ff;
+      --muted:#b7c3d9;
+      --shadow:0 24px 60px rgba(0,0,0,.50);
+      --radius:24px;
+      --max:1360px;
     }
 
     *{box-sizing:border-box}
@@ -30,71 +30,71 @@
       font-family:Arial, Helvetica, sans-serif;
       color:var(--white);
       background:
-        radial-gradient(circle at 12% 10%, rgba(44,127,255,.16), transparent 22%),
-        radial-gradient(circle at 85% 10%, rgba(110,200,255,.11), transparent 18%),
-        radial-gradient(circle at 78% 82%, rgba(44,127,255,.10), transparent 20%),
-        linear-gradient(180deg, #03060b 0%, #07111c 100%);
+        radial-gradient(circle at 10% 8%, rgba(43,125,255,.14), transparent 22%),
+        radial-gradient(circle at 88% 12%, rgba(103,213,255,.10), transparent 18%),
+        radial-gradient(circle at 84% 88%, rgba(43,125,255,.10), transparent 20%),
+        linear-gradient(180deg,#03060b 0%, #07111b 100%);
       overflow-x:hidden;
     }
 
     .wrap{
-      width:min(var(--max), 94%);
+      width:min(var(--max), 95%);
       margin:0 auto;
+      padding-bottom:40px;
     }
 
     .hero{
-      height:74vh;
-      min-height:420px;
+      margin:22px auto 26px;
+      height:72vh;
+      min-height:400px;
       border-radius:28px;
       overflow:hidden;
-      margin:24px auto 28px;
       position:relative;
       background:url('hero.jpg') center/cover no-repeat;
-      box-shadow:var(--shadow);
       border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
     }
 
     .hero::after{
       content:"";
       position:absolute;
       inset:0;
-      background:rgba(0,0,0,.18);
+      background:rgba(0,0,0,.10);
     }
 
-    .catalog-section{
+    .catalog{
       position:relative;
-      padding:34px 18px 42px;
       border-radius:28px;
       overflow:hidden;
+      padding:34px 20px 40px;
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
       background:
-        linear-gradient(rgba(4,8,15,.78), rgba(4,8,15,.90)),
+        linear-gradient(rgba(4,8,15,.78), rgba(4,8,15,.92)),
         url('hero.jpg') center/cover no-repeat;
     }
 
-    .catalog-section::before{
+    .catalog::before{
       content:"";
       position:absolute;
       inset:0;
       pointer-events:none;
-      opacity:.30;
+      opacity:.22;
       background:
-        radial-gradient(circle at 10% 18%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 16% 24%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 22% 17%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 80% 15%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 88% 24%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 93% 18%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 12% 84%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 18% 76%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 84% 82%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 90% 74%, rgba(110,200,255,.95) 0 2px, transparent 3px),
-        linear-gradient(135deg, transparent 49.8%, rgba(110,200,255,.16) 49.95%, rgba(110,200,255,.16) 50.05%, transparent 50.2%),
-        linear-gradient(45deg, transparent 49.8%, rgba(110,200,255,.08) 49.95%, rgba(110,200,255,.08) 50.05%, transparent 50.2%);
-      background-size:100% 100%;
-      mask-image:radial-gradient(circle at center, black 18%, rgba(0,0,0,.7) 58%, transparent 100%);
-      -webkit-mask-image:radial-gradient(circle at center, black 18%, rgba(0,0,0,.7) 58%, transparent 100%);
+        radial-gradient(circle at 8% 18%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 14% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 20% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 86% 18%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 14%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 10% 84%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 18% 76%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 86% 82%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 74%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        linear-gradient(135deg, transparent 49.85%, rgba(103,213,255,.14) 49.95%, rgba(103,213,255,.14) 50.05%, transparent 50.15%),
+        linear-gradient(45deg, transparent 49.85%, rgba(103,213,255,.08) 49.95%, rgba(103,213,255,.08) 50.05%, transparent 50.15%);
+      mask-image:radial-gradient(circle at center, black 20%, rgba(0,0,0,.7) 62%, transparent 100%);
+      -webkit-mask-image:radial-gradient(circle at center, black 20%, rgba(0,0,0,.7) 62%, transparent 100%);
     }
 
     .catalog-inner{
@@ -102,195 +102,131 @@
       z-index:1;
     }
 
-    .catalog-title{
+    .catalog h2{
+      margin:0 0 10px;
       text-align:center;
-      margin:0 0 22px;
-      font-size:42px;
-      line-height:1;
+      font-size:46px;
       letter-spacing:4px;
       text-transform:uppercase;
-      color:#f7fbff;
+      color:#fff;
     }
 
-    .catalog-subtitle{
+    .catalog .sub{
       text-align:center;
-      margin:0 0 26px;
-      color:#dce8f8;
-      opacity:.88;
-      letter-spacing:1.8px;
+      margin:0 0 28px;
+      font-size:14px;
+      letter-spacing:2px;
       text-transform:uppercase;
-      font-size:15px;
+      color:#dbe8fa;
+      opacity:.9;
     }
 
-    .product-grid{
+    .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns:repeat(auto-fit, minmax(235px, 1fr));
       gap:22px;
     }
 
-    .product-card{
-      position:relative;
+    .card{
+      background:linear-gradient(180deg, rgba(7,11,20,.78), rgba(9,15,26,.94));
+      border:1px solid rgba(103,182,255,.22);
       border-radius:22px;
       padding:20px 18px 18px;
-      border:1px solid rgba(120,180,255,.25);
-      background:linear-gradient(180deg, rgba(6,10,18,.76), rgba(7,12,22,.92));
-      backdrop-filter:blur(7px);
-      -webkit-backdrop-filter:blur(7px);
-      box-shadow:0 14px 36px rgba(0,0,0,.38);
-      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow:0 16px 36px rgba(0,0,0,.34);
+      transition:.22s ease;
+      cursor:pointer;
+      text-align:center;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
-    .product-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 22px 48px rgba(0,0,0,.48);
-      border-color:rgba(110,200,255,.42);
+    .card:hover{
+      transform:translateY(-5px);
+      border-color:rgba(103,213,255,.42);
+      box-shadow:0 24px 48px rgba(0,0,0,.42);
     }
 
-    .bottle-wrap{
-      position:relative;
-      width:138px;
-      margin:0 auto 16px;
-      filter:drop-shadow(0 14px 18px rgba(0,0,0,.45));
-    }
-
-    .bottle-wrap img{
-      width:100%;
+    .card img{
+      width:145px;
+      max-width:100%;
       height:auto;
       display:block;
-      border-radius:8px;
+      margin:0 auto 16px;
+      filter:drop-shadow(0 16px 18px rgba(0,0,0,.40));
     }
 
-    /* Overlay label to make each bottle match the correct product */
-    .bottle-label{
-      position:absolute;
-      left:18%;
-      right:18%;
-      top:56%;
-      transform:translateY(-50%);
-      background:rgba(8,11,18,.92);
-      border:1px solid rgba(109,200,255,.24);
-      border-radius:8px;
-      padding:7px 5px 6px;
-      text-align:center;
-      box-shadow:0 0 0 1px rgba(255,255,255,.03) inset;
-    }
-
-    .bottle-brand{
-      display:block;
-      font-size:7px;
-      line-height:1.1;
-      color:#f7fbff;
-      letter-spacing:.7px;
-      text-transform:uppercase;
-      font-weight:700;
-      margin-bottom:4px;
-    }
-
-    .bottle-name{
-      display:block;
-      font-size:10px;
-      line-height:1.1;
-      color:#ffffff;
-      font-weight:800;
-      letter-spacing:.2px;
-      text-transform:uppercase;
-    }
-
-    .bottle-mg{
-      display:block;
-      margin-top:3px;
-      font-size:11px;
-      line-height:1;
-      color:var(--blue2);
-      font-weight:900;
-      letter-spacing:.2px;
-    }
-
-    .product-name{
-      text-align:center;
+    .card h3{
+      margin:0 0 8px;
       font-size:18px;
       line-height:1.2;
-      font-weight:800;
-      margin:0 0 8px;
-      color:#f5f8ff;
+      color:#fff;
     }
 
-    .product-price{
-      text-align:center;
+    .price{
+      margin:0 0 14px;
       color:var(--green);
       font-size:18px;
-      font-weight:900;
-      margin-bottom:14px;
+      font-weight:800;
     }
 
-    .product-btn{
-      display:block;
+    .card button{
       width:100%;
       min-height:42px;
       border:none;
       border-radius:12px;
-      cursor:pointer;
       font-weight:800;
-      letter-spacing:.4px;
-      color:#0a1220;
-      background:linear-gradient(180deg, #6eeaff, #39d4ff);
-      box-shadow:0 10px 20px rgba(54,195,255,.22);
-    }
-
-    .product-btn:hover{
-      opacity:.94;
+      letter-spacing:.3px;
+      color:#07101d;
+      background:linear-gradient(180deg,#79eaff,#2fd5ff);
+      box-shadow:0 10px 18px rgba(47,213,255,.18);
+      cursor:pointer;
     }
 
     .footer{
       text-align:center;
-      color:#d5dfef;
-      opacity:.72;
+      padding:26px 0 6px;
       font-size:12px;
       line-height:1.7;
-      padding:28px 0 40px;
+      color:#d7e2f3;
+      opacity:.72;
     }
 
-    /* Modal */
-    .modal{
+    #productModal{
+      display:none;
       position:fixed;
       inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.76);
+      z-index:9999;
+      background:rgba(0,0,0,.78);
       backdrop-filter:blur(6px);
       -webkit-backdrop-filter:blur(6px);
+      align-items:center;
+      justify-content:center;
       padding:20px;
-      z-index:999;
     }
 
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-card{
+    .modal-box{
       width:min(980px, 100%);
-      border-radius:26px;
+      border-radius:28px;
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(rgba(4,8,15,.82), rgba(4,8,15,.94)),
-        url('hero.jpg') center/cover no-repeat;
-      box-shadow:0 36px 80px rgba(0,0,0,.56);
       position:relative;
+      background:
+        linear-gradient(rgba(4,8,15,.84), rgba(4,8,15,.95)),
+        url('hero.jpg') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 34px 80px rgba(0,0,0,.56);
     }
 
-    .modal-card::before{
+    .modal-box::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 75% 26%, rgba(44,127,255,.16), transparent 20%),
-        linear-gradient(180deg, rgba(3,6,12,.20), rgba(3,6,12,.44));
+        radial-gradient(circle at 78% 28%, rgba(43,125,255,.16), transparent 22%),
+        linear-gradient(180deg, rgba(3,6,12,.18), rgba(3,6,12,.38));
       pointer-events:none;
     }
 
-    .close-btn{
+    .close{
       position:absolute;
       top:16px;
       right:16px;
@@ -298,118 +234,67 @@
       height:44px;
       border:none;
       border-radius:12px;
-      cursor:pointer;
       background:rgba(255,255,255,.08);
       color:#fff;
       font-size:24px;
+      line-height:1;
+      cursor:pointer;
       z-index:2;
     }
 
-    .modal-inner{
+    .modal-content{
       position:relative;
       z-index:1;
-      padding:28px;
-    }
-
-    .modal-grid{
       display:grid;
       grid-template-columns:280px 1fr;
       gap:28px;
+      padding:30px;
       align-items:start;
     }
 
-    .modal-bottle{
-      position:relative;
-      max-width:240px;
-      margin:8px auto 0;
-      filter:drop-shadow(0 20px 28px rgba(0,0,0,.5));
-    }
-
-    .modal-bottle img{
+    .modal-left img{
       width:100%;
-      height:auto;
+      max-width:240px;
       display:block;
-      border-radius:10px;
+      margin:6px auto 0;
+      filter:drop-shadow(0 20px 24px rgba(0,0,0,.46));
     }
 
-    .modal-label{
-      position:absolute;
-      left:18%;
-      right:18%;
-      top:56%;
-      transform:translateY(-50%);
-      background:rgba(8,11,18,.94);
-      border:1px solid rgba(109,200,255,.24);
-      border-radius:10px;
-      padding:9px 7px 8px;
-      text-align:center;
-    }
-
-    .modal-label .brand{
-      display:block;
-      font-size:10px;
-      line-height:1.1;
-      color:#fff;
-      text-transform:uppercase;
-      font-weight:800;
-      letter-spacing:.8px;
-      margin-bottom:5px;
-    }
-
-    .modal-label .name{
-      display:block;
-      font-size:14px;
-      line-height:1.1;
-      color:#fff;
-      text-transform:uppercase;
-      font-weight:900;
-    }
-
-    .modal-label .mg{
-      display:block;
-      margin-top:4px;
-      font-size:16px;
+    .modal-right h2{
+      margin:0 0 10px;
+      font-size:52px;
       line-height:1;
-      color:var(--blue2);
-      font-weight:900;
-    }
-
-    .modal-title{
-      margin:0 0 12px;
-      font-size:54px;
-      line-height:1;
-      font-weight:900;
-      letter-spacing:.2px;
+      color:#fff;
     }
 
     .modal-price{
-      color:var(--green);
-      font-size:58px;
+      font-size:56px;
       line-height:1;
+      color:var(--green);
       font-weight:900;
       margin-bottom:18px;
     }
 
-    .modal-box{
+    .modal-panel{
       background:rgba(8,12,22,.64);
       border:1px solid rgba(255,255,255,.08);
       border-radius:18px;
       padding:18px;
       margin-bottom:16px;
-      color:#e8eef9;
+      color:#eaf1fb;
     }
 
-    .modal-box h4{
+    .modal-panel h4{
       margin:0 0 10px;
-      color:var(--blue2);
       font-size:20px;
-      letter-spacing:1.5px;
       text-transform:uppercase;
+      letter-spacing:1px;
+      color:var(--blue2);
     }
 
-    .modal-box ul{
+    .modal-panel ul{
       margin:0;
-      padding-left:20px;
+      padding-left:18px;
       line-height:1.7;
     }
 
@@ -417,28 +302,33 @@
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:8px;
+      margin-top:6px;
     }
 
-    .modal-btn{
-      min-height:50px;
+    .modal-actions a,
+    .modal-actions button{
+      min-height:48px;
       padding:0 18px;
       border:none;
       border-radius:14px;
+      font-weight:800;
+      letter-spacing:.5px;
       cursor:pointer;
-      font-weight:900;
-      letter-spacing:.7px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .modal-btn.primary{
+    .coa-btn{
       color:#fff;
-      background:linear-gradient(180deg, #18376a, #102954);
-      border:1px solid rgba(109,160,255,.34);
+      background:linear-gradient(180deg,#18376a,#112955);
+      border:1px solid rgba(103,182,255,.34);
     }
 
-    .modal-btn.secondary{
-      color:#fff;
-      background:linear-gradient(180deg, #2f9f47, #51c768);
+    .info-btn{
+      color:#07101d;
+      background:linear-gradient(180deg,#79eaff,#2fd5ff);
     }
 
     @media (max-width: 920px){
@@ -446,30 +336,22 @@
         height:56vh;
         min-height:320px;
       }
-
-      .modal-grid{
+      .modal-content{
         grid-template-columns:1fr;
       }
-
-      .modal-title{
+      .modal-right h2{
         font-size:38px;
       }
-
       .modal-price{
-        font-size:44px;
+        font-size:42px;
       }
     }
 
     @media (max-width: 640px){
-      .wrap{
-        width:95%;
+      .catalog h2{
+        font-size:34px;
       }
-
-      .catalog-title{
-        font-size:32px;
-      }
-
-      .product-grid{
+      .grid{
         grid-template-columns:1fr;
       }
     }
@@ -479,264 +361,239 @@
   <div class="wrap">
     <section class="hero"></section>
 
-    <section class="catalog-section">
+    <section class="catalog">
       <div class="catalog-inner">
-        <h2 class="catalog-title">Catalog</h2>
-        <div class="catalog-subtitle">Research Use Only • Not for Human Consumption</div>
+        <h2>Catalog</h2>
+        <p class="sub">Research Use Only • Not for Human Consumption</p>
 
-        <div class="product-grid" id="productGrid"></div>
+        <div class="grid">
+          <div class="card" onclick="openProduct('Retatrutide 20mg','$120','retatrutide-20mg.png')">
+            <img src="retatrutide-20mg.png" alt="Retatrutide 20mg">
+            <h3>Retatrutide 20mg</h3>
+            <p class="price">$120</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Cagrilintide 5mg','$70','cagrilintide-5mg.png')">
+            <img src="cagrilintide-5mg.png" alt="Cagrilintide 5mg">
+            <h3>Cagrilintide 5mg</h3>
+            <p class="price">$70</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('IGF-1 LR3 1mg','$75','igf1-lr3-1mg.png')">
+            <img src="igf1-lr3-1mg.png" alt="IGF-1 LR3 1mg">
+            <h3>IGF-1 LR3 1mg</h3>
+            <p class="price">$75</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Tesamorelin 5mg','$40','tesamorelin-5mg.png')">
+            <img src="tesamorelin-5mg.png" alt="Tesamorelin 5mg">
+            <h3>Tesamorelin 5mg</h3>
+            <p class="price">$40</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('NAD+ 500mg','$60','nad-500mg.png')">
+            <img src="nad-500mg.png" alt="NAD+ 500mg">
+            <h3>NAD+ 500mg</h3>
+            <p class="price">$60</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('DISP 10mg','$70','disp-10mg.png')">
+            <img src="disp-10mg.png" alt="DISP 10mg">
+            <h3>DISP 10mg</h3>
+            <p class="price">$70</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('MOTS-C 10mg','$40','mots-c-10mg.png')">
+            <img src="mots-c-10mg.png" alt="MOTS-C 10mg">
+            <h3>MOTS-C 10mg</h3>
+            <p class="price">$40</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('SLU-PP-332 5mg','$90','slu-pp-332-5mg.png')">
+            <img src="slu-pp-332-5mg.png" alt="SLU-PP-332 5mg">
+            <h3>SLU-PP-332 5mg</h3>
+            <p class="price">$90</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('WOLVERINE (BPC 157 5mg + TB500 5mg)','$50','wolverine.png')">
+            <img src="wolverine.png" alt="Wolverine">
+            <h3>WOLVERINE</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('SS-31 10mg','$40','ss-31-10mg.png')">
+            <img src="ss-31-10mg.png" alt="SS-31 10mg">
+            <h3>SS-31 10mg</h3>
+            <p class="price">$40</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Bacteriostatic Water 10mL','$10','bacteriostatic-water-10ml.png')">
+            <img src="bacteriostatic-water-10ml.png" alt="Bacteriostatic Water 10mL">
+            <h3>Bacteriostatic Water 10mL</h3>
+            <p class="price">$10</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('HGH Somatropin 10iu','$50','hgh-somatropin-10iu.png')">
+            <img src="hgh-somatropin-10iu.png" alt="HGH Somatropin 10iu">
+            <h3>HGH Somatropin 10iu</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('HGH Somatropin 12iu','$50','hgh-somatropin-12iu.png')">
+            <img src="hgh-somatropin-12iu.png" alt="HGH Somatropin 12iu">
+            <h3>HGH Somatropin 12iu</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('MT-2 10mg','$50','mt-2-10mg.png')">
+            <img src="mt-2-10mg.png" alt="MT-2 10mg">
+            <h3>MT-2 10mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Glutathione 1500mg','$50','glutathione-1500mg.png')">
+            <img src="glutathione-1500mg.png" alt="Glutathione 1500mg">
+            <h3>Glutathione 1500mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Epithalon 10mg','$50','epithalon-10mg.png')">
+            <img src="epithalon-10mg.png" alt="Epithalon 10mg">
+            <h3>Epithalon 10mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('KPV 10mg','$50','kpv-10mg.png')">
+            <img src="kpv-10mg.png" alt="KPV 10mg">
+            <h3>KPV 10mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('5 Amino Q 5mg','$50','5-amino-q-5mg.png')">
+            <img src="5-amino-q-5mg.png" alt="5 Amino Q 5mg">
+            <h3>5 Amino Q 5mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('CJC + IPA (5mg + 5mg No DAC)','$50','cjc-ipa-5mg.png')">
+            <img src="cjc-ipa-5mg.png" alt="CJC + IPA">
+            <h3>CJC + IPA</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Semax 10mg','$50','semax-10mg.png')">
+            <img src="semax-10mg.png" alt="Semax 10mg">
+            <h3>Semax 10mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('Selank 10mg','$50','selank-10mg.png')">
+            <img src="selank-10mg.png" alt="Selank 10mg">
+            <h3>Selank 10mg</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('GLOW (BT 10mg + BPC 10mg + CU 50mg)','$50','glow.png')">
+            <img src="glow.png" alt="Glow">
+            <h3>GLOW</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+
+          <div class="card" onclick="openProduct('KLOW (BT 10mg + BPC 10mg + CU 50mg + KP 10mg)','$50','klow.png')">
+            <img src="klow.png" alt="Klow">
+            <h3>KLOW</h3>
+            <p class="price">$50</p>
+            <button>View Details</button>
+          </div>
+        </div>
       </div>
     </section>
 
     <div class="footer">
       © 2026 Covenant Bio Labs<br>
-      Research Use Only • Not for Human Consumption
+      Research Use Only • Not For Human Consumption
     </div>
   </div>
 
-  <div class="modal" id="productModal">
-    <div class="modal-card">
-      <button class="close-btn" id="closeModal">×</button>
-      <div class="modal-inner">
-        <div class="modal-grid">
-          <div>
-            <div class="modal-bottle">
-              <img src="bottle-reference.jpg" alt="Bottle reference" />
-              <div class="modal-label">
-                <span class="brand">Covenant Biolabs</span>
-                <span class="name" id="modalLabelName">PRODUCT</span>
-                <span class="mg" id="modalLabelMg">10mg</span>
+  <div id="productModal"></div>
+
+  <script>
+    function openProduct(name, price, img) {
+      const modal = document.getElementById('productModal');
+      modal.style.display = 'flex';
+      modal.innerHTML = `
+        <div class="modal-box">
+          <button class="close" onclick="closeModal()">×</button>
+          <div class="modal-content">
+            <div class="modal-left">
+              <img src="${img}" alt="${name}">
+            </div>
+            <div class="modal-right">
+              <h2>${name}</h2>
+              <div class="modal-price">${price}</div>
+
+              <div class="modal-panel">
+                <h4>Product Information</h4>
+                <ul>
+                  <li>Premium catalog presentation</li>
+                  <li>Third-party documentation placeholder</li>
+                  <li>Cold storage / handling notes can be added</li>
+                  <li>Label image matched to product</li>
+                </ul>
+              </div>
+
+              <div class="modal-panel">
+                <h4>Important Notice</h4>
+                <ul>
+                  <li>Research use only</li>
+                  <li>Not for human consumption</li>
+                  <li>For catalog display and reference only</li>
+                </ul>
+              </div>
+
+              <div class="modal-actions">
+                <button class="coa-btn">View COA / Verify</button>
+                <button class="info-btn">Product Info</button>
               </div>
             </div>
           </div>
-
-          <div>
-            <h3 class="modal-title" id="modalTitle">Product</h3>
-            <div class="modal-price" id="modalPrice">$0</div>
-
-            <div class="modal-box">
-              <h4>Product Information</h4>
-              <ul id="modalDetails"></ul>
-            </div>
-
-            <div class="modal-box">
-              <h4>Important Notice</h4>
-              <ul>
-                <li>For research &amp; laboratory reference only.</li>
-                <li>Not for human consumption.</li>
-                <li>For qualified research handling only.</li>
-                <li>Documentation / COA placeholders can be added later.</li>
-              </ul>
-            </div>
-
-            <div class="modal-actions">
-              <button class="modal-btn primary">View COA / Verify</button>
-              <button class="modal-btn secondary">Product Info</button>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+      `;
+    }
 
-  <script>
-    const products = [
-      {
-        title: "Retatrutide 20mg",
-        labelName: "RETATRUTIDE",
-        labelMg: "20mg",
-        price: "$120",
-        details: [
-          "Catalog Code: RET-20",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "Cagrilintide 5mg",
-        labelName: "CAGRILINTIDE",
-        labelMg: "5mg",
-        price: "$70",
-        details: [
-          "Catalog Code: CAG-5",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "IGF-1 LR3 1mg",
-        labelName: "IGF-1 LR3",
-        labelMg: "1mg",
-        price: "$75",
-        details: [
-          "Catalog Code: IGF1-1",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "Tesamorelin 5mg",
-        labelName: "TESAMORELIN",
-        labelMg: "5mg",
-        price: "$40",
-        details: [
-          "Catalog Code: TESA-5",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "NAD+ 500mg",
-        labelName: "NAD+",
-        labelMg: "500mg",
-        price: "$60",
-        details: [
-          "Catalog Code: NAD-500",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "DISP 10mg",
-        labelName: "DISP",
-        labelMg: "10mg",
-        price: "$70",
-        details: [
-          "Catalog Code: DISP-10",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "MOTS-c 10mg",
-        labelName: "MOTS-c",
-        labelMg: "10mg",
-        price: "$40",
-        details: [
-          "Catalog Code: MOTS-10",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "SLU-PP-332 5mg",
-        labelName: "SLU-PP-332",
-        labelMg: "5mg",
-        price: "$90",
-        details: [
-          "Catalog Code: SLU-5",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "BPC-157 + TB-500",
-        labelName: "BPC-157 / TB-500",
-        labelMg: "5mg / 5mg",
-        price: "$50",
-        details: [
-          "Catalog Code: BPC-TB",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "SS-31 10mg",
-        labelName: "SS-31",
-        labelMg: "10mg",
-        price: "$40",
-        details: [
-          "Catalog Code: SS31-10",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "Bacteriostatic Water 10mL",
-        labelName: "BAC WATER",
-        labelMg: "10mL",
-        price: "$10",
-        details: [
-          "Catalog Code: BAC-10",
-          "Presentation: Premium catalog display",
-          "Storage: Cool dry place note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "HGH Somatropin 15iu",
-        labelName: "HGH",
-        labelMg: "15iu",
-        price: "$50",
-        details: [
-          "Catalog Code: HGH-15",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
-      },
-      {
-        title: "MT-2 10mg",
-        labelName: "MT-2",
-        labelMg: "10mg",
-        price: "$50",
-        details: [
-          "Catalog Code: MT2-10",
-          "Presentation: Premium catalog display",
-          "Storage: Refrigerated presentation note",
-          "Use: Research reference listing"
-        ]
+    function closeModal() {
+      const modal = document.getElementById('productModal');
+      modal.style.display = 'none';
+      modal.innerHTML = '';
+    }
+
+    document.getElementById('productModal').addEventListener('click', function(e){
+      if (e.target.id === 'productModal') {
+        closeModal();
       }
-    ];
-
-    const grid = document.getElementById("productGrid");
-    const modal = document.getElementById("productModal");
-    const closeModal = document.getElementById("closeModal");
-
-    function renderProducts() {
-      grid.innerHTML = products.map((product, index) => `
-        <div class="product-card">
-          <div class="bottle-wrap">
-            <img src="bottle-reference.jpg" alt="${product.title}">
-            <div class="bottle-label">
-              <span class="bottle-brand">Covenant Biolabs</span>
-              <span class="bottle-name">${product.labelName}</span>
-              <span class="bottle-mg">${product.labelMg}</span>
-            </div>
-          </div>
-          <div class="product-name">${product.title}</div>
-          <div class="product-price">${product.price}</div>
-          <button class="product-btn" onclick="openProduct(${index})">View Details</button>
-        </div>
-      `).join("");
-    }
-
-    window.openProduct = function(index) {
-      const product = products[index];
-      document.getElementById("modalTitle").textContent = product.title;
-      document.getElementById("modalPrice").textContent = product.price;
-      document.getElementById("modalLabelName").textContent = product.labelName;
-      document.getElementById("modalLabelMg").textContent = product.labelMg;
-      document.getElementById("modalDetails").innerHTML = product.details.map(item => `<li>${item}</li>`).join("");
-      modal.classList.add("show");
-    }
-
-    closeModal.addEventListener("click", () => modal.classList.remove("show"));
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.remove("show");
     });
-
-    renderProducts();
   </script>
 </body>
 </html>

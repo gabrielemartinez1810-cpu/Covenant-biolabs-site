@@ -9,18 +9,39 @@
 body{
   margin:0;
   font-family:Arial;
-  background:#05070d;
   color:white;
-  text-align:center;
+  background:#05070d;
+  overflow-x:hidden;
 }
 
+/* Molecular background */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 20% 30%, #00bfff 2px, transparent 4px),
+    radial-gradient(circle at 80% 60%, #00bfff 2px, transparent 4px),
+    linear-gradient(45deg, rgba(0,191,255,0.2) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(0,191,255,0.2) 1px, transparent 1px);
+  background-size:120px 120px;
+  opacity:0.15;
+}
+
+/* Header */
 header{
+  text-align:center;
   padding:60px 20px;
-  background:linear-gradient(180deg,#061020,#05070d);
+}
+
+.logo{
+  width:120px;
+  margin:auto;
 }
 
 h1{
-  font-size:42px;
+  font-size:40px;
   color:#00bfff;
 }
 
@@ -28,6 +49,7 @@ p{
   color:#aabbd6;
 }
 
+/* Products */
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -39,6 +61,7 @@ p{
   background:#0c1626;
   padding:20px;
   border-radius:12px;
+  box-shadow:0 0 20px rgba(0,191,255,0.1);
 }
 
 .price{
@@ -56,6 +79,7 @@ button{
   cursor:pointer;
 }
 
+/* Footer */
 footer{
   padding:40px 20px;
   font-size:14px;
@@ -68,6 +92,7 @@ footer{
 <body>
 
 <header>
+  <img src="logo.jpg" class="logo">
   <h1>Covenant Bio Labs</h1>
   <p>Premium Research Peptides</p>
   <p>Research Use Only • Not for Human Consumption</p>

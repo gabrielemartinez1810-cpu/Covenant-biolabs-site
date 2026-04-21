@@ -1,1391 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Covenant Bio Labs</title>
-  <meta name="description" content="Covenant Bio Labs — Faith. Science. Purpose." />
-  <style>
-    :root{
-      --bg:#04070d;
-      --bg2:#08101b;
-      --panel:#08121f;
-      --panel2:#0c1727;
-      --white:#f7fbff;
-      --muted:#aab7d2;
-      --blue:#1b84ff;
-      --blue2:#5ec7ff;
-      --blue3:#9ddfff;
-      --silver:#dfe8f2;
-      --silver2:#8b98ab;
-      --green:#62d16d;
-      --line:rgba(101,196,255,.18);
-      --shadow:0 22px 60px rgba(0,0,0,.48);
-      --radius:28px;
-      --max:1320px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      color:var(--white);
-      background:
-        radial-gradient(circle at 10% 12%, rgba(27,132,255,.14), transparent 20%),
-        radial-gradient(circle at 85% 10%, rgba(94,199,255,.11), transparent 18%),
-        radial-gradient(circle at 82% 80%, rgba(27,132,255,.10), transparent 22%),
-        linear-gradient(180deg, #03060b 0%, #07111c 100%);
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.23;
-      background:
-        radial-gradient(circle at 7% 18%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 12% 23%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 18% 16%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 81% 15%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 88% 21%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 94% 14%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 8% 82%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 15% 76%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 22% 84%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 78% 78%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 86% 84%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 93% 76%, rgba(94,199,255,.95) 0 2px, transparent 3px),
-        linear-gradient(135deg, transparent 49.76%, rgba(94,199,255,.18) 49.9%, rgba(94,199,255,.18) 50.1%, transparent 50.24%),
-        linear-gradient(45deg, transparent 49.76%, rgba(94,199,255,.10) 49.9%, rgba(94,199,255,.10) 50.1%, transparent 50.24%);
-      background-size:100% 100%;
-      mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.55) 64%, transparent 100%);
-      -webkit-mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.55) 64%, transparent 100%);
-    }
-
-    a{text-decoration:none;color:inherit}
-    img{display:block;max-width:100%}
-    .container{width:min(var(--max), calc(100% - 28px)); margin:0 auto}
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:80;
-      backdrop-filter:blur(16px);
-      background:rgba(4,8,14,.72);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-
-    .nav{
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .brand-logo{
-      width:58px;
-      height:58px;
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 0 24px rgba(27,132,255,.14);
-      flex:0 0 auto;
-    }
-
-    .brand-logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .brand-fallback{
-      color:var(--blue2);
-      font-size:28px;
-      font-weight:700;
-    }
-
-    .brand-text h1{
-      margin:0;
-      font-size:19px;
-      letter-spacing:.06em;
-    }
-
-    .brand-text p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:12px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-
-    .nav-links{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .nav-links a:hover{color:#fff}
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:38px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:#dce8ff;
-      font-size:12px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-
-    .hero{padding:30px 0 20px}
-
-    .hero-panel{
-      border-radius:30px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      background:
-        radial-gradient(circle at 78% 22%, rgba(27,132,255,.16), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      min-height:430px;
-    }
-
-    .hero-left{
-      position:relative;
-      padding:34px 30px 30px;
-      overflow:hidden;
-    }
-
-    .hero-right{
-      position:relative;
-      border-left:1px solid rgba(255,255,255,.06);
-      overflow:hidden;
-      background:
-        radial-gradient(circle at center, rgba(27,132,255,.18), transparent 36%),
-        linear-gradient(180deg, rgba(4,10,18,.76), rgba(4,10,18,.92));
-    }
-
-    .chem{
-      position:absolute;
-      color:rgba(220,235,255,.28);
-      font-size:13px;
-      line-height:1.25;
-      letter-spacing:.04em;
-      user-select:none;
-      white-space:pre;
-    }
-
-    .chem.one{top:24px; left:20px}
-    .chem.two{right:26px; bottom:24px}
-
-    .hero-logo{
-      width:110px;
-      height:110px;
-      border-radius:26px;
-      overflow:hidden;
-      margin-bottom:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      box-shadow:0 0 28px rgba(27,132,255,.14);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .hero-logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .hero-title{
-      margin:0;
-      font-size:clamp(44px, 7vw, 82px);
-      line-height:.94;
-      letter-spacing:.18em;
-      font-weight:300;
-      text-transform:uppercase;
-    }
-
-    .hero-title.small-space{letter-spacing:.14em}
-
-    .hero-bioline{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin:12px 0 16px;
-      max-width:520px;
-    }
-
-    .hero-bioline .line{
-      flex:1;
-      height:2px;
-      border-radius:999px;
-      background:linear-gradient(90deg, transparent, var(--blue2), transparent);
-      box-shadow:0 0 12px rgba(94,199,255,.2);
-    }
-
-    .hero-bioline .bio{
-      font-size:34px;
-      letter-spacing:.34em;
-      text-transform:uppercase;
-      white-space:nowrap;
-    }
-
-    .hero-bioline .bio .b{color:var(--blue2)}
-    .hero-bioline .bio .l{color:#fff}
-
-    .hero-sub{
-      margin:0 0 24px;
-      color:#eef5ff;
-      font-size:17px;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-    }
-
-    .hero-accent{
-      margin-top:22px;
-      font-size:16px;
-      line-height:1.7;
-      letter-spacing:.20em;
-      text-transform:uppercase;
-      color:var(--blue2);
-    }
-
-    .hero-accent span{
-      display:block;
-    }
-
-    .hero-right::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 20% 26%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 32% 32%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 43% 24%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 58% 46%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 74% 30%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 84% 38%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 78% 62%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 66% 72%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 38% 68%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        linear-gradient(30deg, transparent 49.8%, rgba(94,199,255,.18) 49.95%, rgba(94,199,255,.18) 50.05%, transparent 50.2%);
-      opacity:.36;
-      pointer-events:none;
-    }
-
-    .protein-ribbon{
-      position:absolute;
-      border-radius:999px;
-      filter:drop-shadow(0 0 18px rgba(94,199,255,.22));
-      opacity:.98;
-    }
-
-    .protein-ribbon.blue{
-      width:66px;
-      height:300px;
-      left:48%;
-      top:52px;
-      transform:translateX(-50%) rotate(18deg);
-      background:
-        linear-gradient(180deg,
-          rgba(20,48,204,.18) 0%,
-          rgba(29,96,255,.95) 10%,
-          rgba(94,199,255,.98) 24%,
-          rgba(18,70,255,.98) 40%,
-          rgba(95,201,255,.98) 56%,
-          rgba(22,88,255,.98) 72%,
-          rgba(20,48,204,.20) 100%);
-      clip-path:polygon(30% 0,72% 7%,58% 15%,76% 27%,38% 39%,63% 51%,30% 62%,60% 75%,34% 87%,66% 100%,28% 100%,10% 90%,35% 77%,6% 64%,38% 52%,10% 39%,44% 27%,18% 16%,36% 6%);
-    }
-
-    .protein-ribbon.silver{
-      width:64px;
-      height:300px;
-      left:63%;
-      top:42px;
-      transform:translateX(-50%) rotate(-16deg);
-      background:
-        linear-gradient(180deg,
-          rgba(190,198,212,.18) 0%,
-          rgba(240,246,255,.98) 12%,
-          rgba(141,153,173,.96) 28%,
-          rgba(240,246,255,.97) 45%,
-          rgba(144,156,176,.96) 62%,
-          rgba(228,235,244,.98) 80%,
-          rgba(180,190,206,.20) 100%);
-      clip-path:polygon(35% 0,75% 10%,52% 20%,78% 33%,44% 45%,66% 57%,34% 68%,61% 80%,31% 90%,58% 100%,18% 100%,5% 90%,31% 79%,4% 67%,36% 56%,10% 43%,46% 33%,20% 20%,40% 10%);
-    }
-
-    .section{padding:20px 0}
-
-    .bio-panels{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-    }
-
-    .panel{
-      border-radius:28px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background:
-        radial-gradient(circle at top right, rgba(27,132,255,.10), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      box-shadow:var(--shadow);
-    }
-
-    .identity{
-      padding:34px 28px;
-      min-height:380px;
-    }
-
-    .identity h3{
-      margin:0;
-      font-size:24px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-
-    .identity .role{
-      margin:14px 0 8px;
-      color:var(--blue2);
-      font-size:14px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-
-    .identity .org{
-      margin:0 0 20px;
-      font-size:22px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-
-    .contact-list{
-      display:grid;
-      gap:16px;
-      margin-top:24px;
-    }
-
-    .contact-item{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      font-size:17px;
-      color:#eef5ff;
-    }
-
-    .icon{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      border:1px solid rgba(94,199,255,.28);
-      background:rgba(255,255,255,.03);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--blue2);
-      font-size:20px;
-      flex:0 0 auto;
-    }
-
-    .identity .footer-line{
-      margin-top:26px;
-      padding-top:18px;
-      border-top:1px solid rgba(255,255,255,.08);
-      font-size:13px;
-      line-height:1.9;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:#eef5ff;
-    }
-
-    .identity .footer-line .accent{
-      color:var(--blue2);
-    }
-
-    .protein-panel{
-      display:grid;
-      grid-template-columns:.9fr 1.1fr;
-      min-height:380px;
-    }
-
-    .protein-left{
-      position:relative;
-      border-right:1px solid rgba(255,255,255,.06);
-      background:
-        radial-gradient(circle at center, rgba(27,132,255,.18), transparent 36%);
-      overflow:hidden;
-    }
-
-    .protein-left::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 28% 18%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 42% 28%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 56% 18%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 62% 42%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        radial-gradient(circle at 40% 56%, rgba(94,199,255,.95) 0 5px, transparent 6px),
-        linear-gradient(35deg, transparent 49.8%, rgba(94,199,255,.20) 49.95%, rgba(94,199,255,.20) 50.05%, transparent 50.2%);
-      opacity:.5;
-    }
-
-    .protein-copy{
-      padding:34px 28px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      position:relative;
-    }
-
-    .protein-copy h3{
-      margin:0 0 8px;
-      font-size:22px;
-      color:var(--blue2);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-
-    .protein-copy h4{
-      margin:0 0 8px;
-      font-size:42px;
-      line-height:1;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-    }
-
-    .protein-copy p{
-      margin:0 0 24px;
-      color:#eef5ff;
-      font-size:15px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-
-    .feature-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
-    .feature{
-      text-align:center;
-      padding:10px 6px;
-    }
-
-    .feature .glyph{
-      width:54px;
-      height:54px;
-      border-radius:50%;
-      margin:0 auto 10px;
-      border:1px solid rgba(94,199,255,.30);
-      background:rgba(255,255,255,.03);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--blue2);
-      font-size:24px;
-    }
-
-    .feature h5{
-      margin:0;
-      font-size:12px;
-      line-height:1.45;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:#eef5ff;
-    }
-
-    .catalog-tools{
-      margin-bottom:18px;
-    }
-
-    .searchbar{
-      min-height:56px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      box-shadow:var(--shadow);
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:0 18px;
-    }
-
-    .searchbar input{
-      width:100%;
-      background:transparent;
-      border:none;
-      outline:none;
-      color:#fff;
-      font-size:15px;
-    }
-
-    .searchbar input::placeholder{color:#8fa3c3}
-
-    .notice-wrap{
-      margin:14px 0 22px;
-      display:flex;
-      justify-content:center;
-    }
-
-    .section-center{
-      text-align:center;
-      margin-bottom:24px;
-    }
-
-    .section-center h2{
-      margin:0;
-      font-size:46px;
-      letter-spacing:.03em;
-      text-transform:uppercase;
-    }
-
-    .section-center p{
-      margin:12px auto 0;
-      max-width:860px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:16px;
-    }
-
-    .product-grid{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:18px;
-    }
-
-    .card{
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(7,14,25,.98), rgba(4,9,16,.98));
-      box-shadow:var(--shadow);
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
-    }
-
-    .card-top{
-      min-height:190px;
-      padding:14px;
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 76% 24%, rgba(27,132,255,.18), transparent 22%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-start;
-    }
-
-    .card-top::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 22% 20%, rgba(94,199,255,.95) 0 3px, transparent 4px),
-        radial-gradient(circle at 34% 32%, rgba(94,199,255,.95) 0 3px, transparent 4px),
-        radial-gradient(circle at 46% 20%, rgba(94,199,255,.95) 0 3px, transparent 4px),
-        radial-gradient(circle at 74% 22%, rgba(94,199,255,.95) 0 3px, transparent 4px),
-        radial-gradient(circle at 82% 34%, rgba(94,199,255,.95) 0 3px, transparent 4px),
-        linear-gradient(135deg, transparent 49.76%, rgba(94,199,255,.20) 49.9%, rgba(94,199,255,.20) 50.1%, transparent 50.24%);
-      opacity:.45;
-      pointer-events:none;
-    }
-
-    .vial{
-      width:94px;
-      height:130px;
-      position:relative;
-      z-index:1;
-      filter:drop-shadow(0 14px 18px rgba(0,0,0,.42));
-    }
-
-    .vial-cap{
-      position:absolute;
-      top:0;
-      left:50%;
-      width:78px;
-      height:26px;
-      margin-left:-39px;
-      border-radius:16px 16px 8px 8px;
-      background:linear-gradient(180deg, #245cff, #0f307d);
-      border:1px solid rgba(255,255,255,.22);
-      box-shadow:inset 0 1px 5px rgba(255,255,255,.16);
-    }
-
-    .vial-neck{
-      position:absolute;
-      top:24px;
-      left:50%;
-      width:44px;
-      height:14px;
-      margin-left:-22px;
-      border-radius:4px;
-      background:linear-gradient(180deg, #b1bac7, #66707c);
-    }
-
-    .vial-body{
-      position:absolute;
-      top:36px;
-      left:50%;
-      width:86px;
-      height:88px;
-      margin-left:-43px;
-      border-radius:18px 18px 20px 20px;
-      border:1px solid rgba(255,255,255,.22);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.05) 18%, rgba(0,0,0,.10) 19%, rgba(52,56,66,.90) 68%, rgba(255,255,255,.12));
-      overflow:hidden;
-    }
-
-    .vial-label{
-      position:absolute;
-      left:8px;
-      right:8px;
-      bottom:10px;
-      padding:7px 6px;
-      border-radius:8px;
-      background:linear-gradient(180deg, rgba(5,10,16,.98), rgba(8,12,18,.98));
-      border:1px solid rgba(94,199,255,.22);
-      text-align:center;
-      line-height:1.3;
-      box-shadow:0 0 16px rgba(27,132,255,.10);
-    }
-
-    .vial-label .top{
-      color:#fff;
-      font-size:9px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .vial-label .mid{
-      color:var(--blue2);
-      font-size:8px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-
-    .vial-label .bot{
-      margin-top:2px;
-      color:#f5fbff;
-      font-size:7px;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-    }
-
-    .card-body{
-      padding:16px;
-      display:flex;
-      flex-direction:column;
-      flex:1;
-    }
-
-    .card-body h3{
-      margin:0;
-      font-size:18px;
-      line-height:1.2;
-    }
-
-    .price{
-      margin:10px 0 12px;
-      font-size:18px;
-      font-weight:700;
-      color:var(--green);
-    }
-
-    .card-body p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.55;
-      flex:1;
-    }
-
-    .card-actions{
-      display:flex;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .btn-small{
-      min-height:42px;
-      padding:0 14px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.05);
-      color:#eef5ff;
-      font-weight:700;
-      font-size:13px;
-      cursor:pointer;
-    }
-
-    .btn-small.primary{
-      background:linear-gradient(180deg, #20345d, #131f39);
-      border-color:rgba(255,255,255,.10);
-    }
-
-    .coa-panel{
-      margin-top:26px;
-      padding:30px 24px;
-      border-radius:28px;
-      border:1px solid rgba(255,255,255,.08);
-      background:
-        radial-gradient(circle at 50% 15%, rgba(27,132,255,.12), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      box-shadow:var(--shadow);
-      text-align:center;
-    }
-
-    .coa-panel h2{
-      margin:0;
-      font-size:44px;
-      text-transform:uppercase;
-    }
-
-    .coa-panel .sub{
-      margin-top:10px;
-      font-size:14px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:#eef5ff;
-    }
-
-    .coa-panel p{
-      margin:18px auto 0;
-      max-width:900px;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:16px;
-    }
-
-    .coa-mini-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-top:24px;
-    }
-
-    .coa-mini{
-      background:#f5f7fb;
-      color:#09121f;
-      border-radius:18px;
-      padding:18px 16px;
-      text-align:left;
-    }
-
-    .coa-mini h4{
-      margin:0 0 6px;
-      font-size:18px;
-    }
-
-    .coa-mini .green{
-      color:#2ea043;
-      font-size:18px;
-      font-weight:700;
-    }
-
-    .coa-mini button{
-      width:100%;
-      min-height:44px;
-      margin-top:12px;
-      border:none;
-      border-radius:12px;
-      background:#2ea043;
-      color:#fff;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    .info-footer{
-      padding:30px 24px;
-      border-radius:28px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      box-shadow:var(--shadow);
-      text-align:center;
-    }
-
-    .info-footer h2{
-      margin:0;
-      font-size:40px;
-      text-transform:uppercase;
-    }
-
-    .info-footer p{
-      margin:14px auto 0;
-      max-width:860px;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:16px;
-    }
-
-    .contact-buttons{
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      flex-wrap:wrap;
-      margin-top:24px;
-    }
-
-    .contact-btn{
-      min-width:260px;
-      min-height:58px;
-      border:none;
-      border-radius:16px;
-      color:#fff;
-      font-size:18px;
-      font-weight:700;
-      cursor:pointer;
-      box-shadow:var(--shadow);
-    }
-
-    .contact-btn.blue{
-      background:linear-gradient(180deg,#4c63ff,#2a34b8);
-    }
-
-    .contact-btn.green{
-      background:linear-gradient(180deg,#3ccb6d,#219c50);
-    }
-
-    .footer-note{
-      margin-top:18px;
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      color:#dce8ff;
-      line-height:1.8;
-    }
-
-    .site-footer{
-      padding:26px 0 48px;
-      text-align:center;
-      color:#96a8c8;
-      font-size:14px;
-      line-height:1.8;
-    }
-
-    .site-footer strong{color:#eef5ff}
-
-    @media (max-width:1100px){
-      .hero-grid,
-      .bio-panels{grid-template-columns:1fr}
-      .hero-right{border-left:none;border-top:1px solid rgba(255,255,255,.06); min-height:360px}
-      .protein-panel{grid-template-columns:1fr}
-      .protein-left{min-height:220px;border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
-      .feature-grid{grid-template-columns:repeat(2,1fr)}
-      .product-grid{grid-template-columns:repeat(2,1fr)}
-      .coa-mini-grid{grid-template-columns:repeat(2,1fr)}
-    }
-
-    @media (max-width:760px){
-      .nav-links{display:none}
-      .hero-left{padding:26px 18px}
-      .hero-title{font-size:46px}
-      .hero-bioline .bio{font-size:24px; letter-spacing:.20em}
-      .hero-sub{font-size:14px; letter-spacing:.16em}
-      .hero-accent{font-size:13px; letter-spacing:.12em}
-      .product-grid,
-      .coa-mini-grid{grid-template-columns:1fr}
-      .contact-btn{width:100%}
-      .section-center h2,
-      .coa-panel h2,
-      .info-footer h2{font-size:32px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Covenant Bio Labs</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #05070d;
+  color: white;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px;
+  background: url('hero-reference.jpg') center/cover no-repeat;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 42px;
+  margin: 10px 0;
+}
+
+.subtitle {
+  color: #00d4ff;
+  margin-top: 10px;
+  letter-spacing: 2px;
+}
+
+.tagline {
+  margin-top: 10px;
+  color: #aaa;
+}
+
+/* PRODUCTS */
+.products {
+  padding: 60px 20px;
+  background: url('catalog-reference.jpg') center/cover no-repeat;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.card {
+  background: rgba(0,0,0,0.75);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+
+.card img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.price {
+  color: #00ff9d;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+button {
+  background: linear-gradient(45deg, #00d4ff, #0077ff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #0a0f1c;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.order-btn {
+  background: #00ff9d;
+  color: black;
+  margin-top: 15px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 12px;
+  color: #777;
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand-logo">
-          <img src="logo.jpg" alt="Covenant Bio Labs logo" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=&quot;brand-fallback&quot;>C+</div>';">
-        </div>
-        <div class="brand-text">
-          <h1>Covenant Bio Labs</h1>
-          <p>Faith. Science. Purpose.</p>
-        </div>
-      </div>
 
-      <div class="nav-links">
-        <a href="#catalog">Catalog</a>
-        <a href="#testing">COA & Testing</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <div class="pill">Research Use Only</div>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <img src="logo.jpg" class="logo">
+    <h1>Covenant Bio Labs</h1>
+    <div class="subtitle">FAITH • SCIENCE • PURPOSE</div>
+    <div class="tagline">Premium Research Peptides & Advanced Compounds</div>
   </div>
+</section>
 
-  <section class="hero">
-    <div class="container hero-panel">
-      <div class="hero-grid">
-        <div class="hero-left">
-          <div class="chem one">N    H₂
- ╲  ╱
-  C═N
- ╱   ╲
-O     N</div>
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="grid">
 
-          <div class="hero-logo">
-            <img src="logo.jpg" alt="Covenant Bio Labs logo" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=&quot;brand-fallback&quot;>C+</div>';">
-          </div>
-
-          <h2 class="hero-title">COVENANT</h2>
-
-          <div class="hero-bioline">
-            <div class="line"></div>
-            <div class="bio"><span class="b">BIO</span><span class="l">LABS</span></div>
-            <div class="line"></div>
-          </div>
-
-          <p class="hero-sub">FAITH. SCIENCE. PURPOSE.</p>
-
-          <div class="hero-accent">
-            <span>PREMIUM RESEARCH PEPTIDES</span>
-            <span>&amp; ADVANCED COMPOUNDS</span>
-          </div>
-
-          <div class="chem two">H—N
- ╲ ╲
-  N═C
- ╱   ╲
-HO    O</div>
-        </div>
-
-        <div class="hero-right">
-          <div class="protein-ribbon blue"></div>
-          <div class="protein-ribbon silver"></div>
-        </div>
-      </div>
+    <div class="card">
+      <img src="bottle-reference.jpg">
+      <h3>Retatrutide 20mg</h3>
+      <div class="price">$120</div>
+      <button onclick="openModal('Retatrutide 20mg')">View Details</button>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container bio-panels">
-      <div class="panel identity">
-        <h3>Gabriel Martinez</h3>
-        <div class="role">Founder &amp; CEO</div>
-        <div class="org">COVENANT BIOLABS</div>
-
-        <div class="contact-list">
-          <div class="contact-item"><div class="icon">☎</div><div>4099042178</div></div>
-          <div class="contact-item"><div class="icon">✉</div><div>info@covenantbiolabs.com</div></div>
-          <div class="contact-item"><div class="icon">⌘</div><div>www.covenantbiolabs.com</div></div>
-          <div class="contact-item"><div class="icon">⌖</div><div>Miami, FL 33101</div></div>
-        </div>
-
-        <div class="footer-line">
-          SCIENCE WITH INTEGRITY. <span class="accent">|</span> FAITH WITH PURPOSE. <span class="accent">|</span> RESULTS THAT MATTER.
-          <br><br>
-          <span class="accent">COLOSSIANS 3:23</span>
-        </div>
-      </div>
-
-      <div class="panel protein-panel">
-        <div class="protein-left"></div>
-        <div class="protein-copy">
-          <h3>Protein Synthesis</h3>
-          <h4>Build. Repair. Optimize.</h4>
-          <p>Premium research brand presentation</p>
-
-          <div class="feature-grid">
-            <div class="feature">
-              <div class="glyph">🧬</div>
-              <h5>Research<br>Driven</h5>
-            </div>
-            <div class="feature">
-              <div class="glyph">⬡</div>
-              <h5>High<br>Purity</h5>
-            </div>
-            <div class="feature">
-              <div class="glyph">⚗</div>
-              <h5>Third Party<br>Tested</h5>
-            </div>
-            <div class="feature">
-              <div class="glyph">🛡</div>
-              <h5>Quality<br>Assured</h5>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="card">
+      <img src="bottle-reference.jpg">
+      <h3>Cagrilintide 5mg</h3>
+      <div class="price">$70</div>
+      <button onclick="openModal('Cagrilintide 5mg')">View Details</button>
     </div>
-  </section>
 
-  <section id="catalog" class="section">
-    <div class="container">
-      <div class="catalog-tools">
-        <div class="searchbar">
-          <input type="text" placeholder="Search products..." />
-          <span>🔎</span>
-        </div>
-      </div>
-
-      <div class="notice-wrap">
-        <div class="pill">Research Use Only • Not For Human Consumption</div>
-      </div>
-
-      <div class="section-center">
-        <h2>COA &amp; TESTING</h2>
-        <p>Third party tested for purity &amp; quality</p>
-      </div>
-
-      <div class="product-grid">
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">NAD+ 500MG</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>NAD+ 500mg</h3>
-            <div class="price">$60</div>
-            <p>Premium research catalog presentation.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">CAGRILINTIDE</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>Cagrilintide 5mg</h3>
-            <div class="price">$70</div>
-            <p>Research material shown in premium card styling.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">DISP 10MG</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>DISP 10mg</h3>
-            <div class="price">$70</div>
-            <p>Displayed with a darker molecule-forward look.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">MOTS-C 10MG</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>MOTS-c 10mg</h3>
-            <div class="price">$40</div>
-            <p>Premium biotech catalog presentation.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">IGF-1 LR3</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>IGF-1 LR3 1mg</h3>
-            <div class="price">$75</div>
-            <p>Research inventory presentation with premium dark style.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">SLU-PP-332</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>SLU-PP-332 5mg</h3>
-            <div class="price">$90</div>
-            <p>Structured with stronger premium visual hierarchy.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">BPC + TB</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>BPC 5mg + TB 5mg</h3>
-            <div class="price">$50</div>
-            <p>Research blend in a premium dark card layout.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">RETATRUTIDE</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>Retatrutide 20mg</h3>
-            <div class="price">$120</div>
-            <p>High-end research compound shown in premium brand styling.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">TESAMORELIN</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>Tesamorelin 5mg</h3>
-            <div class="price">$40</div>
-            <p>For research catalog presentation only.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">SS-31 10MG</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>SS-31 10mg</h3>
-            <div class="price">$40</div>
-            <p>Premium informational product card styling.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">BAC WATER</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>Bacteriostatic Water 10mL</h3>
-            <div class="price">$10</div>
-            <p>Ancillary catalog presentation in matching style.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-top">
-            <div class="vial">
-              <div class="vial-cap"></div>
-              <div class="vial-neck"></div>
-              <div class="vial-body">
-                <div class="vial-label">
-                  <div class="top">COVENANT</div>
-                  <div class="mid">BIOLABS</div>
-                  <div class="bot">HGH 15IU</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3>HGH Somatropin 15iu</h3>
-            <div class="price">$50</div>
-            <p>Dark premium bottle card aligned to your references.</p>
-            <div class="card-actions"><button class="btn-small primary">View Details</button></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="testing" class="coa-panel">
-        <h2>COA &amp; TESTING</h2>
-        <div class="sub">THIRD PARTY TESTED FOR PURITY &amp; QUALITY</div>
-        <p>
-          Catalog items are displayed in a premium research-brand format with emphasis on product presentation,
-          documentation readiness, and quality-first visual communication.
-        </p>
-
-        <div class="coa-mini-grid">
-          <div class="coa-mini">
-            <h4>NAD+</h4>
-            <div class="green">$50</div>
-            <button type="button">View Details</button>
-          </div>
-          <div class="coa-mini">
-            <h4>MOTS-c</h4>
-            <div class="green">$70</div>
-            <button type="button">View Details</button>
-          </div>
-          <div class="coa-mini">
-            <h4>Selank</h4>
-            <div class="green">$50</div>
-            <button type="button">View Details</button>
-          </div>
-          <div class="coa-mini">
-            <h4>KPV 10mg</h4>
-            <div class="green">$50</div>
-            <button type="button">View Details</button>
-          </div>
-        </div>
-      </div>
+    <div class="card">
+      <img src="bottle-reference.jpg">
+      <h3>IGF-1 LR3 1mg</h3>
+      <div class="price">$75</div>
+      <button onclick="openModal('IGF-1 LR3 1mg')">View Details</button>
     </div>
-  </section>
 
-  <section class="section" id="contact">
-    <div class="container info-footer">
-      <h2>CONTACT</h2>
-      <p>
-        For research-brand questions, documentation requests, or general catalog inquiries, contact Covenant Bio Labs directly.
-      </p>
-
-      <div class="contact-buttons">
-        <button class="contact-btn blue" onclick="location.href='mailto:info@covenantbiolabs.com?subject=Research Inquiry'">Email Inquiry</button>
-        <button class="contact-btn green" onclick="location.href='mailto:info@covenantbiolabs.com?subject=Documentation Request'">Documentation Request</button>
-      </div>
-
-      <div class="footer-note">
-        <strong>Email:</strong> info@covenantbiolabs.com<br>
-        <strong>Website:</strong> www.covenantbiolabs.com<br>
-        <strong>Location:</strong> Miami, FL 33101
-      </div>
+    <div class="card">
+      <img src="bottle-reference.jpg">
+      <h3>Tesamorelin 5mg</h3>
+      <div class="price">$40</div>
+      <button onclick="openModal('Tesamorelin 5mg')">View Details</button>
     </div>
-  </section>
 
-  <div class="container site-footer">
-    <p><strong>Disclaimer:</strong> Informational brand presentation only. Research use only. Not for human consumption.</p>
-    <p>© 2026 Covenant Bio Labs. All rights reserved.</p>
   </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
+    <h2 id="modalTitle"></h2>
+    <p>Research use only. Not for human consumption.</p>
+    <button class="order-btn">Place Order</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+© 2026 Covenant Bio Labs  
+Research Use Only • Not for Human Consumption
+</footer>
+
+<script>
+function openModal(product) {
+  document.getElementById("modal").style.display = "flex";
+  document.getElementById("modalTitle").innerText = product;
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+
 </body>
 </html>

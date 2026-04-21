@@ -1,140 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Covenant Bio Labs</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Covenant Bio Labs</title>
+  <style>
+    :root{
+      --bg:#03060c;
+      --bg2:#08111c;
+      --panel:#08111c;
+      --panel2:#0c1728;
+      --line:rgba(88,175,255,.18);
+      --blue:#1d87ff;
+      --blue2:#66c7ff;
+      --blue3:#8fdcff;
+      --white:#f7fbff;
+      --muted:#a7b7d3;
+      --green:#69dc7a;
+      --shadow:0 18px 55px rgba(0,0,0,.48);
+      --radius:26px;
+      --max:1320px;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:Arial;
-  color:white;
-  background:#05070d;
-  overflow-x:hidden;
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--white);
+      background:
+        radial-gradient(circle at 12% 15%, rgba(29,135,255,.18), transparent 22%),
+        radial-gradient(circle at 86% 10%, rgba(102,199,255,.14), transparent 18%),
+        radial-gradient(circle at 80% 70%, rgba(29,135,255,.12), transparent 22%),
+        linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
+      overflow-x:hidden;
+    }
 
-/* Molecular background */
-body::before{
-  content:"";
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:
-    radial-gradient(circle at 20% 30%, #00bfff 2px, transparent 4px),
-    radial-gradient(circle at 80% 60%, #00bfff 2px, transparent 4px),
-    linear-gradient(45deg, rgba(0,191,255,0.2) 1px, transparent 1px),
-    linear-gradient(-45deg, rgba(0,191,255,0.2) 1px, transparent 1px);
-  background-size:120px 120px;
-  opacity:0.15;
-}
+    /* soft molecular page glow */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.24;
+      background:
+        radial-gradient(circle at 9% 18%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 15% 23%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 21% 17%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 16%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 22%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 91% 15%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 8% 82%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 14% 76%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 20% 84%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 79% 78%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 87% 83%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 93% 76%, rgba(102,199,255,.95) 0 2px, transparent 3px),
+        linear-gradient(135deg, transparent 49.7%, rgba(102,199,255,.24) 49.9%, rgba(102,199,255,.24) 50.1%, transparent 50.3%),
+        linear-gradient(45deg, transparent 49.7%, rgba(102,199,255,.14) 49.9%, rgba(102,199,255,.14) 50.1%, transparent 50.3%);
+      background-size:100% 100%;
+      mask-image:radial-gradient(circle at center, black 25%, rgba(0,0,0,.55) 62%, transparent 100%);
+      -webkit-mask-image:radial-gradient(circle at center, black 25%, rgba(0,0,0,.55) 62%, transparent 100%);
+    }
 
-/* Header */
-header{
-  text-align:center;
-  padding:60px 20px;
-}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button{font-family:inherit}
 
-.logo{
-  width:120px;
-  margin:auto;
-}
+    .container{
+      width:min(var(--max), calc(100% - 28px));
+      margin:0 auto;
+    }
 
-h1{
-  font-size:40px;
-  color:#00bfff;
-}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(4,8,15,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
 
-p{
-  color:#aabbd6;
-}
+    .nav{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
 
-/* Products */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:30px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
 
-.card{
-  background:#0c1626;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 0 20px rgba(0,191,255,0.1);
-}
+    .brand-logo{
+      width:60px;
+      height:60px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      box-shadow:0 0 24px rgba(29,135,255,.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
 
-.price{
-  color:#00bfff;
-  font-weight:bold;
-  margin:10px 0;
-}
+    .brand-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
 
-button{
-  background:#00bfff;
-  border:none;
-  padding:10px 20px;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
-}
+    .brand-fallback{
+      color:var(--blue2);
+      font-size:28px;
+      font-weight:700;
+    }
 
-/* Footer */
-footer{
-  padding:40px 20px;
-  font-size:14px;
-  color:#8899bb;
-}
-</style>
+    .brand-text{
+      min-width:0;
+    }
 
-</head>
+    .brand-text h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:.04em;
+    }
 
-<body>
+    .brand-text p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
 
-<header>
-  <img src="logo.jpg" class="logo">
-  <h1>Covenant Bio Labs</h1>
-  <p>Premium Research Peptides</p>
-  <p>Research Use Only • Not for Human Consumption</p>
-</header>
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:14px;
+    }
 
-<div class="products">
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dce9ff;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
 
-<div class="card">
-<h3>Retatrutide 20mg</h3>
-<div class="price">$120</div>
-<p>High-end research compound for laboratory study.</p>
-<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
-</div>
+    .hero{
+      padding:34px 0 18px;
+    }
 
-<div class="card">
-<h3>Cagrilintide 5mg</h3>
-<div class="price">$70</div>
-<p>Research material for controlled lab workflows.</p>
-<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
-</div>
+    .hero-panel{
+      background:
+        radial-gradient(circle at 75% 25%, rgba(29,135,255,.18), transparent 25%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
 
-<div class="card">
-<h3>IGF-1 LR3 1mg</h3>
-<div class="price">$75</div>
-<p>Presented for research inventory use.</p>
-<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
-</div>
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+    }
 
-<div class="card">
-<h3>Tesamorelin 5mg</h3>
-<div class="price">$40</div>
-<p>For laboratory research only.</p>
-<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
-</div>
+    .hero-left{
+      padding:38px 30px 34px;
+      position:relative;
+      overflow:hidden;
+      min-height:480px;
+    }
 
-</div>
+    .hero-left::before,
+    .hero-left::after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      filter:blur(22px);
+      opacity:.16;
+      pointer-events:none;
+    }
 
-<footer>
-© 2026 Covenant Bio Labs<br><br>
-All products are sold for research purposes only.<br>
-Not for human consumption.
-</footer>
+    .hero-left::before{
+      left:-60px; top:10px;
+      background:radial-gradient(circle, var(--blue2), transparent 70%);
+    }
 
-</body>
-</html>
+    .hero-left::after{
+      right:-70px; bottom:-40px;
+      background:radial-gradient(circle, var(--blue), transparent 70%);
+    }
+
+    .chem{
+      position:absolute;
+      font-size:12px;
+      color:rgba(220,235,255,.28);
+      letter-spacing:.05em;
+      line

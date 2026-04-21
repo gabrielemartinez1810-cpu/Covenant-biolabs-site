@@ -1,220 +1,1136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Covenant Bio Labs</title>
 
-<title>Covenant Bio Labs</title>
+  <style>
+    :root{
+      --bg:#04070d;
+      --bg2:#09111d;
+      --panel:rgba(8,12,22,0.88);
+      --panel2:rgba(10,16,28,0.94);
+      --line:rgba(91,142,255,0.22);
+      --blue:#2d7dff;
+      --blue2:#6bb7ff;
+      --teal:#87f3ff;
+      --green:#63e38d;
+      --white:#f4f7fb;
+      --muted:#aeb9ca;
+      --shadow:0 20px 50px rgba(0,0,0,0.45);
+      --radius:22px;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #05070d;
-  color: white;
-}
+    *{box-sizing:border-box}
 
-/* HERO */
-.hero {
-  position: relative;
-  text-align: center;
-  padding: 80px 20px;
-  background: url('hero-reference.jpg') center/cover no-repeat;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--white);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(31,87,255,0.14), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(55,155,255,0.12), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(16,80,170,0.12), transparent 30%),
+        linear-gradient(180deg, #03050a 0%, #050913 45%, #04070d 100%);
+      overflow-x:hidden;
+    }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.18;
+      background-image:
+        radial-gradient(circle, rgba(105,180,255,.45) 1px, transparent 1.4px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.28));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.28));
+      z-index:0;
+    }
 
-.logo {
-  width: 100px;
-  margin-bottom: 20px;
-}
+    a{color:inherit;text-decoration:none}
 
-h1 {
-  font-size: 42px;
-  margin: 10px 0;
-}
+    .wrap{
+      width:min(1280px, 92%);
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
 
-.subtitle {
-  color: #00d4ff;
-  margin-top: 10px;
-  letter-spacing: 2px;
-}
+    .hero{
+      padding:36px 0 26px;
+    }
 
-.tagline {
-  margin-top: 10px;
-  color: #aaa;
-}
+    .hero-card{
+      position:relative;
+      min-height:460px;
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(rgba(0,0,0,.44), rgba(0,0,0,.66)),
+        url('hero-reference.jpg') center/cover no-repeat;
+    }
 
-/* PRODUCTS */
-.products {
-  padding: 60px 20px;
-  background: url('catalog-reference.jpg') center/cover no-repeat;
-}
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 72% 28%, rgba(31,108,255,.16), transparent 28%),
+        linear-gradient(90deg, rgba(3,6,12,.92) 0%, rgba(3,6,12,.74) 42%, rgba(3,6,12,.28) 100%);
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  max-width: 1100px;
-  margin: auto;
-}
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+      min-height:460px;
+      padding:44px 42px;
+    }
 
-.card {
-  background: rgba(0,0,0,0.75);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  backdrop-filter: blur(6px);
-}
+    .brand-left{
+      max-width:620px;
+    }
 
-.card img {
-  width: 100%;
-  max-height: 150px;
-  object-fit: contain;
-}
+    .logo-mark{
+      width:110px;
+      display:block;
+      margin-bottom:18px;
+      filter: drop-shadow(0 0 20px rgba(58,145,255,.18));
+    }
 
-.price {
-  color: #00ff9d;
-  margin: 10px 0;
-  font-size: 18px;
-}
+    .brand-main{
+      font-size: clamp(54px, 8vw, 90px);
+      letter-spacing:9px;
+      font-weight:300;
+      line-height:.9;
+      margin:0;
+      color:#f8fbff;
+      text-transform:uppercase;
+    }
 
-button {
-  background: linear-gradient(45deg, #00d4ff, #0077ff);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-}
+    .brand-sub{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin:10px 0 18px;
+      font-size: clamp(30px, 4.2vw, 44px);
+      letter-spacing:11px;
+      font-weight:300;
+      text-transform:uppercase;
+      color:var(--blue2);
+    }
 
-button:hover {
-  opacity: 0.85;
-}
+    .brand-sub::before,
+    .brand-sub::after{
+      content:"";
+      display:block;
+      width:72px;
+      height:2px;
+      background:linear-gradient(90deg, rgba(59,122,255,0), rgba(59,122,255,.95), rgba(59,122,255,0));
+      border-radius:999px;
+    }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-}
+    .faith{
+      margin:0 0 20px;
+      font-size: clamp(16px, 2.2vw, 22px);
+      letter-spacing:6px;
+      color:#f2f5fb;
+      opacity:.95;
+      text-transform:uppercase;
+    }
 
-.modal-content {
-  background: #0a0f1c;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 400px;
-  text-align: center;
-}
+    .premium-line{
+      color:var(--blue2);
+      font-size: clamp(20px, 2.2vw, 34px);
+      letter-spacing:4px;
+      text-transform:uppercase;
+      line-height:1.45;
+      max-width:600px;
+    }
 
-.close {
-  float: right;
-  cursor: pointer;
-  font-size: 20px;
-}
+    .hero-right{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100%;
+    }
 
-.order-btn {
-  background: #00ff9d;
-  color: black;
-  margin-top: 15px;
-}
+    .hero-glow{
+      width:100%;
+      height:100%;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(46,126,255,.16), transparent 38%);
+    }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px;
-  font-size: 12px;
-  color: #777;
-}
-</style>
+    .utility-bar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      margin:24px 0 8px;
+    }
+
+    .search-wrap{
+      flex:1 1 340px;
+      position:relative;
+    }
+
+    .search-wrap input{
+      width:100%;
+      height:54px;
+      padding:0 56px 0 18px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      outline:none;
+      color:#fff;
+      background:rgba(8,13,23,.72);
+      backdrop-filter: blur(6px);
+      font-size:16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .search-wrap button{
+      position:absolute;
+      right:8px;
+      top:8px;
+      height:38px;
+      width:38px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg, #183768, #2d7dff);
+      box-shadow:0 10px 20px rgba(27,77,158,.3);
+      font-size:16px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      color:#f5f8ff;
+      background:rgba(10,16,28,.72);
+      letter-spacing:1.3px;
+      font-weight:600;
+      text-transform:uppercase;
+      font-size:12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .section{
+      padding:18px 0 10px;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size: clamp(34px, 5vw, 52px);
+      letter-spacing:3px;
+      margin:26px 0 8px;
+      text-transform:uppercase;
+    }
+
+    .section-sub{
+      text-align:center;
+      color:#dce5f2;
+      opacity:.88;
+      font-size:18px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      margin-bottom:28px;
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:22px;
+      margin-top:24px;
+    }
+
+    .product-card{
+      position:relative;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(4,7,14,.88), rgba(8,12,23,.96)),
+        url('hero-reference.jpg') center/cover no-repeat;
+      box-shadow: var(--shadow);
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .product-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(2,5,11,.65), rgba(4,7,14,.88));
+      z-index:0;
+    }
+
+    .product-card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 24px 55px rgba(0,0,0,.55);
+      border-color: rgba(102,173,255,.24);
+    }
+
+    .product-card > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .card-top{
+      padding:18px 18px 0;
+      min-height:216px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .bottle-frame{
+      position:relative;
+      width:126px;
+      max-width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      filter: drop-shadow(0 14px 20px rgba(0,0,0,.55));
+    }
+
+    .bottle-img{
+      width:100%;
+      height:auto;
+      display:block;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .label-overlay{
+      position:absolute;
+      left:22%;
+      right:22%;
+      top:56%;
+      transform:translateY(-50%);
+      padding:6px 4px;
+      border-radius:7px;
+      background:rgba(5,8,16,.88);
+      border:1px solid rgba(86,147,255,.26);
+      text-align:center;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
+    }
+
+    .label-overlay .line1{
+      display:block;
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:.6px;
+      line-height:1.12;
+      text-transform:uppercase;
+      color:#f7fbff;
+    }
+
+    .label-overlay .line2{
+      display:block;
+      margin-top:2px;
+      font-size:10px;
+      font-weight:800;
+      line-height:1;
+      color:var(--blue2);
+      letter-spacing:.3px;
+    }
+
+    .card-body{
+      padding:0 18px 20px;
+      text-align:left;
+    }
+
+    .product-name{
+      margin:4px 0 8px;
+      font-size:29px;
+      line-height:1.08;
+      font-weight:800;
+      letter-spacing:.2px;
+      text-transform:none;
+    }
+
+    .product-price{
+      color:var(--green);
+      font-size:36px;
+      line-height:1;
+      font-weight:900;
+      margin:10px 0 14px;
+    }
+
+    .product-desc{
+      color:#d7dfeb;
+      opacity:.92;
+      min-height:64px;
+      line-height:1.45;
+      font-size:15px;
+      margin-bottom:16px;
+    }
+
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius:12px;
+      font-weight:800;
+      letter-spacing:.7px;
+      font-size:14px;
+      transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      opacity:.96;
+    }
+
+    .btn-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      color:#eef6ff;
+      background:linear-gradient(180deg, rgba(16,31,57,.72), rgba(10,20,41,.9));
+      border:1px solid rgba(97,157,255,.4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      width:100%;
+    }
+
+    .coa{
+      padding:28px 0 0;
+    }
+
+    .info-panel{
+      position:relative;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(4,7,14,.88), rgba(7,10,18,.96)),
+        url('hero-reference.jpg') center/cover no-repeat;
+      box-shadow: var(--shadow);
+      margin-top:34px;
+    }
+
+    .info-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(2,5,11,.78), rgba(2,4,9,.92));
+    }
+
+    .info-inner{
+      position:relative;
+      z-index:1;
+      padding:34px 28px;
+    }
+
+    .feature-row{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap:16px;
+      margin-top:14px;
+    }
+
+    .feature{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(11,16,27,.72);
+      border-radius:18px;
+      padding:18px 16px;
+      text-align:center;
+      color:#edf5ff;
+    }
+
+    .feature .icon{
+      font-size:28px;
+      margin-bottom:10px;
+      color:var(--blue2);
+    }
+
+    .feature strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:6px;
+      color:#fff;
+    }
+
+    .order-panel{
+      margin:36px auto 14px;
+      max-width:900px;
+      text-align:center;
+    }
+
+    .order-panel h3{
+      margin:0 0 10px;
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:38px;
+    }
+
+    .order-panel p{
+      color:#d8e1ef;
+      line-height:1.6;
+      font-size:16px;
+    }
+
+    .pay-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      justify-content:center;
+      margin-top:18px;
+    }
+
+    .pay-btn{
+      min-width:240px;
+      min-height:58px;
+      border-radius:14px;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:.8px;
+      color:#fff;
+    }
+
+    .zelle{
+      background:linear-gradient(135deg, #4e2ed4, #7e47ff);
+      box-shadow:0 14px 28px rgba(100,54,255,.32);
+    }
+
+    .cash{
+      background:linear-gradient(135deg, #26a44c, #4fd168);
+      box-shadow:0 14px 28px rgba(44,168,76,.28);
+    }
+
+    footer{
+      text-align:center;
+      color:#cdd6e4;
+      opacity:.85;
+      font-size:13px;
+      padding:28px 0 40px;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.78);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:999;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-card{
+      width:min(960px, 100%);
+      position:relative;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(4,7,14,.88), rgba(7,10,18,.96)),
+        url('hero-reference.jpg') center/cover no-repeat;
+      box-shadow:0 40px 80px rgba(0,0,0,.55);
+    }
+
+    .modal-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(2,5,11,.78), rgba(2,4,9,.93));
+    }
+
+    .modal-inner{
+      position:relative;
+      z-index:1;
+      padding:28px;
+    }
+
+    .close-btn{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      border:none;
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      cursor:pointer;
+      font-size:24px;
+      z-index:2;
+    }
+
+    .modal-top-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      color:#f5f8ff;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-weight:700;
+      opacity:.95;
+    }
+
+    .modal-top-brand img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+    }
+
+    .modal-grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .modal-bottle{
+      position:relative;
+      max-width:240px;
+      margin:10px auto 0;
+    }
+
+    .modal-bottle img{
+      width:100%;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 22px 26px rgba(0,0,0,.55));
+    }
+
+    .modal-label{
+      position:absolute;
+      left:20%;
+      right:20%;
+      top:57%;
+      transform:translateY(-50%);
+      padding:8px 6px;
+      background:rgba(5,8,16,.9);
+      border:1px solid rgba(86,147,255,.26);
+      border-radius:9px;
+      text-align:center;
+    }
+
+    .modal-label .line1{
+      display:block;
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+      line-height:1.14;
+    }
+
+    .modal-label .line2{
+      display:block;
+      margin-top:3px;
+      font-size:16px;
+      font-weight:900;
+      color:var(--blue2);
+      line-height:1;
+    }
+
+    .modal-title{
+      font-size: clamp(34px, 5vw, 62px);
+      line-height:1;
+      margin:8px 0 14px;
+      font-weight:900;
+      letter-spacing:.5px;
+    }
+
+    .modal-price{
+      color:var(--green);
+      font-size:58px;
+      font-weight:900;
+      margin-bottom:18px;
+      line-height:1;
+    }
+
+    .modal-box{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(9,14,24,.58);
+      border-radius:18px;
+      padding:18px;
+      margin-bottom:18px;
+      color:#e6edf8;
+      line-height:1.6;
+    }
+
+    .modal-box h4{
+      margin:0 0 10px;
+      color:var(--blue2);
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+      font-size:22px;
+    }
+
+    .modal-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .wide-btn{
+      min-height:54px;
+      padding:0 22px;
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      letter-spacing:.8px;
+    }
+
+    .verify-btn{
+      background:linear-gradient(180deg, #163666, #0f2b58);
+      color:#fff;
+      border:1px solid rgba(105,167,255,.4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .order-btn{
+      background:linear-gradient(135deg, #37a54a, #67cf65);
+      color:#fff;
+      box-shadow:0 16px 28px rgba(50,165,76,.28);
+      flex:1 1 240px;
+    }
+
+    @media (max-width: 980px){
+      .hero-inner{
+        grid-template-columns: 1fr;
+        text-align:center;
+        padding:34px 24px;
+      }
+
+      .brand-left{
+        margin:0 auto;
+      }
+
+      .logo-mark{
+        margin:0 auto 18px;
+      }
+
+      .brand-sub{
+        justify-content:center;
+      }
+
+      .premium-line{
+        margin:0 auto;
+      }
+
+      .modal-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .brand-main{
+        letter-spacing:4px;
+      }
+      .brand-sub{
+        letter-spacing:5px;
+      }
+      .faith{
+        letter-spacing:2.5px;
+      }
+      .product-name{
+        font-size:25px;
+      }
+      .product-price{
+        font-size:32px;
+      }
+      .section-title{
+        font-size:34px;
+      }
+      .order-panel h3{
+        font-size:30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <img src="logo.jpg" class="logo">
-    <h1>Covenant Bio Labs</h1>
-    <div class="subtitle">FAITH • SCIENCE • PURPOSE</div>
-    <div class="tagline">Premium Research Peptides & Advanced Compounds</div>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+          <div class="brand-left">
+            <img src="logo.jpg" alt="Covenant Bio Labs logo" class="logo-mark" />
+            <h1 class="brand-main">COVENANT</h1>
+            <div class="brand-sub">BIO LABS</div>
+            <p class="faith">FAITH. SCIENCE. PURPOSE.</p>
+            <div class="premium-line">PREMIUM RESEARCH PEPTIDES<br>&amp; ADVANCED COMPOUNDS</div>
+          </div>
+          <div class="hero-right">
+            <div class="hero-glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="utility-bar">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+        <button type="button">⌕</button>
+      </div>
+      <div class="pill">Research Use Only</div>
+      <div class="pill">Not for Human Consumption</div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">COA &amp; TESTING</h2>
+      <div class="section-sub">Third Party Tested for Purity &amp; Quality</div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="coa">
+      <div class="info-panel">
+        <div class="info-inner">
+          <h2 class="section-title" style="margin-top:0;">COA &amp; TESTING</h2>
+          <div class="section-sub" style="margin-bottom:16px;">Third Party Tested for Purity &amp; Quality</div>
+
+          <div class="feature-row">
+            <div class="feature">
+              <div class="icon">🧬</div>
+              <strong>Research Driven</strong>
+              Lab-focused catalog presentation.
+            </div>
+            <div class="feature">
+              <div class="icon">⬡</div>
+              <strong>High Purity</strong>
+              Product layout designed for premium presentation.
+            </div>
+            <div class="feature">
+              <div class="icon">⚗️</div>
+              <strong>Third Party Tested</strong>
+              COA / analysis section ready for your final links.
+            </div>
+            <div class="feature">
+              <div class="icon">🛡️</div>
+              <strong>Quality Assured</strong>
+              Compliance-minded product display.
+            </div>
+          </div>
+
+          <div class="order-panel">
+            <h3>Place Order</h3>
+            <p>
+              For ordering inquiries, click one of the buttons below.<br>
+              Research catalog presentation only.
+            </p>
+            <div class="pay-row">
+              <button class="btn pay-btn zelle">PAY VIA ZELLE</button>
+              <button class="btn pay-btn cash">PAY VIA CASH APP</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Covenant Bio Labs • Research Use Only • Not for Human Consumption
+    </footer>
   </div>
-</section>
 
-<!-- PRODUCTS -->
-<section class="products">
-  <div class="grid">
+  <div class="modal" id="productModal">
+    <div class="modal-card">
+      <button class="close-btn" id="closeModal">×</button>
+      <div class="modal-inner">
+        <div class="modal-top-brand">
+          <img src="logo.jpg" alt="Logo">
+          <span>Covenant Bio Labs</span>
+        </div>
 
-    <div class="card">
-      <img src="bottle-reference.jpg">
-      <h3>Retatrutide 20mg</h3>
-      <div class="price">$120</div>
-      <button onclick="openModal('Retatrutide 20mg')">View Details</button>
+        <div class="modal-grid">
+          <div>
+            <div class="modal-bottle">
+              <img src="bottle-reference.jpg" alt="Bottle">
+              <div class="modal-label">
+                <span class="line1" id="modalBottleLine1">PRODUCT</span>
+                <span class="line2" id="modalBottleLine2">10mg</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="modal-title" id="modalTitle">Product</div>
+            <div class="modal-price" id="modalPrice">$0</div>
+
+            <div class="modal-box">
+              <ul id="modalDetails" style="margin:0;padding-left:20px;"></ul>
+            </div>
+
+            <div class="modal-box">
+              <h4>Important Notice</h4>
+              <ul style="margin:0;padding-left:20px;">
+                <li>For research &amp; laboratory use only.</li>
+                <li>Not for human consumption.</li>
+                <li>Intended for qualified researchers only.</li>
+                <li>Must be 21 years or older to purchase.</li>
+              </ul>
+            </div>
+
+            <div class="modal-actions">
+              <button class="btn wide-btn verify-btn">VIEW COA / VERIFY TEST</button>
+              <button class="btn wide-btn order-btn">PLACE ORDER</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="bottle-reference.jpg">
-      <h3>Cagrilintide 5mg</h3>
-      <div class="price">$70</div>
-      <button onclick="openModal('Cagrilintide 5mg')">View Details</button>
-    </div>
-
-    <div class="card">
-      <img src="bottle-reference.jpg">
-      <h3>IGF-1 LR3 1mg</h3>
-      <div class="price">$75</div>
-      <button onclick="openModal('IGF-1 LR3 1mg')">View Details</button>
-    </div>
-
-    <div class="card">
-      <img src="bottle-reference.jpg">
-      <h3>Tesamorelin 5mg</h3>
-      <div class="price">$40</div>
-      <button onclick="openModal('Tesamorelin 5mg')">View Details</button>
-    </div>
-
   </div>
-</section>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
-    <h2 id="modalTitle"></h2>
-    <p>Research use only. Not for human consumption.</p>
-    <button class="order-btn">Place Order</button>
-  </div>
-</div>
+  <script>
+    const products = [
+      {
+        title: "Retatrutide 20mg",
+        display1: "RETATRUTIDE",
+        display2: "20mg",
+        price: "$120",
+        desc: "High-end research compound presented for laboratory and analytical study.",
+        details: [
+          "Catalog Code: RET-20",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "Cagrilintide 5mg",
+        display1: "CAGRILINTIDE",
+        display2: "5mg",
+        price: "$70",
+        desc: "Research material for controlled lab workflows and catalog presentation.",
+        details: [
+          "Catalog Code: CAG-5",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "IGF-1 LR3 1mg",
+        display1: "IGF-1 LR3",
+        display2: "1mg",
+        price: "$75",
+        desc: "Presented for research inventory use with compliance-minded product display.",
+        details: [
+          "Catalog Code: IGF-1LR3-1",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "Tesamorelin 5mg",
+        display1: "TESAMORELIN",
+        display2: "5mg",
+        price: "$40",
+        desc: "Listed for research and lab handling only. Not intended for personal use.",
+        details: [
+          "Catalog Code: TESA-5",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "NAD+ 500mg",
+        display1: "NAD+",
+        display2: "500mg",
+        price: "$60",
+        desc: "Premium research presentation for catalog and analytical inventory display.",
+        details: [
+          "Catalog Code: NAD-500",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "DISP 10mg",
+        display1: "DISP",
+        display2: "10mg",
+        price: "$70",
+        desc: "Compliance-minded product presentation for research inventory and display.",
+        details: [
+          "Catalog Code: DISP-10",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "MOTS-c 10mg",
+        display1: "MOTS-c",
+        display2: "10mg",
+        price: "$40",
+        desc: "Presented for laboratory and analytical workflows with premium visual styling.",
+        details: [
+          "Catalog Code: MOTS-10",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "SLU-PP-332 5mg",
+        display1: "SLU-PP-332",
+        display2: "5mg",
+        price: "$90",
+        desc: "Research catalog listing with premium display and clear product identification.",
+        details: [
+          "Catalog Code: SLU-5",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "BPC-157 + TB-500",
+        display1: "BPC-157 / TB-500",
+        display2: "5mg / 5mg",
+        price: "$50",
+        desc: "Combination catalog presentation for research inventory and lab display.",
+        details: [
+          "Catalog Code: BPC-TB-55",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "SS-31 10mg",
+        display1: "SS-31",
+        display2: "10mg",
+        price: "$40",
+        desc: "Premium research peptide presentation for laboratory catalog display.",
+        details: [
+          "Catalog Code: SS31-10",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "Bacteriostatic Water 10mL",
+        display1: "BACT WATER",
+        display2: "10mL",
+        price: "$10",
+        desc: "Research inventory presentation for sterile support product display.",
+        details: [
+          "Catalog Code: BAC-10ML",
+          "Use: Research & Lab Studies",
+          "Storage: Store in a cool, dry place as directed for catalog presentation.",
+          "Presentation: Premium catalog display"
+        ]
+      },
+      {
+        title: "HGH Somatropin 15iu",
+        display1: "HGH",
+        display2: "15iu",
+        price: "$50",
+        desc: "Presented for research inventory handling and premium visual catalog display.",
+        details: [
+          "Catalog Code: HGH-15IU",
+          "Use: Research & Lab Studies",
+          "Storage: Store refrigerated at 2-8°C (36-46°F). Protect from light. Do not freeze.",
+          "Presentation: Premium catalog display"
+        ]
+      }
+    ];
 
-<!-- FOOTER -->
-<footer>
-© 2026 Covenant Bio Labs  
-Research Use Only • Not for Human Consumption
-</footer>
+    const productGrid = document.getElementById("productGrid");
+    const searchInput = document.getElementById("searchInput");
 
-<script>
-function openModal(product) {
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("modalTitle").innerText = product;
-}
+    function renderProducts(list){
+      productGrid.innerHTML = "";
 
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-</script>
+      list.forEach((product, index) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <div class="card-top">
+            <div class="bottle-frame">
+              <img src="bottle-reference.jpg" alt="${product.title}" class="bottle-img">
+              <div class="label-overlay">
+                <span class="line1">${product.display1}</span>
+                <span class="line2">${product.display2}</span>
+              </div>
+            </div>
+          </div>
 
+          <div class="card-body">
+            <div class="product-name">${product.title}</div>
+            <div class="product-price">${product.price}</div>
+            <div class="product-desc">${product.desc}</div>
+            <button class="btn btn-outline" onclick="openModal(${index})">VIEW DETAILS</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    renderProducts(products);
+
+    searchInput.addEventListener("input", function(){
+      const term = this.value.toLowerCase().trim();
+      const filtered = products.filter(p =>
+        p.title.toLowerCase().includes(term) ||
+        p.display1.toLowerCase().includes(term) ||
+        p.display2.toLowerCase().includes(term)
+      );
+      renderProducts(filtered);
+    });
+
+    const modal = document.getElementById("productModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalDetails = document.getElementById("modalDetails");
+    const modalBottleLine1 = document.getElementById("modalBottleLine1");
+    const modalBottleLine2 = document.getElementById("modalBottleLine2");
+
+    window.openModal = function(index){
+      const product = products[index];
+      modalTitle.textContent = product.title;
+      modalPrice.textContent = product.price;
+      modalBottleLine1.textContent = product.display1;
+      modalBottleLine2.textContent = product.display2;
+      modalDetails.innerHTML = product.details.map(item => `<li>${item}</li>`).join("");
+      modal.classList.add("show");
+    }
+
+    function closeModal(){
+      modal.classList.remove("show");
+    }
+
+    closeModalBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", function(e){
+      if(e.target === modal) closeModal();
+    });
+  </script>
 </body>
 </html>

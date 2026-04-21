@@ -1,199 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Covenant Bio Labs</title>
-  <style>
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      background:#060b14;
-      color:#fff;
-    }
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:24px;
-    }
-    .top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-      padding:18px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .brand{
-      font-size:28px;
-      font-weight:700;
-      letter-spacing:.04em;
-    }
-    .sub{
-      color:#9fb0c9;
-      font-size:14px;
-    }
-    .hero{
-      padding:60px 0 30px;
-    }
-    h1{
-      font-size:48px;
-      line-height:1.05;
-      margin:0 0 16px;
-    }
-    .lead{
-      color:#a8b7cf;
-      font-size:18px;
-      line-height:1.7;
-      max-width:760px;
-    }
-    .badges{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:22px;
-    }
-    .badge{
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.04);
-      color:#dbe8ff;
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:13px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:18px;
-      margin:36px 0;
-    }
-    .card{
-      background:#0e1625;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:20px;
-    }
-    .card h3{
-      margin:0 0 8px;
-      font-size:22px;
-    }
-    .price{
-      color:#62b0ff;
-      font-size:22px;
-      font-weight:700;
-      margin:8px 0 14px;
-    }
-    .muted{
-      color:#9fb0c9;
-      line-height:1.6;
-      font-size:14px;
-    }
-    .btn{
-      display:inline-block;
-      margin-top:16px;
-      background:#2b7fff;
-      color:#fff;
-      padding:12px 16px;
-      border-radius:12px;
-      font-weight:700;
-      text-decoration:none;
-    }
-    .section{
-      margin:50px 0 20px;
-    }
-    .section h2{
-      margin-bottom:10px;
-      font-size:30px;
-    }
-    .orderbox{
-      background:#0e1625;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:24px;
-      line-height:1.8;
-    }
-    footer{
-      border-top:1px solid rgba(255,255,255,.08);
-      margin-top:40px;
-      padding:24px 0 40px;
-      color:#8ea0bb;
-      font-size:14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Covenant Bio Labs</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#05070d;
+  color:white;
+  text-align:center;
+}
+
+header{
+  padding:60px 20px;
+  background:linear-gradient(180deg,#061020,#05070d);
+}
+
+h1{
+  font-size:42px;
+  color:#00bfff;
+}
+
+p{
+  color:#aabbd6;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:30px;
+}
+
+.card{
+  background:#0c1626;
+  padding:20px;
+  border-radius:12px;
+}
+
+.price{
+  color:#00bfff;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+button{
+  background:#00bfff;
+  border:none;
+  padding:10px 20px;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+footer{
+  padding:40px 20px;
+  font-size:14px;
+  color:#8899bb;
+}
+</style>
+
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <div class="brand">Covenant Bio Labs</div>
-        <div class="sub">Faith. Science. Purpose.</div>
-      </div>
-      <div class="sub">Research Use Only</div>
-    </div>
 
-    <div class="hero">
-      <h1>Premium Research Peptides</h1>
-      <p class="lead">
-        Professional research catalog with a clean, compliance-minded presentation.
-        For laboratory and analytical use only. Not for human consumption.
-      </p>
+<header>
+  <h1>Covenant Bio Labs</h1>
+  <p>Premium Research Peptides</p>
+  <p>Research Use Only • Not for Human Consumption</p>
+</header>
 
-      <div class="badges">
-        <div class="badge">21+ Access</div>
-        <div class="badge">Research Use Only</div>
-        <div class="badge">Third-Party COAs</div>
-        <div class="badge">Direct Ordering</div>
-      </div>
-    </div>
+<div class="products">
 
-    <div class="section">
-      <h2>Featured Products</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Retatrutide 20mg</h3>
-          <div class="price">$120</div>
-          <div class="muted">High-end research compound presented for laboratory and analytical study.</div>
-          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - Retatrutide 20mg">Order Inquiry</a>
-        </div>
+<div class="card">
+<h3>Retatrutide 20mg</h3>
+<div class="price">$120</div>
+<p>High-end research compound for laboratory study.</p>
+<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
+</div>
 
-        <div class="card">
-          <h3>Cagrilintide 5mg</h3>
-          <div class="price">$70</div>
-          <div class="muted">Research material for controlled lab workflows and catalog presentation.</div>
-          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - Cagrilintide 5mg">Order Inquiry</a>
-        </div>
+<div class="card">
+<h3>Cagrilintide 5mg</h3>
+<div class="price">$70</div>
+<p>Research material for controlled lab workflows.</p>
+<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
+</div>
 
-        <div class="card">
-          <h3>IGF-1 LR3 1mg</h3>
-          <div class="price">$75</div>
-          <div class="muted">Presented for research inventory use with compliance-minded product display.</div>
-          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - IGF-1 LR3 1mg">Order Inquiry</a>
-        </div>
+<div class="card">
+<h3>IGF-1 LR3 1mg</h3>
+<div class="price">$75</div>
+<p>Presented for research inventory use.</p>
+<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
+</div>
 
-        <div class="card">
-          <h3>Tesamorelin 5mg</h3>
-          <div class="price">$40</div>
-          <div class="muted">Listed for research and lab handling only. Not intended for personal use.</div>
-          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - Tesamorelin 5mg">Order Inquiry</a>
-        </div>
-      </div>
-    </div>
+<div class="card">
+<h3>Tesamorelin 5mg</h3>
+<div class="price">$40</div>
+<p>For laboratory research only.</p>
+<button onclick="location.href='mailto:orders@covenantbiolabs.com'">Order</button>
+</div>
 
-    <div class="section">
-      <h2>Ordering</h2>
-      <div class="orderbox">
-        <div><strong>Email:</strong> orders@covenantbiolabs.com</div>
-        <div><strong>Zelle:</strong> orders@covenantbiolabs.com</div>
-        <div><strong>Cash App:</strong> $covenantbiolabs</div>
-        <div><strong>Notice:</strong> Research use only. Not for human consumption.</div>
-      </div>
-    </div>
+</div>
 
-    <footer>
-      © 2026 Covenant Bio Labs. All rights reserved.
-    </footer>
-  </div>
+<footer>
+© 2026 Covenant Bio Labs<br><br>
+All products are sold for research purposes only.<br>
+Not for human consumption.
+</footer>
+
 </body>
 </html>
-
-

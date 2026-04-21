@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Covenant Bio Labs</title>
+  <meta name="description" content="Covenant Bio Labs — Faith. Science. Purpose. Premium research brand presentation." />
   <style>
     :root{
       --bg:#03060c;
-      --bg2:#08111c;
-      --panel:#08111c;
-      --panel2:#0c1728;
-      --line:rgba(88,175,255,.18);
+      --bg2:#07111d;
+      --panel:#0a1524;
+      --panel2:#0d1b2d;
+      --line:rgba(104,190,255,.18);
       --blue:#1d87ff;
-      --blue2:#66c7ff;
-      --blue3:#8fdcff;
-      --white:#f7fbff;
-      --muted:#a7b7d3;
-      --green:#69dc7a;
-      --shadow:0 18px 55px rgba(0,0,0,.48);
-      --radius:26px;
-      --max:1320px;
+      --blue2:#67c8ff;
+      --blue3:#9ee0ff;
+      --white:#f6fbff;
+      --muted:#a8b8d3;
+      --shadow:0 24px 70px rgba(0,0,0,.46);
+      --radius:28px;
+      --max:1280px;
     }
 
     *{box-sizing:border-box}
@@ -29,14 +29,14 @@
       font-family:Arial, Helvetica, sans-serif;
       color:var(--white);
       background:
-        radial-gradient(circle at 12% 15%, rgba(29,135,255,.18), transparent 22%),
-        radial-gradient(circle at 86% 10%, rgba(102,199,255,.14), transparent 18%),
-        radial-gradient(circle at 80% 70%, rgba(29,135,255,.12), transparent 22%),
-        linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
+        radial-gradient(circle at 12% 12%, rgba(29,135,255,.16), transparent 22%),
+        radial-gradient(circle at 88% 8%, rgba(103,200,255,.13), transparent 18%),
+        radial-gradient(circle at 82% 78%, rgba(29,135,255,.10), transparent 20%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       overflow-x:hidden;
     }
 
-    /* soft molecular page glow */
+    /* page-level molecular feel */
     body::before{
       content:"";
       position:fixed;
@@ -44,40 +44,35 @@
       pointer-events:none;
       opacity:.24;
       background:
-        radial-gradient(circle at 9% 18%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 15% 23%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 21% 17%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 78% 16%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 85% 22%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 91% 15%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 8% 82%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 14% 76%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 20% 84%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 79% 78%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 87% 83%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 93% 76%, rgba(102,199,255,.95) 0 2px, transparent 3px),
-        linear-gradient(135deg, transparent 49.7%, rgba(102,199,255,.24) 49.9%, rgba(102,199,255,.24) 50.1%, transparent 50.3%),
-        linear-gradient(45deg, transparent 49.7%, rgba(102,199,255,.14) 49.9%, rgba(102,199,255,.14) 50.1%, transparent 50.3%);
+        radial-gradient(circle at 8% 18%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 14% 22%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 20% 16%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 79% 16%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 87% 21%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 93% 15%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 9% 82%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 15% 77%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 22% 84%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 78%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 86% 83%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 76%, rgba(103,200,255,.95) 0 2px, transparent 3px),
+        linear-gradient(135deg, transparent 49.72%, rgba(103,200,255,.18) 49.9%, rgba(103,200,255,.18) 50.1%, transparent 50.28%),
+        linear-gradient(45deg, transparent 49.72%, rgba(103,200,255,.10) 49.9%, rgba(103,200,255,.10) 50.1%, transparent 50.28%);
       background-size:100% 100%;
-      mask-image:radial-gradient(circle at center, black 25%, rgba(0,0,0,.55) 62%, transparent 100%);
-      -webkit-mask-image:radial-gradient(circle at center, black 25%, rgba(0,0,0,.55) 62%, transparent 100%);
+      mask-image:radial-gradient(circle at center, black 28%, rgba(0,0,0,.55) 62%, transparent 100%);
+      -webkit-mask-image:radial-gradient(circle at center, black 28%, rgba(0,0,0,.55) 62%, transparent 100%);
     }
 
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
-    button{font-family:inherit}
-
-    .container{
-      width:min(var(--max), calc(100% - 28px));
-      margin:0 auto;
-    }
+    .container{width:min(var(--max), calc(100% - 28px)); margin:0 auto}
 
     .topbar{
       position:sticky;
       top:0;
       z-index:50;
       backdrop-filter:blur(16px);
-      background:rgba(4,8,15,.72);
+      background:rgba(3,7,12,.72);
       border-bottom:1px solid rgba(255,255,255,.06);
     }
 
@@ -86,7 +81,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
+      gap:18px;
     }
 
     .brand{
@@ -97,8 +92,8 @@
     }
 
     .brand-logo{
-      width:60px;
-      height:60px;
+      width:62px;
+      height:62px;
       border-radius:18px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.08);
@@ -120,10 +115,6 @@
       color:var(--blue2);
       font-size:28px;
       font-weight:700;
-    }
-
-    .brand-text{
-      min-width:0;
     }
 
     .brand-text h1{
@@ -148,6 +139,8 @@
       font-size:14px;
     }
 
+    .nav-links a:hover{color:var(--white)}
+
     .pill{
       display:inline-flex;
       align-items:center;
@@ -168,7 +161,7 @@
 
     .hero-panel{
       background:
-        radial-gradient(circle at 75% 25%, rgba(29,135,255,.18), transparent 25%),
+        radial-gradient(circle at 76% 24%, rgba(29,135,255,.18), transparent 24%),
         linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
       border:1px solid rgba(255,255,255,.08);
       border-radius:30px;
@@ -185,7 +178,7 @@
       padding:38px 30px 34px;
       position:relative;
       overflow:hidden;
-      min-height:480px;
+      min-height:470px;
     }
 
     .hero-left::before,
@@ -195,24 +188,1091 @@
       width:220px;
       height:220px;
       border-radius:50%;
-      filter:blur(22px);
+      filter:blur(24px);
       opacity:.16;
       pointer-events:none;
     }
 
     .hero-left::before{
-      left:-60px; top:10px;
+      left:-60px; top:-30px;
       background:radial-gradient(circle, var(--blue2), transparent 70%);
     }
 
     .hero-left::after{
-      right:-70px; bottom:-40px;
+      right:-70px; bottom:-50px;
       background:radial-gradient(circle, var(--blue), transparent 70%);
     }
 
     .chem{
       position:absolute;
       font-size:12px;
-      color:rgba(220,235,255,.28);
+      color:rgba(220,235,255,.26);
       letter-spacing:.05em;
-      line
+      line-height:1.4;
+      user-select:none;
+    }
+
+    .chem.one{top:24px; left:22px}
+    .chem.two{right:28px; bottom:34px}
+
+    .hero-logo{
+      width:116px;
+      height:116px;
+      border-radius:28px;
+      overflow:hidden;
+      margin-bottom:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      box-shadow:0 0 32px rgba(29,135,255,.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      border-radius:999px;
+      padding:10px 14px;
+      margin-bottom:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      color:#d8e8ff;
+      font-size:12px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--blue2);
+      box-shadow:0 0 14px rgba(103,200,255,.8);
+    }
+
+    .hero-left h2{
+      margin:0 0 12px;
+      font-size:clamp(44px, 7vw, 78px);
+      line-height:.95;
+      letter-spacing:-.045em;
+    }
+
+    .hero-left .subline{
+      margin:0 0 14px;
+      font-size:14px;
+      letter-spacing:.34em;
+      color:#eaf3ff;
+      text-transform:uppercase;
+    }
+
+    .hero-left .subline .accent{
+      color:var(--blue2);
+    }
+
+    .hero-left p{
+      margin:0;
+      max-width:720px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin:24px 0 28px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 18px;
+      border-radius:14px;
+      font-weight:700;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, var(--blue2), var(--blue));
+      color:#fff;
+      box-shadow:0 10px 24px rgba(29,135,255,.30);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.04);
+      border-color:rgba(255,255,255,.10);
+      color:#eef5ff;
+    }
+
+    .hero-right{
+      padding:24px;
+      border-left:1px solid rgba(255,255,255,.06);
+      background:
+        radial-gradient(circle at center, rgba(29,135,255,.18), transparent 40%),
+        linear-gradient(180deg, rgba(4,10,18,.76), rgba(4,10,18,.92));
+      min-height:100%;
+      position:relative;
+    }
+
+    .protein-card{
+      width:100%;
+      height:100%;
+      min-height:420px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 55% 45%, rgba(29,135,255,.22), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .protein-node{
+      position:absolute;
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      background:radial-gradient(circle, #dff4ff 0%, #8ed9ff 38%, #1f86ff 100%);
+      box-shadow:0 0 18px rgba(103,200,255,.65);
+    }
+
+    .protein-line{
+      position:absolute;
+      height:3px;
+      border-radius:999px;
+      transform-origin:left center;
+      background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(103,200,255,.95), rgba(255,255,255,.18));
+      box-shadow:0 0 14px rgba(103,200,255,.25);
+    }
+
+    .n1{top:48px; left:58px}.n2{top:92px; left:112px}.n3{top:62px; left:176px}
+    .n4{top:128px; left:232px}.n5{top:184px; left:182px}.n6{top:228px; left:258px}
+    .n7{top:88px; right:146px}.n8{top:140px; right:210px}.n9{top:212px; right:138px}
+    .n10{top:280px; right:220px}.n11{top:318px; right:124px}.n12{top:248px; left:120px}
+
+    .l1{top:56px; left:66px; width:70px; transform:rotate(38deg)}
+    .l2{top:94px; left:118px; width:74px; transform:rotate(-21deg)}
+    .l3{top:74px; left:179px; width:88px; transform:rotate(49deg)}
+    .l4{top:132px; left:191px; width:66px; transform:rotate(132deg)}
+    .l5{top:187px; left:186px; width:88px; transform:rotate(34deg)}
+    .l6{top:92px; right:150px; width:88px; transform:rotate(138deg)}
+    .l7{top:145px; right:207px; width:105px; transform:rotate(39deg)}
+    .l8{top:213px; right:217px; width:108px; transform:rotate(145deg)}
+    .l9{top:283px; right:214px; width:112px; transform:rotate(26deg)}
+    .l10{top:234px; left:126px; width:82px; transform:rotate(-39deg)}
+
+    .ribbon{
+      position:absolute;
+      width:54px;
+      height:250px;
+      border-radius:40px;
+      filter:drop-shadow(0 0 20px rgba(103,200,255,.28));
+      opacity:.95;
+    }
+
+    .ribbon.blue{
+      left:52%;
+      top:56px;
+      transform:translateX(-50%) rotate(12deg);
+      background:
+        linear-gradient(180deg,
+          rgba(18,55,255,.15) 0%,
+          rgba(21,98,255,.98) 12%,
+          rgba(98,207,255,.96) 28%,
+          rgba(23,82,255,.96) 46%,
+          rgba(101,206,255,.98) 65%,
+          rgba(18,55,255,.2) 100%);
+      clip-path:polygon(31% 0, 70% 5%, 56% 16%, 74% 29%, 38% 40%, 64% 52%, 28% 64%, 61% 76%, 34% 88%, 66% 100%, 28% 100%, 8% 90%, 33% 77%, 4% 64%, 36% 52%, 8% 39%, 42% 28%, 18% 16%, 34% 4%);
+    }
+
+    .ribbon.silver{
+      left:66%;
+      top:48px;
+      transform:translateX(-50%) rotate(-10deg);
+      background:
+        linear-gradient(180deg,
+          rgba(180,190,210,.14) 0%,
+          rgba(235,242,255,.98) 12%,
+          rgba(152,164,184,.96) 30%,
+          rgba(239,246,255,.97) 48%,
+          rgba(155,168,188,.95) 66%,
+          rgba(190,198,212,.18) 100%);
+      clip-path:polygon(36% 0, 74% 10%, 52% 21%, 79% 33%, 44% 44%, 67% 57%, 35% 68%, 63% 79%, 30% 90%, 58% 100%, 18% 100%, 4% 90%, 30% 79%, 3% 67%, 36% 56%, 10% 43%, 46% 33%, 20% 21%, 40% 10%);
+    }
+
+    .mini-label{
+      position:absolute;
+      left:28px;
+      bottom:24px;
+      right:28px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .mini-box{
+      border-radius:16px;
+      background:rgba(7,14,26,.74);
+      border:1px solid rgba(255,255,255,.08);
+      padding:12px 10px;
+      text-align:center;
+      font-size:12px;
+      color:#dce9ff;
+    }
+
+    .section{padding:22px 0}
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .section-head h3{
+      margin:0;
+      font-size:34px;
+      letter-spacing:-.02em;
+    }
+
+    .section-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      max-width:760px;
+      line-height:1.7;
+    }
+
+    .search-wrap{
+      margin-bottom:16px;
+    }
+
+    .searchbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:56px;
+      padding:0 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+    }
+
+    .searchbar input{
+      width:100%;
+      background:transparent;
+      border:none;
+      outline:none;
+      color:#fff;
+      font-size:15px;
+    }
+
+    .searchbar input::placeholder{color:#8fa3c3}
+
+    .notice-band{
+      margin:14px 0 22px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .notice-band .pill{
+      background:rgba(255,255,255,.06);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .product{
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(8,17,29,.98), rgba(4,10,18,.98));
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+
+    .product-top{
+      min-height:182px;
+      padding:14px;
+      position:relative;
+      background:
+        radial-gradient(circle at 78% 26%, rgba(29,135,255,.20), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+    }
+
+    .product-top::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 22% 24%, rgba(103,200,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 32% 36%, rgba(103,200,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 42% 24%, rgba(103,200,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 22%, rgba(103,200,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 34%, rgba(103,200,255,.9) 0 2px, transparent 3px),
+        linear-gradient(135deg, transparent 49.7%, rgba(103,200,255,.20) 49.9%, rgba(103,200,255,.20) 50.1%, transparent 50.3%);
+      opacity:.42;
+      pointer-events:none;
+    }
+
+    .vial{
+      width:88px;
+      height:122px;
+      position:relative;
+      z-index:1;
+      filter:drop-shadow(0 12px 16px rgba(0,0,0,.42));
+    }
+
+    .vial-cap{
+      position:absolute;
+      top:0;
+      left:50%;
+      width:72px;
+      height:24px;
+      margin-left:-36px;
+      border-radius:14px 14px 8px 8px;
+      background:linear-gradient(180deg, #1e5bff, #0e307e);
+      border:1px solid rgba(255,255,255,.24);
+    }
+
+    .vial-neck{
+      position:absolute;
+      top:22px;
+      left:50%;
+      width:42px;
+      height:14px;
+      margin-left:-21px;
+      border-radius:4px;
+      background:linear-gradient(180deg, #aab2bd, #5f6772);
+    }
+
+    .vial-body{
+      position:absolute;
+      top:32px;
+      left:50%;
+      width:82px;
+      height:84px;
+      margin-left:-41px;
+      border-radius:16px 16px 18px 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,.04) 18%, rgba(0,0,0,.10) 19%, rgba(40,40,50,.88) 68%, rgba(255,255,255,.12));
+      border:1px solid rgba(255,255,255,.22);
+      overflow:hidden;
+    }
+
+    .vial-label{
+      position:absolute;
+      left:9px;
+      right:9px;
+      bottom:10px;
+      padding:7px 6px;
+      border-radius:8px;
+      background:linear-gradient(180deg, rgba(3,8,14,.96), rgba(8,12,18,.96));
+      border:1px solid rgba(103,200,255,.22);
+      text-align:center;
+      font-size:9px;
+      line-height:1.35;
+      letter-spacing:.06em;
+    }
+
+    .vial-label .w{color:#fff}
+    .vial-label .b{color:var(--blue2)}
+
+    .product-body{
+      padding:16px 16px 16px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+
+    .product-body h4{
+      margin:0;
+      font-size:18px;
+      line-height:1.2;
+    }
+
+    .price{
+      margin:10px 0 12px;
+      font-size:18px;
+      font-weight:700;
+      color:var(--green);
+    }
+
+    .product-body p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      flex:1;
+    }
+
+    .product-actions{
+      display:flex;
+      gap:10px;
+      margin-top:16px;
+      flex-wrap:wrap;
+    }
+
+    .btn-small{
+      min-height:42px;
+      padding:0 14px;
+      border-radius:12px;
+      font-size:13px;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.05);
+      color:#f5fbff;
+      cursor:pointer;
+    }
+
+    .btn-small.primary{
+      background:linear-gradient(180deg,#215ecf,#173d84);
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .coa-panel{
+      margin-top:22px;
+      padding:28px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 50% 20%, rgba(29,135,255,.12), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    .coa-panel h3{
+      margin:0 0 8px;
+      font-size:40px;
+    }
+
+    .coa-panel .sub{
+      font-size:14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#e9f2ff;
+      margin-bottom:16px;
+    }
+
+    .coa-panel p{
+      margin:0 auto;
+      color:var(--muted);
+      max-width:860px;
+      line-height:1.8;
+    }
+
+    .coa-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-top:24px;
+    }
+
+    .coa-card{
+      background:#f5f7fb;
+      color:#0a1322;
+      border-radius:18px;
+      padding:18px;
+      text-align:left;
+    }
+
+    .coa-card h4{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+
+    .coa-card .green{
+      font-size:18px;
+      font-weight:700;
+      color:#2ea043;
+    }
+
+    .coa-card button{
+      width:100%;
+      min-height:44px;
+      margin-top:12px;
+      border:none;
+      border-radius:12px;
+      background:#2ea043;
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .ordering{
+      padding:30px 24px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    .ordering h3{
+      margin:0 0 12px;
+      font-size:40px;
+    }
+
+    .ordering p{
+      margin:0 auto 18px;
+      color:var(--muted);
+      max-width:860px;
+      line-height:1.8;
+    }
+
+    .pay-row{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .pay-btn{
+      min-width:250px;
+      min-height:58px;
+      border:none;
+      border-radius:16px;
+      color:#fff;
+      font-size:18px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+    }
+
+    .zelle{background:linear-gradient(180deg,#6c45ff,#5327d7)}
+    .cashapp{background:linear-gradient(180deg,#35c96b,#1f9f50)}
+
+    .order-note{
+      margin-top:18px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dce8ff;
+      line-height:1.8;
+    }
+
+    .footer{
+      padding:26px 0 48px;
+      text-align:center;
+      color:#92a4c4;
+      font-size:14px;
+    }
+
+    .footer strong{color:#eef5ff}
+
+    @media (max-width: 1120px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-right{border-left:none;border-top:1px solid rgba(255,255,255,.06)}
+      .grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+      .coa-grid{grid-template-columns:repeat(2,1fr)}
+      .mini-label{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 720px){
+      .nav-links{display:none}
+      .hero-left{padding:28px 20px 26px}
+      .hero-left h2{font-size:46px}
+      .hero-left .subline{letter-spacing:.18em}
+      .hero-right{padding:16px}
+      .protein-card{min-height:340px}
+      .mini-label{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .coa-grid{grid-template-columns:1fr}
+      .pay-btn{width:100%}
+      .section-head{display:block}
+      .brand-text h1{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="logo.jpg" alt="Covenant Bio Labs logo" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;brand-fallback&quot;>C+</div>';">
+        </div>
+        <div class="brand-text">
+          <h1>Covenant Bio Labs</h1>
+          <p>Faith. Science. Purpose.</p>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#catalog">Catalog</a>
+        <a href="#testing">COA & Testing</a>
+        <a href="#ordering">Contact</a>
+      </div>
+
+      <div class="pill">Research Use Only</div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container hero-panel">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="chem one">N—N<br>O H<br>HN NH₂</div>
+          <div class="chem two">H—N<br>N O<br>OH</div>
+
+          <div class="hero-logo">
+            <img src="logo.jpg" alt="Covenant Bio Labs logo" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;brand-fallback&quot;>C+</div>';">
+          </div>
+
+          <div class="eyebrow"><span class="dot"></span> Premium Research Brand</div>
+
+          <h2>COVENANT</h2>
+          <div class="subline"><span class="accent">BIO</span>LABS</div>
+
+          <p>
+            Faith. Science. Purpose. Premium research peptides & advanced compounds presented through
+            a clean, premium, compliance-forward brand experience.
+          </p>
+
+          <div class="hero-badges">
+            <div class="pill">Research Driven</div>
+            <div class="pill">High Purity</div>
+            <div class="pill">Third Party Tested</div>
+            <div class="pill">Quality Assured</div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#catalog">View Catalog</a>
+            <a class="btn btn-secondary" href="#testing">Read Testing Info</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="protein-card">
+            <div class="protein-node n1"></div><div class="protein-node n2"></div><div class="protein-node n3"></div>
+            <div class="protein-node n4"></div><div class="protein-node n5"></div><div class="protein-node n6"></div>
+            <div class="protein-node n7"></div><div class="protein-node n8"></div><div class="protein-node n9"></div>
+            <div class="protein-node n10"></div><div class="protein-node n11"></div><div class="protein-node n12"></div>
+
+            <div class="protein-line l1"></div><div class="protein-line l2"></div><div class="protein-line l3"></div>
+            <div class="protein-line l4"></div><div class="protein-line l5"></div><div class="protein-line l6"></div>
+            <div class="protein-line l7"></div><div class="protein-line l8"></div><div class="protein-line l9"></div>
+            <div class="protein-line l10"></div>
+
+            <div class="ribbon blue"></div>
+            <div class="ribbon silver"></div>
+
+            <div class="mini-label">
+              <div class="mini-box">Research Driven</div>
+              <div class="mini-box">High Purity</div>
+              <div class="mini-box">Third Party Tested</div>
+              <div class="mini-box">Quality Assured</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalog">
+    <div class="container">
+      <div class="search-wrap">
+        <div class="searchbar">
+          <input type="text" placeholder="Search products..." />
+          <span>🔎</span>
+        </div>
+      </div>
+
+      <div class="notice-band">
+        <div class="pill">Research Use Only • Not For Human Consumption</div>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <h3>COA & TESTING</h3>
+          <p>Third party tested for purity & quality with a premium catalog presentation.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">NAD+ 500MG</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>NAD+ 500mg</h4>
+            <div class="price">$60</div>
+            <p>Presented for research catalog display and laboratory reference purposes.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">CAGRILINTIDE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>Cagrilintide 5mg</h4>
+            <div class="price">$70</div>
+            <p>Research material for controlled lab workflows and catalog presentation.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">DISP 10MG</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>DISP 10mg</h4>
+            <div class="price">$70</div>
+            <p>Research compound presented through a premium dark catalog layout.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">MOTS-C 10MG</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>MOTS-c 10mg</h4>
+            <div class="price">$40</div>
+            <p>Listed for analytical and research-oriented brand presentation only.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">IGF-1 LR3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>IGF-1 LR3 1mg</h4>
+            <div class="price">$75</div>
+            <p>Presented for research inventory display with a clean premium layout.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">SLU-PP-332</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>SLU-PP-332 5mg</h4>
+            <div class="price">$90</div>
+            <p>Research compound displayed in a premium biotech catalog format.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">BPC + TB</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>BPC 5mg + TB 5mg</h4>
+            <div class="price">$50</div>
+            <p>Research blend shown through a clean product-card presentation.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">RETATRUTIDE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>Retatrutide 20mg</h4>
+            <div class="price">$120</div>
+            <p>High-end research compound featured in a premium dark branded panel.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">TESAMORELIN</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>Tesamorelin 5mg</h4>
+            <div class="price">$40</div>
+            <p>Presented for research and laboratory catalog styling only.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">SS-31 10MG</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>SS-31 10mg</h4>
+            <div class="price">$40</div>
+            <p>Shown in a premium biotech-style card for catalog reference.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">BAC WATER</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>Bacteriostatic Water 10mL</h4>
+            <div class="price">$10</div>
+            <p>Ancillary catalog item presented in matching brand style.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-top">
+            <div class="vial">
+              <div class="vial-cap"></div>
+              <div class="vial-neck"></div>
+              <div class="vial-body">
+                <div class="vial-label">
+                  <div class="w">COVENANT</div>
+                  <div class="b">BIOLABS</div>
+                  <div class="w">HGH 15IU</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            <h4>HGH Somatropin 15iu</h4>
+            <div class="price">$50</div>
+            <p>Research catalog presentation with matching premium visual language.</p>
+            <div class="product-actions">
+              <button class="btn-small primary">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="testing">
+    <div class="container coa-panel">
+      <h3>COA & TESTING</h3>
+      <div class="sub">Third Party Tested For Purity & Quality</div>
+      <p>
+        Our research brand emphasizes quality presentation, third-party testing awareness, and a clean
+        visual standard. Certificates of analysis and reference documentation can be organized for internal
+        review and quality workflows.
+      </p>
+
+      <div class="coa-grid">
+        <div class="coa-card">
+          <h4>NAD+</h4>
+          <div class="green">$50</div>
+          <button type="button">View Details</button>
+        </div>
+        <div class="coa-card">
+          <h4>MOTS-c</h4>
+          <div class="green">$70</div>
+          <button type="button">View Details</button>
+        </div>
+        <div class="coa-card">
+          <h4>Selank</h4>
+          <div class="green">$50</div>
+          <button type="button">View Details</button>
+        </div>
+        <div class="coa-card">
+          <h4>KPV 10mg</h4>
+          <div class="green">$50</div>
+          <button type="button">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ordering">
+    <div class="container ordering">
+      <h3>CONTACT</h3>
+      <p>
+        For research-related brand inquiries, documentation requests, or general catalog questions,
+        contact Covenant Bio Labs directly.
+      </p>
+
+      <div class="pay-row">
+        <button class="pay-btn zelle" onclick="location.href='mailto:info@covenantbiolabs.com?subject=Research Inquiry'">Email Inquiry</button>
+        <button class="pay-btn cashapp" onclick="location.href='mailto:info@covenantbiolabs.com?subject=Documentation Request'">Documentation Request</button>
+      </div>
+
+      <div class="order-note">
+        <strong>Email:</strong> info@covenantbiolabs.com<br>
+        <strong>Website:</strong> www.covenantbiolabs.com<br>
+        <strong>Location:</strong> Miami, FL 33101
+      </div>
+    </div>
+  </section>
+
+  <div class="container footer">
+    <p>
+      <strong>Disclaimer:</strong> Content on this site is presented for informational and research-brand
+      communication purposes only. Not for human consumption or clinical use.
+    </p>
+    <p>© 2026 Covenant Bio Labs. All rights reserved.</p>
+  </div>
+</body>
+</html>

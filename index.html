@@ -5,230 +5,195 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Covenant Bio Labs</title>
   <style>
-    :root{
-      --bg:#05070d;
-      --panel:#0c1220;
-      --panel-2:#101a2c;
-      --line:#1d2a44;
-      --text:#eef4ff;
-      --muted:#97a7c6;
-      --blue:#4da3ff;
-      --blue-2:#1f6fff;
-      --green:#30d158;
-      --shadow:0 20px 50px rgba(0,0,0,.45);
-      --radius:20px;
-      --max:1180px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(44,105,255,.18), transparent 25%),
-        radial-gradient(circle at left center, rgba(77,163,255,.14), transparent 20%),
-        linear-gradient(180deg,#05070d 0%,#07101b 100%);
-      color:var(--text);
+      font-family:Arial,sans-serif;
+      background:#060b14;
+      color:#fff;
     }
-
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-
-    .container{
-      width:min(var(--max), calc(100% - 32px));
+    .wrap{
+      max-width:1100px;
       margin:0 auto;
+      padding:24px;
     }
-
-    .topbar{
-      border-bottom:1px solid rgba(255,255,255,.06);
-      background:rgba(5,7,13,.75);
-      backdrop-filter: blur(14px);
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
-
-    .nav{
-      min-height:72px;
+    .top{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand{
-      display:flex;
       align-items:center;
-      gap:12px;
+      gap:16px;
+      padding:18px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .brand{
+      font-size:28px;
       font-weight:700;
       letter-spacing:.04em;
     }
-
-    .brand-mark{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:2px solid rgba(255,255,255,.7);
-      display:grid;
-      place-items:center;
-      font-size:22px;
-      color:var(--blue);
-      box-shadow:0 0 24px rgba(77,163,255,.18);
-    }
-
-    .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1.05;
-    }
-
-    .brand-text span:first-child{
-      font-size:18px;
-      letter-spacing:.08em;
-    }
-
-    .brand-text span:last-child{
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:.22em;
-      margin-top:4px;
-    }
-
-    .nav-links{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-      color:var(--muted);
+    .sub{
+      color:#9fb0c9;
       font-size:14px;
     }
-
     .hero{
-      padding:64px 0 28px;
+      padding:60px 0 30px;
     }
-
-    .hero-wrap{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:28px;
-      align-items:center;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      color:#d6e6ff;
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-    }
-
-    .dot{
-      width:8px;height:8px;border-radius:50%;background:var(--green);
-      box-shadow:0 0 12px rgba(48,209,88,.6);
-    }
-
     h1{
-      font-size:clamp(36px, 6vw, 64px);
-      line-height:1.02;
-      margin:18px 0 16px;
-      letter-spacing:-.03em;
+      font-size:48px;
+      line-height:1.05;
+      margin:0 0 16px;
     }
-
     .lead{
+      color:#a8b7cf;
       font-size:18px;
       line-height:1.7;
-      color:var(--muted);
-      max-width:720px;
-      margin:0 0 28px;
+      max-width:760px;
     }
-
-    .hero-actions{
+    .badges{
       display:flex;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
-      margin-bottom:22px;
+      margin-top:22px;
     }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:48px;
-      padding:0 18px;
-      border-radius:14px;
-      border:1px solid transparent;
-      font-weight:700;
-      letter-spacing:.02em;
-      cursor:pointer;
-    }
-
-    .btn-primary{
-      background:linear-gradient(180deg, var(--blue), var(--blue-2));
-      color:white;
-      box-shadow:0 10px 25px rgba(31,111,255,.35);
-    }
-
-    .btn-secondary{
+    .badge{
+      border:1px solid rgba(255,255,255,.1);
       background:rgba(255,255,255,.04);
-      border-color:rgba(255,255,255,.1);
-      color:#e5eeff;
+      color:#dbe8ff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
     }
-
-    .hero-card{
-      background:
-        radial-gradient(circle at top right, rgba(77,163,255,.22), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:28px;
-      padding:24px;
-      box-shadow:var(--shadow);
-      min-height:100%;
-    }
-
-    .hero-grid{
+    .grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:12px;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+      margin:36px 0;
     }
-
-    .mini{
-      background:rgba(5,10,20,.6);
+    .card{
+      background:#0e1625;
       border:1px solid rgba(255,255,255,.08);
       border-radius:18px;
-      padding:16px;
+      padding:20px;
     }
-
-    .mini h4{
+    .card h3{
       margin:0 0 8px;
-      font-size:13px;
-      color:#cfe0ff;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+      font-size:22px;
     }
-
-    .mini p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
+    .price{
+      color:#62b0ff;
+      font-size:22px;
+      font-weight:700;
+      margin:8px 0 14px;
+    }
+    .muted{
+      color:#9fb0c9;
       line-height:1.6;
+      font-size:14px;
     }
-
+    .btn{
+      display:inline-block;
+      margin-top:16px;
+      background:#2b7fff;
+      color:#fff;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:700;
+      text-decoration:none;
+    }
     .section{
-      padding:28px 0 18px;
+      margin:50px 0 20px;
     }
+    .section h2{
+      margin-bottom:10px;
+      font-size:30px;
+    }
+    .orderbox{
+      background:#0e1625;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:24px;
+      line-height:1.8;
+    }
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      margin-top:40px;
+      padding:24px 0 40px;
+      color:#8ea0bb;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="brand">Covenant Bio Labs</div>
+        <div class="sub">Faith. Science. Purpose.</div>
+      </div>
+      <div class="sub">Research Use Only</div>
+    </div>
 
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:
+    <div class="hero">
+      <h1>Premium Research Peptides</h1>
+      <p class="lead">
+        Professional research catalog with a clean, compliance-minded presentation.
+        For laboratory and analytical use only. Not for human consumption.
+      </p>
+
+      <div class="badges">
+        <div class="badge">21+ Access</div>
+        <div class="badge">Research Use Only</div>
+        <div class="badge">Third-Party COAs</div>
+        <div class="badge">Direct Ordering</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Featured Products</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Retatrutide 20mg</h3>
+          <div class="price">$120</div>
+          <div class="muted">High-end research compound presented for laboratory and analytical study.</div>
+          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - Retatrutide 20mg">Order Inquiry</a>
+        </div>
+
+        <div class="card">
+          <h3>Cagrilintide 5mg</h3>
+          <div class="price">$70</div>
+          <div class="muted">Research material for controlled lab workflows and catalog presentation.</div>
+          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - Cagrilintide 5mg">Order Inquiry</a>
+        </div>
+
+        <div class="card">
+          <h3>IGF-1 LR3 1mg</h3>
+          <div class="price">$75</div>
+          <div class="muted">Presented for research inventory use with compliance-minded product display.</div>
+          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - IGF-1 LR3 1mg">Order Inquiry</a>
+        </div>
+
+        <div class="card">
+          <h3>Tesamorelin 5mg</h3>
+          <div class="price">$40</div>
+          <div class="muted">Listed for research and lab handling only. Not intended for personal use.</div>
+          <a class="btn" href="mailto:orders@covenantbiolabs.com?subject=Order Inquiry - Tesamorelin 5mg">Order Inquiry</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Ordering</h2>
+      <div class="orderbox">
+        <div><strong>Email:</strong> orders@covenantbiolabs.com</div>
+        <div><strong>Zelle:</strong> orders@covenantbiolabs.com</div>
+        <div><strong>Cash App:</strong> $covenantbiolabs</div>
+        <div><strong>Notice:</strong> Research use only. Not for human consumption.</div>
+      </div>
+    </div>
+
+    <footer>
+      © 2026 Covenant Bio Labs. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
 
 

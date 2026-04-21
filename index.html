@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Covenant Bio Labs</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
 * {
   margin:0;
   padding:0;
@@ -17,172 +16,209 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at top, #0a0f1c, #000);
+  background:#05070c;
   color:white;
 }
 
-/* HERO */
-
+/* HERO (JUST BACKGROUND — NO TEXT) */
 .hero {
-  height: 80vh;
-  background: url('hero.jpg') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  height:80vh;
+  background:url('hero.jpg') center/cover no-repeat;
   position:relative;
 }
 
 .hero::after {
   content:"";
   position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.65);
+  inset:0;
+  background:rgba(0,0,0,0.25);
 }
 
-.hero-content {
-  position:relative;
-  z-index:2;
+/* CATALOG TITLE */
+.section-title {
+  text-align:center;
+  margin:60px 0 30px;
+  font-family:'Orbitron', sans-serif;
+  letter-spacing:3px;
+  font-size:28px;
 }
 
-.logo {
-  width:80px;
+/* PRODUCT GRID */
+.products {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:25px;
+  padding:0 30px 60px;
+}
+
+/* PRODUCT CARD */
+.card {
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(0,212,255,0.2);
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+  transition:0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 0 25px rgba(0,212,255,0.3);
+}
+
+/* BOTTLE IMAGE */
+.card img {
+  width:110px;
   margin-bottom:15px;
 }
 
-.title {
-  font-family:'Orbitron', sans-serif;
-  font-size:42px;
-  letter-spacing:2px;
+/* PRODUCT NAME */
+.card h3 {
+  font-size:16px;
+  margin-bottom:8px;
 }
 
-.subtitle {
-  color:#00d4ff;
-  margin-top:10px;
-  letter-spacing:2px;
-}
-
-.tagline {
-  margin-top:10px;
-  font-size:14px;
-  opacity:0.7;
-}
-
-/* PRODUCTS SECTION */
-
-.products-section {
-  padding:60px 20px;
-  text-align:center;
-}
-
-.section-title {
-  font-family:'Orbitron', sans-serif;
-  font-size:28px;
-  margin-bottom:30px;
-}
-
-/* FULL IMAGE GRID */
-
-.product-image-wrapper {
-  display:flex;
-  justify-content:center;
-}
-
-.product-image {
-  width:100%;
-  max-width:1200px;
-  border-radius:12px;
-  box-shadow:0 0 40px rgba(0,212,255,0.15);
-}
-
-/* ORDER SECTION */
-
-.order-section {
-  margin-top:60px;
-}
-
-.order-buttons {
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  margin-top:20px;
-}
-
-.btn {
-  padding:14px 30px;
-  border-radius:8px;
+/* PRICE */
+.price {
+  color:#00ff88;
   font-weight:600;
-  text-decoration:none;
-  color:white;
-  transition:0.3s;
+  margin-bottom:12px;
 }
 
-.zelle {
-  background: linear-gradient(90deg, #6c2bd9, #9d4edd);
-}
-
-.cashapp {
-  background: linear-gradient(90deg, #00c853, #00e676);
+/* BUTTON */
+.btn {
+  background:linear-gradient(90deg,#00d4ff,#00ffcc);
+  color:black;
+  border:none;
+  padding:8px 16px;
+  border-radius:6px;
+  font-weight:600;
+  cursor:pointer;
 }
 
 .btn:hover {
-  transform:scale(1.05);
+  opacity:0.85;
 }
 
 /* FOOTER */
-
 .footer {
   text-align:center;
-  margin-top:60px;
+  padding:40px 20px;
   font-size:12px;
   opacity:0.6;
 }
-
 </style>
 </head>
 
 <body>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-content">
-    <img src="logo.jpg" class="logo">
+<div class="hero"></div>
 
-    <div class="title">COVENANT BIO LABS</div>
-    <div class="subtitle">FAITH • SCIENCE • PURPOSE</div>
-    <div class="tagline">Premium Research Peptides & Advanced Compounds</div>
-  </div>
-</div>
+<!-- TITLE -->
+<div class="section-title">CATALOG</div>
 
 <!-- PRODUCTS -->
-<div class="products-section">
+<div class="products">
 
-  <div class="section-title">CATALOG</div>
-
-  <div class="product-image-wrapper">
-    <img src="products.png" class="product-image">
-  </div>
-
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>Retatrutide 20mg</h3>
+<div class="price">$120</div>
+<button class="btn">View Details</button>
 </div>
 
-<!-- ORDER -->
-<div class="products-section order-section">
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>Cagrilintide 5mg</h3>
+<div class="price">$70</div>
+<button class="btn">View Details</button>
+</div>
 
-  <div class="section-title">PLACE ORDER</div>
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>IGF-1 LR3 1mg</h3>
+<div class="price">$75</div>
+<button class="btn">View Details</button>
+</div>
 
-  <p style="opacity:0.7;">Payments accepted via Zelle or Cash App</p>
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>Tesamorelin 5mg</h3>
+<div class="price">$40</div>
+<button class="btn">View Details</button>
+</div>
 
-  <div class="order-buttons">
-    <a href="#" class="btn zelle">PAY VIA ZELLE</a>
-    <a href="#" class="btn cashapp">PAY VIA CASH APP</a>
-  </div>
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>NAD+ 500mg</h3>
+<div class="price">$60</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>DISP 10mg</h3>
+<div class="price">$70</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>MOTS-c 10mg</h3>
+<div class="price">$40</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>SLU-PP-332 5mg</h3>
+<div class="price">$90</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>BPC-157 + TB-500 (5mg/5mg)</h3>
+<div class="price">$50</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>SS-31 10mg</h3>
+<div class="price">$40</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>Bacteriostatic Water 10mL</h3>
+<div class="price">$10</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>HGH Somatropin 15iu</h3>
+<div class="price">$50</div>
+<button class="btn">View Details</button>
+</div>
+
+<div class="card">
+<img src="bottle-reference.jpg">
+<h3>MT-2 10mg</h3>
+<div class="price">$50</div>
+<button class="btn">View Details</button>
+</div>
 
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  © 2026 Covenant Bio Labs — Research Use Only • Not for Human Consumption
+© 2026 Covenant Bio Labs<br>
+Research Use Only • Not for Human Consumption
 </div>
 
 </body>

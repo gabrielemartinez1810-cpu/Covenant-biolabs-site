@@ -86,6 +86,7 @@
       z-index:1;
     }
 
+    /* TOP HERO BUBBLE - ONLY THE IMAGE */
     .hero{
       height:72vh;
       min-height:420px;
@@ -105,13 +106,14 @@
       background:
         linear-gradient(
           180deg,
-          rgba(0,0,0,0.04) 0%,
-          rgba(0,0,0,0.08) 55%,
-          rgba(0,0,0,0.14) 100%
+          rgba(0,0,0,0.02) 0%,
+          rgba(0,0,0,0.06) 55%,
+          rgba(0,0,0,0.12) 100%
         );
       pointer-events:none;
     }
 
+    /* SECOND BUBBLE - FULL CATALOG */
     .catalog{
       position:relative;
       border-radius:30px;
@@ -120,7 +122,7 @@
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
       background:
-        linear-gradient(rgba(4,8,15,.64), rgba(4,8,15,.88)),
+        linear-gradient(rgba(4,8,15,.70), rgba(4,8,15,.90)),
         url('hero-new.jpg') center/cover no-repeat;
     }
 
@@ -129,7 +131,7 @@
       position:absolute;
       inset:0;
       pointer-events:none;
-      opacity:.42;
+      opacity:.40;
       background:
         radial-gradient(circle at 8% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
         radial-gradient(circle at 12% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),

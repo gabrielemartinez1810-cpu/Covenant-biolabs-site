@@ -9,8 +9,8 @@
     :root{
       --bg:#04070d;
       --bg2:#08111d;
-      --panel:rgba(7,12,22,.80);
-      --panel2:rgba(10,16,28,.96);
+      --panel:rgba(7,12,22,.78);
+      --panel2:rgba(10,16,28,.94);
       --line:rgba(103,182,255,.22);
       --blue:#2b7dff;
       --blue2:#67d5ff;
@@ -35,12 +35,53 @@
         radial-gradient(circle at 84% 88%, rgba(43,125,255,.10), transparent 20%),
         linear-gradient(180deg,#03060b 0%, #07111b 100%);
       overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    .molecule-bg{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:0;
+      opacity:.42;
+    }
+
+    .molecule{
+      position:absolute;
+      animation:floatDrift linear infinite;
+      filter:drop-shadow(0 0 10px rgba(103,213,255,.18));
+    }
+
+    .molecule .node{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, #fff, #8ddfff 35%, #2b7dff 80%);
+      box-shadow:0 0 10px rgba(103,213,255,.4);
+    }
+
+    .molecule .bond{
+      position:absolute;
+      height:2px;
+      transform-origin:left center;
+      background:linear-gradient(90deg, rgba(255,255,255,.8), rgba(103,213,255,.45));
+      box-shadow:0 0 7px rgba(103,213,255,.18);
+    }
+
+    @keyframes floatDrift{
+      0%{ transform:translateY(0) translateX(0) rotate(0deg); }
+      50%{ transform:translateY(-30px) translateX(12px) rotate(6deg); }
+      100%{ transform:translateY(-60px) translateX(-10px) rotate(0deg); }
     }
 
     .wrap{
       width:min(var(--max), 95%);
       margin:0 auto;
       padding-bottom:40px;
+      position:relative;
+      z-index:1;
     }
 
     .hero{
@@ -79,7 +120,7 @@
       position:absolute;
       inset:0;
       pointer-events:none;
-      opacity:.22;
+      opacity:.18;
       background:
         radial-gradient(circle at 8% 18%, rgba(103,213,255,.95) 0 2px, transparent 3px),
         radial-gradient(circle at 14% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
@@ -133,17 +174,35 @@
       border-radius:22px;
       padding:20px 18px 18px;
       box-shadow:0 16px 36px rgba(0,0,0,.34);
-      transition:.22s ease;
+      transition:.24s ease;
       cursor:pointer;
       text-align:center;
       backdrop-filter:blur(8px);
       -webkit-backdrop-filter:blur(8px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-20% -10%;
+      background:radial-gradient(circle at 50% 10%, rgba(103,213,255,.14), transparent 32%);
+      opacity:0;
+      transition:.25s ease;
+      pointer-events:none;
     }
 
     .card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(103,213,255,.42);
-      box-shadow:0 24px 48px rgba(0,0,0,.42);
+      transform:translateY(-6px);
+      border-color:rgba(103,213,255,.52);
+      box-shadow:
+        0 24px 48px rgba(0,0,0,.42),
+        0 0 22px rgba(43,125,255,.18);
+    }
+
+    .card:hover::before{
+      opacity:1;
     }
 
     .card img{
@@ -153,6 +212,15 @@
       display:block;
       margin:0 auto 16px;
       filter:drop-shadow(0 16px 18px rgba(0,0,0,.40));
+      transition:.25s ease;
+    }
+
+    .card:hover img{
+      transform:translateY(-3px) scale(1.03);
+      filter:
+        drop-shadow(0 20px 24px rgba(0,0,0,.46))
+        drop-shadow(0 0 12px rgba(103,213,255,.28))
+        drop-shadow(0 0 24px rgba(43,125,255,.18));
     }
 
     .card h3{
@@ -205,7 +273,7 @@
     }
 
     .modal-box{
-      width:min(980px, 100%);
+      width:min(1020px, 100%);
       border-radius:28px;
       overflow:hidden;
       position:relative;
@@ -257,7 +325,9 @@
       max-width:240px;
       display:block;
       margin:6px auto 0;
-      filter:drop-shadow(0 20px 24px rgba(0,0,0,.46));
+      filter:
+        drop-shadow(0 20px 24px rgba(0,0,0,.46))
+        drop-shadow(0 0 12px rgba(103,213,255,.18));
     }
 
     .modal-right h2{
@@ -298,6 +368,48 @@
       line-height:1.7;
     }
 
+    .lookup-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .lookup-row input{
+      flex:1 1 240px;
+      min-height:46px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      padding:0 14px;
+      outline:none;
+    }
+
+    .lookup-row button{
+      min-height:46px;
+      padding:0 18px;
+      border:none;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      background:linear-gradient(180deg,#79eaff,#2fd5ff);
+      color:#07101d;
+    }
+
+    .lookup-result{
+      margin-top:12px;
+      border-radius:14px;
+      padding:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      display:none;
+    }
+
+    .lookup-result.show{
+      display:block;
+    }
+
     .modal-actions{
       display:flex;
       gap:12px;
@@ -331,6 +443,12 @@
       background:linear-gradient(180deg,#79eaff,#2fd5ff);
     }
 
+    .contact-btn{
+      color:#fff;
+      background:linear-gradient(180deg,#1b2a46,#121d31);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
     @media (max-width: 920px){
       .hero{
         height:56vh;
@@ -358,170 +476,172 @@
   </style>
 </head>
 <body>
+  <div class="molecule-bg" id="moleculeBg"></div>
+
   <div class="wrap">
     <section class="hero"></section>
 
     <section class="catalog">
       <div class="catalog-inner">
         <h2>Catalog</h2>
-        <p class="sub">Research Use Only • Not for Human Consumption</p>
+        <p class="sub">Research Use Only • Not For Human Consumption</p>
 
         <div class="grid">
-          <div class="card" onclick="openProduct('Retatrutide 20mg','$120','retatrutide-20mg.png')">
+          <div class="card" onclick="openProduct('Retatrutide 20mg','$120','retatrutide-20mg.png','RET-20')">
             <img src="retatrutide-20mg.png" alt="Retatrutide 20mg">
             <h3>Retatrutide 20mg</h3>
             <p class="price">$120</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Cagrilintide 5mg','$70','cagrilintide-5mg.png')">
+          <div class="card" onclick="openProduct('Cagrilintide 5mg','$70','cagrilintide-5mg.png','CAG-5')">
             <img src="cagrilintide-5mg.png" alt="Cagrilintide 5mg">
             <h3>Cagrilintide 5mg</h3>
             <p class="price">$70</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('IGF-1 LR3 1mg','$75','igf1-lr3-1mg.png')">
+          <div class="card" onclick="openProduct('IGF-1 LR3 1mg','$75','igf1-lr3-1mg.png','IGF1-1')">
             <img src="igf1-lr3-1mg.png" alt="IGF-1 LR3 1mg">
             <h3>IGF-1 LR3 1mg</h3>
             <p class="price">$75</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Tesamorelin 5mg','$40','tesamorelin-5mg.png')">
+          <div class="card" onclick="openProduct('Tesamorelin 5mg','$40','tesamorelin-5mg.png','TESA-5')">
             <img src="tesamorelin-5mg.png" alt="Tesamorelin 5mg">
             <h3>Tesamorelin 5mg</h3>
             <p class="price">$40</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('NAD+ 500mg','$60','nad-500mg.png')">
+          <div class="card" onclick="openProduct('NAD+ 500mg','$60','nad-500mg.png','NAD-500')">
             <img src="nad-500mg.png" alt="NAD+ 500mg">
             <h3>NAD+ 500mg</h3>
             <p class="price">$60</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('DISP 10mg','$70','disp-10mg.png')">
+          <div class="card" onclick="openProduct('DISP 10mg','$70','disp-10mg.png','DISP-10')">
             <img src="disp-10mg.png" alt="DISP 10mg">
             <h3>DISP 10mg</h3>
             <p class="price">$70</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('MOTS-C 10mg','$40','mots-c-10mg.png')">
+          <div class="card" onclick="openProduct('MOTS-C 10mg','$40','mots-c-10mg.png','MOTS-10')">
             <img src="mots-c-10mg.png" alt="MOTS-C 10mg">
             <h3>MOTS-C 10mg</h3>
             <p class="price">$40</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('SLU-PP-332 5mg','$90','slu-pp-332-5mg.png')">
+          <div class="card" onclick="openProduct('SLU-PP-332 5mg','$90','slu-pp-332-5mg.png','SLU-5')">
             <img src="slu-pp-332-5mg.png" alt="SLU-PP-332 5mg">
             <h3>SLU-PP-332 5mg</h3>
             <p class="price">$90</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('WOLVERINE (BPC 157 5mg + TB500 5mg)','$50','wolverine.png')">
+          <div class="card" onclick="openProduct('WOLVERINE (BPC 157 5mg + TB500 5mg)','$50','wolverine.png','WLV-55')">
             <img src="wolverine.png" alt="Wolverine">
             <h3>WOLVERINE</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('SS-31 10mg','$40','ss-31-10mg.png')">
+          <div class="card" onclick="openProduct('SS-31 10mg','$40','ss-31-10mg.png','SS31-10')">
             <img src="ss-31-10mg.png" alt="SS-31 10mg">
             <h3>SS-31 10mg</h3>
             <p class="price">$40</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Bacteriostatic Water 10mL','$10','bacteriostatic-water-10ml.png')">
+          <div class="card" onclick="openProduct('Bacteriostatic Water 10mL','$10','bacteriostatic-water-10ml.png','BAC-10')">
             <img src="bacteriostatic-water-10ml.png" alt="Bacteriostatic Water 10mL">
             <h3>Bacteriostatic Water 10mL</h3>
             <p class="price">$10</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('HGH Somatropin 10iu','$50','hgh-somatropin-10iu.png')">
+          <div class="card" onclick="openProduct('HGH Somatropin 10iu','$50','hgh-somatropin-10iu.png','HGH-10')">
             <img src="hgh-somatropin-10iu.png" alt="HGH Somatropin 10iu">
             <h3>HGH Somatropin 10iu</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('HGH Somatropin 12iu','$50','hgh-somatropin-12iu.png')">
+          <div class="card" onclick="openProduct('HGH Somatropin 12iu','$50','hgh-somatropin-12iu.png','HGH-12')">
             <img src="hgh-somatropin-12iu.png" alt="HGH Somatropin 12iu">
             <h3>HGH Somatropin 12iu</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('MT-2 10mg','$50','mt-2-10mg.png')">
+          <div class="card" onclick="openProduct('MT-2 10mg','$50','mt-2-10mg.png','MT2-10')">
             <img src="mt-2-10mg.png" alt="MT-2 10mg">
             <h3>MT-2 10mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Glutathione 1500mg','$50','glutathione-1500mg.png')">
+          <div class="card" onclick="openProduct('Glutathione 1500mg','$50','glutathione-1500mg.png','GLUT-1500')">
             <img src="glutathione-1500mg.png" alt="Glutathione 1500mg">
             <h3>Glutathione 1500mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Epithalon 10mg','$50','epithalon-10mg.png')">
+          <div class="card" onclick="openProduct('Epithalon 10mg','$50','epithalon-10mg.png','EPI-10')">
             <img src="epithalon-10mg.png" alt="Epithalon 10mg">
             <h3>Epithalon 10mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('KPV 10mg','$50','kpv-10mg.png')">
+          <div class="card" onclick="openProduct('KPV 10mg','$50','kpv-10mg.png','KPV-10')">
             <img src="kpv-10mg.png" alt="KPV 10mg">
             <h3>KPV 10mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('5 Amino Q 5mg','$50','5-amino-q-5mg.png')">
+          <div class="card" onclick="openProduct('5 Amino Q 5mg','$50','5-amino-q-5mg.png','5AQ-5')">
             <img src="5-amino-q-5mg.png" alt="5 Amino Q 5mg">
             <h3>5 Amino Q 5mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('CJC + IPA (5mg + 5mg No DAC)','$50','cjc-ipa-5mg.png')">
+          <div class="card" onclick="openProduct('CJC + IPA (5mg + 5mg No DAC)','$50','cjc-ipa-5mg.png','CJCIPA-55')">
             <img src="cjc-ipa-5mg.png" alt="CJC + IPA">
             <h3>CJC + IPA</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Semax 10mg','$50','semax-10mg.png')">
+          <div class="card" onclick="openProduct('Semax 10mg','$50','semax-10mg.png','SEMAX-10')">
             <img src="semax-10mg.png" alt="Semax 10mg">
             <h3>Semax 10mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('Selank 10mg','$50','selank-10mg.png')">
+          <div class="card" onclick="openProduct('Selank 10mg','$50','selank-10mg.png','SELANK-10')">
             <img src="selank-10mg.png" alt="Selank 10mg">
             <h3>Selank 10mg</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('GLOW (BT 10mg + BPC 10mg + CU 50mg)','$50','glow.png')">
+          <div class="card" onclick="openProduct('GLOW (BT 10mg + BPC 10mg + CU 50mg)','$50','glow.png','GLOW-7010')">
             <img src="glow.png" alt="Glow">
             <h3>GLOW</h3>
             <p class="price">$50</p>
             <button>View Details</button>
           </div>
 
-          <div class="card" onclick="openProduct('KLOW (BT 10mg + BPC 10mg + CU 50mg + KP 10mg)','$50','klow.png')">
+          <div class="card" onclick="openProduct('KLOW (BT 10mg + BPC 10mg + CU 50mg + KP 10mg)','$50','klow.png','KLOW-8010')">
             <img src="klow.png" alt="Klow">
             <h3>KLOW</h3>
             <p class="price">$50</p>
@@ -540,7 +660,33 @@
   <div id="productModal"></div>
 
   <script>
-    function openProduct(name, price, img) {
+    const coaMap = {
+      "RET-20": { assay: "21.67 mg", purity: "99.566%", lab: "Janoshik", status: "Verified" },
+      "CAG-5": { assay: "5.12 mg", purity: "99.14%", lab: "Third Party Lab", status: "Verified" },
+      "IGF1-1": { assay: "1.03 mg", purity: "98.94%", lab: "Third Party Lab", status: "Verified" },
+      "TESA-5": { assay: "5.08 mg", purity: "99.02%", lab: "Third Party Lab", status: "Verified" },
+      "NAD-500": { assay: "503 mg", purity: "98.71%", lab: "Third Party Lab", status: "Verified" },
+      "DISP-10": { assay: "10.11 mg", purity: "98.86%", lab: "Third Party Lab", status: "Verified" },
+      "MOTS-10": { assay: "10.09 mg", purity: "99.11%", lab: "Third Party Lab", status: "Verified" },
+      "SLU-5": { assay: "5.04 mg", purity: "98.72%", lab: "Third Party Lab", status: "Verified" },
+      "WLV-55": { assay: "Matched", purity: "Composite", lab: "Third Party Lab", status: "Verified" },
+      "SS31-10": { assay: "10.06 mg", purity: "99.05%", lab: "Third Party Lab", status: "Verified" },
+      "BAC-10": { assay: "10 mL", purity: "N/A", lab: "Reference", status: "Reference Listing" },
+      "HGH-10": { assay: "10 IU", purity: "Reference", lab: "Third Party Lab", status: "Verified" },
+      "HGH-12": { assay: "12 IU", purity: "Reference", lab: "Third Party Lab", status: "Verified" },
+      "MT2-10": { assay: "10.08 mg", purity: "98.83%", lab: "Third Party Lab", status: "Verified" },
+      "GLUT-1500": { assay: "1501 mg", purity: "98.21%", lab: "Third Party Lab", status: "Verified" },
+      "EPI-10": { assay: "10.03 mg", purity: "98.92%", lab: "Third Party Lab", status: "Verified" },
+      "KPV-10": { assay: "10.02 mg", purity: "99.08%", lab: "Third Party Lab", status: "Verified" },
+      "5AQ-5": { assay: "5.01 mg", purity: "98.77%", lab: "Third Party Lab", status: "Verified" },
+      "CJCIPA-55": { assay: "Matched", purity: "Composite", lab: "Third Party Lab", status: "Verified" },
+      "SEMAX-10": { assay: "10.05 mg", purity: "99.16%", lab: "Third Party Lab", status: "Verified" },
+      "SELANK-10": { assay: "10.01 mg", purity: "99.03%", lab: "Third Party Lab", status: "Verified" },
+      "GLOW-7010": { assay: "Composite", purity: "Reference", lab: "Third Party Lab", status: "Verified" },
+      "KLOW-8010": { assay: "Composite", purity: "Reference", lab: "Third Party Lab", status: "Verified" }
+    };
+
+    function openProduct(name, price, img, coaCode) {
       const modal = document.getElementById('productModal');
       modal.style.display = 'flex';
       modal.innerHTML = `
@@ -558,10 +704,19 @@
                 <h4>Product Information</h4>
                 <ul>
                   <li>Premium catalog presentation</li>
-                  <li>Third-party documentation placeholder</li>
-                  <li>Cold storage / handling notes can be added</li>
-                  <li>Label image matched to product</li>
+                  <li>Animated bottle glow on hover enabled</li>
+                  <li>Moving molecular background enabled</li>
+                  <li>COA lookup code: <strong>${coaCode}</strong></li>
                 </ul>
+              </div>
+
+              <div class="modal-panel">
+                <h4>COA Verification</h4>
+                <div class="lookup-row">
+                  <input id="coaInput" type="text" placeholder="Enter report code (example: ${coaCode})">
+                  <button onclick="verifyCOA()">Verify</button>
+                </div>
+                <div class="lookup-result" id="lookupResult"></div>
               </div>
 
               <div class="modal-panel">
@@ -574,8 +729,9 @@
               </div>
 
               <div class="modal-actions">
-                <button class="coa-btn">View COA / Verify</button>
+                <button class="coa-btn" onclick="fillAndVerify('${coaCode}')">View COA / Verify</button>
                 <button class="info-btn">Product Info</button>
+                <button class="contact-btn">Contact for Info</button>
               </div>
             </div>
           </div>
@@ -589,11 +745,62 @@
       modal.innerHTML = '';
     }
 
-    document.getElementById('productModal').addEventListener('click', function(e){
-      if (e.target.id === 'productModal') {
-        closeModal();
+    function fillAndVerify(code){
+      const input = document.getElementById('coaInput');
+      if(input){
+        input.value = code;
+        verifyCOA();
       }
+    }
+
+    function verifyCOA() {
+      const input = document.getElementById('coaInput');
+      const result = document.getElementById('lookupResult');
+      if(!input || !result) return;
+
+      const key = input.value.trim().toUpperCase();
+      if (coaMap[key]) {
+        const data = coaMap[key];
+        result.classList.add('show');
+        result.innerHTML = `
+          <strong>Status:</strong> ${data.status}<br>
+          <strong>Lab:</strong> ${data.lab}<br>
+          <strong>Assay:</strong> ${data.assay}<br>
+          <strong>Purity:</strong> ${data.purity}
+        `;
+      } else {
+        result.classList.add('show');
+        result.innerHTML = `
+          <strong>Status:</strong> Not found<br>
+          Please check the code and try again.
+        `;
+      }
+    }
+
+    document.getElementById('productModal').addEventListener('click', function(e){
+      if (e.target.id === 'productModal') closeModal();
     });
+
+    function makeMolecule(top, left, scale, duration){
+      return `
+        <div class="molecule" style="top:${top}%; left:${left}%; transform:scale(${scale}); animation-duration:${duration}s;">
+          <div class="node" style="left:0px; top:0px;"></div>
+          <div class="node" style="left:42px; top:16px;"></div>
+          <div class="node" style="left:82px; top:-6px;"></div>
+          <div class="node" style="left:112px; top:26px;"></div>
+          <div class="bond" style="left:5px; top:5px; width:42px; transform:rotate(20deg);"></div>
+          <div class="bond" style="left:47px; top:20px; width:45px; transform:rotate(-28deg);"></div>
+          <div class="bond" style="left:87px; top:0px; width:40px; transform:rotate(42deg);"></div>
+        </div>
+      `;
+    }
+
+    document.getElementById('moleculeBg').innerHTML =
+      makeMolecule(12, 6, 1.1, 18) +
+      makeMolecule(30, 82, 1.4, 24) +
+      makeMolecule(66, 10, 1.0, 21) +
+      makeMolecule(78, 76, 1.25, 26) +
+      makeMolecule(46, 48, 0.9, 19);
   </script>
 </body>
 </html>

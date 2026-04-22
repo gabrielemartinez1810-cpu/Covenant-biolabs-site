@@ -7,40 +7,29 @@
   <meta name="description" content="Premium research catalog." />
   <style>
     :root{
-      --bg:#03060b;
-      --bg2:#08111b;
-      --panel:rgba(8,12,22,.78);
-      --panel2:rgba(10,16,28,.94);
-      --line:rgba(103,182,255,.24);
       --blue:#2b7dff;
       --blue2:#67d5ff;
-      --blue3:#b9edff;
       --green:#65df87;
       --white:#f5f8ff;
-      --softSilver:#d9dde6;
-      --silver:#bcc5d3;
-      --muted:#b7c3d9;
       --shadow:0 24px 60px rgba(0,0,0,.50);
-      --radius:24px;
       --max:1380px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
       color:var(--white);
       background:
-        radial-gradient(circle at 10% 8%, rgba(43,125,255,.14), transparent 22%),
+        radial-gradient(circle at 10% 8%, rgba(43,125,255,.12), transparent 22%),
         radial-gradient(circle at 88% 12%, rgba(103,213,255,.10), transparent 18%),
-        radial-gradient(circle at 84% 88%, rgba(43,125,255,.10), transparent 20%),
         linear-gradient(180deg,#03060b 0%, #07111b 100%);
       overflow-x:hidden;
       min-height:100vh;
     }
 
-    a{color:inherit;text-decoration:none}
     button{font:inherit}
 
     .molecule-bg{
@@ -92,22 +81,21 @@
     .wrap{
       width:min(var(--max), 95%);
       margin:0 auto;
-      padding-bottom:40px;
+      padding:22px 0 40px;
       position:relative;
       z-index:1;
     }
 
     .hero{
-      margin:22px auto 26px;
       height:72vh;
-      min-height:430px;
+      min-height:420px;
       border-radius:30px;
       overflow:hidden;
       position:relative;
-      background:url('hero.jpg') center center/cover no-repeat;
+      background:url('hero-new.jpg') center center/cover no-repeat;
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
-      isolation:isolate;
+      margin-bottom:28px;
     }
 
     .hero::after{
@@ -117,91 +105,11 @@
       background:
         linear-gradient(
           180deg,
-          rgba(0,0,0,0.02) 0%,
-          rgba(0,0,0,0.06) 50%,
-          rgba(0,0,0,0.12) 100%
+          rgba(0,0,0,0.04) 0%,
+          rgba(0,0,0,0.08) 55%,
+          rgba(0,0,0,0.14) 100%
         );
-      z-index:1;
       pointer-events:none;
-    }
-
-    .hero-brand{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      z-index:4;
-      width:min(92%, 980px);
-      text-align:center;
-      pointer-events:none;
-    }
-
-    .hero-brand::before{
-      content:"";
-      position:absolute;
-      inset:-50px -70px;
-      background:radial-gradient(circle at center, rgba(2,6,12,.18) 0%, rgba(2,6,12,.12) 36%, rgba(2,6,12,.02) 64%, transparent 78%);
-      z-index:-1;
-      filter:blur(8px);
-    }
-
-    .hero-logo{
-      width:118px;
-      display:block;
-      margin:0 auto 14px;
-      opacity:.98;
-      filter:
-        drop-shadow(0 0 12px rgba(43,125,255,.24))
-        brightness(.98);
-    }
-
-    .hero-title{
-      margin:0;
-      font-size:clamp(44px,7vw,110px);
-      font-weight:300;
-      letter-spacing:7px;
-      line-height:.92;
-      text-transform:uppercase;
-      color:var(--softSilver);
-      text-shadow:
-        0 1px 0 rgba(255,255,255,.10),
-        0 0 14px rgba(188,197,211,.10),
-        0 0 30px rgba(43,125,255,.08);
-    }
-
-    .hero-title .bio{
-      display:block;
-      margin-top:10px;
-      font-size:.58em;
-      letter-spacing:14px;
-      color:var(--silver);
-    }
-
-    .hero-rule{
-      width:min(360px, 70%);
-      height:2px;
-      margin:18px auto;
-      background:linear-gradient(90deg, rgba(43,125,255,0), rgba(43,125,255,.95), rgba(43,125,255,0));
-      box-shadow:0 0 14px rgba(43,125,255,.30);
-    }
-
-    .hero-tag{
-      font-size:clamp(14px,1.4vw,24px);
-      letter-spacing:6px;
-      text-transform:uppercase;
-      color:#edf1f7;
-      margin:0 0 16px;
-      text-shadow:0 0 10px rgba(255,255,255,.05);
-    }
-
-    .hero-sub{
-      font-size:clamp(15px,1.35vw,26px);
-      line-height:1.45;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      color:#6ba7ff;
-      margin:0;
-      text-shadow:0 0 14px rgba(43,125,255,.16);
     }
 
     .catalog{
@@ -213,7 +121,7 @@
       box-shadow:var(--shadow);
       background:
         linear-gradient(rgba(4,8,15,.64), rgba(4,8,15,.88)),
-        url('hero.jpg') center/cover no-repeat;
+        url('hero-new.jpg') center/cover no-repeat;
     }
 
     .catalog::before{
@@ -397,7 +305,7 @@
       position:relative;
       background:
         linear-gradient(rgba(4,8,15,.84), rgba(4,8,15,.95)),
-        url('hero.jpg') center/cover no-repeat;
+        url('hero-new.jpg') center/cover no-repeat;
       border:1px solid rgba(255,255,255,.10);
       box-shadow:0 34px 80px rgba(0,0,0,.56);
     }
@@ -565,20 +473,11 @@
       border:1px solid rgba(255,255,255,.10);
     }
 
-    @media (max-width: 980px){
-      .hero{
-        height:62vh;
-        min-height:360px;
-      }
-      .hero-title{
-        letter-spacing:5px;
-      }
-      .hero-title .bio{
-        letter-spacing:8px;
-      }
-    }
-
     @media (max-width: 920px){
+      .hero{
+        height:56vh;
+        min-height:320px;
+      }
       .modal-content{
         grid-template-columns:1fr;
       }
@@ -587,30 +486,6 @@
       }
       .modal-price{
         font-size:42px;
-      }
-    }
-
-    @media (max-width: 720px){
-      .hero{
-        height:56vh;
-        min-height:320px;
-      }
-      .hero-logo{
-        width:78px;
-        margin-bottom:14px;
-      }
-      .hero-title{
-        font-size:clamp(30px,9vw,54px);
-        letter-spacing:4px;
-      }
-      .hero-title .bio{
-        letter-spacing:6px;
-      }
-      .hero-tag{
-        letter-spacing:3px;
-      }
-      .hero-sub{
-        letter-spacing:2px;
       }
     }
 
@@ -628,15 +503,7 @@
   <div class="molecule-bg" id="moleculeBg"></div>
 
   <div class="wrap">
-    <section class="hero">
-      <div class="hero-brand">
-        <img class="hero-logo" src="logo.jpg" alt="Covenant Bio Labs logo">
-        <h1 class="hero-title">Covenant<span class="bio">Bio Labs</span></h1>
-        <div class="hero-rule"></div>
-        <p class="hero-tag">Faith. Science. Purpose.</p>
-        <p class="hero-sub">Premium Research Peptides<br>&amp; Advanced Compounds</p>
-      </div>
-    </section>
+    <section class="hero"></section>
 
     <section class="catalog">
       <div class="catalog-inner">

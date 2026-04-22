@@ -7,17 +7,23 @@
   <meta name="description" content="Premium research catalog." />
   <style>
     :root{
+      --bg:#03060b;
+      --bg2:#07111b;
+      --panel:rgba(8,12,22,.78);
+      --panel2:rgba(10,16,28,.94);
+      --line:rgba(103,182,255,.22);
       --blue:#2b7dff;
       --blue2:#67d5ff;
       --green:#65df87;
       --white:#f5f8ff;
+      --muted:#cdd7e8;
       --shadow:0 24px 60px rgba(0,0,0,.50);
-      --max:1380px;
+      --max:1400px;
+      --radius:28px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
@@ -25,12 +31,13 @@
       background:
         radial-gradient(circle at 10% 8%, rgba(43,125,255,.12), transparent 22%),
         radial-gradient(circle at 88% 12%, rgba(103,213,255,.10), transparent 18%),
-        linear-gradient(180deg,#03060b 0%, #07111b 100%);
+        linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
       overflow-x:hidden;
       min-height:100vh;
     }
 
-    button{font:inherit}
+    button,input{font:inherit}
+    img{max-width:100%;display:block}
 
     .molecule-bg{
       position:fixed;
@@ -86,11 +93,10 @@
       z-index:1;
     }
 
-    /* TOP HERO BUBBLE - ONLY THE IMAGE */
     .hero{
       height:72vh;
-      min-height:420px;
-      border-radius:30px;
+      min-height:430px;
+      border-radius:var(--radius);
       overflow:hidden;
       position:relative;
       background:url('hero-new.jpg') center center/cover no-repeat;
@@ -104,25 +110,31 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(
-          180deg,
-          rgba(0,0,0,0.02) 0%,
-          rgba(0,0,0,0.06) 55%,
-          rgba(0,0,0,0.12) 100%
-        );
+        linear-gradient(180deg, rgba(0,0,0,.03) 0%, rgba(0,0,0,.08) 58%, rgba(0,0,0,.14) 100%);
       pointer-events:none;
     }
 
-    /* SECOND BUBBLE - FULL CATALOG */
+    .hero-badge{
+      position:absolute;
+      right:3.2%;
+      bottom:6%;
+      width:min(34%, 520px);
+      z-index:2;
+      filter:
+        drop-shadow(0 18px 28px rgba(0,0,0,.45))
+        drop-shadow(0 0 22px rgba(43,125,255,.16));
+      opacity:.98;
+    }
+
     .catalog{
       position:relative;
-      border-radius:30px;
+      border-radius:var(--radius);
       overflow:hidden;
       padding:36px 20px 42px;
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
       background:
-        linear-gradient(rgba(4,8,15,.70), rgba(4,8,15,.90)),
+        linear-gradient(rgba(4,8,15,.68), rgba(4,8,15,.90)),
         url('hero-new.jpg') center/cover no-repeat;
     }
 
@@ -131,7 +143,7 @@
       position:absolute;
       inset:0;
       pointer-events:none;
-      opacity:.40;
+      opacity:.42;
       background:
         radial-gradient(circle at 8% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
         radial-gradient(circle at 12% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
@@ -163,7 +175,7 @@
         radial-gradient(circle at 15% 18%, rgba(43,125,255,.14), transparent 16%),
         radial-gradient(circle at 82% 20%, rgba(43,125,255,.12), transparent 18%),
         radial-gradient(circle at 70% 78%, rgba(103,213,255,.10), transparent 16%);
-      opacity:.85;
+      opacity:.9;
     }
 
     .catalog-inner{
@@ -174,7 +186,7 @@
     .catalog h2{
       margin:0 0 10px;
       text-align:center;
-      font-size:46px;
+      font-size:50px;
       letter-spacing:4px;
       text-transform:uppercase;
       color:#fff;
@@ -187,7 +199,7 @@
       letter-spacing:2px;
       text-transform:uppercase;
       color:#dbe8fa;
-      opacity:.9;
+      opacity:.95;
     }
 
     .grid{
@@ -229,15 +241,11 @@
         0 0 22px rgba(43,125,255,.18);
     }
 
-    .card:hover::before{
-      opacity:1;
-    }
+    .card:hover::before{ opacity:1; }
 
     .card img{
       width:145px;
-      max-width:100%;
       height:auto;
-      display:block;
       margin:0 auto 16px;
       filter:drop-shadow(0 16px 18px rgba(0,0,0,.40));
       transition:.25s ease;
@@ -351,7 +359,6 @@
     .modal-left img{
       width:100%;
       max-width:240px;
-      display:block;
       margin:6px auto 0;
       filter:
         drop-shadow(0 20px 24px rgba(0,0,0,.46))
@@ -434,9 +441,7 @@
       display:none;
     }
 
-    .lookup-result.show{
-      display:block;
-    }
+    .lookup-result.show{ display:block; }
 
     .modal-actions{
       display:flex;
@@ -475,28 +480,34 @@
       border:1px solid rgba(255,255,255,.10);
     }
 
+    @media (max-width: 1100px){
+      .hero-badge{
+        width:min(42%, 430px);
+      }
+    }
+
     @media (max-width: 920px){
       .hero{
         height:56vh;
         min-height:320px;
       }
+      .hero-badge{
+        width:min(52%, 340px);
+        right:4%;
+        bottom:5%;
+      }
       .modal-content{
         grid-template-columns:1fr;
       }
-      .modal-right h2{
-        font-size:38px;
-      }
-      .modal-price{
-        font-size:42px;
-      }
+      .modal-right h2{ font-size:38px; }
+      .modal-price{ font-size:42px; }
     }
 
     @media (max-width: 640px){
-      .catalog h2{
-        font-size:34px;
-      }
-      .grid{
-        grid-template-columns:1fr;
+      .catalog h2{ font-size:34px; }
+      .grid{ grid-template-columns:1fr; }
+      .hero-badge{
+        width:min(62%, 280px);
       }
     }
   </style>
@@ -505,7 +516,9 @@
   <div class="molecule-bg" id="moleculeBg"></div>
 
   <div class="wrap">
-    <section class="hero"></section>
+    <section class="hero">
+      <img class="hero-badge" src="hero-badge.png" alt="Covenant Bio Labs">
+    </section>
 
     <section class="catalog">
       <div class="catalog-inner">
@@ -513,166 +526,29 @@
         <p class="sub">Research Use Only • Not For Human Consumption</p>
 
         <div class="grid">
-          <div class="card" onclick="openProduct('Retatrutide 20mg','$120','retatrutide-20mg.png','RET-20')">
-            <img src="retatrutide-20mg.png" alt="Retatrutide 20mg">
-            <h3>Retatrutide 20mg</h3>
-            <p class="price">$120</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Cagrilintide 5mg','$70','cagrilintide-5mg.png','CAG-5')">
-            <img src="cagrilintide-5mg.png" alt="Cagrilintide 5mg">
-            <h3>Cagrilintide 5mg</h3>
-            <p class="price">$70</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('IGF-1 LR3 1mg','$75','igf1-lr3-1mg.png','IGF1-1')">
-            <img src="igf1-lr3-1mg.png" alt="IGF-1 LR3 1mg">
-            <h3>IGF-1 LR3 1mg</h3>
-            <p class="price">$75</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Tesamorelin 5mg','$40','tesamorelin-5mg.png','TESA-5')">
-            <img src="tesamorelin-5mg.png" alt="Tesamorelin 5mg">
-            <h3>Tesamorelin 5mg</h3>
-            <p class="price">$40</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('NAD+ 500mg','$60','nad-500mg.png','NAD-500')">
-            <img src="nad-500mg.png" alt="NAD+ 500mg">
-            <h3>NAD+ 500mg</h3>
-            <p class="price">$60</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('DISP 10mg','$70','disp-10mg.png','DISP-10')">
-            <img src="disp-10mg.png" alt="DISP 10mg">
-            <h3>DISP 10mg</h3>
-            <p class="price">$70</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('MOTS-C 10mg','$50','mots-c-10mg.png','MOTS-10')">
-            <img src="mots-c-10mg.png" alt="MOTS-C 10mg">
-            <h3>MOTS-C 10mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('SLU-PP-332 5mg','$90','slu-pp-332-5mg.png','SLU-5')">
-            <img src="slu-pp-332-5mg.png" alt="SLU-PP-332 5mg">
-            <h3>SLU-PP-332 5mg</h3>
-            <p class="price">$90</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('WOLVERINE (BPC 157 5mg + TB500 5mg)','$50','wolverine.png','WLV-55')">
-            <img src="wolverine.png" alt="Wolverine">
-            <h3>WOLVERINE</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('SS-31 10mg','$40','ss-31-10mg.png','SS31-10')">
-            <img src="ss-31-10mg.png" alt="SS-31 10mg">
-            <h3>SS-31 10mg</h3>
-            <p class="price">$40</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Bacteriostatic Water 10mL','$10','bacteriostatic-water-10ml.png','BAC-10')">
-            <img src="bacteriostatic-water-10ml.png" alt="Bacteriostatic Water 10mL">
-            <h3>Bacteriostatic Water 10mL</h3>
-            <p class="price">$10</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('HGH Somatropin 10iu','$45','hgh-somatropin-10iu.png','HGH-10')">
-            <img src="hgh-somatropin-10iu.png" alt="HGH Somatropin 10iu">
-            <h3>HGH Somatropin 10iu</h3>
-            <p class="price">$45</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('HGH Somatropin 12iu','$55','hgh-somatropin-12iu.png','HGH-12')">
-            <img src="hgh-somatropin-12iu.png" alt="HGH Somatropin 12iu">
-            <h3>HGH Somatropin 12iu</h3>
-            <p class="price">$55</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('MT-2 10mg','$50','mt-2-10mg.png','MT2-10')">
-            <img src="mt-2-10mg.png" alt="MT-2 10mg">
-            <h3>MT-2 10mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Glutathione 1500mg','$50','glutathione-1500mg.png','GLUT-1500')">
-            <img src="glutathione-1500mg.png" alt="Glutathione 1500mg">
-            <h3>Glutathione 1500mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Epithalon 10mg','$50','epithalon-10mg.png','EPI-10')">
-            <img src="epithalon-10mg.png" alt="Epithalon 10mg">
-            <h3>Epithalon 10mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('KPV 10mg','$50','kpv-10mg.png','KPV-10')">
-            <img src="kpv-10mg.png" alt="KPV 10mg">
-            <h3>KPV 10mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('5 Amino Q 5mg','$50','5-amino-q-5mg.png','5AQ-5')">
-            <img src="5-amino-q-5mg.png" alt="5 Amino Q 5mg">
-            <h3>5 Amino Q 5mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('CJC + IPA (5mg + 5mg No DAC)','$50','cjc-ipa-5mg.png','CJCIPA-55')">
-            <img src="cjc-ipa-5mg.png" alt="CJC + IPA">
-            <h3>CJC + IPA</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Semax 10mg','$50','semax-10mg.png','SEMAX-10')">
-            <img src="semax-10mg.png" alt="Semax 10mg">
-            <h3>Semax 10mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('Selank 10mg','$50','selank-10mg.png','SELANK-10')">
-            <img src="selank-10mg.png" alt="Selank 10mg">
-            <h3>Selank 10mg</h3>
-            <p class="price">$50</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('GLOW (BT 10mg + BPC 10mg + CU 50mg)','$100','glow.png','GLOW-7010')">
-            <img src="glow.png" alt="Glow">
-            <h3>GLOW</h3>
-            <p class="price">$100</p>
-            <button>View Details</button>
-          </div>
-
-          <div class="card" onclick="openProduct('KLOW (BT 10mg + BPC 10mg + CU 50mg + KP 10mg)','$120','klow.png','KLOW-8010')">
-            <img src="klow.png" alt="Klow">
-            <h3>KLOW</h3>
-            <p class="price">$120</p>
-            <button>View Details</button>
-          </div>
+          <div class="card" onclick="openProduct('Retatrutide 20mg','$120','retatrutide-20mg.png','RET-20')"><img src="retatrutide-20mg.png" alt="Retatrutide 20mg"><h3>Retatrutide 20mg</h3><p class="price">$120</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Cagrilintide 5mg','$70','cagrilintide-5mg.png','CAG-5')"><img src="cagrilintide-5mg.png" alt="Cagrilintide 5mg"><h3>Cagrilintide 5mg</h3><p class="price">$70</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('IGF-1 LR3 1mg','$75','igf1-lr3-1mg.png','IGF1-1')"><img src="igf1-lr3-1mg.png" alt="IGF-1 LR3 1mg"><h3>IGF-1 LR3 1mg</h3><p class="price">$75</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Tesamorelin 5mg','$40','tesamorelin-5mg.png','TESA-5')"><img src="tesamorelin-5mg.png" alt="Tesamorelin 5mg"><h3>Tesamorelin 5mg</h3><p class="price">$40</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('NAD+ 500mg','$60','nad-500mg.png','NAD-500')"><img src="nad-500mg.png" alt="NAD+ 500mg"><h3>NAD+ 500mg</h3><p class="price">$60</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('DISP 10mg','$70','disp-10mg.png','DISP-10')"><img src="disp-10mg.png" alt="DISP 10mg"><h3>DISP 10mg</h3><p class="price">$70</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('MOTS-C 10mg','$50','mots-c-10mg.png','MOTS-10')"><img src="mots-c-10mg.png" alt="MOTS-C 10mg"><h3>MOTS-C 10mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('SLU-PP-332 5mg','$90','slu-pp-332-5mg.png','SLU-5')"><img src="slu-pp-332-5mg.png" alt="SLU-PP-332 5mg"><h3>SLU-PP-332 5mg</h3><p class="price">$90</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('WOLVERINE (BPC 157 5mg + TB500 5mg)','$50','wolverine.png','WLV-55')"><img src="wolverine.png" alt="Wolverine"><h3>WOLVERINE</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('SS-31 10mg','$40','ss-31-10mg.png','SS31-10')"><img src="ss-31-10mg.png" alt="SS-31 10mg"><h3>SS-31 10mg</h3><p class="price">$40</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Bacteriostatic Water 10mL','$10','bacteriostatic-water-10ml.png','BAC-10')"><img src="bacteriostatic-water-10ml.png" alt="Bacteriostatic Water 10mL"><h3>Bacteriostatic Water 10mL</h3><p class="price">$10</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('HGH Somatropin 10iu','$45','hgh-somatropin-10iu.png','HGH-10')"><img src="hgh-somatropin-10iu.png" alt="HGH Somatropin 10iu"><h3>HGH Somatropin 10iu</h3><p class="price">$45</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('HGH Somatropin 12iu','$55','hgh-somatropin-12iu.png','HGH-12')"><img src="hgh-somatropin-12iu.png" alt="HGH Somatropin 12iu"><h3>HGH Somatropin 12iu</h3><p class="price">$55</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('MT-2 10mg','$50','mt-2-10mg.png','MT2-10')"><img src="mt-2-10mg.png" alt="MT-2 10mg"><h3>MT-2 10mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Glutathione 1500mg','$50','glutathione-1500mg.png','GLUT-1500')"><img src="glutathione-1500mg.png" alt="Glutathione 1500mg"><h3>Glutathione 1500mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Epithalon 10mg','$50','epithalon-10mg.png','EPI-10')"><img src="epithalon-10mg.png" alt="Epithalon 10mg"><h3>Epithalon 10mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('KPV 10mg','$50','kpv-10mg.png','KPV-10')"><img src="kpv-10mg.png" alt="KPV 10mg"><h3>KPV 10mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('5 Amino Q 5mg','$50','5-amino-q-5mg.png','5AQ-5')"><img src="5-amino-q-5mg.png" alt="5 Amino Q 5mg"><h3>5 Amino Q 5mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('CJC + IPA (5mg + 5mg No DAC)','$50','cjc-ipa-5mg.png','CJCIPA-55')"><img src="cjc-ipa-5mg.png" alt="CJC + IPA"><h3>CJC + IPA</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Semax 10mg','$50','semax-10mg.png','SEMAX-10')"><img src="semax-10mg.png" alt="Semax 10mg"><h3>Semax 10mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('Selank 10mg','$50','selank-10mg.png','SELANK-10')"><img src="selank-10mg.png" alt="Selank 10mg"><h3>Selank 10mg</h3><p class="price">$50</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('GLOW (BT 10mg + BPC 10mg + CU 50mg)','$100','glow.png','GLOW-7010')"><img src="glow.png" alt="Glow"><h3>GLOW</h3><p class="price">$100</p><button>View Details</button></div>
+          <div class="card" onclick="openProduct('KLOW (BT 10mg + BPC 10mg + CU 50mg + KP 10mg)','$120','klow.png','KLOW-8010')"><img src="klow.png" alt="Klow"><h3>KLOW</h3><p class="price">$120</p><button>View Details</button></div>
         </div>
       </div>
     </section>

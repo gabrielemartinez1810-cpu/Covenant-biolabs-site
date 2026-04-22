@@ -65,6 +65,7 @@
       border-radius:50%;
       background:radial-gradient(circle at 35% 35%, #fff, #8ddfff 35%, #2b7dff 80%);
       box-shadow:0 0 10px rgba(103,213,255,.4);
+      animation:pulseNode 4s ease-in-out infinite;
     }
 
     .molecule .bond{
@@ -76,9 +77,16 @@
     }
 
     @keyframes floatDrift{
-      0%{ transform:translateY(0) translateX(0) rotate(0deg); }
-      50%{ transform:translateY(-30px) translateX(12px) rotate(6deg); }
-      100%{ transform:translateY(-60px) translateX(-10px) rotate(0deg); }
+      0%{ transform:translateY(0) translateX(0) rotate(0deg) scale(1); }
+      25%{ transform:translateY(-18px) translateX(10px) rotate(3deg) scale(1.02); }
+      50%{ transform:translateY(-34px) translateX(-6px) rotate(6deg) scale(1); }
+      75%{ transform:translateY(-20px) translateX(14px) rotate(2deg) scale(.98); }
+      100%{ transform:translateY(-52px) translateX(-8px) rotate(0deg) scale(1); }
+    }
+
+    @keyframes pulseNode{
+      0%,100%{ opacity:.75; box-shadow:0 0 8px rgba(103,213,255,.28); }
+      50%{ opacity:1; box-shadow:0 0 18px rgba(103,213,255,.62); }
     }
 
     .wrap{
@@ -92,7 +100,7 @@
     .hero{
       margin:22px auto 26px;
       height:72vh;
-      min-height:420px;
+      min-height:430px;
       border-radius:30px;
       overflow:hidden;
       position:relative;
@@ -109,110 +117,91 @@
       background:
         linear-gradient(
           180deg,
-          rgba(0,0,0,0.03) 0%,
-          rgba(0,0,0,0.08) 48%,
-          rgba(0,0,0,0.13) 100%
+          rgba(0,0,0,0.02) 0%,
+          rgba(0,0,0,0.06) 50%,
+          rgba(0,0,0,0.12) 100%
         );
       z-index:1;
       pointer-events:none;
     }
 
-    .hero-fix{
-      position:absolute;
-      inset:0;
-      z-index:2;
-      pointer-events:none;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(2,4,8,0.50) 0%,
-          rgba(2,4,8,0.34) 10%,
-          rgba(2,4,8,0.20) 18%,
-          rgba(2,4,8,0.10) 28%,
-          rgba(2,4,8,0.04) 40%,
-          rgba(2,4,8,0.00) 58%,
-          rgba(2,4,8,0.00) 100%
-        );
-    }
-
-    .hero-glow{
-      position:absolute;
-      inset:0;
-      z-index:3;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 73% 26%, rgba(43,125,255,.18), transparent 20%),
-        radial-gradient(circle at 82% 43%, rgba(103,213,255,.10), transparent 18%);
-    }
-
     .hero-brand{
       position:absolute;
-      left:5.5%;
+      left:50%;
       top:50%;
-      transform:translateY(-50%);
+      transform:translate(-50%,-50%);
       z-index:4;
-      max-width:43%;
+      width:min(92%, 980px);
+      text-align:center;
       pointer-events:none;
     }
 
-    .hero-brand .hero-logo{
-      width:108px;
-      display:block;
-      margin-bottom:20px;
-      opacity:.95;
-      filter:
-        drop-shadow(0 0 10px rgba(43,125,255,.20))
-        grayscale(.08)
-        brightness(.95);
+    .hero-brand::before{
+      content:"";
+      position:absolute;
+      inset:-50px -70px;
+      background:radial-gradient(circle at center, rgba(2,6,12,.18) 0%, rgba(2,6,12,.12) 36%, rgba(2,6,12,.02) 64%, transparent 78%);
+      z-index:-1;
+      filter:blur(8px);
     }
 
-    .hero-brand .hero-title{
+    .hero-logo{
+      width:118px;
+      display:block;
+      margin:0 auto 14px;
+      opacity:.98;
+      filter:
+        drop-shadow(0 0 12px rgba(43,125,255,.24))
+        brightness(.98);
+    }
+
+    .hero-title{
       margin:0;
-      font-size:clamp(44px,7vw,96px);
+      font-size:clamp(44px,7vw,110px);
       font-weight:300;
-      letter-spacing:8px;
+      letter-spacing:7px;
       line-height:.92;
       text-transform:uppercase;
       color:var(--softSilver);
       text-shadow:
-        0 0 1px rgba(255,255,255,.15),
-        0 0 12px rgba(180,190,210,.06);
+        0 1px 0 rgba(255,255,255,.10),
+        0 0 14px rgba(188,197,211,.10),
+        0 0 30px rgba(43,125,255,.08);
     }
 
-    .hero-brand .hero-title .bio{
+    .hero-title .bio{
       display:block;
-      margin-top:12px;
-      font-size:.60em;
-      letter-spacing:12px;
+      margin-top:10px;
+      font-size:.58em;
+      letter-spacing:14px;
       color:var(--silver);
     }
 
-    .hero-brand .hero-rule{
-      width:280px;
-      max-width:90%;
+    .hero-rule{
+      width:min(360px, 70%);
       height:2px;
-      margin:18px 0 18px;
-      background:linear-gradient(90deg, rgba(43,125,255,.0), rgba(43,125,255,.95), rgba(43,125,255,.0));
-      box-shadow:0 0 14px rgba(43,125,255,.26);
+      margin:18px auto;
+      background:linear-gradient(90deg, rgba(43,125,255,0), rgba(43,125,255,.95), rgba(43,125,255,0));
+      box-shadow:0 0 14px rgba(43,125,255,.30);
     }
 
-    .hero-brand .hero-tag{
-      font-size:clamp(13px,1.4vw,22px);
+    .hero-tag{
+      font-size:clamp(14px,1.4vw,24px);
       letter-spacing:6px;
       text-transform:uppercase;
-      color:#e4e8ef;
-      opacity:.92;
-      margin:0 0 18px;
+      color:#edf1f7;
+      margin:0 0 16px;
+      text-shadow:0 0 10px rgba(255,255,255,.05);
     }
 
-    .hero-brand .hero-sub{
-      font-size:clamp(14px,1.3vw,24px);
+    .hero-sub{
+      font-size:clamp(15px,1.35vw,26px);
       line-height:1.45;
       letter-spacing:3px;
       text-transform:uppercase;
       color:#6ba7ff;
       margin:0;
-      text-shadow:0 0 14px rgba(43,125,255,.14);
+      text-shadow:0 0 14px rgba(43,125,255,.16);
     }
 
     .catalog{
@@ -223,7 +212,7 @@
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
       background:
-        linear-gradient(rgba(4,8,15,.72), rgba(4,8,15,.90)),
+        linear-gradient(rgba(4,8,15,.64), rgba(4,8,15,.88)),
         url('hero.jpg') center/cover no-repeat;
     }
 
@@ -232,25 +221,27 @@
       position:absolute;
       inset:0;
       pointer-events:none;
-      opacity:.36;
+      opacity:.42;
       background:
-        radial-gradient(circle at 7% 14%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 14% 20%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 20% 11%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 30% 17%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 86% 12%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 92% 20%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 78% 10%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 10% 84%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 18% 76%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 28% 70%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 86% 82%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 92% 74%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 76% 70%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        linear-gradient(135deg, transparent 49.85%, rgba(103,213,255,.16) 49.95%, rgba(103,213,255,.16) 50.05%, transparent 50.15%),
-        linear-gradient(45deg, transparent 49.85%, rgba(103,213,255,.10) 49.95%, rgba(103,213,255,.10) 50.05%, transparent 50.15%);
-      mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.84) 66%, transparent 100%);
-      -webkit-mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.84) 66%, transparent 100%);
+        radial-gradient(circle at 8% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 12% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 18% 12%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 24% 20%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 13%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 82% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 88% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 92% 13%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 28%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 12% 82%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 18% 72%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 26% 76%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 84% 82%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 90% 72%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 76% 76%, rgba(103,213,255,.95) 0 2px, transparent 3px),
+        linear-gradient(135deg, transparent 49.85%, rgba(103,213,255,.18) 49.95%, rgba(103,213,255,.18) 50.05%, transparent 50.15%),
+        linear-gradient(45deg, transparent 49.85%, rgba(103,213,255,.12) 49.95%, rgba(103,213,255,.12) 50.05%, transparent 50.15%);
+      mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.86) 68%, transparent 100%);
+      -webkit-mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.86) 68%, transparent 100%);
     }
 
     .catalog::after{
@@ -260,8 +251,8 @@
       pointer-events:none;
       background:
         radial-gradient(circle at 15% 18%, rgba(43,125,255,.14), transparent 16%),
-        radial-gradient(circle at 82% 20%, rgba(43,125,255,.10), transparent 18%),
-        radial-gradient(circle at 70% 78%, rgba(103,213,255,.08), transparent 16%);
+        radial-gradient(circle at 82% 20%, rgba(43,125,255,.12), transparent 18%),
+        radial-gradient(circle at 70% 78%, rgba(103,213,255,.10), transparent 16%);
       opacity:.85;
     }
 
@@ -579,14 +570,10 @@
         height:62vh;
         min-height:360px;
       }
-      .hero-brand{
-        max-width:60%;
-        left:6%;
-      }
-      .hero-brand .hero-title{
+      .hero-title{
         letter-spacing:5px;
       }
-      .hero-brand .hero-title .bio{
+      .hero-title .bio{
         letter-spacing:8px;
       }
     }
@@ -608,25 +595,21 @@
         height:56vh;
         min-height:320px;
       }
-      .hero-brand{
-        max-width:72%;
-        left:7%;
-      }
-      .hero-brand .hero-logo{
-        width:74px;
+      .hero-logo{
+        width:78px;
         margin-bottom:14px;
       }
-      .hero-brand .hero-title{
+      .hero-title{
         font-size:clamp(30px,9vw,54px);
         letter-spacing:4px;
       }
-      .hero-brand .hero-title .bio{
+      .hero-title .bio{
         letter-spacing:6px;
       }
-      .hero-brand .hero-tag{
+      .hero-tag{
         letter-spacing:3px;
       }
-      .hero-brand .hero-sub{
+      .hero-sub{
         letter-spacing:2px;
       }
     }
@@ -646,9 +629,6 @@
 
   <div class="wrap">
     <section class="hero">
-      <div class="hero-fix"></div>
-      <div class="hero-glow"></div>
-
       <div class="hero-brand">
         <img class="hero-logo" src="logo.jpg" alt="Covenant Bio Labs logo">
         <h1 class="hero-title">Covenant<span class="bio">Bio Labs</span></h1>
@@ -947,10 +927,7 @@
         `;
       } else {
         result.classList.add('show');
-        result.innerHTML = `
-          <strong>Status:</strong> Not found<br>
-          Please check the code and try again.
-        `;
+        result.innerHTML = `<strong>Status:</strong> Not found<br>Please check the code and try again.`;
       }
     }
 
@@ -958,9 +935,9 @@
       if (e.target.id === 'productModal') closeModal();
     });
 
-    function makeMolecule(top, left, scale, duration){
+    function makeMolecule(top, left, scale, duration, delay){
       return `
-        <div class="molecule" style="top:${top}%; left:${left}%; transform:scale(${scale}); animation-duration:${duration}s;">
+        <div class="molecule" style="top:${top}%; left:${left}%; transform:scale(${scale}); animation-duration:${duration}s; animation-delay:${delay}s;">
           <div class="node" style="left:0px; top:0px;"></div>
           <div class="node" style="left:42px; top:16px;"></div>
           <div class="node" style="left:82px; top:-6px;"></div>
@@ -973,15 +950,14 @@
     }
 
     document.getElementById('moleculeBg').innerHTML =
-      makeMolecule(8, 4, 1.1, 18) +
-      makeMolecule(18, 82, 1.35, 24) +
-      makeMolecule(34, 62, 0.92, 20) +
-      makeMolecule(54, 10, 1.02, 21) +
-      makeMolecule(68, 76, 1.25, 26) +
-      makeMolecule(78, 54, 0.95, 19) +
-      makeMolecule(22, 48, 0.75, 17) +
-      makeMolecule(72, 34, 1.05, 22) +
-      makeMolecule(86, 88, 0.8, 16);
+      makeMolecule(6, 4, 1.15, 22, 0) +
+      makeMolecule(12, 80, 1.35, 28, -3) +
+      makeMolecule(24, 56, 0.90, 20, -6) +
+      makeMolecule(38, 12, 1.00, 24, -2) +
+      makeMolecule(52, 84, 1.22, 26, -8) +
+      makeMolecule(68, 8, 0.92, 19, -4) +
+      makeMolecule(74, 52, 1.05, 22, -5) +
+      makeMolecule(84, 88, 0.82, 17, -7);
   </script>
 </body>
 </html>

@@ -4,23 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Covenant Bio Labs</title>
-  <meta name="description" content="Premium research catalog." />
+  <meta name="description" content="Premium research peptide catalog." />
   <style>
     :root{
       --bg:#03060b;
       --bg2:#08111b;
-      --panel:rgba(8,12,22,.82);
-      --panel2:rgba(10,16,28,.94);
-      --line:rgba(103,182,255,.22);
+      --panel:rgba(8,12,22,.84);
+      --panel-2:rgba(10,16,28,.94);
+      --line:rgba(103,182,255,.24);
       --blue:#2b7dff;
       --blue2:#67d5ff;
       --green:#65df87;
       --white:#f5f8ff;
       --text:#eaf1ff;
-      --muted:#d7e3f8;
+      --muted:#d8e3f4;
       --shadow:0 24px 60px rgba(0,0,0,.50);
-      --max:1400px;
       --radius:28px;
+      --max:1400px;
     }
 
     *{box-sizing:border-box}
@@ -38,7 +38,7 @@
     }
 
     img{display:block;max-width:100%}
-    button,input{font:inherit}
+    button{font:inherit}
 
     .molecule-bg{
       position:fixed;
@@ -46,7 +46,7 @@
       overflow:hidden;
       pointer-events:none;
       z-index:0;
-      opacity:.5;
+      opacity:.48;
     }
 
     .molecule{
@@ -109,100 +109,24 @@
       margin-bottom:28px;
     }
 
-    .hero-brand{
+    .hero-badge{
       position:absolute;
-      right:3.2%;
-      bottom:6%;
-      width:min(36%, 520px);
       z-index:2;
-      padding:22px 22px 20px;
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(5,8,16,.10), rgba(5,8,16,.05));
-      backdrop-filter:blur(1px);
-      filter:drop-shadow(0 18px 28px rgba(0,0,0,.40));
+      filter:
+        drop-shadow(0 18px 28px rgba(0,0,0,.45))
+        drop-shadow(0 0 22px rgba(43,125,255,.16));
     }
 
-    .brand-mark{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:86px;
-      height:86px;
-      margin:0 auto 10px;
-      border:4px solid rgba(255,255,255,.95);
-      border-radius:50%;
-      color:#2b7dff;
-      font-weight:700;
-      font-size:52px;
-      line-height:1;
-      position:relative;
-      text-shadow:0 0 18px rgba(43,125,255,.24);
-      box-shadow:0 0 24px rgba(43,125,255,.14);
-      background:rgba(0,0,0,.08);
+    .hero-badge-left{
+      left:2.8%;
+      top:5%;
+      width:min(23%, 300px);
     }
 
-    .brand-mark::before{
-      content:"";
-      position:absolute;
-      left:10px;
-      top:8px;
-      bottom:8px;
-      width:14px;
-      border-left:2px solid rgba(255,255,255,.9);
-      border-right:2px solid rgba(255,255,255,.9);
-      border-radius:10px;
-      opacity:.7;
-    }
-
-    .brand-title{
-      text-align:center;
-      text-transform:uppercase;
-      margin:0;
-      font-weight:300;
-      letter-spacing:7px;
-      line-height:1;
-      font-size:clamp(40px, 4.6vw, 72px);
-      color:#f0f3f8;
-      text-shadow:0 2px 14px rgba(0,0,0,.28);
-    }
-
-    .brand-subtitle{
-      text-align:center;
-      text-transform:uppercase;
-      margin:10px 0 0;
-      letter-spacing:11px;
-      font-size:clamp(18px, 2vw, 31px);
-      color:#dfe5ef;
-      text-shadow:0 2px 14px rgba(0,0,0,.28);
-    }
-
-    .brand-line{
-      width:100%;
-      max-width:360px;
-      height:2px;
-      margin:14px auto;
-      background:linear-gradient(90deg, transparent, rgba(43,125,255,.95), transparent);
-      box-shadow:0 0 16px rgba(43,125,255,.24);
-    }
-
-    .brand-tag{
-      margin:0;
-      text-align:center;
-      font-size:clamp(13px, 1.15vw, 18px);
-      letter-spacing:4px;
-      text-transform:uppercase;
-      color:#edf2f9;
-    }
-
-    .brand-desc{
-      margin:16px 0 0;
-      text-align:center;
-      font-size:clamp(13px, 1.2vw, 20px);
-      line-height:1.45;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      color:#5d9dff;
-      text-shadow:0 0 16px rgba(43,125,255,.18);
+    .hero-badge-right{
+      right:3%;
+      bottom:5%;
+      width:min(34%, 520px);
     }
 
     .catalog{
@@ -292,16 +216,6 @@
       min-height:325px;
     }
 
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-20% -10%;
-      background:radial-gradient(circle at 50% 10%, rgba(103,213,255,.14), transparent 32%);
-      opacity:0;
-      transition:.25s ease;
-      pointer-events:none;
-    }
-
     .card:hover{
       transform:translateY(-6px);
       border-color:rgba(103,213,255,.52);
@@ -309,8 +223,6 @@
         0 24px 48px rgba(0,0,0,.42),
         0 0 22px rgba(43,125,255,.18);
     }
-
-    .card:hover::before{ opacity:1; }
 
     .card img{
       width:145px;
@@ -369,35 +281,26 @@
       position:fixed;
       inset:0;
       z-index:9999;
-      background:rgba(0,0,0,.78);
+      background:rgba(0,0,0,.82);
       backdrop-filter:blur(6px);
       -webkit-backdrop-filter:blur(6px);
       align-items:center;
       justify-content:center;
       padding:20px;
+      overflow:auto;
     }
 
     .modal-box{
-      width:min(1060px, 100%);
+      width:min(1120px, 100%);
       border-radius:28px;
       overflow:hidden;
       position:relative;
       background:
-        linear-gradient(rgba(4,8,15,.84), rgba(4,8,15,.95)),
+        linear-gradient(rgba(4,8,15,.88), rgba(4,8,15,.96)),
         url('hero-new.jpg') center/cover no-repeat,
         linear-gradient(180deg,#03060b,#09131d);
       border:1px solid rgba(255,255,255,.10);
       box-shadow:0 34px 80px rgba(0,0,0,.56);
-    }
-
-    .modal-box::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 78% 28%, rgba(43,125,255,.16), transparent 22%),
-        linear-gradient(180deg, rgba(3,6,12,.18), rgba(3,6,12,.38));
-      pointer-events:none;
     }
 
     .close{
@@ -413,37 +316,37 @@
       font-size:24px;
       line-height:1;
       cursor:pointer;
-      z-index:2;
+      z-index:3;
     }
 
     .modal-content{
       position:relative;
       z-index:1;
       display:grid;
-      grid-template-columns:280px 1fr;
-      gap:28px;
-      padding:30px;
+      grid-template-columns:260px 1fr;
+      gap:24px;
+      padding:28px;
       align-items:start;
     }
 
     .modal-left img{
       width:100%;
-      max-width:240px;
-      margin:6px auto 0;
+      max-width:220px;
+      margin:0 auto;
       filter:
         drop-shadow(0 20px 24px rgba(0,0,0,.46))
         drop-shadow(0 0 12px rgba(103,213,255,.18));
     }
 
     .modal-right h2{
-      margin:0 0 10px;
-      font-size:52px;
+      margin:0 0 8px;
+      font-size:48px;
       line-height:1;
       color:#fff;
     }
 
     .modal-price{
-      font-size:56px;
+      font-size:54px;
       line-height:1;
       color:var(--green);
       font-weight:900;
@@ -451,7 +354,7 @@
     }
 
     .modal-panel{
-      background:rgba(8,12,22,.64);
+      background:rgba(8,12,22,.62);
       border:1px solid rgba(255,255,255,.08);
       border-radius:18px;
       padding:18px;
@@ -480,8 +383,7 @@
       margin-top:6px;
     }
 
-    .modal-actions button,
-    .modal-actions a{
+    .modal-actions button{
       min-height:48px;
       padding:0 18px;
       border:none;
@@ -492,7 +394,6 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      text-decoration:none;
     }
 
     .coa-btn{
@@ -518,8 +419,34 @@
       border:1px solid rgba(255,255,255,.10);
     }
 
+    .coa-viewer{
+      margin-top:18px;
+      display:none;
+    }
+
+    .coa-viewer.show{
+      display:block;
+    }
+
+    .coa-frame{
+      width:100%;
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      padding:12px;
+    }
+
+    .coa-frame img{
+      width:100%;
+      height:auto;
+      border-radius:10px;
+      background:#fff;
+    }
+
     @media (max-width: 1100px){
-      .hero-brand{ width:min(42%, 430px); }
+      .hero-badge-left{ width:min(24%, 250px); }
+      .hero-badge-right{ width:min(38%, 420px); }
     }
 
     @media (max-width: 920px){
@@ -527,16 +454,16 @@
         height:56vh;
         min-height:320px;
       }
-      .hero-brand{
-        width:min(54%, 360px);
-        right:4%;
-        bottom:5%;
-        padding:18px;
+      .hero-badge-left{
+        width:min(28%, 200px);
+        left:3%;
+        top:5%;
       }
-      .brand-title{ font-size:clamp(30px, 7vw, 48px); }
-      .brand-subtitle{ font-size:clamp(16px, 3vw, 22px); letter-spacing:7px; }
-      .brand-tag{ letter-spacing:2px; }
-      .brand-desc{ letter-spacing:2px; }
+      .hero-badge-right{
+        width:min(46%, 300px);
+        right:3%;
+        bottom:5%;
+      }
       .modal-content{
         grid-template-columns:1fr;
       }
@@ -546,12 +473,8 @@
 
     @media (max-width: 640px){
       .grid{ grid-template-columns:1fr; }
-      .hero-brand{ width:min(66%, 280px); }
-      .brand-mark{
-        width:68px;
-        height:68px;
-        font-size:40px;
-      }
+      .hero-badge-left{ width:min(32%, 150px); }
+      .hero-badge-right{ width:min(54%, 240px); }
     }
   </style>
 </head>
@@ -560,14 +483,8 @@
 
   <div class="wrap">
     <section class="hero">
-      <div class="hero-brand">
-        <div class="brand-mark">+</div>
-        <h1 class="brand-title">Covenant</h1>
-        <div class="brand-subtitle">Bio Labs</div>
-        <div class="brand-line"></div>
-        <p class="brand-tag">Faith. Science. Purpose.</p>
-        <p class="brand-desc">Premium Research Peptides<br>&amp; Advanced Compounds</p>
-      </div>
+      <img class="hero-badge hero-badge-left" src="hero-badge.png" alt="Covenant Bio Labs badge">
+      <img class="hero-badge hero-badge-right" src="hero-badge-v2.png" alt="Covenant Bio Labs badge">
     </section>
 
     <section class="catalog">
@@ -587,249 +504,29 @@
 
   <script>
     const products = [
-      {
-        name:"Retatrutide 20mg",
-        price:"$120",
-        img:"retatrutide-20mg.png",
-        amount:"20mg",
-        form:"Lyophilized powder",
-        assay:"21.67 mg",
-        purity:"99.566%",
-        coaStatus:"Verified",
-        lab:"Janoshik",
-        coaFile:"coa-retatrutide-20mg.jpg"
-      },
-      {
-        name:"Cagrilintide 5mg",
-        price:"$70",
-        img:"cagrilintide-5mg.png",
-        amount:"5mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"IGF-1 LR3 1mg",
-        price:"$75",
-        img:"igf1-lr3-1mg.png",
-        amount:"1mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"Tesamorelin 5mg",
-        price:"$40",
-        img:"tesamorelin-5mg.png",
-        amount:"5mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"NAD+ 500mg",
-        price:"$60",
-        img:"nad-500mg.png",
-        amount:"500mg",
-        form:"Lyophilized powder",
-        assay:"536.16 mg",
-        coaStatus:"Verified",
-        lab:"Janoshik",
-        coaFile:"coa-nad-500mg.jpg"
-      },
-      {
-        name:"DISP 10mg",
-        price:"$70",
-        img:"disp-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"MOTS-C 10mg",
-        price:"$50",
-        img:"mots-c-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        assay:"10.63 mg",
-        purity:"99.009%",
-        coaStatus:"Verified",
-        lab:"Janoshik",
-        coaFile:"coa-mots-c-10mg.jpg"
-      },
-      {
-        name:"SLU-PP-332 5mg",
-        price:"$90",
-        img:"slu-pp-332-5mg.png",
-        amount:"5mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"WOLVERINE",
-        price:"$50",
-        img:"wolverine.png",
-        amount:"BPC-157 5mg + TB-500 5mg",
-        form:"Lyophilized powder",
-        details:"Blend presentation",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"SS-31 10mg",
-        price:"$40",
-        img:"ss-31-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        assay:"10.31 mg",
-        purity:"99.694%",
-        coaStatus:"Verified",
-        lab:"Janoshik",
-        coaFile:"coa-ss31-10mg.jpg"
-      },
-      {
-        name:"Bacteriostatic Water 10mL",
-        price:"$10",
-        img:"bacteriostatic-water-10ml.png",
-        amount:"10mL",
-        form:"Sterile water",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"HGH Somatropin 10iu",
-        price:"$45",
-        img:"hgh-somatropin-10iu.png",
-        amount:"10iu",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"HGH Somatropin 12iu",
-        price:"$55",
-        img:"hgh-somatropin-12iu.png",
-        amount:"12iu",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"MT-2 10mg",
-        price:"$50",
-        img:"mt-2-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"Glutathione 1500mg",
-        price:"$50",
-        img:"glutathione-1500mg.png",
-        amount:"1500mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"Epithalon 10mg",
-        price:"$50",
-        img:"epithalon-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"KPV 10mg",
-        price:"$50",
-        img:"kpv-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"5 Amino Q 5mg",
-        price:"$50",
-        img:"5-amino-q-5mg.png",
-        amount:"5mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"CJC + IPA",
-        price:"$50",
-        img:"cjc-ipa-5mg.png",
-        amount:"5mg + 5mg (No DAC)",
-        form:"Lyophilized powder",
-        assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg",
-        coaStatus:"Verified",
-        lab:"Janoshik",
-        coaFile:"coa-cjc-ipa-5-5.jpg"
-      },
-      {
-        name:"Semax 10mg",
-        price:"$50",
-        img:"semax-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"Selank 10mg",
-        price:"$50",
-        img:"selank-10mg.png",
-        amount:"10mg",
-        form:"Lyophilized powder",
-        assay:"11.55 mg",
-        purity:"99.793%",
-        coaStatus:"Verified",
-        lab:"Janoshik",
-        coaFile:"coa-selank-10mg.jpg"
-      },
-      {
-        name:"GLOW",
-        price:"$100",
-        img:"glow.png",
-        amount:"BT 10mg + BPC 10mg + CU 50mg",
-        form:"Lyophilized powder",
-        details:"Blend presentation",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      },
-      {
-        name:"KLOW",
-        price:"$120",
-        img:"klow.png",
-        amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg",
-        form:"Lyophilized powder",
-        details:"Blend presentation",
-        coaStatus:"COA pending upload",
-        lab:"Janoshik",
-        coaFile:""
-      }
+      { name:"Retatrutide 20mg", price:"$120", img:"retatrutide-20mg.png", amount:"20mg", form:"Lyophilized powder", assay:"21.67 mg", purity:"99.566%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-retatrutide-20mg.jpg" },
+      { name:"Cagrilintide 5mg", price:"$70", img:"cagrilintide-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"IGF-1 LR3 1mg", price:"$75", img:"igf1-lr3-1mg.png", amount:"1mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"Tesamorelin 5mg", price:"$40", img:"tesamorelin-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"NAD+ 500mg", price:"$60", img:"nad-500mg.png", amount:"500mg", form:"Lyophilized powder", assay:"536.16 mg", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-nad-500mg.jpg" },
+      { name:"DISP 10mg", price:"$70", img:"disp-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"MOTS-C 10mg", price:"$50", img:"mots-c-10mg.png", amount:"10mg", form:"Lyophilized powder", assay:"10.63 mg", purity:"99.009%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-mots-c-10mg.jpg" },
+      { name:"SLU-PP-332 5mg", price:"$90", img:"slu-pp-332-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"WOLVERINE", price:"$50", img:"wolverine.png", amount:"BPC-157 5mg + TB-500 5mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"SS-31 10mg", price:"$40", img:"ss-31-10mg.png", amount:"10mg", form:"Lyophilized powder", assay:"10.31 mg", purity:"99.694%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-ss31-10mg.jpg" },
+      { name:"Bacteriostatic Water 10mL", price:"$10", img:"bacteriostatic-water-10ml.png", amount:"10mL", form:"Sterile water", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"HGH Somatropin 10iu", price:"$45", img:"hgh-somatropin-10iu.png", amount:"10iu", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"HGH Somatropin 12iu", price:"$55", img:"hgh-somatropin-12iu.png", amount:"12iu", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"MT-2 10mg", price:"$50", img:"mt-2-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"Glutathione 1500mg", price:"$50", img:"glutathione-1500mg.png", amount:"1500mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"Epithalon 10mg", price:"$50", img:"epithalon-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"KPV 10mg", price:"$50", img:"kpv-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"5 Amino Q 5mg", price:"$50", img:"5-amino-q-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"CJC + IPA", price:"$50", img:"cjc-ipa-5mg.png", amount:"5mg + 5mg (No DAC)", form:"Lyophilized powder", assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-cjc-ipa-5-5.jpg" },
+      { name:"Semax 10mg", price:"$50", img:"semax-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"Selank 10mg", price:"$50", img:"selank-10mg.png", amount:"10mg", form:"Lyophilized powder", assay:"11.55 mg", purity:"99.793%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-selank-10mg.jpg" },
+      { name:"GLOW", price:"$100", img:"glow.png", amount:"BT 10mg + BPC 10mg + CU 50mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
+      { name:"KLOW", price:"$120", img:"klow.png", amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" }
     ];
 
     const grid = document.getElementById('productGrid');
@@ -854,9 +551,23 @@
       const assayLine = p.assay ? `<li><strong>Assay:</strong> ${p.assay}</li>` : '';
       const purityLine = p.purity ? `<li><strong>Purity:</strong> ${p.purity}</li>` : '';
       const detailsLine = p.details ? `<li><strong>Details:</strong> ${p.details}</li>` : '';
+
       const coaButton = p.coaFile
-        ? `<a class="coa-btn" href="${p.coaFile}" target="_blank" rel="noopener noreferrer">View COA</a>`
-        : `<span class="coa-btn disabled">COA Pending</span>`;
+        ? `<button class="coa-btn" type="button" onclick="toggleCOA()">View COA</button>`
+        : `<button class="coa-btn disabled" type="button">COA Pending</button>`;
+
+      const coaViewer = p.coaFile
+        ? `
+          <div class="coa-viewer" id="coaViewer">
+            <div class="modal-panel">
+              <h4>COA Report</h4>
+              <div class="coa-frame">
+                <img src="${p.coaFile}" alt="${p.name} COA">
+              </div>
+            </div>
+          </div>
+        `
+        : '';
 
       const modal = document.getElementById('productModal');
       modal.style.display = 'flex';
@@ -903,10 +614,18 @@
                 <button class="info-btn" type="button">Product Info</button>
                 <button class="contact-btn" type="button">Contact for Info</button>
               </div>
+
+              ${coaViewer}
             </div>
           </div>
         </div>
       `;
+    }
+
+    function toggleCOA() {
+      const viewer = document.getElementById('coaViewer');
+      if (!viewer) return;
+      viewer.classList.toggle('show');
     }
 
     function closeModal() {

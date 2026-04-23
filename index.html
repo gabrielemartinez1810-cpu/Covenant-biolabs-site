@@ -10,12 +10,10 @@
       --bg:#03060b;
       --bg2:#08111b;
       --panel:rgba(8,12,22,.84);
-      --panel-2:rgba(10,16,28,.94);
-      --line:rgba(103,182,255,.24);
+      --panel2:rgba(10,16,28,.94);
       --blue:#2b7dff;
       --blue2:#67d5ff;
       --green:#65df87;
-      --white:#f5f8ff;
       --text:#eaf1ff;
       --muted:#d8e3f4;
       --shadow:0 24px 60px rgba(0,0,0,.50);
@@ -109,24 +107,15 @@
       margin-bottom:28px;
     }
 
-    .hero-badge{
+    .hero-badge-right{
       position:absolute;
+      right:3%;
+      bottom:5%;
+      width:min(34%, 520px);
       z-index:2;
       filter:
         drop-shadow(0 18px 28px rgba(0,0,0,.45))
         drop-shadow(0 0 22px rgba(43,125,255,.16));
-    }
-
-    .hero-badge-left{
-      left:2.8%;
-      top:5%;
-      width:min(23%, 300px);
-    }
-
-    .hero-badge-right{
-      right:3%;
-      bottom:5%;
-      width:min(34%, 520px);
     }
 
     .catalog{
@@ -142,34 +131,6 @@
         linear-gradient(180deg,#03060b,#09131d);
     }
 
-    .catalog::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.42;
-      background:
-        radial-gradient(circle at 8% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 12% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 18% 12%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 24% 20%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 30% 13%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 82% 16%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 88% 24%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 92% 13%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 78% 28%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 12% 82%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 18% 72%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 26% 76%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 84% 82%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 90% 72%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        radial-gradient(circle at 76% 76%, rgba(103,213,255,.95) 0 2px, transparent 3px),
-        linear-gradient(135deg, transparent 49.85%, rgba(103,213,255,.18) 49.95%, rgba(103,213,255,.18) 50.05%, transparent 50.15%),
-        linear-gradient(45deg, transparent 49.85%, rgba(103,213,255,.12) 49.95%, rgba(103,213,255,.12) 50.05%, transparent 50.15%);
-      mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.86) 68%, transparent 100%);
-      -webkit-mask-image:radial-gradient(circle at center, black 24%, rgba(0,0,0,.86) 68%, transparent 100%);
-    }
-
     .catalog::after{
       content:"";
       position:absolute;
@@ -182,7 +143,10 @@
       opacity:.9;
     }
 
-    .catalog-inner{ position:relative; z-index:1; }
+    .catalog-inner{
+      position:relative;
+      z-index:1;
+    }
 
     .catalog .sub{
       text-align:center;
@@ -224,20 +188,46 @@
         0 0 22px rgba(43,125,255,.18);
     }
 
-    .card img{
+    .product-thumb{
+      width:145px;
+      height:170px;
+      margin:0 auto 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      overflow:hidden;
+      background:rgba(0,0,0,.16);
+    }
+
+    .product-thumb img{
       width:145px;
       height:auto;
-      margin:0 auto 16px;
       filter:drop-shadow(0 16px 18px rgba(0,0,0,.40));
       transition:.25s ease;
     }
 
-    .card:hover img{
+    .card:hover .product-thumb img{
       transform:translateY(-3px) scale(1.03);
       filter:
         drop-shadow(0 20px 24px rgba(0,0,0,.46))
         drop-shadow(0 0 12px rgba(103,213,255,.28))
         drop-shadow(0 0 24px rgba(43,125,255,.18));
+    }
+
+    .img-fallback{
+      display:none;
+      width:145px;
+      height:170px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-weight:700;
+      color:#bcd7ff;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:10px;
     }
 
     .card h3{
@@ -329,13 +319,41 @@
       align-items:start;
     }
 
+    .modal-left{
+      display:flex;
+      justify-content:center;
+    }
+
+    .modal-left .modal-thumb{
+      width:220px;
+      min-height:260px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.16);
+      overflow:hidden;
+    }
+
     .modal-left img{
       width:100%;
       max-width:220px;
-      margin:0 auto;
       filter:
         drop-shadow(0 20px 24px rgba(0,0,0,.46))
         drop-shadow(0 0 12px rgba(103,213,255,.18));
+    }
+
+    .modal-thumb-fallback{
+      display:none;
+      width:220px;
+      min-height:260px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-weight:700;
+      color:#bcd7ff;
+      background:rgba(255,255,255,.04);
+      padding:16px;
     }
 
     .modal-right h2{
@@ -402,12 +420,6 @@
       border:1px solid rgba(103,182,255,.34);
     }
 
-    .coa-btn.disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      pointer-events:none;
-    }
-
     .info-btn{
       color:#07101d;
       background:linear-gradient(180deg,#79eaff,#2fd5ff);
@@ -435,6 +447,7 @@
       overflow:hidden;
       border:1px solid rgba(255,255,255,.12);
       padding:12px;
+      min-height:220px;
     }
 
     .coa-frame img{
@@ -444,8 +457,18 @@
       background:#fff;
     }
 
+    .coa-error{
+      display:none;
+      color:#111;
+      background:#fff;
+      border-radius:10px;
+      padding:20px;
+      text-align:center;
+      font-weight:700;
+      line-height:1.6;
+    }
+
     @media (max-width: 1100px){
-      .hero-badge-left{ width:min(24%, 250px); }
       .hero-badge-right{ width:min(38%, 420px); }
     }
 
@@ -453,11 +476,6 @@
       .hero{
         height:56vh;
         min-height:320px;
-      }
-      .hero-badge-left{
-        width:min(28%, 200px);
-        left:3%;
-        top:5%;
       }
       .hero-badge-right{
         width:min(46%, 300px);
@@ -473,7 +491,6 @@
 
     @media (max-width: 640px){
       .grid{ grid-template-columns:1fr; }
-      .hero-badge-left{ width:min(32%, 150px); }
       .hero-badge-right{ width:min(54%, 240px); }
     }
   </style>
@@ -483,8 +500,7 @@
 
   <div class="wrap">
     <section class="hero">
-      <img class="hero-badge hero-badge-left" src="hero-badge.png" alt="Covenant Bio Labs badge">
-      <img class="hero-badge hero-badge-right" src="hero-badge-v2.png" alt="Covenant Bio Labs badge">
+      <img class="hero-badge-right" src="hero-badge-v2.png" alt="Covenant Bio Labs">
     </section>
 
     <section class="catalog">
@@ -504,29 +520,29 @@
 
   <script>
     const products = [
-      { name:"Retatrutide 20mg", price:"$120", img:"retatrutide-20mg.png", amount:"20mg", form:"Lyophilized powder", assay:"21.67 mg", purity:"99.566%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-retatrutide-20mg.jpg" },
-      { name:"Cagrilintide 5mg", price:"$70", img:"cagrilintide-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"IGF-1 LR3 1mg", price:"$75", img:"igf1-lr3-1mg.png", amount:"1mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"Tesamorelin 5mg", price:"$40", img:"tesamorelin-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"NAD+ 500mg", price:"$60", img:"nad-500mg.png", amount:"500mg", form:"Lyophilized powder", assay:"536.16 mg", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-nad-500mg.jpg" },
-      { name:"DISP 10mg", price:"$70", img:"disp-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"MOTS-C 10mg", price:"$50", img:"mots-c-10mg.png", amount:"10mg", form:"Lyophilized powder", assay:"10.63 mg", purity:"99.009%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-mots-c-10mg.jpg" },
-      { name:"SLU-PP-332 5mg", price:"$90", img:"slu-pp-332-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"WOLVERINE", price:"$50", img:"wolverine.png", amount:"BPC-157 5mg + TB-500 5mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"SS-31 10mg", price:"$40", img:"ss-31-10mg.png", amount:"10mg", form:"Lyophilized powder", assay:"10.31 mg", purity:"99.694%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-ss31-10mg.jpg" },
-      { name:"Bacteriostatic Water 10mL", price:"$10", img:"bacteriostatic-water-10ml.png", amount:"10mL", form:"Sterile water", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"HGH Somatropin 10iu", price:"$45", img:"hgh-somatropin-10iu.png", amount:"10iu", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"HGH Somatropin 12iu", price:"$55", img:"hgh-somatropin-12iu.png", amount:"12iu", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"MT-2 10mg", price:"$50", img:"mt-2-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"Glutathione 1500mg", price:"$50", img:"glutathione-1500mg.png", amount:"1500mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"Epithalon 10mg", price:"$50", img:"epithalon-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"KPV 10mg", price:"$50", img:"kpv-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"5 Amino Q 5mg", price:"$50", img:"5-amino-q-5mg.png", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"CJC + IPA", price:"$50", img:"cjc-ipa-5mg.png", amount:"5mg + 5mg (No DAC)", form:"Lyophilized powder", assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-cjc-ipa-5-5.jpg" },
-      { name:"Semax 10mg", price:"$50", img:"semax-10mg.png", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"Selank 10mg", price:"$50", img:"selank-10mg.png", amount:"10mg", form:"Lyophilized powder", assay:"11.55 mg", purity:"99.793%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-selank-10mg.jpg" },
-      { name:"GLOW", price:"$100", img:"glow.png", amount:"BT 10mg + BPC 10mg + CU 50mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" },
-      { name:"KLOW", price:"$120", img:"klow.png", amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA pending upload", lab:"Janoshik", coaFile:"" }
+      { name:"Retatrutide 20mg", price:"$120", img:"retatrutide-20mg.jpg", amount:"20mg", form:"Lyophilized powder", assay:"21.67 mg", purity:"99.566%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-retatrutide-20mg.jpg", hasCOA:true },
+      { name:"Cagrilintide 5mg", price:"$70", img:"cagrilintide-5mg.jpg", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"IGF-1 LR3 1mg", price:"$75", img:"igf1-lr3-1mg.jpg", amount:"1mg", form:"Lyophilized powder", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-igf1-lr3-1mg.jpg", hasCOA:true },
+      { name:"Tesamorelin 5mg", price:"$40", img:"tesamorelin-5mg.jpg", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"NAD+ 500mg", price:"$60", img:"nad-500mg.jpg", amount:"500mg", form:"Lyophilized powder", assay:"536.16 mg", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-nad-500mg.jpg", hasCOA:true },
+      { name:"DISP 10mg", price:"$70", img:"disp-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"MOTS-C 10mg", price:"$50", img:"mots-c-10mg.jpg", amount:"10mg", form:"Lyophilized powder", assay:"10.63 mg", purity:"99.009%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-mots-c-10mg.jpg", hasCOA:true },
+      { name:"SLU-PP-332 5mg", price:"$90", img:"slu-pp-332-5mg.jpg", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"WOLVERINE", price:"$50", img:"wolverine.jpg", amount:"BPC-157 5mg + TB-500 5mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"SS-31 10mg", price:"$40", img:"ss-31-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"Bacteriostatic Water 10mL", price:"$10", img:"bacteriostatic-water-10ml.jpg", amount:"10mL", form:"Sterile water", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"HGH Somatropin 10iu", price:"$45", img:"hgh-somatropin-10iu.jpg", amount:"10iu", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"HGH Somatropin 12iu", price:"$55", img:"hgh-somatropin-12iu.jpg", amount:"12iu", form:"Lyophilized powder", assay:"5.07 mg / 15.21 IU", purity:"96.363%", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-high-12iu.jpg", hasCOA:true },
+      { name:"MT-2 10mg", price:"$50", img:"mt-2-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"Glutathione 1500mg", price:"$50", img:"glutathione-1500mg.jpg", amount:"1500mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"Epithalon 10mg", price:"$50", img:"epithalon-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"KPV 10mg", price:"$50", img:"kpv-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"5 Amino Q 5mg", price:"$50", img:"5-amino-q-5mg.jpg", amount:"5mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"CJC + IPA", price:"$50", img:"cjc-ipa-5mg.jpg", amount:"5mg + 5mg (No DAC)", form:"Lyophilized powder", assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg", coaStatus:"Verified", lab:"Janoshik", coaFile:"coa-cjc-ipa.jpg", hasCOA:true },
+      { name:"Semax 10mg", price:"$50", img:"semax-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"Selank 10mg", price:"$50", img:"selank-10mg.jpg", amount:"10mg", form:"Lyophilized powder", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"GLOW", price:"$100", img:"glow.jpg", amount:"BT 10mg + BPC 10mg + CU 50mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false },
+      { name:"KLOW", price:"$120", img:"klow.jpg", amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg", form:"Lyophilized powder", details:"Blend presentation", coaStatus:"COA not available yet", lab:"Janoshik", coaFile:"", hasCOA:false }
     ];
 
     const grid = document.getElementById('productGrid');
@@ -536,7 +552,10 @@
       card.className = 'card';
       card.onclick = () => openProduct(p.name);
       card.innerHTML = `
-        <img src="${p.img}" alt="${p.name}">
+        <div class="product-thumb">
+          <img src="${p.img}" alt="${p.name}" onerror="showImageFallback(this)">
+          <div class="img-fallback">${p.name}</div>
+        </div>
         <h3>${p.name}</h3>
         <p class="price">${p.price}</p>
         <button>View Details</button>
@@ -552,22 +571,21 @@
       const purityLine = p.purity ? `<li><strong>Purity:</strong> ${p.purity}</li>` : '';
       const detailsLine = p.details ? `<li><strong>Details:</strong> ${p.details}</li>` : '';
 
-      const coaButton = p.coaFile
-        ? `<button class="coa-btn" type="button" onclick="toggleCOA()">View COA</button>`
-        : `<button class="coa-btn disabled" type="button">COA Pending</button>`;
-
-      const coaViewer = p.coaFile
-        ? `
-          <div class="coa-viewer" id="coaViewer">
-            <div class="modal-panel">
-              <h4>COA Report</h4>
-              <div class="coa-frame">
-                <img src="${p.coaFile}" alt="${p.name} COA">
-              </div>
+      const coaViewer = `
+        <div class="coa-viewer" id="coaViewer">
+          <div class="modal-panel">
+            <h4>COA Report</h4>
+            <div class="coa-frame">
+              ${p.hasCOA ? `
+                <img src="${p.coaFile}" alt="${p.name} COA" onerror="showCoaError(this)">
+                <div class="coa-error">COA image not found. Check the filename in your repo.</div>
+              ` : `
+                <div class="coa-error" style="display:block;">COA not available yet for this product.</div>
+              `}
             </div>
           </div>
-        `
-        : '';
+        </div>
+      `;
 
       const modal = document.getElementById('productModal');
       modal.style.display = 'flex';
@@ -576,7 +594,10 @@
           <button class="close" onclick="closeModal()">×</button>
           <div class="modal-content">
             <div class="modal-left">
-              <img src="${p.img}" alt="${p.name}">
+              <div class="modal-thumb">
+                <img src="${p.img}" alt="${p.name}" onerror="showModalImageFallback(this)">
+                <div class="modal-thumb-fallback">${p.name}</div>
+              </div>
             </div>
             <div class="modal-right">
               <h2>${p.name}</h2>
@@ -610,7 +631,7 @@
               </div>
 
               <div class="modal-actions">
-                ${coaButton}
+                <button class="coa-btn" type="button" onclick="toggleCOA()">${p.hasCOA ? 'View COA' : 'COA Status'}</button>
                 <button class="info-btn" type="button">Product Info</button>
                 <button class="contact-btn" type="button">Contact for Info</button>
               </div>
@@ -626,6 +647,24 @@
       const viewer = document.getElementById('coaViewer');
       if (!viewer) return;
       viewer.classList.toggle('show');
+    }
+
+    function showImageFallback(img){
+      img.style.display = 'none';
+      const fallback = img.parentElement.querySelector('.img-fallback');
+      if (fallback) fallback.style.display = 'flex';
+    }
+
+    function showModalImageFallback(img){
+      img.style.display = 'none';
+      const fallback = img.parentElement.querySelector('.modal-thumb-fallback');
+      if (fallback) fallback.style.display = 'flex';
+    }
+
+    function showCoaError(img){
+      img.style.display = 'none';
+      const err = img.parentElement.querySelector('.coa-error');
+      if (err) err.style.display = 'block';
     }
 
     function closeModal() {

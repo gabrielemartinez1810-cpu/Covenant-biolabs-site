@@ -1256,22 +1256,63 @@
 
               <div class="modal-actions">
                 <button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button>
-                <button class="info-btn" type="button" onclick="scrollToTopOfModal()">Product Info</button>
+                <button class="info-btn" type="button" onclick="toggleOrderForm()">Order Now</button>
                 <button class="contact-btn" type="button" onclick="copyContactEmail()">Contact for Info</button>
               </div>
 
               ${coaViewer}
+              <div class="coa-viewer" id="orderViewer">
+  <div class="modal-panel">
+    <h4>Order Inquiry</h4>
+
+    <form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
+      <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="Product" value="${p.name}">
+      <input type="hidden" name="Price" value="${p.price}">
+
+      <input class="field" value="${p.name} - ${p.price}" readonly>
+
+      <input class="field" name="Quantity" type="number" min="1" value="1" required>
+
+      <input class="field" name="First Name" placeholder="First Name" required>
+
+      <input class="field" name="Last Name" placeholder="Last Name" required>
+
+      <input class="field" name="Phone Number" placeholder="Phone Number" required>
+
+      <textarea class="field" name="Address" placeholder="Shipping Address" required></textarea>
+
+      <button class="order-submit" type="submit">Submit Order Inquiry</button>
+    </form>
+  </div>
+</div>
             </div>
           </div>
         </div>
       `;
     }
 
-    function toggleCOA() {
-      const viewer = document.getElementById('coaViewer');
-      if (!viewer) return;
-      viewer.classList.toggle('show');
-    }
+function toggleCOA() {
+  const viewer = document.getElementById('coaViewer');
+  const orderViewer = document.getElementById('orderViewer');
+
+  if (orderViewer) orderViewer.classList.remove('show');
+  if (!viewer) return;
+
+  viewer.classList.toggle('show');
+}
+
+function toggleOrderForm() {
+  const orderViewer = document.getElementById('orderViewer');
+  const coaViewer = document.getElementById('coaViewer');
+
+  if (coaViewer) coaViewer.classList.remove('show');
+  if (!orderViewer) return;
+
+  orderViewer.classList.toggle('show');
+}
+    
 
     function openCOAZoom() {
       if (!currentProduct || !currentProduct.hasCOA || !currentProduct.coaFile) return;

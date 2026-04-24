@@ -364,107 +364,6 @@
       z-index: 1;
     }
 
-    .order-section {
-      position: relative;
-      z-index: 1;
-      margin-top: 28px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      padding: 28px 20px 34px;
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      box-shadow: var(--shadow);
-      background:
-        linear-gradient(180deg, rgba(7, 11, 20, 0.86), rgba(9, 15, 26, 0.96)),
-        radial-gradient(circle at 20% 15%, rgba(43, 125, 255, 0.18), transparent 24%),
-        radial-gradient(circle at 82% 18%, rgba(101, 223, 135, 0.10), transparent 20%);
-    }
-
-    .order-inner {
-      width: min(900px, 100%);
-      margin: 0 auto;
-    }
-
-    .order-section h2 {
-      margin: 0 0 8px;
-      text-align: center;
-      font-size: 34px;
-      letter-spacing: 0.5px;
-      color: #ffffff;
-    }
-
-    .order-section .order-note {
-      text-align: center;
-      margin: 0 0 22px;
-      color: #d7e2f3;
-      line-height: 1.6;
-      opacity: 0.86;
-    }
-
-    .order-form {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .order-form label {
-      display: block;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--blue2);
-      margin: 0 0 7px;
-      font-weight: 800;
-    }
-
-    .field,
-    .order-form select,
-    .order-form textarea {
-      width: 100%;
-      min-height: 48px;
-      border-radius: 14px;
-      border: 1px solid rgba(103, 182, 255, 0.28);
-      background: rgba(3, 6, 11, 0.70);
-      color: #ffffff;
-      padding: 12px 14px;
-      outline: none;
-      font-size: 15px;
-    }
-
-    .order-form textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .full-field {
-      grid-column: 1 / -1;
-    }
-
-    .order-submit {
-      grid-column: 1 / -1;
-      min-height: 52px;
-      border: none;
-      border-radius: 16px;
-      color: #07101d;
-      font-weight: 900;
-      letter-spacing: 0.7px;
-      background: var(--btnGrad);
-      box-shadow: 0 14px 24px rgba(47, 213, 255, 0.20);
-      cursor: pointer;
-    }
-
-    .checkout-disabled {
-      grid-column: 1 / -1;
-      margin-top: 4px;
-      border-radius: 16px;
-      padding: 15px;
-      border: 1px solid rgba(245, 215, 110, 0.28);
-      background: rgba(245, 215, 110, 0.08);
-      color: #fff4bf;
-      font-size: 13px;
-      line-height: 1.6;
-      text-align: center;
-    }
-
     .footer {
       text-align: center;
       padding: 26px 0 6px;
@@ -892,14 +791,6 @@
       .modal-actions button {
         width: 100%;
       }
-
-      .order-form {
-        grid-template-columns: 1fr;
-      }
-
-      .order-section h2 {
-        font-size: 28px;
-      }
     }
   </style>
 </head>
@@ -1116,20 +1007,6 @@
         verified: true
       },
       {
-        name: "HGH Somatropin 15iu",
-        price: "$65",
-        img: "hgh-somatropin-15iu.jpg",
-        amount: "15iu",
-        form: "Lyophilized powder",
-        assay: "5.77 mg / 17.31 IU",
-        purity: "97.483%",
-        coaStatus: "Lab Verified — COA Available",
-        lab: "Janoshik",
-        coaFile: "coa-hgh-somatropin-15iu-v1.jpg",
-        hasCOA: true,
-        verified: true
-      },
-      {
         name: "MT-2 10mg",
         price: "$50",
         img: "mt-2-10mg.jpg",
@@ -1159,12 +1036,10 @@
         img: "epithalon-10mg.jpg",
         amount: "10mg",
         form: "Lyophilized powder",
-        assay: "9.81 mg",
-        purity: "99.686%",
-        coaStatus: "Lab Verified — COA Available",
+        coaStatus: "Lab Verified — COA Upload Pending",
         lab: "Janoshik",
-        coaFile: "coa-epithalon-10mg-v1.jpg",
-        hasCOA: true,
+        coaFile: "",
+        hasCOA: false,
         verified: true
       },
       {
@@ -1250,11 +1125,10 @@
         amount: "BT 10mg + BPC 10mg + CU 50mg + KP 10mg",
         form: "Lyophilized powder",
         details: "Blend presentation",
-        assay: "GHK-Cu 68.55 mg / BPC-157 11.83 mg / TB-500 11.56 mg / KPV 12.78 mg",
-        coaStatus: "Lab Verified — COA Available",
+        coaStatus: "Lab Verified — COA Upload Pending",
         lab: "Janoshik",
-        coaFile: "coa-klow-v1.jpg",
-        hasCOA: true,
+        coaFile: "",
+        hasCOA: false,
         verified: true
       }
     ];
@@ -1365,81 +1239,15 @@
 
               <div class="modal-actions">
                 <button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button>
-                <button class="info-btn" type="button" onclick="openOrderForm()">Order Inquiry</button>
+                <button class="info-btn" type="button" onclick="scrollToTopOfModal()">Product Info</button>
                 <button class="contact-btn" type="button" onclick="copyContactEmail()">Contact for Info</button>
               </div>
 
               ${coaViewer}
-
-              <div class="coa-viewer" id="orderViewer">
-                <div class="modal-panel">
-                  <h4>Order Inquiry</h4>
-                  <form class="order-form" action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
-                    <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_captcha" value="true">
-                    <input type="hidden" name="_autoresponse" value="Your Covenant Bio Labs research order inquiry has been received. Our team will review it and contact you shortly. Research use only. Not for human consumption.">
-                    <input type="hidden" name="Product" value="${p.name}">
-                    <input type="hidden" name="Price" value="${p.price}">
-
-                    <div>
-                      <label>Product</label>
-                      <input class="field" type="text" value="${p.name} - ${p.price}" readonly>
-                    </div>
-
-                    <div>
-                      <label>Quantity</label>
-                      <input class="field" name="Quantity" type="number" min="1" value="1" required>
-                    </div>
-
-                    <div>
-                      <label>Full Name</label>
-                      <input class="field" name="Name" type="text" placeholder="Full Name" required>
-                    </div>
-
-                    <div>
-                      <label>Email Address</label>
-                      <input class="field" name="Email" type="email" placeholder="Email Address" required>
-                    </div>
-
-                    <div>
-                      <label>Phone</label>
-                      <input class="field" name="Phone" type="tel" placeholder="Phone Number">
-                    </div>
-
-                    <div>
-                      <label>Research Use Confirmation</label>
-                      <select name="Research Use Confirmation" required>
-                        <option value="">Select Confirmation</option>
-                        <option value="I confirm this inquiry is for research use only.">I confirm this inquiry is for research use only.</option>
-                      </select>
-                    </div>
-
-                    <div class="full-field">
-                      <label>Shipping / Delivery Address</label>
-                      <textarea name="Address" placeholder="Street, city, state, zip"></textarea>
-                    </div>
-
-                    <div class="full-field">
-                      <label>Notes</label>
-                      <textarea name="Notes" placeholder="Additional order details or questions"></textarea>
-                    </div>
-
-                    <button class="order-submit" type="submit">Submit Inquiry for ${p.name}</button>
-                  </form>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       `;
-    }
-
-    function openOrderForm() {
-      const viewer = document.getElementById('orderViewer');
-      const coaViewer = document.getElementById('coaViewer');
-      if (coaViewer) coaViewer.classList.remove('show');
-      if (viewer) viewer.classList.toggle('show');
     }
 
     function toggleCOA() {
@@ -1501,4 +1309,134 @@
       }
     }
 
-    function copyConta
+    function copyContactEmail() {
+      const email = 'info@covenantbiolabs.com';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          alert(`Copied: ${email}`);
+        }).catch(() => {
+          alert(email);
+        });
+      } else {
+        alert(email);
+      }
+    }
+
+    function showImageFallback(img) {
+      img.style.display = 'none';
+      const fallback = img.parentElement.querySelector('.img-fallback');
+      if (fallback) fallback.style.display = 'flex';
+    }
+
+    function showModalImageFallback(img) {
+      img.style.display = 'none';
+      const fallback = img.parentElement.querySelector('.modal-thumb-fallback');
+      if (fallback) fallback.style.display = 'flex';
+    }
+
+    function showCoaError(img) {
+      img.style.display = 'none';
+      const err = img.parentElement.querySelector('.coa-error');
+      if (err) err.style.display = 'block';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('productModal');
+      modal.style.display = 'none';
+      modal.innerHTML = '';
+      currentProduct = null;
+    }
+
+    document.getElementById('productModal').addEventListener('click', function(e) {
+      if (e.target.id === 'productModal') closeModal();
+    });
+
+    document.getElementById('coaZoomModal').addEventListener('click', function(e) {
+      if (e.target.id === 'coaZoomModal') closeCOAZoom();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeCOAZoom();
+        closeModal();
+      }
+    });
+
+    const zoomWrap = document.getElementById('zoomWrap');
+    const zoomedImage = document.getElementById('zoomedCOAImage');
+
+    zoomWrap.addEventListener('wheel', function(e) {
+      if (document.getElementById('coaZoomModal').style.display !== 'flex') return;
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        zoomInCOA();
+      } else {
+        zoomOutCOA();
+      }
+    }, { passive: false });
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let scrollLeft = 0;
+    let scrollTop = 0;
+
+    zoomedImage.addEventListener('mousedown', (e) => {
+      if (currentZoom <= 1) return;
+      isDragging = true;
+      zoomedImage.classList.add('dragging');
+      startX = e.pageX - zoomWrap.offsetLeft;
+      startY = e.pageY - zoomWrap.offsetTop;
+      scrollLeft = zoomWrap.scrollLeft;
+      scrollTop = zoomWrap.scrollTop;
+    });
+
+    zoomedImage.addEventListener('mouseleave', () => {
+      isDragging = false;
+      zoomedImage.classList.remove('dragging');
+    });
+
+    zoomedImage.addEventListener('mouseup', () => {
+      isDragging = false;
+      zoomedImage.classList.remove('dragging');
+    });
+
+    zoomedImage.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - zoomWrap.offsetLeft;
+      const y = e.pageY - zoomWrap.offsetTop;
+      const walkX = (x - startX) * 1.2;
+      const walkY = (y - startY) * 1.2;
+      zoomWrap.scrollLeft = scrollLeft - walkX;
+      zoomWrap.scrollTop = scrollTop - walkY;
+    });
+
+    function makeMolecule(top, left, scale, duration, delay) {
+      return `
+        <div class="molecule" style="top:${top}%; left:${left}%; transform:scale(${scale}); animation-duration:${duration}s; animation-delay:${delay}s;">
+          <div class="node" style="left:0px; top:0px;"></div>
+          <div class="node" style="left:42px; top:16px;"></div>
+          <div class="node" style="left:82px; top:-6px;"></div>
+          <div class="node" style="left:112px; top:26px;"></div>
+          <div class="bond" style="left:5px; top:5px; width:42px; transform:rotate(20deg);"></div>
+          <div class="bond" style="left:47px; top:20px; width:45px; transform:rotate(-28deg);"></div>
+          <div class="bond" style="left:87px; top:0px; width:40px; transform:rotate(42deg);"></div>
+        </div>
+      `;
+    }
+
+    document.getElementById('moleculeBg').innerHTML =
+      makeMolecule(6, 4, 1.15, 22, 0) +
+      makeMolecule(12, 80, 1.35, 28, -3) +
+      makeMolecule(24, 56, 0.90, 20, -6) +
+      makeMolecule(38, 12, 1.00, 24, -2) +
+      makeMolecule(52, 84, 1.22, 26, -8) +
+      makeMolecule(68, 8, 0.92, 19, -4) +
+      makeMolecule(74, 52, 1.05, 22, -5) +
+      makeMolecule(84, 88, 0.82, 17, -7);
+  </script>
+</body>
+</html>
+
+

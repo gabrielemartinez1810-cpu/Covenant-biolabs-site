@@ -363,7 +363,59 @@
       position: relative;
       z-index: 1;
     }
+.order-submit {
+  width: 100%;
+  min-height: 54px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  font-size: 15px;
+  color: #07101d;
+  background: linear-gradient(180deg, #8beaff, #58d8ff 42%, #55c9ff 100%);
+  box-shadow:
+    0 12px 22px rgba(47, 213, 255, 0.22),
+    0 0 18px rgba(103, 213, 255, 0.18);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
 
+.order-submit:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 18px 30px rgba(47, 213, 255, 0.30),
+    0 0 26px rgba(103, 213, 255, 0.28);
+}
+
+.order-submit::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 65%
+  );
+  transform: translateX(-40%) rotate(8deg);
+  animation: buttonShine 4s ease-in-out infinite;
+}
+
+@keyframes buttonShine {
+  0%, 70% {
+    transform: translateX(-50%) rotate(8deg);
+    opacity: 0;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(50%) rotate(8deg);
+    opacity: 0;
+  }
+}
     .footer {
       text-align: center;
       padding: 26px 0 6px;
@@ -1283,7 +1335,7 @@
 
       <textarea class="field" name="Address" placeholder="Shipping Address" required></textarea>
 
-      <button class="order-submit" type="submit">Submit Order Inquiry</button>
+      <button class="order-submit" type="submit">Place Order Request</button>
     </form>
   </div>
 </div>

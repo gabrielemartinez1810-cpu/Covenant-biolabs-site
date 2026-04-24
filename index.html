@@ -364,6 +364,208 @@
       z-index: 1;
     }
 
+    .order-section {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      padding: 28px 20px 34px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(7, 11, 20, 0.86), rgba(9, 15, 26, 0.96)),
+        radial-gradient(circle at 20% 15%, rgba(43, 125, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(101, 223, 135, 0.10), transparent 20%);
+    }
+
+    .order-inner {
+      width: min(900px, 100%);
+      margin: 0 auto;
+    }
+
+    .order-section h2 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 34px;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .order-section .order-note {
+      text-align: center;
+      margin: 0 0 22px;
+      color: #d7e2f3;
+      line-height: 1.6;
+      opacity: 0.86;
+    }
+
+    .order-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .order-form label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue2);
+      margin: 0 0 7px;
+      font-weight: 800;
+    }
+
+    .field,
+    .order-form select,
+    .order-form textarea {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(103, 182, 255, 0.28);
+      background: rgba(3, 6, 11, 0.70);
+      color: #ffffff;
+      padding: 12px 14px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .order-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .full-field {
+      grid-column: 1 / -1;
+    }
+
+    .order-submit {
+      grid-column: 1 / -1;
+      min-height: 52px;
+      border: none;
+      border-radius: 16px;
+      color: #07101d;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      background: var(--btnGrad);
+      box-shadow: 0 14px 24px rgba(47, 213, 255, 0.20);
+      cursor: pointer;
+    }
+
+    .checkout-disabled {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      border-radius: 16px;
+      padding: 15px;
+      border: 1px solid rgba(245, 215, 110, 0.28);
+      background: rgba(245, 215, 110, 0.08);
+      color: #fff4bf;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .order-section {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      padding: 28px 20px 34px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(7, 11, 20, 0.86), rgba(9, 15, 26, 0.96)),
+        radial-gradient(circle at 20% 15%, rgba(43, 125, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(101, 223, 135, 0.10), transparent 20%);
+    }
+
+    .order-inner {
+      width: min(900px, 100%);
+      margin: 0 auto;
+    }
+
+    .order-section h2 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 34px;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .order-section .order-note {
+      text-align: center;
+      margin: 0 0 22px;
+      color: #d7e2f3;
+      line-height: 1.6;
+      opacity: 0.86;
+    }
+
+    .order-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .order-form label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue2);
+      margin: 0 0 7px;
+      font-weight: 800;
+    }
+
+    .field,
+    .order-form select,
+    .order-form textarea {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(103, 182, 255, 0.28);
+      background: rgba(3, 6, 11, 0.70);
+      color: #ffffff;
+      padding: 12px 14px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .order-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .full-field {
+      grid-column: 1 / -1;
+    }
+
+    .order-submit {
+      grid-column: 1 / -1;
+      min-height: 52px;
+      border: none;
+      border-radius: 16px;
+      color: #07101d;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      background: var(--btnGrad);
+      box-shadow: 0 14px 24px rgba(47, 213, 255, 0.20);
+      cursor: pointer;
+    }
+
+    .checkout-disabled {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      border-radius: 16px;
+      padding: 15px;
+      border: 1px solid rgba(245, 215, 110, 0.28);
+      background: rgba(245, 215, 110, 0.08);
+      color: #fff4bf;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
     .footer {
       text-align: center;
       padding: 26px 0 6px;
@@ -791,6 +993,14 @@
       .modal-actions button {
         width: 100%;
       }
+
+      .order-form {
+        grid-template-columns: 1fr;
+      }
+
+      .order-section h2 {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
@@ -807,6 +1017,126 @@
       <div class="catalog-inner">
         <p class="sub">Research Use Only</p>
         <div class="grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="order-inner">
+        <h2>Place Research Order Inquiry</h2>
+        <p class="order-note">Submit a research-use-only order inquiry. Covenant Bio Labs will reply from orders@covenantbiolabs.com with availability and next steps.</p>
+
+        <form class="order-form" action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
+          <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="true">
+          <input type="hidden" name="_autoresponse" value="Your Covenant Bio Labs research order inquiry has been received. Our team will review it and contact you shortly. Research use only. Not for human consumption.">
+
+          <div>
+            <label for="customerName">Full Name</label>
+            <input class="field" id="customerName" name="Name" type="text" placeholder="Full Name" required>
+          </div>
+
+          <div>
+            <label for="customerEmail">Email Address</label>
+            <input class="field" id="customerEmail" name="Email" type="email" placeholder="Email Address" required>
+          </div>
+
+          <div>
+            <label for="customerPhone">Phone</label>
+            <input class="field" id="customerPhone" name="Phone" type="tel" placeholder="Phone Number">
+          </div>
+
+          <div>
+            <label for="selectedProduct">Product</label>
+            <select id="selectedProduct" name="Product" required>
+              <option value="">Select Product</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="quantity">Quantity</label>
+            <input class="field" id="quantity" name="Quantity" type="number" min="1" placeholder="Quantity" required>
+          </div>
+
+          <div>
+            <label for="researchUse">Research Use Confirmation</label>
+            <select id="researchUse" name="Research Use Confirmation" required>
+              <option value="">Select Confirmation</option>
+              <option value="I confirm this inquiry is for research use only.">I confirm this inquiry is for research use only.</option>
+            </select>
+          </div>
+
+          <div class="full-field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="Notes" placeholder="Additional order details, product questions, or delivery notes"></textarea>
+          </div>
+
+          <button class="order-submit" type="submit">Submit Order Inquiry</button>
+
+          <div class="checkout-disabled">
+            Real-time card checkout is not enabled on this static GitHub Pages site. This Phase 1 inquiry form routes requests to orders@covenantbiolabs.com for manual review and compliant follow-up.
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="order-inner">
+        <h2>Place Research Order Inquiry</h2>
+        <p class="order-note">Submit a research-use-only order inquiry. Covenant Bio Labs will reply from orders@covenantbiolabs.com with availability and next steps.</p>
+
+        <form class="order-form" action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
+          <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="true">
+          <input type="hidden" name="_autoresponse" value="Your Covenant Bio Labs research order inquiry has been received. Our team will review it and contact you shortly. Research use only. Not for human consumption.">
+
+          <div>
+            <label for="customerName">Full Name</label>
+            <input class="field" id="customerName" name="Name" type="text" placeholder="Full Name" required>
+          </div>
+
+          <div>
+            <label for="customerEmail">Email Address</label>
+            <input class="field" id="customerEmail" name="Email" type="email" placeholder="Email Address" required>
+          </div>
+
+          <div>
+            <label for="customerPhone">Phone</label>
+            <input class="field" id="customerPhone" name="Phone" type="tel" placeholder="Phone Number">
+          </div>
+
+          <div>
+            <label for="selectedProduct">Product</label>
+            <select id="selectedProduct" name="Product" required>
+              <option value="">Select Product</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="quantity">Quantity</label>
+            <input class="field" id="quantity" name="Quantity" type="number" min="1" placeholder="Quantity" required>
+          </div>
+
+          <div>
+            <label for="researchUse">Research Use Confirmation</label>
+            <select id="researchUse" name="Research Use Confirmation" required>
+              <option value="">Select Confirmation</option>
+              <option value="I confirm this inquiry is for research use only.">I confirm this inquiry is for research use only.</option>
+            </select>
+          </div>
+
+          <div class="full-field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="Notes" placeholder="Additional order details, product questions, or delivery notes"></textarea>
+          </div>
+
+          <button class="order-submit" type="submit">Submit Order Inquiry</button>
+
+          <div class="checkout-disabled">
+            Real-time card checkout is not enabled on this static GitHub Pages site. This Phase 1 inquiry form routes requests to orders@covenantbiolabs.com for manual review and compliant follow-up.
+          </div>
+        </form>
       </div>
     </section>
 
@@ -1156,6 +1486,26 @@
     const maxZoom = 4;
 
     const grid = document.getElementById('productGrid');
+    const productSelect = document.getElementById('selectedProduct');
+
+    products.forEach((p) => {
+      if (productSelect) {
+        const option = document.createElement('option');
+        option.value = `${p.name} - ${p.price}`;
+        option.textContent = `${p.name} - ${p.price}`;
+        productSelect.appendChild(option);
+      }
+    });
+    const productSelect = document.getElementById('selectedProduct');
+
+    products.forEach((p) => {
+      if (productSelect) {
+        const option = document.createElement('option');
+        option.value = `${p.name} - ${p.price}`;
+        option.textContent = `${p.name} - ${p.price}`;
+        productSelect.appendChild(option);
+      }
+    });
 
     products.forEach((p) => {
       const card = document.createElement('div');

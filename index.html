@@ -1313,21 +1313,6 @@
               </div>
 
 
-function updateOrderTotal() {
-  const qty = document.getElementById('orderQuantity');
-  const totalField = document.getElementById('orderTotal');
-  const hiddenTotal = document.getElementById('hiddenOrderTotal');
-
-  if (!qty || !totalField || !hiddenTotal || !currentProduct) return;
-
-  const price = parseFloat(currentProduct.price.replace('$', ''));
-  const quantity = parseInt(qty.value) || 1;
-
-  const total = price * quantity;
-
-  totalField.value = "Estimated Total: $" + total.toFixed(2);
-  hiddenTotal.value = "$" + total.toFixed(2);
-}
 
               <div class="modal-actions">
                 <button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button>
@@ -1344,9 +1329,10 @@ function updateOrderTotal() {
                   <form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
                     <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
                     <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="Product" value="${p.name}">
-                    <input type="hidden" name="Price" value="${p.price}">
-                    <input type="hidden" name="Estimated Total" id="hiddenOrderTotal" value="${p.price}">
+<input type="hidden" name="Product" value="${p.name}">
+<input type="hidden" name="Price" value="${p.price}">
+<input type="hidden" name="Estimated Total" id="hiddenOrderTotal" value="${p.price}">
+                
 
                     <input class="field" value="${p.name} - ${p.price}" readonly>
 

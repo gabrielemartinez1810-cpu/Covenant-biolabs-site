@@ -415,6 +415,100 @@
     transform: translateX(50%) rotate(8deg);
     opacity: 0;
   }
+  .cart-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9998;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-weight: 900;
+  color: #07101d;
+  background: var(--btnGrad);
+  box-shadow: 0 14px 30px rgba(47, 213, 255, 0.28);
+  cursor: pointer;
+}
+
+.cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #07101d;
+  color: #67d5ff;
+  font-size: 12px;
+}
+
+#cartModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  background: rgba(0, 0, 0, 0.86);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.cart-box {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 24px;
+  background:
+    linear-gradient(rgba(4, 8, 15, 0.94), rgba(4, 8, 15, 0.98)),
+    url('hero-new.jpg') center / cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.56);
+  padding: 24px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.cart-total {
+  margin-top: 18px;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--green);
+}
+
+.cart-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.cart-actions button {
+  min-height: 46px;
+  border: none;
+  border-radius: 14px;
+  padding: 0 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.cart-primary {
+  color: #07101d;
+  background: var(--btnGrad);
+}
+
+.cart-secondary {
+  color: #ffffff;
+  background: linear-gradient(180deg, #1b2a46, #121d31);
+  border: 1px solid rgba(255,255,255,0.12);
+}
 }
     .footer {
       text-align: center;
@@ -1308,7 +1402,7 @@
 
               <div class="modal-actions">
                 <button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button>
-                <button class="info-btn" type="button" onclick="toggleOrderForm()">Order Now</button>
+<button class="info-btn" type="button" onclick="addToCart(currentProduct)">Add to Cart</button>
                 <button class="contact-btn" type="button" onclick="copyContactEmail()">Contact for Info</button>
               </div>
 
@@ -1411,7 +1505,7 @@ function toggleCOA() {
   viewer.classList.toggle('show');
 }
 
-function toggleOrderForm() {
+
   const orderViewer = document.getElementById('orderViewer');
   const coaViewer = document.getElementById('coaViewer');
 
@@ -1601,6 +1695,82 @@ function toggleOrderForm() {
       makeMolecule(68, 8, 0.92, 19, -4) +
       makeMolecule(74, 52, 1.05, 22, -5) +
       makeMolecule(84, 88, 0.82, 17, -7);
+    // ===== CART SYSTEM =====
+let cart = [];
+
+function addToCart(product) {
+  const existing = cart.find(item => item.name === product.name);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      name: product.name,
+      price: parseFloat(product.price.replace('$','')),
+      quantity: 1
+    });
+  }
+
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const count = document.getElementById('cartCount');
+  const itemsDiv = document.getElementById('cartItems');
+  const totalDiv = document.getElementById('cartTotal');
+
+  if (!count || !itemsDiv || !totalDiv) return;
+
+  count.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  itemsDiv.innerHTML = '';
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+
+    itemsDiv.innerHTML += `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong><br>
+          Qty: ${item.quantity}
+        </div>
+        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+      </div>
+    `;
+  });
+
+  totalDiv.textContent = "Estimated Total: $" + total.toFixed(2);
+}
+
+function openCart() {
+  document.getElementById('cartModal').style.display = 'flex';
+}
+
+function closeCart() {
+  document.getElementById('cartModal').style.display = 'none';
+}
+
+function showCartCheckout() {
+  const checkout = document.getElementById('cartCheckout');
+
+  let productList = cart.map(i => `${i.name} (x${i.quantity})`).join(', ');
+
+  checkout.innerHTML = `
+    <form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
+      <input type="hidden" name="Products" value="${productList}">
+
+      <input class="field" name="First Name" placeholder="First Name" required>
+      <input class="field" name="Last Name" placeholder="Last Name" required>
+      <input class="field" name="Email" type="email" placeholder="Email Address" required>
+      <input class="field" name="Phone Number" placeholder="Phone Number" required>
+      <textarea class="field" name="Address" placeholder="Shipping Address" required></textarea>
+
+      <button class="order-submit" type="submit">Submit Order</button>
+    </form>
+  `;
+}
   </script>
 </body>
 </html>

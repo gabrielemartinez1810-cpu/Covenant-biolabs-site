@@ -1355,8 +1355,63 @@
       `;
 
       const modal = document.getElementById('productModal');
-      modal.style.display = 'flex';
-      modal.innerHTML = `
+modal.style.display = 'flex';
+modal.innerHTML = `
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="modal-content">
+      <div class="modal-left">
+        <div class="modal-thumb">
+          <div class="verified-pill">Lab Verified</div>
+          <img src="${p.img}" alt="${p.name}" onerror="showModalImageFallback(this)">
+          <div class="modal-thumb-fallback">${p.name}</div>
+        </div>
+      </div>
+
+      <div class="modal-right">
+        <div class="modal-status">Lab Verified</div>
+        <h2>${p.name}</h2>
+        <div class="modal-price">${p.price}</div>
+
+        <div class="modal-panel">
+          <h4>Product Information</h4>
+          <ul>
+            <li><strong>Amount:</strong> ${p.amount}</li>
+            <li><strong>Form:</strong> ${p.form}</li>
+            ${detailsLine}
+            ${assayLine}
+            ${purityLine}
+          </ul>
+        </div>
+
+        <div class="modal-panel">
+          <h4>COA Verification</h4>
+          <ul>
+            <li><strong>Status:</strong> ${p.coaStatus}</li>
+            <li><strong>Lab:</strong> ${p.lab}</li>
+          </ul>
+        </div>
+
+        <div class="modal-panel">
+          <h4>Important Notice</h4>
+          <ul>
+            <li>For research use only.</li>
+            <li>Keep out of reach of children.</li>
+          </ul>
+        </div>
+
+        <div class="modal-actions">
+          <button class="coa-btn" onclick="toggleCOA()">View Lab Verified COA</button>
+          <button class="info-btn" onclick="toggleOrderForm()">Order Now</button>
+          <button class="contact-btn" onclick="copyContactEmail()">Contact for Info</button>
+        </div>
+
+        ${coaViewer}
+
+      </div>
+    </div>
+  </div>
+`;
         <div class="modal-box">
           <button class="close" onclick="closeModal()">×</button>
           <div class="modal-content">

@@ -6,102 +6,179 @@
 <title>Covenant Bio Labs</title>
 
 <style>
+:root{
+  --bg:#03060b;
+  --card:#0b1420;
+  --blue:#67d5ff;
+  --green:#65df87;
+}
+
+/* BASE */
 body{
   margin:0;
   font-family:Arial;
-  background:#03060b;
+  background:linear-gradient(180deg,#03060b,#08111b);
   color:white;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
-  padding:20px;
+  padding:30px;
 }
 
+/* CARD */
 .card{
-  background:#0b1420;
+  background:var(--card);
+  border-radius:16px;
   padding:20px;
-  border-radius:14px;
   text-align:center;
   cursor:pointer;
+  transition:.25s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 40px rgba(0,0,0,.5);
 }
 
-.price{color:#65df87;font-weight:bold}
+.price{color:var(--green);font-weight:bold}
 
-/* 🔥 FIXED MODAL */
+/* 🔥 MODAL FIXED */
 #productModal{
   display:none;
   position:fixed;
   inset:0;
   z-index:9999;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.7);
   backdrop-filter:blur(10px);
   align-items:center;
   justify-content:center;
 }
 
+/* MODAL BOX */
 .modal-box{
-  width:90%;
-  max-width:900px;
-  background:#06101a;
-  padding:30px;
+  width:95%;
+  max-width:950px;
   border-radius:20px;
+  padding:30px;
+  background:rgba(10,20,35,.95); /* 🔥 LESS TRANSPARENT */
   box-shadow:0 30px 80px rgba(0,0,0,.8);
+  position:relative;
 }
 
+/* CLOSE */
 .close{
-  float:right;
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:22px;
   cursor:pointer;
-  font-size:20px;
 }
 
+/* BUTTONS */
 button{
-  padding:10px 16px;
+  padding:12px 18px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
+  font-weight:bold;
   cursor:pointer;
-  margin-top:10px;
 }
+
+.btn-primary{
+  background:linear-gradient(180deg,#8beaff,#55c9ff);
+  color:#07101d;
+}
+
+.btn-dark{
+  background:#13263d;
+  color:white;
+}
+
+/* CART */
+.cart-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--blue);
+  color:#07101d;
+  padding:12px 18px;
+  border-radius:999px;
+  font-weight:bold;
+}
+
+/* COA */
+.coa-view{
+  margin-top:20px;
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.coa-view img{
+  width:100%;
+  cursor:zoom-in;
+}
+
+/* MOLECULE BACKGROUND */
+.molecule{
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:#67d5ff;
+  border-radius:50%;
+  opacity:.3;
+  animation:float 12s infinite linear;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-120vh)}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="grid" id="productGrid"></div>
+<div id="bg"></div>
+
+<div class="grid" id="grid"></div>
 
 <div id="productModal"></div>
+
+<button class="cart-float" onclick="openCart()">Cart (<span id="cartCount">0</span>)</button>
 
 <script>
 
 /* PRODUCTS */
 const products=[
-{name:"Retatrutide 20mg",price:"$120"},
-{name:"Cagrilintide 5mg",price:"$70"},
-{name:"IGF-1 LR3 1mg",price:"$75"},
-{name:"NAD+ 500mg",price:"$60"}
+{name:"Retatrutide 20mg",price:120,img:"retatrutide-20mg.jpg",coa:"coa-retatrutide-20mg-v.jpg"},
+{name:"Cagrilintide 5mg",price:70,img:"cagrilintide-5mg.jpg",coa:"coa-cagrilintide-5mg-v.jpg"},
+{name:"IGF-1 LR3 1mg",price:75,img:"igf1-lr3-1mg.jpg",coa:"coa-igf1-lr3-1mg-v.jpg"},
+{name:"NAD+ 500mg",price:60,img:"nad-500mg.jpg",coa:"coa-nad-500mg-v.jpg"}
 ];
 
 let cart=[];
 let currentProduct=null;
 
-/* GRID */
-const grid=document.getElementById('productGrid');
+/* GRID BUILD */
+const grid=document.getElementById('grid');
 
 products.forEach(p=>{
-  const card=document.createElement('div');
-  card.className='card';
-  card.innerHTML=`
+  const el=document.createElement('div');
+  el.className='card';
+  el.innerHTML=`
     <h3>${p.name}</h3>
-    <p class="price">${p.price}</p>
-    <button>View</button>
+    <p class="price">$${p.price}</p>
+    <button class="btn-primary">View</button>
   `;
-  card.onclick=()=>openProduct(p.name);
-  grid.appendChild(card);
+  el.onclick=()=>openProduct(p.name);
+  grid.appendChild(el);
 });
 
-/* 🔥 MODAL FIX */
+/* OPEN PRODUCT */
 function openProduct(name){
   const p=products.find(x=>x.name===name);
   currentProduct=p;
@@ -109,15 +186,23 @@ function openProduct(name){
   const modal=document.getElementById('productModal');
 
   modal.innerHTML=`
-    <div class="modal-box">
-      <div class="close" onclick="closeModal()">X</div>
-      <h2>${p.name}</h2>
-      <p>${p.price}</p>
-      <button onclick="addToCart()">Add to Cart</button>
+  <div class="modal-box">
+    <div class="close" onclick="closeModal()">✕</div>
+
+    <h2>${p.name}</h2>
+    <h3>$${p.price}</h3>
+
+    <button class="btn-primary" onclick="addToCart()">Add to Cart</button>
+    <button class="btn-dark" onclick="toggleCOA()">View COA</button>
+
+    <div id="coaBox" style="display:none;">
+      <div class="coa-view">
+        <img src="${p.coa}" onclick="zoomCOA('${p.coa}')">
+      </div>
     </div>
+  </div>
   `;
 
-  document.body.appendChild(modal);
   modal.style.display='flex';
 }
 
@@ -129,15 +214,67 @@ function closeModal(){
 /* CART */
 function addToCart(){
   cart.push(currentProduct);
-  alert("Added to cart");
+  updateCart();
 }
 
-/* CLICK OUTSIDE */
+function updateCart(){
+  document.getElementById('cartCount').textContent=cart.length;
+}
+
+/* COA */
+function toggleCOA(){
+  const box=document.getElementById('coaBox');
+  box.style.display=box.style.display==='none'?'block':'none';
+}
+
+/* CLICK OUTSIDE CLOSE */
 document.getElementById('productModal').addEventListener('click',e=>{
   if(e.target.id==='productModal')closeModal();
-});
+  /* COA ZOOM */
+function zoomCOA(src){
+  const modal=document.getElementById('productModal');
+  modal.innerHTML=`
+    <div class="modal-box">
+      <div class="close" onclick="closeModal()">✕</div>
+      <img src="${src}" style="width:100%;">
+    </div>
+  `;
+}
+
+/* CART OPEN */
+function openCart(){
+  let html="<h2>Cart</h2>";
+
+  if(cart.length===0){
+    html+="<p>Cart is empty</p>";
+  }else{
+    cart.forEach(item=>{
+      html+=`<p>${item.name} - $${item.price}</p>`;
+    });
+  }
+
+  const modal=document.getElementById('productModal');
+  modal.innerHTML=`
+    <div class="modal-box">
+      <div class="close" onclick="closeModal()">✕</div>
+      ${html}
+    </div>
+  `;
+  modal.style.display='flex';
+}
+
+/* FLOATING BACKGROUND */
+const bg=document.getElementById('bg');
+for(let i=0;i<30;i++){
+  const m=document.createElement('div');
+  m.className='molecule';
+  m.style.left=Math.random()*100+"%";
+  m.style.animationDuration=(10+Math.random()*10)+"s";
+  bg.appendChild(m);
+}
 
 </script>
 
 </body>
 </html>
+});

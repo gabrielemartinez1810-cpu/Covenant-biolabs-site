@@ -1,697 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Covenant Bio Labs</title>
 
 <style>
-:root{
---bg:#03060b;--bg2:#08111b;
---line:rgba(103,182,255,.22);
---lineStrong:rgba(103,213,255,.46);
---blue:#2b7dff;--blue2:#67d5ff;
---green:#65df87;--text:#eaf1ff;
---shadow:0 24px 60px rgba(0,0,0,.52);
---radius:28px;
---btnGrad:linear-gradient(180deg,#8beaff,#58d8ff 42%,#55c9ff 100%);
---verifiedGrad:linear-gradient(135deg,#fff3a6,#65df87,#5fd7ff);
-}
-
-*{box-sizing:border-box}
 body{
-margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);
-background:
-radial-gradient(circle at 10% 8%,rgba(43,125,255,.14),transparent 22%),
-radial-gradient(circle at 88% 12%,rgba(103,213,255,.10),transparent 18%),
-linear-gradient(180deg,var(--bg),var(--bg2));
-}
-
-/* FLOATING MOLECULES */
-.molecule-bg{position:fixed;inset:0;pointer-events:none;opacity:.4}
-
-/* HERO */
-.hero{
-height:72vh;
-border-radius:var(--radius);
-background:url('hero-new.jpg') center/cover no-repeat;
-margin:20px;
-position:relative;
-box-shadow:var(--shadow);
-}
-.hero img{
-position:absolute;bottom:20px;right:20px;width:320px;
-}
-
-/* ABOUT (UPDATED SMALL + PRODUCT BG) */
-.about-section{
-margin:20px;
-padding:40px 20px;
-border-radius:var(--radius);
-background:
-linear-gradient(rgba(4,8,15,.75),rgba(4,8,15,.92)),
-url('hero-new.jpg') center/cover no-repeat;
-border:1px solid rgba(255,255,255,.08);
-box-shadow:var(--shadow);
-}
-
-.about-card{
-max-width:850px;
-margin:auto;
-padding:30px;
-border-radius:22px;
-background:rgba(10,15,25,.75);
-backdrop-filter:blur(12px);
-}
-
-.about-eyebrow{
-color:#67d5ff;
-font-size:12px;
-letter-spacing:2px;
-margin-bottom:8px;
-text-transform:uppercase;
-}
-
-.about-card h2{margin:0 0 10px;font-size:30px}
-
-.about-card p{
-color:#cbd5e1;
-font-size:14px;
-margin:10px 0;
-}
-
-.about-list{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-list-style:none;
-padding:0;
-}
-
-.about-list li{
-background:rgba(0,0,0,.3);
-padding:10px;
-border-radius:12px;
-font-size:13px;
-}
-
-.about-divider{
-height:1px;
-background:linear-gradient(90deg,transparent,#67d5ff,transparent);
-margin:20px 0;
-}
-
-.about-notice{
-background:rgba(14,165,233,.1);
-padding:15px;
-border-radius:12px;
-margin-top:15px;
-}
-
-.about-tagline{
-text-align:center;
-margin-top:20px;
-color:#67d5ff;
-font-size:12px;
-letter-spacing:2px;
-}
-
-/* PRODUCTS */
-.catalog{
-margin:20px;
-padding:30px;
-border-radius:var(--radius);
-background:
-linear-gradient(rgba(4,8,15,.8),rgba(4,8,15,.95)),
-url('hero-new.jpg') center/cover no-repeat;
-border:1px solid rgba(255,255,255,.08);
-box-shadow:var(--shadow);
+  margin:0;
+  font-family:Arial;
+  background:#03060b;
+  color:white;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  padding:20px;
 }
 
 .card{
-background:rgba(7,11,20,.85);
-border:1px solid var(--line);
-border-radius:20px;
-padding:20px;
-text-align:center;
-cursor:pointer;
-transition:.2s;
+  background:#0b1420;
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+  cursor:pointer;
 }
 
-.card:hover{
-transform:translateY(-6px);
-border-color:var(--lineStrong);
+.price{color:#65df87;font-weight:bold}
+
+/* 🔥 FIXED MODAL */
+#productModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);
+  align-items:center;
+  justify-content:center;
 }
 
-.card img{
-width:140px;
-margin:auto;
-filter:drop-shadow(0 15px 20px rgba(0,0,0,.4));
+.modal-box{
+  width:90%;
+  max-width:900px;
+  background:#06101a;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
 }
 
-.price{
-color:var(--green);
-font-weight:900;
-margin:10px 0;
+.close{
+  float:right;
+  cursor:pointer;
+  font-size:20px;
 }
 
-.card button{
-width:100%;
-border:none;
-border-radius:10px;
-padding:10px;
-background:var(--btnGrad);
-font-weight:900;
-cursor:pointer;
-}
-
-/* FOOTER */
-.footer{
-text-align:center;
-padding:20px;
-font-size:12px;
-opacity:.7;
+button{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="molecule-bg" id="moleculeBg"></div>
-
-<section class="hero">
-<img src="hero-badge-v2.png">
-</section>
-
-<section id="about" class="about-section">
-<div class="about-card">
-
-<p class="about-eyebrow">About Covenant Bio Labs</p>
-
-<h2>Built on Purpose. Driven by Precision.</h2>
-
-<p class="about-lead">
-Covenant Bio Labs was founded on a simple principle:
-<strong>integrity in every compound, purpose in every decision.</strong>
-</p>
-
-<p>
-We operate at the intersection of <strong>faith, science, and discipline</strong>—providing high-quality research compounds with precision and consistency.
-</p>
-
-<ul class="about-list">
-<li>Small-batch sourcing</li>
-<li>Third-party verified purity</li>
-<li>Clean presentation</li>
-<li>Research-first approach</li>
-</ul>
-
-<div class="about-divider"></div>
-
-<h3>Our Standard</h3>
-
-<ul class="about-list">
-<li>Tested for quality</li>
-<li>Handled professionally</li>
-<li>Clear labeling</li>
-<li>Consistent results</li>
-</ul>
-
-<div class="about-notice">
-<strong>Important:</strong> Research Use Only
-</div>
-
-<p class="about-tagline">Faith • Science • Purpose</p>
-
-</div>
-</section>
-
-<section class="catalog">
 <div class="grid" id="productGrid"></div>
-</section>
-
-<div class="footer">
-© 2026 Covenant Bio Labs<br>
-Research Use Only
-  <style>
-#productModal,#coaZoomModal,#cartModal{
-/* FORCE PRODUCT DETAILS TO OPEN AS CENTER POPUP */
-#productModal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(12px) saturate(120%);
-  -webkit-backdrop-filter:blur(12px) saturate(120%);
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:auto;
-}
-
-#productModal .modal-box{
-  width:min(1180px,96vw);
-  max-height:90vh;
-  overflow:auto;
-  border-radius:28px;
-  position:relative;
-  background:
-    radial-gradient(circle at 20% 45%, rgba(103,213,255,.12), transparent 25%),
-    linear-gradient(rgba(3,8,18,.94),rgba(3,8,18,.98)),
-    url('hero-new.jpg') center/cover no-repeat;
-  border:1px solid rgba(103,213,255,.26);
-  box-shadow:
-    0 40px 100px rgba(0,0,0,.85),
-    0 0 45px rgba(103,213,255,.14);
-}
-
-#productModal .modal-panel{
-  background:rgba(3,8,18,.84);
-  border:1px solid rgba(103,213,255,.18);
-}
-
-#productModal .modal-right h2,
-#productModal .modal-price,
-#productModal .modal-panel,
-#productModal .modal-panel li{
-  text-shadow:0 2px 10px rgba(0,0,0,.85);
-}
-}
-#coaZoomModal{z-index:10001;background:rgba(0,0,0,.92)}
-#cartModal{z-index:10002;background:rgba(0,0,0,.86)}
-
-.modal-box,.cart-box{
-.modal-box{
-  width:min(1180px,100%);
-  border-radius:28px;
-  overflow:hidden;
-  position:relative;
-  background:
-    linear-gradient(rgba(3,8,18,.94),rgba(3,8,18,.98)),
-    url('hero-new.jpg') center/cover no-repeat;
-  border:1px solid rgba(103,213,255,.22);
-  box-shadow:
-    0 34px 90px rgba(0,0,0,.78),
-    0 0 35px rgba(103,213,255,.12);
-}
-.cart-box{width:min(900px,96vw);max-height:90vh;overflow:auto;padding:24px}
-
-.close{
-position:absolute;top:16px;right:16px;width:46px;height:46px;border:none;border-radius:12px;
-background:rgba(255,255,255,.08);color:#fff;font-size:24px;cursor:pointer;z-index:5;
-}
-
-.modal-content{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:28px}
-.modal-left{display:flex;justify-content:center}
-.modal-thumb{width:220px;min-height:270px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.16);overflow:hidden;position:relative}
-.modal-thumb img{max-width:220px}
-.modal-thumb-fallback{display:none;color:#bcd7ff;font-weight:700;text-align:center}
-
-.modal-right h2{margin:0 0 8px;font-size:42px;color:#fff}
-.modal-price{font-size:46px;color:#65df87;font-weight:900;margin-bottom:18px}
-
-.modal-{
-.modal-panel{
-  background:rgba(3,8,18,.82);
-  border:1px solid rgba(103,213,255,.18);
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:16px;
-  color:#eaf1fb;
-}
-}
-.modal-panel h4,.cart-box h3{margin:0 0 10px;color:#67d5ff;text-transform:uppercase;letter-spacing:1px}
-.modal-panel ul{margin:0;padding-left:18px;line-height:1.8}
-
-.modal-actions,.cart-actions{display:flex;gap:12px;flex-wrap:wrap}
-.modal-actions button,.cart-actions button{
-min-height:48px;padding:0 18px;border:none;border-radius:14px;font-weight:800;cursor:pointer;
-}
-
-.coa-btn{color:#fff;background:linear-gradient(180deg,#18376a,#112955)}
-.info-btn,.cart-primary,.order-submit{color:#07101d;background:var(--btnGrad)}
-.contact-btn,.cart-secondary,.cart-remove{color:#fff;background:#121d31;border:1px solid rgba(255,255,255,.1)}
-
-.modal-status{
-display:inline-flex;padding:10px 14px;border-radius:999px;font-size:13px;font-weight:900;
-text-transform:uppercase;margin-bottom:14px;color:#07101d;background:var(--verifiedGrad);
-}
-  .modal-right h2,
-.modal-price,
-.modal-panel,
-.modal-panel li{
-  text-shadow:0 2px 8px rgba(0,0,0,.8);
-}
-
-.coa-viewer{margin-top:18px;display:none}
-.coa-viewer.show{display:block}
-.coa-frame{background:#fff;border-radius:18px;overflow:hidden;padding:12px;min-height:220px}
-.coa-frame img{width:100%;border-radius:10px;cursor:zoom-in}
-.coa-error{display:none;color:#111;background:#fff;border-radius:10px;padding:20px;text-align:center;font-weight:700}
-.coa-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.coa-toolbar .mini{font-size:12px;color:#d1ddf0}
-.coa-toolbar button{min-height:40px;padding:0 14px;border:none;border-radius:12px;font-weight:800;background:#dff5ff;color:#07101d}
-
-.zoom-box{max-width:min(1200px,96vw);max-height:92vh;width:100%;display:flex;flex-direction:column;gap:14px}
-.zoom-topbar{display:flex;justify-content:space-between;align-items:center;color:#fff;gap:12px;flex-wrap:wrap}
-.zoom-actions{display:flex;gap:10px;flex-wrap:wrap}
-.zoom-actions button{min-height:42px;padding:0 14px;border:none;border-radius:12px;font-weight:800;background:var(--btnGrad)}
-.zoom-canvas-wrap{width:100%;max-height:calc(92vh - 76px);overflow:auto;background:#fff;border-radius:18px;padding:16px}
-.zoom-canvas-wrap img{width:100%;transform-origin:center center;transition:transform .18s ease;cursor:grab}
-
-.cart-float{
-position:fixed;right:22px;bottom:22px;z-index:9998;border:none;border-radius:999px;
-padding:14px 18px;font-weight:900;color:#07101d;background:var(--btnGrad);cursor:pointer;
-}
-.cart-count{margin-left:8px;background:#07101d;color:#67d5ff;border-radius:999px;padding:4px 8px;font-size:12px}
-.cart-item{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
-.cart-total{margin-top:18px;font-size:24px;font-weight:900;color:#65df87;text-align:right}
-.field{width:100%;min-height:46px;margin-bottom:12px;border-radius:12px;border:1px solid rgba(103,213,255,.22);background:rgba(255,255,255,.06);color:#fff;padding:12px 14px}
-textarea.field{min-height:96px}
-
-@media(max-width:920px){
-.modal-content{grid-template-columns:1fr}
-.modal-right h2{font-size:34px}
-.modal-price{font-size:38px}
-.cart-item{grid-template-columns:1fr}
-}
-  /* =========================
-   🔥 PRODUCT MODAL FIX (FULL)
-   Paste above </style> (~line 380)
-========================= */
-
-#productModal {
-  display: none;
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 99999 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  padding: 24px !important;
-  overflow-y: auto !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  background:
-    radial-gradient(circle at center, rgba(103,213,255,.10), transparent 34%),
-    rgba(0,0,0,.78) !important;
-
-  backdrop-filter: blur(14px) saturate(120%) !important;
-  -webkit-backdrop-filter: blur(14px) saturate(120%) !important;
-}
-
-/* Modal container */
-#productModal .modal-box {
-  width: min(1180px, 96vw) !important;
-  max-height: 90vh !important;
-  overflow-y: auto !important;
-  margin: auto !important;
-  border-radius: 28px !important;
-  position: relative !important;
-
-  background:
-    radial-gradient(circle at 18% 45%, rgba(103,213,255,.14), transparent 24%),
-    linear-gradient(rgba(3,8,18,.94), rgba(3,8,18,.985)),
-    url('hero-new.jpg') center/cover no-repeat !important;
-
-  border: 1px solid rgba(103,213,255,.28) !important;
-
-  box-shadow:
-    0 40px 100px rgba(0,0,0,.86),
-    0 0 45px rgba(103,213,255,.14),
-    inset 0 0 35px rgba(255,255,255,.03) !important;
-}
-
-/* Layout */
-#productModal .modal-content {
-  display: grid !important;
-  grid-template-columns: 260px 1fr !important;
-  gap: 24px !important;
-  padding: 28px !important;
-  align-items: center !important;
-}
-
-/* Panels readable */
-#productModal .modal-panel {
-  background: rgba(3,8,18,.86) !important;
-  border: 1px solid rgba(103,213,255,.18) !important;
-  box-shadow: inset 0 0 22px rgba(255,255,255,.025) !important;
-}
-
-/* Bottle glow */
-#productModal .modal-left .modal-thumb {
-  background:
-    radial-gradient(circle at center, rgba(103,213,255,.22), transparent 58%),
-    rgba(0,0,0,.25) !important;
-
-  box-shadow:
-    0 0 35px rgba(103,213,255,.12),
-    inset 0 0 28px rgba(255,255,255,.04) !important;
-}
-
-/* Bottle pop */
-#productModal .modal-left img {
-  filter:
-    drop-shadow(0 28px 32px rgba(0,0,0,.65))
-    drop-shadow(0 0 18px rgba(103,213,255,.30)) !important;
-}
-
-/* Text readability */
-#productModal .modal-right h2,
-#productModal .modal-price,
-#productModal .modal-panel,
-#productModal .modal-panel li {
-  text-shadow: 0 2px 10px rgba(0,0,0,.85) !important;
-}
-
-/* Mobile fix */
-@media(max-width:920px) {
-  #productModal .modal-content {
-    grid-template-columns: 1fr !important;
-  }
-}
-</style>
 
 <div id="productModal"></div>
 
-<button class="cart-float" type="button" onclick="openCart()">
-Cart <span class="cart-count" id="cartCount">0</span>
-</button>
-
-<div id="cartModal">
-<div class="cart-box">
-<button class="close" type="button" onclick="closeCart()">X</button>
-<h2>Order Cart</h2>
-<div class="modal-panel">
-<h3>Selected Products</h3>
-<div id="cartItems"></div>
-<div class="cart-total" id="cartTotal">Estimated Total: $0.00</div>
-<div class="cart-actions">
-<button class="cart-primary" type="button" onclick="showCartCheckout()">Submit Order Request</button>
-<button class="cart-secondary" type="button" onclick="closeCart()">Keep Shopping</button>
-</div>
-</div>
-<div id="cartCheckout"></div>
-</div>
-</div>
-
-<div id="coaZoomModal">
-<div class="zoom-box">
-<div class="zoom-topbar">
-<div>
-<div class="zoom-title" id="zoomTitle">Lab Verification Report</div>
-<div class="hint">Lab verified. Use zoom controls to inspect the report.</div>
-</div>
-<div class="zoom-actions">
-<button type="button" onclick="zoomOutCOA()">- Zoom Out</button>
-<button type="button" onclick="resetCOAZoom()">Reset</button>
-<button type="button" onclick="zoomInCOA()">+ Zoom In</button>
-<button type="button" onclick="closeCOAZoom()">Close</button>
-</div>
-</div>
-<div class="zoom-canvas-wrap" id="zoomWrap">
-<img id="zoomedCOAImage" src="" alt="COA zoomed view">
-</div>
-</div>
-</div>
-
 <script>
+
+/* PRODUCTS */
 const products=[
-{name:"Retatrutide 20mg",price:"$120",img:"retatrutide-20mg.jpg",amount:"20mg",form:"Lyophilized powder",assay:"21.67 mg",purity:"99.566%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-retatrutide-20mg-v.jpg",hasCOA:true},
-{name:"Cagrilintide 5mg",price:"$70",img:"cagrilintide-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-cagrilintide-5mg-v.jpg",hasCOA:true},
-{name:"IGF-1 LR3 1mg",price:"$75",img:"igf1-lr3-1mg.jpg",amount:"1mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-igf1-lr3-1mg-v.jpg",hasCOA:true},
-{name:"Tesamorelin 5mg",price:"$40",img:"tesamorelin-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"NAD+ 500mg",price:"$60",img:"nad-500mg.jpg",amount:"500mg",form:"Lyophilized powder",assay:"536.16 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-nad-500mg-v.jpg",hasCOA:true},
-{name:"DISP 10mg",price:"$70",img:"disp-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"MOTS-C 10mg",price:"$50",img:"mots-c-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"10.63 mg",purity:"99.009%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-mots-c-10mg-v.jpg",hasCOA:true},
-{name:"SLU-PP-332 5mg",price:"$90",img:"slu-pp-332-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"WOLVERINE",price:"$50",img:"wolverine.jpg",amount:"BPC-157 5mg + TB-500 5mg",form:"Lyophilized powder",details:"Blend presentation",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-bpc-tb500-v.jpg",hasCOA:true},
-{name:"SS-31 10mg",price:"$40",img:"ss-31-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"10.31 mg",purity:"99.694%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-ss31-10mg-v.jpg",hasCOA:true},
-{name:"Bacteriostatic Water 10mL",price:"$10",img:"bacteriostatic-water-10ml.jpg",amount:"10mL",form:"Sterile water",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"HGH Somatropin 10iu",price:"$45",img:"hgh-somatropin-10iu.jpg",amount:"10iu",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"HGH Somatropin 12iu",price:"$55",img:"hgh-somatropin-12iu.jpg",amount:"12iu",form:"Lyophilized powder",assay:"5.07 mg / 12.00 IU",purity:"96.363%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-hgh-somatropin-12iu-v.jpg",hasCOA:true},
-{name:"HGH Somatropin 15iu",price:"$65",img:"hgh-somatropin-15iu.jpg",amount:"15iu",form:"Lyophilized powder",assay:"5.77 mg / 17.31 IU",purity:"97.483%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-hgh-somatropin-15iu-v.jpg",hasCOA:true},
-{name:"MT-2 10mg",price:"$50",img:"mt-2-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"Glutathione 1500mg",price:"$50",img:"glutathione-1500mg.jpg",amount:"1500mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"Epithalon 10mg",price:"$50",img:"epithalon-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"9.81 mg",purity:"99.686%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-epithalon-10mg-v.jpg",hasCOA:true},
-{name:"KPV 10mg",price:"$50",img:"kpv-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"5 Amino Q 5mg",price:"$50",img:"5-amino-q-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"CJC + IPA",price:"$50",img:"cjc-ipa-5mg.jpg",amount:"5mg + 5mg (No DAC)",form:"Lyophilized powder",assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-cjc-ipa-5mg-v.jpg",hasCOA:true},
-{name:"Semax 10mg",price:"$50",img:"semax-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"Selank 10mg",price:"$50",img:"selank-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"11.55 mg",purity:"99.793%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-selank-10mg-v.jpg",hasCOA:true},
-{name:"GLOW",price:"$100",img:"glow.jpg",amount:"BT 10mg + BPC 10mg + CU 50mg",form:"Lyophilized powder",details:"Blend presentation",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"KLOW",price:"$120",img:"klow.jpg",amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg",form:"Lyophilized powder",details:"Blend presentation",assay:"GHK-Cu 68.55 mg / BPC-157 11.83 mg / TB-500 11.56 mg / KPV 12.78 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-klow-v.jpg",hasCOA:true}
+{name:"Retatrutide 20mg",price:"$120"},
+{name:"Cagrilintide 5mg",price:"$70"},
+{name:"IGF-1 LR3 1mg",price:"$75"},
+{name:"NAD+ 500mg",price:"$60"}
 ];
 
-let currentProduct=null,currentZoom=1,cart=[];
-const minZoom=1,maxZoom=4,grid=document.getElementById('productGrid');
+let cart=[];
+let currentProduct=null;
+
+/* GRID */
+const grid=document.getElementById('productGrid');
 
 products.forEach(p=>{
-const card=document.createElement('div');
-card.className='card';
-card.onclick=()=>openProduct(p.name);
-card.innerHTML=`<img src="${p.img}" alt="${p.name}" onerror="showImageFallback(this)"><h3>${p.name}</h3><p class="price">${p.price}</p><button type="button">View Details</button>`;
-grid.appendChild(card);
+  const card=document.createElement('div');
+  card.className='card';
+  card.innerHTML=`
+    <h3>${p.name}</h3>
+    <p class="price">${p.price}</p>
+    <button>View</button>
+  `;
+  card.onclick=()=>openProduct(p.name);
+  grid.appendChild(card);
 });
 
+/* 🔥 MODAL FIX */
 function openProduct(name){
-const p=products.find(item=>item.name===name);
-if(!p)return;
-currentProduct=p;
+  const p=products.find(x=>x.name===name);
+  currentProduct=p;
 
-const assayLine=p.assay?`<li><strong>Assay:</strong> ${p.assay}</li>`:'';
-const purityLine=p.purity?`<li><strong>Purity:</strong> ${p.purity}</li>`:'';
-const detailsLine=p.details?`<li><strong>Details:</strong> ${p.details}</li>`:'';
-const coaButtonText=p.hasCOA?'View Lab Verified COA':'COA Status';
+  const modal=document.getElementById('productModal');
 
-const coaViewer=`<div class="coa-viewer" id="coaViewer"><div class="modal-panel"><div class="coa-toolbar"><div><h4 style="margin:0;">Lab Verification Report</h4><div class="mini">${p.hasCOA?'Certificate of Analysis available. Tap the report to zoom in.':'Lab verified. COA upload pending for this product.'}</div></div>${p.hasCOA?`<button type="button" onclick="openCOAZoom()">Zoom In COA</button>`:''}</div><div class="coa-frame">${p.hasCOA?`<img id="modalCOAImage" src="${p.coaFile}" alt="${p.name} COA" onclick="openCOAZoom()" onerror="showCoaError(this)"><div class="coa-error">COA image not found. Check the filename in your repo.</div>`:`<div class="coa-error" style="display:block;">Lab Verified - COA Upload Pending.</div>`}</div></div></div>`;
+  modal.innerHTML=`
+    <div class="modal-box">
+      <div class="close" onclick="closeModal()">X</div>
+      <h2>${p.name}</h2>
+      <p>${p.price}</p>
+      <button onclick="addToCart()">Add to Cart</button>
+    </div>
+  `;
 
-const modal=document.getElementById('productModal');
-modal.style.display='flex';
-modal.innerHTML=`<div class="modal-box"><button class="close" onclick="closeModal()">X</button><div class="modal-content"><div class="modal-left"><div class="modal-thumb"><img src="${p.img}" alt="${p.name}" onerror="showModalImageFallback(this)"><div class="modal-thumb-fallback">${p.name}</div></div></div><div class="modal-right"><div class="modal-status">Lab Verified</div><h2>${p.name}</h2><div class="modal-price">${p.price}</div><div class="modal-panel"><h4>Product Information</h4><ul><li><strong>Amount:</strong> ${p.amount}</li><li><strong>Form:</strong> ${p.form}</li>${detailsLine}${assayLine}${purityLine}</ul></div><div class="modal-panel"><h4>COA Verification</h4><ul><li><strong>Status:</strong> ${p.coaStatus}</li><li><strong>Lab:</strong> ${p.lab}</li></ul></div><div class="modal-panel"><h4>Important Notice</h4><ul><li>For research use only.</li><li>Keep out of reach of children.</li></ul></div><div class="modal-actions"><button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button><button class="info-btn" type="button" onclick="addToCart(currentProduct)">Add to Cart</button><button class="contact-btn" type="button" onclick="copyContactEmail()">Contact for Info</button></div>${coaViewer}</div></div></div>`;
+  document.body.appendChild(modal);
+  modal.style.display='flex';
 }
 
-function toggleCOA(){const viewer=document.getElementById('coaViewer');if(viewer)viewer.classList.toggle('show');}
-
-function openCOAZoom(){
-if(!currentProduct||!currentProduct.hasCOA||!currentProduct.coaFile)return;
-const zoomModal=document.getElementById('coaZoomModal');
-const zoomedImage=document.getElementById('zoomedCOAImage');
-const zoomTitle=document.getElementById('zoomTitle');
-currentZoom=1;
-zoomedImage.style.transform='scale(1)';
-zoomedImage.src=currentProduct.coaFile;
-zoomTitle.textContent=`${currentProduct.name} - Lab Verification Report`;
-zoomModal.style.display='flex';
+/* CLOSE */
+function closeModal(){
+  document.getElementById('productModal').style.display='none';
 }
 
-function closeCOAZoom(){document.getElementById('coaZoomModal').style.display='none';resetCOAZoom();}
-function zoomInCOA(){currentZoom=Math.min(maxZoom,+(currentZoom+.25).toFixed(2));applyCOAZoom();}
-function zoomOutCOA(){currentZoom=Math.max(minZoom,+(currentZoom-.25).toFixed(2));applyCOAZoom();}
-function resetCOAZoom(){currentZoom=1;applyCOAZoom();}
-function applyCOAZoom(){const zoomedImage=document.getElementById('zoomedCOAImage');if(zoomedImage)zoomedImage.style.transform=`scale(${currentZoom})`;}
-
-function copyContactEmail(){
-const email='orders@covenantbiolabs.com';
-if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(email).then(()=>alert(`Copied: ${email}`)).catch(()=>alert(email));
-}else{alert(email);}
+/* CART */
+function addToCart(){
+  cart.push(currentProduct);
+  alert("Added to cart");
 }
 
-function showImageFallback(img){img.style.display='none';}
-function showModalImageFallback(img){img.style.display='none';const fallback=img.parentElement.querySelector('.modal-thumb-fallback');if(fallback)fallback.style.display='flex';}
-function showCoaError(img){img.style.display='none';const err=img.parentElement.querySelector('.coa-error');if(err)err.style.display='block';}
-function closeModal(){const modal=document.getElementById('productModal');modal.style.display='none';modal.innerHTML='';currentProduct=null;}
-function priceNumber(price){return Number(String(price).replace(/[^0-9.]/g,''))||0;}
+/* CLICK OUTSIDE */
+document.getElementById('productModal').addEventListener('click',e=>{
+  if(e.target.id==='productModal')closeModal();
+});
 
-function addToCart(product){
-if(!product)return;
-const existing=cart.find(item=>item.name===product.name);
-if(existing){existing.quantity+=1;}
-else{cart.push({name:product.name,priceText:product.price,price:priceNumber(product.price),quantity:1});}
-updateCartUI();
-closeModal();
-openCart();
-}
-
-function updateCartUI(){
-const count=document.getElementById('cartCount'),itemsDiv=document.getElementById('cartItems'),totalDiv=document.getElementById('cartTotal');
-if(!count||!itemsDiv||!totalDiv)return;
-count.textContent=cart.reduce((sum,item)=>sum+item.quantity,0);
-
-if(cart.length===0){
-itemsDiv.innerHTML='<p style="color:#dbe8fa;">Your cart is empty.</p>';
-totalDiv.textContent='Estimated Total: $0.00';
-return;
-}
-
-let total=0;
-itemsDiv.innerHTML=cart.map((item,index)=>{
-const lineTotal=item.price*item.quantity;
-total+=lineTotal;
-return `<div class="cart-item"><div><strong>${item.name}</strong><br><span>${item.priceText} each</span></div><div><button onclick="changeCartQuantity(${index},-1)">-</button> ${item.quantity} <button onclick="changeCartQuantity(${index},1)">+</button></div><div>$${lineTotal.toFixed(2)}</div><button class="cart-remove" onclick="removeCartItem(${index})">Remove</button></div>`;
-}).join('');
-totalDiv.textContent=`Estimated Total: $${total.toFixed(2)}`;
-}
-
-function changeCartQuantity(index,amount){if(!cart[index])return;cart[index].quantity+=amount;if(cart[index].quantity<=0)cart.splice(index,1);updateCartUI();renderCartCheckoutIfOpen();}
-function removeCartItem(index){cart.splice(index,1);updateCartUI();renderCartCheckoutIfOpen();}
-function openCart(){updateCartUI();document.getElementById('cartModal').style.display='flex';}
-function closeCart(){document.getElementById('cartModal').style.display='none';}
-
-function cartSummaryText(){
-if(cart.length===0)return '';
-const lines=cart.map(item=>`${item.name} | Qty: ${item.quantity} | Unit: ${item.priceText} | Line Total: $${(item.price*item.quantity).toFixed(2)}`);
-const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
-lines.push(`Estimated Total: $${total.toFixed(2)}`);
-return lines.join('\n');
-}
-
-function showCartCheckout(){renderCartCheckout();}
-function renderCartCheckoutIfOpen(){const checkout=document.getElementById('cartCheckout');if(checkout&&checkout.innerHTML.trim())renderCartCheckout();}
-
-function renderCartCheckout(){
-const checkout=document.getElementById('cartCheckout');
-if(!checkout)return;
-
-if(cart.length===0){
-checkout.innerHTML='<div class="modal-panel"><h3>Order Request</h3><p style="color:#dbe8fa;">Add at least one product before submitting an order request.</p></div>';
-return;
-}
-
-const summary=cartSummaryText().replace(/"/g,'&quot;');
-
-checkout.innerHTML=`<div class="modal-panel"><h3>Order Request</h3><form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST"><input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry"><input type="hidden" name="_template" value="table"><input type="hidden" name="Order Summary" value="${summary}"><textarea class="field" name="Products Requested" readonly>${cartSummaryText()}</textarea><input class="field" name="First Name" placeholder="First Name" required><input class="field" name="Last Name" placeholder="Last Name" required><input class="field" name="Email" type="email" placeholder="Email Address" required><input class="field" name="Phone Number" placeholder="Phone Number" required><textarea class="field" name="Shipping Address" placeholder="Shipping Address" required></textarea><button class="order-submit" type="submit">Submit Order Request</button></form></div>`;
-}
-
-document.getElementById('productModal').addEventListener('click',e=>{if(e.target.id==='productModal')closeModal();});
-document.getElementById('coaZoomModal').addEventListener('click',e=>{if(e.target.id==='coaZoomModal')closeCOAZoom();});
-document.getElementById('cartModal').addEventListener('click',e=>{if(e.target.id==='cartModal')closeCart();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCOAZoom();closeCart();closeModal();}});
-
-function makeMolecule(top,left,scale,duration,delay){
-return `<div style="position:absolute;top:${top}%;left:${left}%;width:${90*scale}px;height:${40*scale}px;animation:floatDrift ${duration}s linear infinite;animation-delay:${delay}s;"><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#67d5ff;box-shadow:0 0 14px #67d5ff;"></div><div style="position:absolute;left:35px;top:15px;width:9px;height:9px;border-radius:50%;background:#67d5ff;box-shadow:0 0 14px #67d5ff;"></div><div style="position:absolute;left:70px;top:0;width:9px;height:9px;border-radius:50%;background:#67d5ff;box-shadow:0 0 14px #67d5ff;"></div></div>`;
-}
-
-document.getElementById('moleculeBg').innerHTML=
-makeMolecule(6,4,1.15,22,0)+
-makeMolecule(12,80,1.35,28,-3)+
-makeMolecule(24,56,.90,20,-6)+
-makeMolecule(38,12,1,24,-2)+
-makeMolecule(52,84,1.22,26,-8)+
-makeMolecule(68,8,.92,19,-4)+
-makeMolecule(74,52,1.05,22,-5)+
-makeMolecule(84,88,.82,17,-7);
-
-updateCartUI();
 </script>
+
 </body>
 </html>
-</div>

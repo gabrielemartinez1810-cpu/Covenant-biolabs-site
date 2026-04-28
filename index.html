@@ -241,16 +241,36 @@ We operate at the intersection of <strong>faith, science, and discipline</strong
 Research Use Only
   <style>
 #productModal,#coaZoomModal,#cartModal{
-display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);
-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;overflow:auto;
+#productModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  overflow:auto;
+}
 }
 #coaZoomModal{z-index:10001;background:rgba(0,0,0,.92)}
 #cartModal{z-index:10002;background:rgba(0,0,0,.86)}
 
 .modal-box,.cart-box{
-width:min(1180px,100%);border-radius:28px;overflow:hidden;position:relative;
-background:linear-gradient(rgba(4,8,15,.9),rgba(4,8,15,.96)),url('hero-new.jpg') center/cover no-repeat;
-border:1px solid rgba(255,255,255,.1);box-shadow:0 34px 80px rgba(0,0,0,.56);
+.modal-box{
+  width:min(1180px,100%);
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  background:
+    linear-gradient(rgba(3,8,18,.94),rgba(3,8,18,.98)),
+    url('hero-new.jpg') center/cover no-repeat;
+  border:1px solid rgba(103,213,255,.22);
+  box-shadow:
+    0 34px 90px rgba(0,0,0,.78),
+    0 0 35px rgba(103,213,255,.12);
 }
 .cart-box{width:min(900px,96vw);max-height:90vh;overflow:auto;padding:24px}
 
@@ -268,9 +288,15 @@ background:rgba(255,255,255,.08);color:#fff;font-size:24px;cursor:pointer;z-inde
 .modal-right h2{margin:0 0 8px;font-size:42px;color:#fff}
 .modal-price{font-size:46px;color:#65df87;font-weight:900;margin-bottom:18px}
 
+.modal-{
 .modal-panel{
-background:rgba(8,12,22,.65);border:1px solid rgba(255,255,255,.08);
-border-radius:18px;padding:18px;margin-bottom:16px;color:#eaf1fb;
+  background:rgba(3,8,18,.82);
+  border:1px solid rgba(103,213,255,.18);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+  color:#eaf1fb;
+}
 }
 .modal-panel h4,.cart-box h3{margin:0 0 10px;color:#67d5ff;text-transform:uppercase;letter-spacing:1px}
 .modal-panel ul{margin:0;padding-left:18px;line-height:1.8}
@@ -287,6 +313,12 @@ min-height:48px;padding:0 18px;border:none;border-radius:14px;font-weight:800;cu
 .modal-status{
 display:inline-flex;padding:10px 14px;border-radius:999px;font-size:13px;font-weight:900;
 text-transform:uppercase;margin-bottom:14px;color:#07101d;background:var(--verifiedGrad);
+}
+  .modal-right h2,
+.modal-price,
+.modal-panel,
+.modal-panel li{
+  text-shadow:0 2px 8px rgba(0,0,0,.8);
 }
 
 .coa-viewer{margin-top:18px;display:none}

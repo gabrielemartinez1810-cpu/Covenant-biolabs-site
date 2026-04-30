@@ -468,13 +468,6 @@ textarea.field{min-height:96px;resize:vertical}
   <div class="preview-row" id="previewRow"></div>
 </section>
 
-<section id="shop" class="catalog">
-  <div class="catalog-inner">
-    <p class="sub">Research Use Only</p>
-    <div class="grid" id="productGrid"></div>
-  </div>
-</section>
-
 <section id="calculator" class="about-section">
   <div class="about-card">
     <p class="eyebrow">Peptide Calculator</p>
@@ -563,12 +556,7 @@ function renderProductCard(product, preview=false){
 }
 
 products.forEach(product => {
-  grid.appendChild(renderProductCard(product, false));
-});
-
-["Retatrutide 20mg","NAD+ 500mg","MT-2 10mg","GLOW 70mg"].forEach(name => {
-  const product = products.find(item => item.name === name);
-  if(product) previewRow.appendChild(renderProductCard(product, true));
+  previewRow.appendChild(renderProductCard(product, true));
 });
 
 function openProduct(name){

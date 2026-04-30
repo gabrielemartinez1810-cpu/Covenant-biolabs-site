@@ -271,7 +271,35 @@ strong{color:#fff}
 .shop-intro h2{margin:0 0 16px;font-size:clamp(2rem,4vw,3rem);color:#fff}
 .shop-intro p{color:#cbd5e1;line-height:1.6;margin:0 0 22px}
 .shop-btn{width:max-content;min-height:50px;border:none;border-radius:12px;padding:0 22px;background:linear-gradient(180deg,#3a8bff,#1d6eff);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 16px 30px rgba(43,125,255,.25)}
-.preview-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:stretch}
+.preview-row{
+  display:flex;
+  gap:18px;
+  align-items:stretch;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  padding:6px 6px 18px;
+  -webkit-overflow-scrolling:touch;
+}
+
+.preview-row::-webkit-scrollbar{
+  height:8px;
+}
+
+.preview-row::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.06);
+  border-radius:999px;
+}
+
+.preview-row::-webkit-scrollbar-thumb{
+  background:linear-gradient(90deg,#2b7dff,#67d5ff);
+  border-radius:999px;
+}
+
+.preview-card{
+  min-width:205px;
+  scroll-snap-align:start;
+}
 .preview-card{position:relative;border:1px solid rgba(103,213,255,.22);border-radius:18px;background:rgba(7,13,27,.78);padding:18px;text-align:center;overflow:hidden;cursor:pointer;transition:.24s ease}
 .preview-card:hover{transform:translateY(-5px);border-color:var(--lineStrong);box-shadow:0 22px 45px rgba(0,0,0,.42),0 0 24px rgba(103,213,255,.12)}
 .preview-card img{width:145px;height:170px;object-fit:contain;margin:0 auto 12px;filter:drop-shadow(0 18px 20px rgba(0,0,0,.45))}

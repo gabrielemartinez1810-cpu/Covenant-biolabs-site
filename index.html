@@ -955,7 +955,52 @@ function addToCart(product){
       quantity:1
     });
   }
+// CALCULATOR LOGIC
+let syringe = 30;
+let vial = 5;
+let water = 2;
+let dose = 50;
 
+function setActive(btn){
+  btn.parentElement.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+function setSyringe(val,el){
+  syringe = val;
+  document.querySelectorAll(".calc-card").forEach(c=>c.classList.remove("active"));
+  el.classList.add("active");
+  updateCalc();
+}
+
+function setVial(val,el){
+  vial = val;
+  setActive(el);
+  updateCalc();
+}
+
+function setWater(val,el){
+  water = val;
+  setActive(el);
+  updateCalc();
+}
+
+function setDose(val,el){
+  dose = val;
+  setActive(el);
+  updateCalc();
+}
+
+function updateCalc(){
+  const totalMcg = vial * 1000;
+  const concentration = totalMcg / water;
+  const units = (dose / concentration) * syringe;
+
+  document.getElementById("calcResult").innerHTML =
+    `To have a dose of <strong>${dose} mcg</strong>, pull the syringe to <strong>${units.toFixed(1)}</strong>`;
+}
+
+updateCalc();
   updateCartUI();
   closeModal();
   openCart();

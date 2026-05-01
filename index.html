@@ -594,7 +594,7 @@ textarea.field{min-height:96px;resize:vertical}
   <div class="preview-row" id="previewRow"></div>
 </section>
 
-<<section id="calculator" class="calculator-section">
+<section id="calculator" class="calculator-section">
   <h2 class="calc-title">Peptide Calculator</h2>
 
   <div class="calc-box">
@@ -950,7 +950,8 @@ function addToCart(product){
       priceText:product.price,
       price:priceNumber(product.price),
       quantity:1
-    });
+    });updateCartUI();
+}
   }
 // CALCULATOR LOGIC
 let syringe = 30;

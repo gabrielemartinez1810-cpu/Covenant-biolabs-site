@@ -375,7 +375,105 @@ strong{color:#fff}
 textarea.field{min-height:96px;resize:vertical}
 .field::placeholder{color:rgba(234,241,255,.62)}
 .order-submit{width:100%;min-height:54px;border:none;border-radius:14px;font-weight:900;letter-spacing:.6px;font-size:15px;cursor:pointer;background:var(--btnGrad);color:#07101d}
+/* CALCULATOR STYLES */
+.calculator-section{
+  padding:60px 20px;
+}
 
+.calc-title{
+  text-align:center;
+  font-size:48px;
+  margin-bottom:30px;
+  color:#fff;
+}
+
+.calc-box{
+  max-width:1200px;
+  margin:0 auto;
+  background:rgba(7,13,27,.85);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:30px;
+}
+
+.calc-left{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.calc-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:16px;
+  padding:20px;
+  background:rgba(255,255,255,.03);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.calc-card.active{
+  border-color:#67d5ff;
+  box-shadow:0 0 15px rgba(103,213,255,.25);
+}
+
+.calc-card img{
+  height:42px;
+}
+
+.calc-right{
+  margin-top:30px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.calc-panel{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  padding:20px;
+  background:rgba(255,255,255,.02);
+}
+
+.calc-panel img{
+  height:80px;
+}
+
+.calc-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.calc-buttons button{
+  padding:10px 16px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.2);
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.calc-buttons button.active{
+  border-color:#67d5ff;
+  box-shadow:0 0 10px rgba(103,213,255,.25);
+}
+
+.calc-result{
+  margin-top:30px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  text-align:center;
+  font-size:18px;
+}
+@media(max-width:1100px){
 @media(max-width:1100px){
   .shop-preview{grid-template-columns:1fr}
   .preview-row{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -496,11 +594,74 @@ textarea.field{min-height:96px;resize:vertical}
   <div class="preview-row" id="previewRow"></div>
 </section>
 
-<section id="calculator" class="about-section">
-  <div class="about-card">
-    <p class="eyebrow">Peptide Calculator</p>
-    <h2>Calculator Coming Soon</h2>
-    <p>This area is reserved for your peptide calculator tool.</p>
+<section id="calculator" class="calculator-section">
+  <h2 class="calc-title">Peptide Calculator</h2>
+
+  <div class="calc-box">
+    <div class="calc-left">
+      <h3>What is the total volume of your syringe?</h3>
+
+      <button class="calc-card active" onclick="setSyringe(30, this)">
+        <span>0.3 ml</span>
+        <img src="syringe-03ml.png" alt="0.3 ml syringe">
+      </button>
+
+      <button class="calc-card" onclick="setSyringe(50, this)">
+        <span>0.5 ml</span>
+        <img src="syringe-05ml.png" alt="0.5 ml syringe">
+      </button>
+
+      <button class="calc-card" onclick="setSyringe(100, this)">
+        <span>1.0 ml</span>
+        <img src="syringe-10ml.png" alt="1.0 ml syringe">
+      </button>
+    </div>
+
+    <div class="calc-right">
+      <div class="calc-panel">
+        <img src="retatrutide-20mg.jpg" alt="Peptide vial">
+        <div>
+          <h3>Select peptide vial quantity</h3>
+          <div class="calc-buttons">
+            <button class="active" onclick="setVial(5, this)">5 mg</button>
+            <button onclick="setVial(10, this)">10 mg</button>
+            <button onclick="setVial(15, this)">15 mg</button>
+            <button onclick="setCustom('vial')">Other</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-panel">
+        <img src="bacteriostatic-water-10ml.jpg" alt="Bacteriostatic water">
+        <div>
+          <h3>How much bacteriostatic water are you adding?</h3>
+          <div class="calc-buttons">
+            <button onclick="setWater(1, this)">1 ml</button>
+            <button class="active" onclick="setWater(2, this)">2 ml</button>
+            <button onclick="setWater(5, this)">5 ml</button>
+            <button onclick="setCustom('water')">Other</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-dose">
+        <h3>How much of the peptide do you want in each dose?</h3>
+        <div class="calc-buttons">
+          <button class="active" onclick="setDose(50, this)">50 mcg</button>
+          <button onclick="setDose(100, this)">100 mcg</button>
+          <button onclick="setDose(250, this)">250 mcg</button>
+          <button onclick="setDose(500, this)">500 mcg</button>
+          <button onclick="setCustom('dose')">Other</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-result">
+      <p id="calcResult">To have a dose of <strong>50 mcg</strong>, pull the syringe to <strong>2.0</strong></p>
+      <div class="unit-scale" id="unitScale"></div>
+    </div>
+  </div>
+</section>
   </div>
 </section>
 

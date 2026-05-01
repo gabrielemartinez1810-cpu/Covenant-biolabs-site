@@ -594,24 +594,24 @@ textarea.field{min-height:96px;resize:vertical}
   <div class="preview-row" id="previewRow"></div>
 </section>
 
-<section id="calculator" class="calculator-section">
+<<section id="calculator" class="calculator-section">
   <h2 class="calc-title">Peptide Calculator</h2>
 
   <div class="calc-box">
     <div class="calc-left">
       <h3>What is the total volume of your syringe?</h3>
 
-      <button class="calc-card active" onclick="setSyringe(30, this)">
+      <button class="calc-card active" type="button" onclick="setSyringe(30, this)">
         <span>0.3 ml</span>
         <img src="syringe-03ml.png" alt="0.3 ml syringe">
       </button>
 
-      <button class="calc-card" onclick="setSyringe(50, this)">
+      <button class="calc-card" type="button" onclick="setSyringe(50, this)">
         <span>0.5 ml</span>
         <img src="syringe-05ml.png" alt="0.5 ml syringe">
       </button>
 
-      <button class="calc-card" onclick="setSyringe(100, this)">
+      <button class="calc-card" type="button" onclick="setSyringe(100, this)">
         <span>1.0 ml</span>
         <img src="syringe-10ml.png" alt="1.0 ml syringe">
       </button>
@@ -623,10 +623,10 @@ textarea.field{min-height:96px;resize:vertical}
         <div>
           <h3>Select peptide vial quantity</h3>
           <div class="calc-buttons">
-            <button class="active" onclick="setVial(5, this)">5 mg</button>
-            <button onclick="setVial(10, this)">10 mg</button>
-            <button onclick="setVial(15, this)">15 mg</button>
-            <button onclick="setCustom('vial')">Other</button>
+            <button class="active" type="button" onclick="setVial(5, this)">5 mg</button>
+            <button type="button" onclick="setVial(10, this)">10 mg</button>
+            <button type="button" onclick="setVial(15, this)">15 mg</button>
+            <button type="button" onclick="setCustom('vial')">Other</button>
           </div>
         </div>
       </div>
@@ -636,10 +636,10 @@ textarea.field{min-height:96px;resize:vertical}
         <div>
           <h3>How much bacteriostatic water are you adding?</h3>
           <div class="calc-buttons">
-            <button onclick="setWater(1, this)">1 ml</button>
-            <button class="active" onclick="setWater(2, this)">2 ml</button>
-            <button onclick="setWater(5, this)">5 ml</button>
-            <button onclick="setCustom('water')">Other</button>
+            <button type="button" onclick="setWater(1, this)">1 ml</button>
+            <button class="active" type="button" onclick="setWater(2, this)">2 ml</button>
+            <button type="button" onclick="setWater(5, this)">5 ml</button>
+            <button type="button" onclick="setCustom('water')">Other</button>
           </div>
         </div>
       </div>
@@ -647,21 +647,18 @@ textarea.field{min-height:96px;resize:vertical}
       <div class="calc-dose">
         <h3>How much of the peptide do you want in each dose?</h3>
         <div class="calc-buttons">
-          <button class="active" onclick="setDose(50, this)">50 mcg</button>
-          <button onclick="setDose(100, this)">100 mcg</button>
-          <button onclick="setDose(250, this)">250 mcg</button>
-          <button onclick="setDose(500, this)">500 mcg</button>
-          <button onclick="setCustom('dose')">Other</button>
+          <button class="active" type="button" onclick="setDose(50, this)">50 mcg</button>
+          <button type="button" onclick="setDose(100, this)">100 mcg</button>
+          <button type="button" onclick="setDose(250, this)">250 mcg</button>
+          <button type="button" onclick="setDose(500, this)">500 mcg</button>
+          <button type="button" onclick="setCustom('dose')">Other</button>
         </div>
       </div>
     </div>
 
-    <div class="calc-result">
-      <p id="calcResult">To have a dose of <strong>50 mcg</strong>, pull the syringe to <strong>2.0</strong></p>
-      <div class="unit-scale" id="unitScale"></div>
+    <div id="calcResult" class="calc-result">
+      To have a dose of <strong>50 mcg</strong>, pull the syringe to <strong>0.6</strong>
     </div>
-  </div>
-</section>
   </div>
 </section>
 
@@ -962,49 +959,63 @@ let water = 2;
 let dose = 50;
 
 function setActive(btn){
-  btn.parentElement.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+  if(!btn) return;
+  btn.parentElement.querySelectorAll("button").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
 }
 
-function setSyringe(val,el){
+window.setSyringe = function(val, el){
   syringe = val;
-  document.querySelectorAll(".calc-card").forEach(c=>c.classList.remove("active"));
+  document.querySelectorAll(".calc-card").forEach(c => c.classList.remove("active"));
   el.classList.add("active");
   updateCalc();
 }
 
-function setVial(val,el){
+window.setVial = function(val, el){
   vial = val;
   setActive(el);
   updateCalc();
 }
 
-function setWater(val,el){
+window.setWater = function(val, el){
   water = val;
   setActive(el);
   updateCalc();
 }
 
-function setDose(val,el){
+window.setDose = function(val, el){
   dose = val;
   setActive(el);
   updateCalc();
 }
 
+window.setCustom = function(type){
+  const value = prompt("Enter custom value:");
+  if(!value) return;
+
+  const num = Number(value);
+  if(!num || num <= 0) return alert("Please enter a valid number.");
+
+  if(type === "vial") vial = num;
+  if(type === "water") water = num;
+  if(type === "dose") dose = num;
+
+  updateCalc();
+}
+
 function updateCalc(){
+  const result = document.getElementById("calcResult");
+  if(!result) return;
+
   const totalMcg = vial * 1000;
   const concentration = totalMcg / water;
   const units = (dose / concentration) * syringe;
 
-  document.getElementById("calcResult").innerHTML =
+  result.innerHTML =
     `To have a dose of <strong>${dose} mcg</strong>, pull the syringe to <strong>${units.toFixed(1)}</strong>`;
 }
 
 updateCalc();
-  updateCartUI();
-  closeModal();
-  openCart();
-}
 
 function updateCartUI(){
   const count = document.getElementById("cartCount");

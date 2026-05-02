@@ -596,71 +596,40 @@ textarea.field{min-height:96px;resize:vertical}
 
 <section id="calculator" class="calculator-section">
   <h2 class="calc-title">Peptide Calculator</h2>
+  <p class="calc-subtitle">Research-use calculator for estimating syringe pull volume based on vial amount, bacteriostatic water volume, and selected research amount.</p>
 
   <div class="calc-box">
-    <div class="calc-left">
-      <h3>What is the total volume of your syringe?</h3>
-
-      <button class="calc-card active" type="button" onclick="setSyringe(30, this)">
-        <span>0.3 ml</span>
-        <img src="syringe-03ml.png" alt="0.3 ml syringe">
-      </button>
-
-      <button class="calc-card" type="button" onclick="setSyringe(50, this)">
-        <span>0.5 ml</span>
-        <img src="syringe-05ml.png" alt="0.5 ml syringe">
-      </button>
-
-      <button class="calc-card" type="button" onclick="setSyringe(100, this)">
-        <span>1.0 ml</span>
-        <img src="syringe-10ml.png" alt="1.0 ml syringe">
-      </button>
-    </div>
-
-    <div class="calc-right">
-      <div class="calc-panel">
-        <img src="retatrutide-20mg.jpg" alt="Peptide vial">
-        <div>
-          <h3>Select peptide vial quantity</h3>
-          <div class="calc-buttons">
-            <button class="active" type="button" onclick="setVial(5, this)">5 mg</button>
-            <button type="button" onclick="setVial(10, this)">10 mg</button>
-            <button type="button" onclick="setVial(15, this)">15 mg</button>
-            <button type="button" onclick="setCustom('vial')">Other</button>
-          </div>
-        </div>
-      </div>
+    <div class="calc-grid">
 
       <div class="calc-panel">
-        <img src="bacteriostatic-water-10ml.jpg" alt="Bacteriostatic water">
-        <div>
-          <h3>How much bacteriostatic water are you adding?</h3>
-          <div class="calc-buttons">
-            <button type="button" onclick="setWater(1, this)">1 ml</button>
-            <button class="active" type="button" onclick="setWater(2, this)">2 ml</button>
-            <button type="button" onclick="setWater(5, this)">5 ml</button>
-            <button type="button" onclick="setCustom('water')">Other</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="calc-dose">
-        <h3>How much of the peptide do you want in each dose?</h3>
+        <h3>Syringe Size</h3>
         <div class="calc-buttons">
-          <button class="active" type="button" onclick="setDose(50, this)">50 mcg</button>
-          <button type="button" onclick="setDose(100, this)">100 mcg</button>
-          <button type="button" onclick="setDose(250, this)">250 mcg</button>
-          <button type="button" onclick="setDose(500, this)">500 mcg</button>
-          <button type="button" onclick="setCustom('dose')">Other</button>
+          <button class="active" type="button" onclick="setSyringe(30,this)">0.3 mL</button>
+          <button type="button" onclick="setSyringe(50,this)">0.5 mL</button>
+          <button type="button" onclick="setSyringe(100,this)">1.0 mL</button>
         </div>
       </div>
-    </div>
 
-    <div id="calcResult" class="calc-result">
-      To have a dose of <strong>50 mcg</strong>, pull the syringe to <strong>0.6</strong>
-    </div>
-  </div>
-</section>
+      <div class="calc-panel">
+        <h3>Peptide Vial Quantity</h3>
+        <div class="calc-buttons">
+          <button class="active" type="button" onclick="setVial(5,this)">5 mg</button>
+          <button type="button" onclick="setVial(10,this)">10 mg</button>
+          <button type="button" onclick="setVial(15,this)">15 mg</button>
+          <button type="button" onclick="setVial(20,this)">20 mg</button>
+        </div>
+        <input class="calc-field" id="customVial" type="number" min="0" step="0.1" placeholder="Custom vial mg" oninput="setCustomInput('vial',this.value)">
+      </div>
+
+      <div class="calc-panel">
+        <h3>Bacteriostatic Water Added</h3>
+        <div class="calc-buttons">
+          <button type="button" onclick="setWater(1,this)">1 mL</button>
+          <button class="active" type="button" onclick="setWater(2,this)">2 mL</button>
+          <button type="button" onclick="setWater(3,this)">3 mL</button>
+          <button type="button" onclick="setWater(5,this)">5 mL</button>
+        </div>
+        <input class="calc-field" id="customWater" type="number" min="0" step="0.1" placeholder="Custom water mL" oninput="setCustomInput('water',this.value)">
 
 <section id="contact" class="about-section">
   <div class="about-card">

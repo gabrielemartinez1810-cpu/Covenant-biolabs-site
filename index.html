@@ -94,59 +94,29 @@ button,input,textarea{font:inherit}
 
 section{border-radius:var(--radius);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}
 
-.hero{
-  min-height:470px;
-  position:relative;
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  background:
-    linear-gradient(90deg,rgba(4,8,15,.14),rgba(4,8,15,.82)),
-    url('hero-glossy-ribbon.jpg') center/cover no-repeat;
-}
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    linear-gradient(115deg,transparent 35%,rgba(255,255,255,.10) 49%,transparent 63%);
-  animation:heroShine 7s ease-in-out infinite;
-}
-@keyframes heroShine{
-  0%,55%{transform:translateX(-45%) rotate(8deg);opacity:0}
-  70%{opacity:.65}
-  100%{transform:translateX(45%) rotate(8deg);opacity:0}
-}
-.hero-left{min-height:470px}
-.hero-right{
+</section>.hero{
+  min-height:auto;
+  padding:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:42px;
-  background:linear-gradient(90deg,rgba(3,8,18,.05),rgba(3,8,18,.70));
-  position:relative;
-  z-index:2;
-}
-.hero-logo{
-  width:min(520px,100%);
-  border-radius:20px;
-  filter:drop-shadow(0 20px 36px rgba(0,0,0,.65)) drop-shadow(0 0 30px rgba(43,125,255,.20));
+  background:linear-gradient(180deg,rgba(4,8,15,.72),rgba(4,8,15,.92));
 }
 
-.about-section{
-  padding:54px 22px;
-  background:linear-gradient(rgba(4,8,15,.68),rgba(4,8,15,.90)),url('hero-new.jpg') center/cover no-repeat;
+.hero-inner{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.about-card{
-  max-width:1180px;
-  margin:0 auto;
-  padding:38px;
+
+.hero-badge{
+  width:100%;
+  max-width:1320px;
   border-radius:24px;
-  border:1px solid rgba(103,213,255,.22);
-  background:rgba(7,13,27,.78);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  box-shadow:0 0 36px rgba(103,213,255,.08);
+  display:block;
+  box-shadow:0 0 38px rgba(43,125,255,.20);
+}
 }
 .eyebrow{margin:0 0 12px;color:#dbe8fa;font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:900;opacity:.88}
 .about-card h1,.about-card h2{margin:0 0 18px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.05;color:#fff}
@@ -817,9 +787,8 @@ textarea.field{min-height:96px;resize:vertical}
 </header>
 
 <section id="home" class="hero">
-  <div class="hero-left"></div>
-  <div class="hero-right">
-    <img class="hero-logo" src="hero-badge-v2.png" alt="Covenant Bio Labs">
+  <div class="hero-inner">
+    <img class="hero-badge" src="hero-banner.jpg" alt="Covenant Bio Labs">
   </div>
 </section>
 

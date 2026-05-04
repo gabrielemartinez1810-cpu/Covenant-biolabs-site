@@ -1473,12 +1473,111 @@ function renderCartCheckout(){
         <input class="field" name="Phone Number" placeholder="Phone Number" required>
         <textarea class="field" name="Shipping Address" placeholder="Shipping Address" required></textarea>
 
+        <div style="
+          margin:18px 0 16px;
+          padding:18px;
+          border-radius:18px;
+          border:1px solid rgba(103,213,255,.24);
+          background:rgba(3,8,18,.82);
+          box-shadow:0 0 28px rgba(103,213,255,.10);
+        ">
+          <h3 style="
+            margin:0 0 10px;
+            color:#67d5ff;
+            font-size:20px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+          ">Payment</h3>
+
+          <p style="
+            margin:0 0 14px;
+            color:#dbe8fa;
+            line-height:1.5;
+            font-size:14px;
+          ">
+            Choose Cash App or Venmo, then submit your order request.
+            Please include your first and last name in the payment note.
+          </p>
+
+          <label style="
+            display:block;
+            margin-bottom:10px;
+            padding:13px 14px;
+            border-radius:14px;
+            border:1px solid rgba(103,213,255,.22);
+            background:rgba(255,255,255,.05);
+            color:#fff;
+            font-weight:900;
+          ">
+            <input type="radio" name="Payment Method" value="Cash App" checked>
+            Cash App
+          </label>
+
+          <label style="
+            display:block;
+            margin-bottom:14px;
+            padding:13px 14px;
+            border-radius:14px;
+            border:1px solid rgba(103,213,255,.22);
+            background:rgba(255,255,255,.05);
+            color:#fff;
+            font-weight:900;
+          ">
+            <input type="radio" name="Payment Method" value="Venmo">
+            Venmo
+          </label>
+
+          <div style="
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+          ">
+            <a href="https://cash.app/$CovBioLabs" target="_blank" style="
+              flex:1;
+              min-height:44px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              border-radius:14px;
+              text-decoration:none;
+              color:#07101d;
+              background:var(--btnGrad);
+              font-weight:900;
+            ">
+              Pay Cash App
+            </a>
+
+            <a href="https://venmo.com/u/CovBioLabs" target="_blank" style="
+              flex:1;
+              min-height:44px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              border-radius:14px;
+              text-decoration:none;
+              color:#07101d;
+              background:var(--btnGrad);
+              font-weight:900;
+            ">
+              Pay Venmo
+            </a>
+          </div>
+
+          <div style="
+            margin-top:12px;
+            color:#67d5ff;
+            font-size:13px;
+            font-weight:800;
+          ">
+            Payment note: First and last name from your order
+          </div>
+        </div>
+
         <button class="order-submit" type="submit">Submit Order Request</button>
       </form>
     </div>
   `;
 }
-
 /* PEPTIDE CALCULATOR LOGIC */
 let currentDose = 0;
 

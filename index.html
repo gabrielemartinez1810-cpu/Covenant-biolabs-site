@@ -853,6 +853,167 @@ textarea.field{min-height:96px;resize:vertical}
   .cart-float{right:14px;bottom:14px}
   .modal-actions,.cart-actions{flex-direction:column}
   .modal-actions button,.cart-actions button{width:100%}
+}/* ==============================
+   LEGAL CENTER SECTION
+============================== */
+
+.legal-section {
+  padding: 64px 28px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(103,213,255,.12), transparent 28%),
+    radial-gradient(circle at 86% 20%, rgba(43,125,255,.12), transparent 30%),
+    linear-gradient(180deg, rgba(3,8,18,.92), rgba(3,8,18,.98));
+  border: 1px solid rgba(103,213,255,.18);
+}
+
+.legal-shell {
+  width: min(1180px, 96%);
+  margin: 0 auto;
+}
+
+.legal-head {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.legal-head .eyebrow {
+  margin-bottom: 12px;
+}
+
+.legal-head h2 {
+  margin: 0 0 14px;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 34px rgba(103,213,255,.18);
+}
+
+.legal-head p {
+  max-width: 780px;
+  margin: 0 auto;
+  color: #d7e2f3;
+  line-height: 1.7;
+}
+
+.legal-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 28px 0 34px;
+}
+
+.legal-nav a {
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #07101d;
+  background: var(--btnGrad);
+  text-decoration: none;
+  font-weight: 900;
+  box-shadow: 0 10px 22px rgba(47,213,255,.14);
+}
+
+.legal-card {
+  margin-bottom: 24px;
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(103,213,255,.22);
+  background:
+    radial-gradient(circle at top right, rgba(103,213,255,.09), transparent 34%),
+    rgba(7,13,27,.72);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.38),
+    inset 0 0 28px rgba(255,255,255,.025);
+}
+
+.legal-card h3 {
+  margin: 0 0 8px;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  color: #67d5ff;
+}
+
+.legal-effective {
+  margin: 0 0 24px;
+  color: rgba(234,241,255,.68);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.legal-block {
+  margin: 0 0 24px;
+}
+
+.legal-block:last-child {
+  margin-bottom: 0;
+}
+
+.legal-block h4 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.legal-block p {
+  margin: 0 0 10px;
+  color: #d7e2f3;
+  line-height: 1.65;
+}
+
+.legal-block ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #d7e2f3;
+  line-height: 1.65;
+}
+
+.legal-block li {
+  margin-bottom: 6px;
+}
+
+.legal-notice {
+  margin-top: 26px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(101,223,135,.26);
+  background: rgba(101,223,135,.08);
+  color: #eaf1ff;
+  line-height: 1.6;
+}
+
+.legal-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 26px 0 0;
+}
+
+.legal-footer-links a {
+  color: #67d5ff;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.legal-footer-links a:hover {
+  color: #fff;
+}
+
+@media(max-width:700px){
+  .legal-section {
+    padding: 44px 18px;
+  }
+
+  .legal-card {
+    padding: 22px 18px;
+  }
+
+  .legal-nav a {
+    width: 100%;
+  }
 }
 </style>
 </head>
@@ -862,12 +1023,13 @@ textarea.field{min-height:96px;resize:vertical}
 <div class="wrap">
 <header class="topbar">
   <a href="#home" class="brand"><img src="hero-badge-v2.png" alt="Covenant Bio Labs"></a>
-  <nav class="nav">
-    <a href="#home" class="active">Home</a>
-    <a href="#shop">Shop</a>
-    <a href="#contact">Contact</a>
-    <a href="#calculator">Peptide Calculator</a>
-  </nav>
+<nav class="nav">
+  <a href="#home" class="active">Home</a>
+  <a href="#shop">Shop</a>
+  <a href="#contact">Contact</a>
+  <a href="#calculator">Peptide Calculator</a>
+  <a href="#legal">Legal</a>
+</nav>
   <button class="cart-nav" type="button" onclick="openCart()">Cart <span class="cart-count" id="cartCount">0</span></button>
 </header>
 
@@ -1057,7 +1219,360 @@ textarea.field{min-height:96px;resize:vertical}
     <p>For product questions or order support, contact us at <strong>orders@covenantbiolabs.com</strong>.</p>
   </div>
 </section>
+</section>
 
+<section id="legal" class="legal-section">
+  <div class="legal-shell">
+
+    <div class="legal-head">
+      <p class="eyebrow">Legal & Compliance</p>
+      <h2>Policies & Terms</h2>
+      <p>
+        Covenant Bio Labs operates with clear research-use standards, responsible order review,
+        and transparent customer policies.
+      </p>
+
+      <div class="legal-nav">
+        <a href="#terms">Terms & Conditions</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#shipping">Shipping Policy</a>
+      </div>
+    </div>
+
+    <div class="legal-card" id="terms">
+      <h3>Terms & Conditions</h3>
+      <p class="legal-effective">Effective Date: May 4, 2026</p>
+
+      <div class="legal-block">
+        <h4>1. Acceptance of Terms</h4>
+        <p>
+          By accessing, browsing, creating a customer profile, submitting an order request, or purchasing
+          from Covenant Bio Labs, you agree to be bound by these Terms & Conditions, our Privacy Policy,
+          Shipping Policy, and all applicable laws and regulations. If you do not agree, please do not use this website.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>2. Product Intended Use</h4>
+        <ul>
+          <li>All products offered by Covenant Bio Labs are intended exclusively for lawful laboratory research use only.</li>
+          <li>Products are not intended for human consumption, veterinary use, therapeutic use, diagnostic use, food use, cosmetic use, or household use.</li>
+          <li>No product information on this website is intended to diagnose, treat, cure, prevent, or mitigate any disease or medical condition.</li>
+          <li>Buyer assumes full responsibility for understanding and complying with all federal, state, and local laws before ordering.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>3. Eligibility & Age Restrictions</h4>
+        <ul>
+          <li>Customers must be 21 years of age or older to submit an order request.</li>
+          <li>Customers must confirm that products are being purchased only for lawful laboratory research purposes.</li>
+          <li>Covenant Bio Labs reserves the right to request additional verification before accepting or shipping any order.</li>
+          <li>We may refuse, hold, cancel, or refund any order that raises compliance, safety, legal, or verification concerns.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>4. Customer Profile & Order Review</h4>
+        <ul>
+          <li>Creating a customer profile does not guarantee order approval.</li>
+          <li>All order requests are subject to review before fulfillment.</li>
+          <li>Customers are responsible for providing accurate name, contact, shipping, and eligibility information.</li>
+          <li>False, incomplete, or misleading information may result in cancellation or refusal of service.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>5. Purchase & Payment</h4>
+        <ul>
+          <li>Orders are submitted as order requests and are reviewed before processing.</li>
+          <li>Accepted payment methods are displayed at checkout and may change at any time.</li>
+          <li>Payment does not guarantee order approval or shipment.</li>
+          <li>Use of alternative payment methods may require additional review or verification.</li>
+          <li>Covenant Bio Labs reserves the right to cancel and refund orders that do not meet compliance or verification standards.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>6. Documentation & Traceability</h4>
+        <ul>
+          <li>Products may include batch, lot, or Certificate of Analysis information where available.</li>
+          <li>COA availability may vary by product and batch.</li>
+          <li>Customers are responsible for retaining their own compliance, receiving, and research records.</li>
+          <li>Product images, labels, and COA previews are provided for transparency and may vary slightly by batch.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>7. No Medical Advice</h4>
+        <p>
+          Information on this website is provided for general product identification and research-catalog purposes only.
+          Covenant Bio Labs does not provide medical advice, dosing advice, treatment guidance, veterinary advice,
+          or clinical recommendations.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>8. Returns, Exchanges & Refunds</h4>
+        <ul>
+          <li>Due to the sensitive nature of research products, returns are not accepted once an order has shipped.</li>
+          <li>Refunds are reviewed on a case-by-case basis and are not guaranteed.</li>
+          <li>Damaged, defective, or incorrect shipments must be reported within 72 hours of delivery with clear photos and order details.</li>
+          <li>Once shipped, orders cannot be cancelled or refunded except where Covenant Bio Labs determines an error, defect, or shipping issue qualifies for review.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>9. Regulatory & Legal Compliance</h4>
+        <ul>
+          <li>Buyer certifies that they comply with all applicable laws relating to research chemicals, storage, handling, ordering, and use.</li>
+          <li>Products may not be exported, resold, transferred, relabeled, or used in violation of applicable law.</li>
+          <li>Covenant Bio Labs reserves the right to restrict sales to certain jurisdictions, customers, or addresses.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>10. Limitation of Liability</h4>
+        <ul>
+          <li>Products are provided “as is” without warranties, express or implied.</li>
+          <li>Covenant Bio Labs is not liable for misuse, improper storage, improper handling, unauthorized resale, or use outside the stated research-use purpose.</li>
+          <li>Use and risk are solely the responsibility of the buyer.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>11. Indemnification</h4>
+        <p>
+          Buyer agrees to indemnify, defend, and hold harmless Covenant Bio Labs, its owners, employees,
+          suppliers, contractors, and affiliates from any claim, loss, damage, liability, or cost arising from
+          buyer’s breach of these Terms, violation of law, misuse of products, or negligence.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>12. Intellectual Property</h4>
+        <p>
+          All website content, images, design, logos, product presentation, copy, and branding belong to
+          Covenant Bio Labs or its licensors and may not be copied or used without written permission.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>13. Updates</h4>
+        <p>
+          Covenant Bio Labs may update these Terms & Conditions at any time. Changes are effective upon posting.
+          Continued use of the website constitutes acceptance of the updated terms.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>14. Contact Information</h4>
+        <p>
+          For questions or concerns, contact: <strong>orders@covenantbiolabs.com</strong>
+        </p>
+      </div>
+
+      <div class="legal-notice">
+        Research Use Only. Not for human consumption. Not for veterinary use. Keep out of reach of children.
+      </div>
+    </div>
+
+    <div class="legal-card" id="privacy">
+      <h3>Privacy Policy</h3>
+      <p class="legal-effective">Effective Date: May 4, 2026</p>
+
+      <div class="legal-block">
+        <h4>1. Information We Collect</h4>
+        <ul>
+          <li>Customer profile information such as name, email address, phone number, and date of birth.</li>
+          <li>Order information such as products requested, shipping address, order notes, and communication history.</li>
+          <li>Payment confirmation details when provided by the customer or payment platform.</li>
+          <li>Technical information such as browser type, device information, IP address, cookies, and basic website usage data where applicable.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>2. How We Use Your Information</h4>
+        <ul>
+          <li>To create and review customer profiles.</li>
+          <li>To process order requests and communicate about order status.</li>
+          <li>To verify age, eligibility, shipping details, and compliance requirements.</li>
+          <li>To prevent fraud, misuse, unauthorized transactions, or unlawful activity.</li>
+          <li>To improve website performance, customer support, and internal operations.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>3. Sharing of Information</h4>
+        <ul>
+          <li>We do not sell or rent customer information.</li>
+          <li>Information may be shared with trusted service providers such as email, order-management, payment, shipping, compliance, or website-service providers.</li>
+          <li>Information may be disclosed if required by law, regulation, subpoena, legal process, fraud prevention, or to protect our rights and safety.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>4. Payment Information</h4>
+        <p>
+          Covenant Bio Labs does not store full payment card information on this website. If payment is made through
+          a third-party payment platform, that platform’s own terms and privacy practices may apply.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>5. Cookies & Website Tracking</h4>
+        <ul>
+          <li>Our website may use cookies or similar tools to support website functionality, performance, analytics, and security.</li>
+          <li>Users may control cookies through browser settings, but some website features may not function properly if cookies are disabled.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>6. Data Security & Retention</h4>
+        <ul>
+          <li>We use reasonable administrative, technical, and physical safeguards to protect customer information.</li>
+          <li>No online system can be guaranteed completely secure.</li>
+          <li>Information is retained only as long as reasonably necessary for business, compliance, legal, tax, fraud-prevention, or recordkeeping purposes.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>7. Customer Choices</h4>
+        <ul>
+          <li>Customers may contact us to request updates or corrections to their information.</li>
+          <li>Customers may request removal from marketing communications where applicable.</li>
+          <li>Certain information may be retained where required for legal, compliance, security, or transaction records.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>8. Children’s Privacy</h4>
+        <p>
+          This website and its products are not intended for individuals under 21 years of age.
+          We do not knowingly collect information from individuals under 21.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>9. Privacy Updates</h4>
+        <p>
+          We may update this Privacy Policy at any time. Updates are effective upon posting to this website.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>10. Contact</h4>
+        <p>
+          For privacy questions, contact: <strong>orders@covenantbiolabs.com</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="legal-card" id="shipping">
+      <h3>Shipping Policy</h3>
+      <p class="legal-effective">Effective Date: May 4, 2026</p>
+
+      <div class="legal-block">
+        <h4>1. Handling & Processing Time</h4>
+        <ul>
+          <li>Orders are processed after payment confirmation, customer verification, and order review.</li>
+          <li>Typical processing time is 1–3 business days after approval.</li>
+          <li>Orders placed after business hours, on weekends, or on holidays may be processed the next business day.</li>
+          <li>Processing may be delayed for compliance review, weather, inventory, payment verification, or address issues.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>2. Shipping Carrier & Tracking</h4>
+        <ul>
+          <li>Orders are typically shipped through USPS or another eligible domestic carrier.</li>
+          <li>Tracking information will be provided when available.</li>
+          <li>Shipping times vary by destination, carrier conditions, holidays, and weather.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>3. Domestic Shipping Only</h4>
+        <ul>
+          <li>Covenant Bio Labs currently ships only within the United States.</li>
+          <li>We do not ship internationally.</li>
+          <li>We reserve the right to restrict shipping to certain states, regions, addresses, or customers based on compliance or carrier requirements.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>4. Shipping Rates</h4>
+        <ul>
+          <li>Shipping charges may be calculated at checkout or communicated during order review.</li>
+          <li>Free or discounted shipping may be offered at our discretion and may change at any time.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>5. Address Accuracy</h4>
+        <ul>
+          <li>Customers are responsible for providing a complete and accurate shipping address.</li>
+          <li>Covenant Bio Labs is not responsible for delays, losses, or returns caused by incorrect or incomplete shipping information.</li>
+          <li>If a package is returned due to an incorrect address, additional shipping charges may apply.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>6. Delivery & Lost Packages</h4>
+        <ul>
+          <li>If tracking shows a package as delivered, Covenant Bio Labs may consider the order fulfilled.</li>
+          <li>If a package is marked delivered but missing, please check with household members, neighbors, building management, and the carrier first.</li>
+          <li>Lost package claims are reviewed case by case and are not guaranteed.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>7. Damaged, Defective, or Incorrect Shipments</h4>
+        <ul>
+          <li>Customers must contact us within 72 hours of delivery if an order arrives damaged, defective, or incorrect.</li>
+          <li>Clear photos, packaging images, and order details may be required.</li>
+          <li>Approved resolutions may include replacement, store credit, or other remedy determined by Covenant Bio Labs.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>8. Packaging & Product Protection</h4>
+        <ul>
+          <li>Orders are packaged with appropriate labeling and product protection based on product type and shipping needs.</li>
+          <li>Weather, temperature, carrier handling, or delivery delays may affect transit conditions.</li>
+          <li>Covenant Bio Labs may delay shipment during extreme weather or carrier disruptions to protect order integrity.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h4>9. Restricted or Non-Mailable Items</h4>
+        <p>
+          Some materials may be restricted by carrier rules, federal law, state law, or local regulation.
+          Covenant Bio Labs reserves the right to cancel, hold, modify, or refuse shipment if an order raises shipping,
+          safety, compliance, or regulatory concerns.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h4>10. Contact</h4>
+        <p>
+          For shipping questions, contact: <strong>orders@covenantbiolabs.com</strong>
+        </p>
+      </div>
+
+      <div class="legal-notice">
+        Orders are shipped only after review and approval. Research Use Only. Not for human consumption.
+      </div>
+    </div>
+
+    <div class="legal-footer-links">
+      <a href="#terms">Terms & Conditions</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#shipping">Shipping Policy</a>
+    </div>
+
+  </div>
+</section>
 <div class="footer">&copy; 2026 Covenant Bio Labs<br>Research Use Only</div>
 </div>
 

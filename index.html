@@ -1014,6 +1014,128 @@ textarea.field{min-height:96px;resize:vertical}
   .legal-nav a {
     width: 100%;
   }
+}/* FAQ SECTION */
+.faq-section{
+  padding:42px 22px 50px;
+  background:
+    linear-gradient(180deg,rgba(4,8,15,.84),rgba(4,8,15,.96)),
+    radial-gradient(circle at 15% 10%,rgba(103,213,255,.08),transparent 24%);
+  border:1px solid rgba(103,213,255,.16);
+  box-shadow:0 24px 70px rgba(0,0,0,.42);
+}
+
+.faq-shell{
+  max-width:1280px;
+  margin:0 auto;
+}
+
+.faq-head{
+  text-align:center;
+  max-width:780px;
+  margin:0 auto 28px;
+}
+
+.faq-head h2{
+  margin:0 0 12px;
+  font-size:clamp(2rem,4vw,3.2rem);
+  color:#fff;
+}
+
+.faq-head p{
+  margin:0;
+  color:#d7e2f3;
+  line-height:1.7;
+  font-size:16px;
+}
+
+.faq-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px 22px;
+  align-items:start;
+  margin-top:30px;
+}
+
+.faq-col{
+  display:grid;
+  gap:14px;
+}
+
+.faq-item{
+  border:1px solid rgba(103,213,255,.18);
+  border-radius:18px;
+  background:rgba(7,13,27,.46);
+  overflow:hidden;
+  transition:.22s ease;
+}
+
+.faq-item.active{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(103,213,255,.30);
+  box-shadow:0 0 24px rgba(103,213,255,.08);
+}
+
+.faq-question{
+  width:100%;
+  min-height:72px;
+  padding:18px 20px;
+  border:none;
+  background:transparent;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  text-align:left;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:800;
+}
+
+.faq-question span:first-child{
+  flex:1;
+}
+
+.faq-icon{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  color:var(--blue2);
+  font-size:24px;
+  font-weight:400;
+  flex-shrink:0;
+}
+
+.faq-answer{
+  display:none;
+  padding:0 20px 20px;
+  color:#d7e2f3;
+  line-height:1.7;
+  font-size:15px;
+}
+
+.faq-answer p{
+  margin:0;
+}
+
+.faq-item.active .faq-answer{
+  display:block;
+}
+
+@media(max-width:900px){
+  .faq-grid{
+    grid-template-columns:1fr;
+  }
+
+  .faq-question{
+    font-size:17px;
+    min-height:66px;
+  }
 }
 </style>
 </head>
@@ -1023,11 +1145,12 @@ textarea.field{min-height:96px;resize:vertical}
 <div class="wrap">
 <header class="topbar">
   <a href="#home" class="brand"><img src="hero-badge-v2.png" alt="Covenant Bio Labs"></a>
-<nav class="nav">
+<<nav class="nav">
   <a href="#home" class="active">Home</a>
   <a href="#shop">Shop</a>
   <a href="#contact">Contact</a>
   <a href="#calculator">Peptide Calculator</a>
+  <a href="#faq">FAQ</a>
   <a href="#legal">Legal</a>
 </nav>
   <button class="cart-nav" type="button" onclick="openCart()">Cart <span class="cart-count" id="cartCount">0</span></button>
@@ -1220,7 +1343,168 @@ textarea.field{min-height:96px;resize:vertical}
   </div>
 </section>
 </section>
+<section id="faq" class="faq-section">
+  <div class="faq-shell">
 
+    <div class="faq-head">
+      <p class="eyebrow">Knowledge Base</p>
+      <h2>Frequently Asked Questions</h2>
+      <p>Quick answers about shipping, returns, research-use standards, and customer support.</p>
+    </div>
+
+    <div class="faq-grid">
+
+      <div class="faq-col">
+
+        <div class="faq-item active">
+          <button class="faq-question" type="button">
+            <span>What if my order arrives damaged?</span>
+            <span class="faq-icon">−</span>
+          </button>
+          <div class="faq-answer">
+            <p>If your order arrives damaged, contact <strong>orders@covenantbiolabs.com</strong> within 72 hours with your order details, a short description of the issue, and clear photos. Approved claims may qualify for replacement review.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>What if my package is missing products or contains the wrong items?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Email <strong>orders@covenantbiolabs.com</strong> as soon as possible with your order information and photos of what was received. We will review the issue and respond with next-step support.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you accept returns?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Due to the sensitive nature of research products, returns are not accepted once an order has shipped.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you issue refunds?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Refund requests are reviewed case by case and are not guaranteed. If there is an issue with your order, contact us with the full details and supporting photos if available.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Can I return my order?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Orders are generally final once shipped. If a shipment arrives damaged or incorrect, reach out within the stated review window so we can evaluate the situation.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="faq-col">
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>What are peptides and what are they used for?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Peptides are short chains of amino acids. All products offered by Covenant Bio Labs are sold strictly for <strong>research use only</strong> and are not intended for human or veterinary use.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Can you give me advice on peptide dosing or reconstitution?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. We do not provide medical, dosing, clinical, or usage advice. Our products are offered exclusively for laboratory research purposes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Are your products intended for human or veterinary consumption?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Covenant Bio Labs products are not for human consumption, veterinary use, therapeutic use, or clinical application.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>How long does it take to process and ship my order?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Orders are generally processed within 1–3 business days after payment and review. Domestic delivery times may vary by location and carrier.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you ship internationally?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. At this time, orders are shipped only within the United States.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>How should I store my products?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Storage can vary by product. Always follow the product label, handling guidance, and your research protocols. Keep all products secured and out of reach of children.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>My package was lost or damaged — what should I do?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>If a package appears lost or arrives damaged, first check the tracking details and carrier status. Then contact <strong>orders@covenantbiolabs.com</strong> with your order information so we can review the issue with you.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Why do you require age verification?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Buyers must be 21 years of age or older. Age verification supports regulatory compliance and responsible order review.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Who can I contact for help or documentation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>For order support or documentation questions, contact <strong>orders@covenantbiolabs.com</strong>.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
 <section id="legal" class="legal-section">
   <div class="legal-shell">
 
@@ -2223,7 +2507,34 @@ document.getElementById("moleculeBg").innerHTML =
   makeMolecule(68,8,.92,19,-4) +
   makeMolecule(74,52,1.05,22,-5) +
   makeMolecule(84,88,.82,17,-7);
+function initFaqAccordion(){
+  const faqItems = document.querySelectorAll(".faq-item");
 
+  faqItems.forEach(item => {
+    const button = item.querySelector(".faq-question");
+    const icon = item.querySelector(".faq-icon");
+
+    button.addEventListener("click", () => {
+      const isActive = item.classList.contains("active");
+
+      faqItems.forEach(other => {
+        other.classList.remove("active");
+        const otherIcon = other.querySelector(".faq-icon");
+        if(otherIcon) otherIcon.textContent = "+";
+      });
+
+      if(!isActive){
+        item.classList.add("active");
+        if(icon) icon.textContent = "−";
+      }
+    });
+  });
+}
+
+initFaqAccordion();
+
+updateCartUI();
+updateCalc();
 updateCartUI();
 updateCalc();
 </script>

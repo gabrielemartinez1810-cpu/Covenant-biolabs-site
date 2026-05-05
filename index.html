@@ -3047,14 +3047,14 @@ const modalStatus = isSupplyItem ? "" : `<div class="modal-status">Lab Verified<
       <div class="modal-content">
         <div class="modal-left">
           <div class="modal-thumb">
-            <div class="verified-pill">Lab Verified</div>
+${modalBadge}
             <img src="${product.img}" alt="${product.name}" onerror="showModalImageFallback(this)">
             <div class="modal-thumb-fallback">${product.name}</div>
           </div>
         </div>
 
         <div class="modal-right">
-          <div class="modal-status">Lab Verified</div>
+${modalStatus}
           <h2>${product.name}</h2>
           <div class="modal-price">${product.price}</div>
 

@@ -2968,9 +2968,13 @@ function renderProductCard(product, preview=false){
   card.className = preview ? "preview-card" : "card";
   card.onclick = () => openProduct(product.name);
 
+  const badge = product.name.toLowerCase().includes("syringe")
+    ? ""
+    : `<div class="verified-pill">Lab Verified</div>`;
+
   if(preview){
     card.innerHTML = `
-      <div class="verified-pill">Lab Verified</div>
+      ${badge}
       <img src="${product.img}" alt="${product.name}" onerror="this.style.display='none'">
       <h3>${product.name}</h3>
       <p>${product.price}</p>
@@ -2978,7 +2982,7 @@ function renderProductCard(product, preview=false){
   } else {
     card.innerHTML = `
       <div class="product-thumb">
-        <div class="verified-pill">Lab Verified</div>
+        ${badge}
         <img src="${product.img}" alt="${product.name}" onerror="showImageFallback(this)">
         <div class="img-fallback">${product.name}</div>
       </div>

@@ -1737,6 +1737,158 @@ textarea.field{min-height:96px;resize:vertical}
   .calc-v2-bubble {
     left: calc(50% + 105px);
   }
+}/* ==============================
+   CALCULATOR FINAL POLISH OVERRIDE
+   Paste directly above </style>
+============================== */
+
+/* Make Peptide Calculator title match Covenant blue */
+.calc-v2-head h2{
+  color:transparent !important;
+  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  text-shadow:
+    0 0 22px rgba(43,125,255,.42),
+    0 0 48px rgba(103,213,255,.22) !important;
+}
+
+/* Give the calculator more breathing room */
+.calc-v2-main{
+  grid-template-columns:240px 240px minmax(520px,1fr) 250px !important;
+  gap:14px !important;
+}
+
+/* Fix the bunched-up center section */
+.calc-v2-center{
+  grid-template-columns:255px minmax(220px,1fr) !important;
+  gap:22px !important;
+  align-items:center !important;
+  padding:26px !important;
+}
+
+/* Keep the top sentence clean */
+.calc-v2-readout{
+  grid-column:1 / -1 !important;
+  max-width:520px !important;
+  margin:0 auto 6px !important;
+  font-size:17px !important;
+  line-height:1.55 !important;
+}
+
+/* Keep syringe/tube side contained */
+.calc-v2-tube-area{
+  width:255px !important;
+  justify-self:center !important;
+  overflow:visible !important;
+}
+
+/* Move unit label away from the syringe numbers */
+.calc-v2-units-word{
+  left:0 !important;
+  top:42% !important;
+  font-size:14px !important;
+  color:#d7e2f3 !important;
+}
+
+/* Make scale numbers sit cleaner */
+.calc-v2-scale{
+  left:172px !important;
+  top:22px !important;
+  width:58px !important;
+  height:285px !important;
+}
+
+.calc-v2-scale-row{
+  font-size:13px !important;
+  gap:7px !important;
+}
+
+/* Move the blue number bubble under the syringe instead of crowding the text */
+.calc-v2-bubble{
+  left:50% !important;
+  bottom:-18px !important;
+  transform:translateX(-50%) !important;
+  min-width:58px !important;
+  padding:7px 10px !important;
+}
+
+/* Add a clean divider between syringe and result text */
+.calc-v2-result{
+  border-left:1px solid rgba(103,213,255,.22) !important;
+  padding-left:24px !important;
+  min-width:220px !important;
+}
+
+/* Make the result section look premium and spaced out */
+.calc-v2-result-title{
+  margin-top:4px !important;
+}
+
+.calc-v2-units{
+  color:#67d5ff !important;
+  text-shadow:
+    0 0 18px rgba(103,213,255,.45),
+    0 0 34px rgba(43,125,255,.24) !important;
+  letter-spacing:.3px !important;
+}
+
+.calc-v2-sub{
+  margin-top:6px !important;
+  line-height:1.5 !important;
+}
+
+/* Make the tube less white and more website-blue */
+.calc-v2-tube{
+  border:2px solid rgba(103,213,255,.38) !important;
+  background:
+    linear-gradient(90deg, rgba(103,213,255,.10), rgba(255,255,255,.025), rgba(43,125,255,.12)),
+    rgba(4,10,19,.88) !important;
+  box-shadow:
+    inset 0 0 24px rgba(103,213,255,.08),
+    0 0 32px rgba(43,125,255,.18) !important;
+}
+
+.calc-v2-tube::before{
+  background:linear-gradient(180deg,#8beaff,#2b7dff) !important;
+}
+
+.calc-v2-tube::after{
+  background:linear-gradient(180deg,#67d5ff,#163a7a) !important;
+}
+
+/* iPad / smaller screens */
+@media(max-width:1200px){
+  .calc-v2-main{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+
+  .calc-v2-center{
+    grid-column:1 / -1 !important;
+    grid-template-columns:280px minmax(240px,1fr) !important;
+  }
+
+  .calc-v2-result{
+    border-left:1px solid rgba(103,213,255,.22) !important;
+    padding-left:24px !important;
+  }
+}
+
+/* Phone layout */
+@media(max-width:760px){
+  .calc-v2-center{
+    grid-template-columns:1fr !important;
+  }
+
+  .calc-v2-result{
+    border-left:none !important;
+    padding-left:0 !important;
+    text-align:center !important;
+  }
+
+  .calc-v2-tube-area{
+    margin:0 auto 22px !important;
+  }
 }
 </style>
 </head>

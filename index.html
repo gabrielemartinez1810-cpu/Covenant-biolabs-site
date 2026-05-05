@@ -1136,6 +1136,607 @@ textarea.field{min-height:96px;resize:vertical}
     font-size:17px;
     min-height:66px;
   }
+}/* ==============================
+   PREMIUM LIVE PEPTIDE CALCULATOR
+============================== */
+
+.calc-v2-section {
+  padding: 48px 22px 54px;
+  background:
+    radial-gradient(circle at 8% 18%, rgba(43,125,255,.24), transparent 20%),
+    radial-gradient(circle at 92% 18%, rgba(103,213,255,.16), transparent 22%),
+    linear-gradient(180deg, rgba(2,5,11,.96), rgba(3,8,18,.98));
+  border: 1px solid rgba(103,213,255,.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.calc-v2-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .35;
+  background:
+    radial-gradient(circle at 20% 24%, rgba(103,213,255,.18), transparent 2px),
+    radial-gradient(circle at 25% 30%, rgba(43,125,255,.18), transparent 2px),
+    radial-gradient(circle at 82% 18%, rgba(103,213,255,.18), transparent 2px),
+    radial-gradient(circle at 88% 26%, rgba(43,125,255,.18), transparent 2px);
+}
+
+.calc-v2-shell {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.calc-v2-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.calc-v2-head h2 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: .95;
+  text-shadow: 0 0 34px rgba(103,213,255,.20);
+}
+
+.calc-v2-head p {
+  margin: 0;
+  color: #d7e2f3;
+  font-size: 18px;
+}
+
+.calc-v2-main {
+  display: grid;
+  grid-template-columns: 240px 240px minmax(420px, 1fr) 260px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.calc-v2-card,
+.calc-v2-center,
+.calc-v2-syringe-panel,
+.calc-v2-guide {
+  border: 1px solid rgba(103,213,255,.22);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(103,213,255,.08), transparent 36%),
+    rgba(5,12,22,.82);
+  box-shadow:
+    0 22px 58px rgba(0,0,0,.42),
+    inset 0 0 28px rgba(255,255,255,.025);
+}
+
+.calc-v2-card {
+  padding: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.calc-v2-badge {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 9px 16px;
+  border-radius: 999px;
+  color: #07101d;
+  background: var(--verifiedGrad);
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 12px;
+  box-shadow: 0 0 20px rgba(103,213,255,.25);
+  white-space: nowrap;
+}
+
+.calc-v2-card img {
+  height: 230px;
+  width: 100%;
+  object-fit: contain;
+  margin: 12px auto 14px;
+  filter: drop-shadow(0 24px 24px rgba(0,0,0,.55)) drop-shadow(0 0 14px rgba(103,213,255,.18));
+}
+
+.calc-v2-card h3 {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.calc-v2-card p {
+  margin: 0 0 14px;
+  color: #d7e2f3;
+}
+
+.calc-v2-label {
+  margin: 0 0 10px;
+  color: #dbe8fa;
+  font-size: 14px;
+}
+
+.calc-v2-btn-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.calc-v2-btn {
+  min-height: 40px;
+  padding: 0 13px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .22s ease;
+}
+
+.calc-v2-btn:hover,
+.calc-v2-btn.active {
+  color: #fff;
+  background: linear-gradient(180deg,#1d6eff,#0d4db8);
+  border-color: rgba(103,213,255,.70);
+  box-shadow: 0 0 18px rgba(43,125,255,.34);
+}
+
+.calc-v2-center {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr 210px;
+  gap: 18px;
+  align-items: center;
+  min-height: 440px;
+}
+
+.calc-v2-readout {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.calc-v2-readout strong {
+  color: var(--blue2);
+}
+
+.calc-v2-tube-area {
+  position: relative;
+  height: 325px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calc-v2-units-word {
+  position: absolute;
+  left: 8px;
+  top: 48%;
+  color: #d7e2f3;
+  font-size: 14px;
+}
+
+.calc-v2-tube {
+  position: relative;
+  width: 88px;
+  height: 285px;
+  border-radius: 22px 22px 16px 16px;
+  border: 2px solid rgba(255,255,255,.35);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.10), rgba(255,255,255,.02), rgba(255,255,255,.12)),
+    rgba(7,13,27,.76);
+  box-shadow:
+    inset 0 0 24px rgba(255,255,255,.08),
+    0 0 32px rgba(103,213,255,.12);
+  overflow: hidden;
+}
+
+.calc-v2-tube::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: -16px;
+  height: 20px;
+  border-radius: 12px 12px 4px 4px;
+  background: linear-gradient(180deg,#f8fbff,#5d6572);
+  box-shadow: 0 0 18px rgba(255,255,255,.20);
+  z-index: 3;
+}
+
+.calc-v2-tube::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -12px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(180deg,#dfe8f2,#3c4553);
+  box-shadow: 0 0 22px rgba(103,213,255,.22);
+  z-index: 3;
+}
+
+.calc-v2-liquid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background:
+    linear-gradient(180deg, rgba(103,213,255,.92), rgba(43,125,255,.88), rgba(10,72,180,.95));
+  box-shadow:
+    inset 0 0 24px rgba(255,255,255,.16),
+    0 0 28px rgba(43,125,255,.50);
+  transition: height .45s ease;
+}
+
+.calc-v2-ticks {
+  position: absolute;
+  inset: 24px 12px 20px 12px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0 13px,
+      rgba(255,255,255,.50) 13px 14px
+    );
+  opacity: .68;
+  z-index: 2;
+}
+
+.calc-v2-scale {
+  position: absolute;
+  left: calc(50% + 70px);
+  top: 20px;
+  width: 72px;
+  height: 285px;
+}
+
+.calc-v2-scale-row {
+  position: absolute;
+  left: 0;
+  transform: translateY(50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.calc-v2-scale-row::before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  background: rgba(255,255,255,.72);
+}
+
+.calc-v2-bubble {
+  position: absolute;
+  left: calc(50% + 132px);
+  bottom: 0%;
+  transform: translateY(50%);
+  min-width: 56px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: linear-gradient(180deg,#1d6eff,#0d4db8);
+  color: #fff;
+  font-weight: 900;
+  text-align: center;
+  box-shadow: 0 0 18px rgba(43,125,255,.42);
+  transition: bottom .45s ease;
+}
+
+.calc-v2-result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calc-v2-dose-title,
+.calc-v2-result-title {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.calc-v2-units {
+  color: var(--blue2);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.calc-v2-sub {
+  color: #d7e2f3;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.calc-v2-reset {
+  width: max-content;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.05);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.calc-v2-warning {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,205,86,.32);
+  background: rgba(255,205,86,.10);
+  color: #fff3c4;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.calc-v2-syringe-panel {
+  padding: 18px;
+}
+
+.calc-v2-syringe-panel h3 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.calc-v2-syringe-card {
+  width: 100%;
+  min-height: 112px;
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.035);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: .22s ease;
+}
+
+.calc-v2-syringe-card.active {
+  border-color: rgba(103,213,255,.75);
+  box-shadow: 0 0 24px rgba(43,125,255,.26);
+  background:
+    radial-gradient(circle at right, rgba(43,125,255,.22), transparent 42%),
+    rgba(255,255,255,.045);
+}
+
+.calc-v2-syringe-card strong {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 19px;
+  color: #fff;
+}
+
+.mini-syringe {
+  position: relative;
+  height: 18px;
+  margin: 10px 4px 4px;
+}
+
+.mini-syringe::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 28px;
+  top: 6px;
+  height: 7px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(103,213,255,.34), rgba(255,255,255,.72), rgba(43,125,255,.55));
+  border: 1px solid rgba(255,255,255,.42);
+  box-shadow: 0 0 14px rgba(103,213,255,.22);
+}
+
+.mini-syringe::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 0;
+  width: 8px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(180deg,#e9faff,#2b7dff);
+  box-shadow: 0 0 12px rgba(103,213,255,.34);
+}
+
+.mini-syringe span {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 12px;
+  height: 2px;
+  background: rgba(103,213,255,.78);
+  box-shadow: 0 0 10px rgba(103,213,255,.40);
+}
+
+.calc-v2-guide {
+  margin-top: 16px;
+  padding: 18px;
+}
+
+.calc-v2-guide-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid rgba(103,213,255,.16);
+  margin-bottom: 16px;
+}
+
+.calc-v2-guide-tab {
+  border: none;
+  background: transparent;
+  color: #d7e2f3;
+  padding: 0 0 12px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.calc-v2-guide-tab.active {
+  color: var(--blue2);
+  border-bottom: 2px solid var(--blue);
+}
+
+.calc-v2-guide-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .9fr;
+  gap: 16px;
+}
+
+.calc-v2-guide-copy,
+.calc-v2-accordion {
+  border: 1px solid rgba(103,213,255,.16);
+  border-radius: 16px;
+  background: rgba(255,255,255,.025);
+  padding: 18px;
+}
+
+.calc-v2-guide-copy h3 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 25px;
+}
+
+.calc-v2-guide-copy p {
+  color: #d7e2f3;
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+.calc-v2-guide-panel {
+  display: none;
+}
+
+.calc-v2-guide-panel.active {
+  display: block;
+}
+
+.calc-v2-acc-item {
+  border: 1px solid rgba(103,213,255,.14);
+  border-radius: 12px;
+  margin-bottom: 9px;
+  overflow: hidden;
+}
+
+.calc-v2-acc-btn {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 14px;
+  border: none;
+  background: rgba(255,255,255,.035);
+  color: #fff;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.calc-v2-acc-body {
+  display: none;
+  padding: 0 14px 14px;
+  color: #d7e2f3;
+  line-height: 1.6;
+}
+
+.calc-v2-acc-item.active .calc-v2-acc-body {
+  display: block;
+}
+
+.calc-v2-safe-strip {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+}
+
+.calc-v2-safe-item {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(103,213,255,.16);
+  background: rgba(255,255,255,.025);
+  color: #d7e2f3;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.calc-v2-safe-item strong {
+  display: block;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+@media(max-width:1200px){
+  .calc-v2-main {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .calc-v2-center {
+    grid-column: 1 / -1;
+  }
+
+  .calc-v2-syringe-panel {
+    grid-column: 1 / -1;
+  }
+
+  .calc-v2-syringe-panel {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 12px;
+  }
+
+  .calc-v2-syringe-panel h3 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media(max-width:760px){
+  .calc-v2-main,
+  .calc-v2-center,
+  .calc-v2-guide-grid,
+  .calc-v2-safe-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-v2-syringe-panel {
+    display: block;
+  }
+
+  .calc-v2-center {
+    padding: 16px;
+  }
+
+  .calc-v2-tube-area {
+    height: 300px;
+  }
+
+  .calc-v2-units-word {
+    display: none;
+  }
+
+  .calc-v2-bubble {
+    left: calc(50% + 105px);
+  }
 }
 </style>
 </head>
@@ -1221,120 +1822,189 @@ textarea.field{min-height:96px;resize:vertical}
     <div class="grid" id="productGrid"></div>
   </div>
 </section>
-<section id="calculator" class="calculator-section premium-calculator-section">
+<section id="calculator" class="calculator-section premium-calculator-section calc-v2-section">
+  <div class="calc-v2-shell">
 
-  <div class="calc-shell">
-
-    <!-- HEADER -->
-    <div class="calc-head">
+    <div class="calc-v2-head">
       <h2>Peptide Calculator</h2>
       <p>Precision dosing. Clean visualization. Built for serious research.</p>
     </div>
 
-    <!-- DOSE VISUAL (CIRCLE INSTEAD OF SYRINGE) -->
-    <div class="dose-visual">
-      <div class="dose-circle">
-        <div class="dose-fill" id="doseFill"></div>
-        <div class="dose-text" id="doseText">0 mcg</div>
-      </div>
-      <p class="dose-helper">Select your dose below</p>
-    </div>
+    <div class="calc-v2-main">
 
-    <!-- CONTROLS -->
-    <div class="calc-controls">
-
-      <div class="calc-row">
-        <h3>Peptide Amount</h3>
-        <div class="calc-choice-row">
-          <button onclick="setPeptide(5)">5 mg</button>
-          <button onclick="setPeptide(10)">10 mg</button>
-          <button onclick="setPeptide(20)">20 mg</button>
-        </div>
-      </div>
-
-      <div class="calc-row">
+      <div class="calc-v2-card">
+        <div class="calc-v2-badge">Lab Verified</div>
+        <img src="bacteriostatic-water-10ml.jpg" alt="Bacteriostatic Water 10mL">
         <h3>Bacteriostatic Water</h3>
-        <div class="calc-choice-row">
-          <button onclick="setWater(1)">1 mL</button>
-          <button onclick="setWater(2)">2 mL</button>
-          <button onclick="setWater(3)">3 mL</button>
+        <p>10mL</p>
+
+        <div class="calc-v2-label">Select Volume</div>
+        <div class="calc-v2-btn-row">
+          <button class="calc-v2-btn" type="button" data-calc-group="water" data-calc-value="1" onclick="selectCalcWater(1,this)">1 mL</button>
+          <button class="calc-v2-btn active" type="button" data-calc-group="water" data-calc-value="2" onclick="selectCalcWater(2,this)">2 mL</button>
+          <button class="calc-v2-btn" type="button" data-calc-group="water" data-calc-value="3" onclick="selectCalcWater(3,this)">3 mL</button>
+          <button class="calc-v2-btn" type="button" data-calc-group="water" data-calc-value="5" onclick="selectCalcWater(5,this)">5 mL</button>
         </div>
       </div>
 
-      <div class="calc-row">
-        <h3>Research Dose</h3>
-        <div class="calc-choice-row">
-          <button onclick="setDose(50)">50 mcg</button>
-          <button onclick="setDose(100)">100 mcg</button>
-          <button onclick="setDose(250)">250 mcg</button>
-          <button onclick="setDose(500)">500 mcg</button>
+      <div class="calc-v2-card">
+        <div class="calc-v2-badge">Lab Verified</div>
+        <img src="retatrutide-20mg.jpg" alt="Retatrutide 20mg">
+        <h3>Retatrutide</h3>
+        <p>20mg</p>
+
+        <div class="calc-v2-label">Select Amount</div>
+        <div class="calc-v2-btn-row">
+          <button class="calc-v2-btn" type="button" data-calc-group="vial" data-calc-value="5" onclick="selectCalcVial(5,this)">5 mg</button>
+          <button class="calc-v2-btn active" type="button" data-calc-group="vial" data-calc-value="10" onclick="selectCalcVial(10,this)">10 mg</button>
+          <button class="calc-v2-btn" type="button" data-calc-group="vial" data-calc-value="15" onclick="selectCalcVial(15,this)">15 mg</button>
+          <button class="calc-v2-btn" type="button" data-calc-group="vial" data-calc-value="20" onclick="selectCalcVial(20,this)">20 mg</button>
         </div>
+      </div>
+
+      <div class="calc-v2-center">
+        <div class="calc-v2-readout" id="calcV2Text">
+          To have a dose of <strong>500 mcg</strong>, pull the syringe to <strong>10.0 units</strong>.
+        </div>
+
+        <div class="calc-v2-tube-area">
+          <div class="calc-v2-units-word">units</div>
+
+          <div class="calc-v2-tube">
+            <div class="calc-v2-liquid" id="calcV2Liquid"></div>
+            <div class="calc-v2-ticks"></div>
+          </div>
+
+          <div class="calc-v2-scale" id="calcV2Scale"></div>
+          <div class="calc-v2-bubble" id="calcV2Bubble">10.0</div>
+        </div>
+
+        <div class="calc-v2-result">
+          <div>
+            <div class="calc-v2-dose-title">Research Dose</div>
+            <div class="calc-v2-btn-row" style="justify-content:flex-start;">
+              <button class="calc-v2-btn" type="button" data-calc-group="dose" data-calc-value="50" onclick="selectCalcDose(50,this)">50 mcg</button>
+              <button class="calc-v2-btn" type="button" data-calc-group="dose" data-calc-value="100" onclick="selectCalcDose(100,this)">100 mcg</button>
+              <button class="calc-v2-btn" type="button" data-calc-group="dose" data-calc-value="250" onclick="selectCalcDose(250,this)">250 mcg</button>
+              <button class="calc-v2-btn active" type="button" data-calc-group="dose" data-calc-value="500" onclick="selectCalcDose(500,this)">500 mcg</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="calc-v2-result-title">Pull Amount</div>
+            <div class="calc-v2-units" id="calcV2Units">10.0 units</div>
+            <div class="calc-v2-sub" id="calcV2Ml">0.10 mL</div>
+            <div class="calc-v2-sub" id="calcV2SyringeLabel">Selected syringe: 1.0 mL / 100 units</div>
+            <div class="calc-v2-sub" id="calcV2Concentration">Concentration: 5,000 mcg/mL</div>
+          </div>
+
+          <button class="calc-v2-reset" type="button" onclick="resetPeptideCalc()">Reset</button>
+        </div>
+      </div>
+
+      <div class="calc-v2-syringe-panel">
+        <h3>Select Syringe Volume</h3>
+
+        <button class="calc-v2-syringe-card" type="button" data-calc-group="syringe" data-calc-value="30" onclick="selectCalcSyringe(30,.3,this)">
+          <strong>0.3 mL</strong>
+          <div class="mini-syringe"><span></span></div>
+        </button>
+
+        <button class="calc-v2-syringe-card" type="button" data-calc-group="syringe" data-calc-value="50" onclick="selectCalcSyringe(50,.5,this)">
+          <strong>0.5 mL</strong>
+          <div class="mini-syringe"><span></span></div>
+        </button>
+
+        <button class="calc-v2-syringe-card active" type="button" data-calc-group="syringe" data-calc-value="100" onclick="selectCalcSyringe(100,1,this)">
+          <strong>1.0 mL</strong>
+          <div class="mini-syringe"><span></span></div>
+        </button>
       </div>
 
     </div>
 
-    <!-- RESULT -->
-    <div class="calc-result">
-      <h3>Pull Amount</h3>
-      <p id="resultText">0 units</p>
-    </div>
+    <div class="calc-v2-warning" id="calcV2Warning"></div>
 
-    <!-- RECONSTITUTION SECTION -->
-    <div class="recon-section">
-
-      <h2>Correct Peptide Reconstitution</h2>
-
-      <p>
-        Our compounds are delivered in a lyophilized (freeze-dried) state to preserve stability and purity.
-        Before use in research settings, they must be reconstituted with a suitable solvent.
-        Proper technique ensures consistency, accuracy, and reliable outcomes.
-      </p>
-
-      <!-- TABS -->
-      <div class="recon-tabs">
-
-        <button class="tab active" onclick="openTab(0)">Preparation</button>
-        <button class="tab" onclick="openTab(1)">Solvent</button>
-        <button class="tab" onclick="openTab(2)">Mixing</button>
-        <button class="tab" onclick="openTab(3)">Storage</button>
-
+    <div class="calc-v2-guide">
+      <div class="calc-v2-guide-tabs">
+        <button class="calc-v2-guide-tab active" type="button" onclick="setCalcGuideTab('guide',this)">Reconstitution Guide</button>
+        <button class="calc-v2-guide-tab" type="button" onclick="setCalcGuideTab('info',this)">Calculator Info</button>
       </div>
 
-      <!-- TAB CONTENT -->
-      <div class="tab-content active">
-        <p>
-          Begin in a sterile environment. Use gloves, alcohol swabs, and clean surfaces.
-          Ensure all materials are prepared before starting the reconstitution process.
-        </p>
+      <div class="calc-v2-guide-grid">
+        <div class="calc-v2-guide-copy">
+          <div class="calc-v2-guide-panel active" id="calcGuidePanel">
+            <h3>Correct Peptide Reconstitution</h3>
+            <p>
+              Compounds are commonly delivered in a lyophilized state to preserve stability during storage and transport.
+              Proper research handling helps maintain consistency, integrity, and reliable measurement.
+            </p>
+            <p>
+              This calculator is a measurement tool for research planning only. It converts vial amount, water volume,
+              selected syringe size, and selected research dose into estimated syringe units.
+            </p>
+          </div>
+
+          <div class="calc-v2-guide-panel" id="calcInfoPanel">
+            <h3>How the Calculator Works</h3>
+            <p>
+              The calculator converts milligrams to micrograms, calculates concentration per mL, then converts the selected
+              research amount into U-100 syringe units.
+            </p>
+            <p>
+              1 mL equals 100 units. A 0.3 mL syringe holds 30 units, a 0.5 mL syringe holds 50 units, and a 1.0 mL syringe holds 100 units.
+            </p>
+          </div>
+        </div>
+
+        <div class="calc-v2-accordion">
+          <div class="calc-v2-acc-item">
+            <button class="calc-v2-acc-btn" type="button" onclick="toggleCalcAccordion(this)">
+              1. Select syringe size <span>+</span>
+            </button>
+            <div class="calc-v2-acc-body">
+              Choose the syringe size being used. The main tube will rescale to 30, 50, or 100 units.
+            </div>
+          </div>
+
+          <div class="calc-v2-acc-item">
+            <button class="calc-v2-acc-btn" type="button" onclick="toggleCalcAccordion(this)">
+              2. Select vial amount <span>+</span>
+            </button>
+            <div class="calc-v2-acc-body">
+              Select the peptide vial amount in milligrams. The calculator converts this into micrograms.
+            </div>
+          </div>
+
+          <div class="calc-v2-acc-item">
+            <button class="calc-v2-acc-btn" type="button" onclick="toggleCalcAccordion(this)">
+              3. Select water volume <span>+</span>
+            </button>
+            <div class="calc-v2-acc-body">
+              Select how much bacteriostatic water is added. This determines the final concentration.
+            </div>
+          </div>
+
+          <div class="calc-v2-acc-item">
+            <button class="calc-v2-acc-btn" type="button" onclick="toggleCalcAccordion(this)">
+              4. Read pull amount <span>+</span>
+            </button>
+            <div class="calc-v2-acc-body">
+              The blue fill and unit readout update automatically to show the estimated amount to draw.
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="tab-content">
-        <p>
-          Select bacteriostatic water as your solvent. Allow both peptide and solvent
-          to reach room temperature before use to ensure proper dissolution.
-        </p>
+      <div class="calc-v2-safe-strip">
+        <div class="calc-v2-safe-item"><strong>Research Use Only</strong>Not for human consumption</div>
+        <div class="calc-v2-safe-item"><strong>Live Unit Calculator</strong>Updates syringe fill instantly</div>
+        <div class="calc-v2-safe-item"><strong>Lab Verified Focus</strong>Built for research planning</div>
       </div>
-
-      <div class="tab-content">
-        <p>
-          Slowly introduce the solvent into the vial. Tilt at a slight angle and avoid
-          direct pressure on the powder. Do not shake—allow it to dissolve naturally.
-        </p>
-      </div>
-
-      <div class="tab-content">
-        <p>
-          Store reconstituted solutions in refrigeration (2–8°C). For best results,
-          use within several weeks to maintain integrity and effectiveness.
-        </p>
-      </div>
-
     </div>
 
   </div>
-
 </section>
-
 <section id="contact" class="about-section">
   <div class="about-card">
     <p class="eyebrow">Contact</p>

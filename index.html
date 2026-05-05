@@ -1756,12 +1756,15 @@ textarea.field{min-height:96px;resize:vertical}
    Paste directly above </style>
 ============================== */
 
-/* Make the Frequently Asked Questions title match the website color */
+/* ==============================
+   FAQ BLUE POLISH OVERRIDE
+============================== */
+
 .faq-head h2{
   color:transparent !important;
-  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
+  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
   text-shadow:
     0 0 22px rgba(43,125,255,.42),
     0 0 48px rgba(103,213,255,.22) !important;
@@ -1770,27 +1773,9 @@ textarea.field{min-height:96px;resize:vertical}
 .faq-head .eyebrow{
   color:#67d5ff !important;
   letter-spacing:.36em !important;
-  text-shadow:0 0 18px rgba(103,213,255,.35);
+  text-shadow:0 0 18px rgba(103,213,255,.35) !important;
 }
 
-/* Active FAQ question: darker blue */
-.faq-item.active .faq-question{
-  background:
-    linear-gradient(180deg,rgba(8,34,72,.88),rgba(4,16,36,.92)) !important;
-  border-bottom:1px solid rgba(103,213,255,.20);
-  color:#ffffff !important;
-}
-
-/* Active FAQ answer: lighter blue */
-.faq-item.active .faq-answer{
-  background:
-    linear-gradient(180deg,rgba(32,125,255,.16),rgba(103,213,255,.09)) !important;
-  color:#dff5ff !important;
-  padding:18px 22px 22px !important;
-  border-top:1px solid rgba(103,213,255,.14);
-}
-
-/* Make the open FAQ card glow blue */
 .faq-item.active{
   border-color:rgba(103,213,255,.62) !important;
   box-shadow:
@@ -1798,18 +1783,29 @@ textarea.field{min-height:96px;resize:vertical}
     inset 0 0 28px rgba(103,213,255,.06) !important;
 }
 
-/* Make email/contact words match website blue */
-.faq-answer strong{
-  color:#67d5ff !important;
-  text-shadow:0 0 12px rgba(103,213,255,.22);
+.faq-item.active .faq-question{
+  background:linear-gradient(180deg,rgba(8,34,72,.92),rgba(4,16,36,.96)) !important;
+  color:#ffffff !important;
+  border-bottom:1px solid rgba(103,213,255,.20) !important;
 }
 
-/* Make plus/minus button match website color */
+.faq-item.active .faq-answer{
+  background:linear-gradient(180deg,rgba(32,125,255,.16),rgba(103,213,255,.09)) !important;
+  color:#dff5ff !important;
+  padding:18px 22px 22px !important;
+  border-top:1px solid rgba(103,213,255,.14) !important;
+}
+
+.faq-answer strong{
+  color:#67d5ff !important;
+  text-shadow:0 0 12px rgba(103,213,255,.22) !important;
+}
+
 .faq-item.active .faq-icon{
   color:#67d5ff !important;
   border-color:rgba(103,213,255,.55) !important;
   background:rgba(43,125,255,.18) !important;
-  box-shadow:0 0 16px rgba(43,125,255,.24);
+  box-shadow:0 0 16px rgba(43,125,255,.24) !important;
 }
 }/* ==============================
    CALCULATOR FINAL POLISH OVERRIDE

@@ -15,7 +15,7 @@
   --blue:#2b7dff;
   --blue2:#67d5ff;
   --green:#65df87;
-  --text:#eaf1ff;
+  --text:#b9d9ff;
   --shadow:0 24px 70px rgba(0,0,0,.55);
   --radius:28px;
   --max:1440px;
@@ -164,10 +164,180 @@ section{border-radius:var(--radius);border:1px solid rgba(255,255,255,.08);box-s
 }
 }
 .eyebrow{margin:0 0 12px;color:#dbe8fa;font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:900;opacity:.88}
-.about-card h1,.about-card h2{margin:0 0 18px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.05;color:#fff}
-.about-card h3{margin:0 0 10px;color:#fff;font-size:22px}
-.about-card p{margin:0 0 16px;color:#d7e2f3;line-height:1.65;font-size:16px}
-strong{color:#fff}
+.about-card h1,
+.about-card h2{
+  margin:0 0 18px;
+  font-size:clamp(2rem,4vw,3.3rem);
+  line-height:1.05;
+  color:transparent;
+  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  text-shadow:
+    0 0 22px rgba(43,125,255,.35),
+    0 0 44px rgba(103,213,255,.18);
+}
+.about-card h3{margin:0 0 10px;color:#67d5ff;font-size:22px}
+.about-card p{margin:0 0 16px;color:#8fdfff;line-height:1.65;font-size:16px}
+strong{color:#67d5ff}
+  /* ==============================
+   FIX 3 — GLOBAL BLUE TEXT OVERRIDE
+   Makes website wording match Covenant blue
+============================== */
+
+/* Main big titles */
+.about-card h1,
+.about-card h2,
+.trust-copy h2,
+.catalog-title,
+.calc-v2-head h2,
+.legal-head h2,
+.legal-card h3,
+.faq-head h2,
+#contact h2{
+  color:transparent !important;
+  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  text-shadow:
+    0 0 22px rgba(43,125,255,.42),
+    0 0 48px rgba(103,213,255,.22) !important;
+}
+
+/* Small section labels */
+.eyebrow,
+.legal-head .eyebrow,
+.faq-head .eyebrow{
+  color:#67d5ff !important;
+  text-shadow:0 0 18px rgba(103,213,255,.30) !important;
+}
+/* Body wording: light blue instead of white */
+.about-card p,
+.trust-copy p,
+.trust-card p,
+.shop-intro p,
+.catalog .sub,
+.modal-panel li,
+.modal-panel p,
+.legal-head p,
+.legal-block p,
+.legal-block li,
+.legal-effective,
+.calc-v2-head p,
+.calc-v2-readout,
+.calc-v2-sub,
+.calc-v2-guide-copy p,
+.calc-v2-acc-body,
+.calc-v2-safe-item,
+.faq-head p,
+.faq-answer{
+  color:#9fdfff !important;
+}
+
+/* Questions / section headings: darker blue */
+.faq-question span:first-child,
+.calc-v2-acc-btn,
+.recon-title,
+.legal-block h4,
+.modal-panel h4,
+.trust-card h3,
+.calc-v2-dose-title,
+.calc-v2-result-title{
+  color:#58d8ff !important;
+}
+
+/* Answers / explanation text: lighter blue */
+.faq-answer p,
+.calc-v2-acc-body,
+.recon-content,
+.legal-block p,
+.legal-block li,
+.about-card p{
+  color:#bfeeff !important;
+}
+
+/* Keep important words blue, not white */
+strong{
+  color:#67d5ff !important;
+  text-shadow:0 0 10px rgba(103,213,255,.18);
+}
+/* Normal paragraph wording — no white */
+.about-card p,
+.trust-copy p,
+.shop-intro p,
+.faq-head p,
+.legal-head p,
+.legal-block p,
+.legal-block li,
+.calc-v2-head p,
+.calc-v2-guide-copy p,
+.calc-v2-sub,
+.calc-v2-safe-item,
+.footer{
+  color:#b9d9ff !important;
+}
+
+/* Bold words should be bright blue, not white */
+strong,
+.about-card strong,
+.legal-block strong,
+.faq-answer strong,
+#contact strong{
+  color:#67d5ff !important;
+  text-shadow:0 0 12px rgba(103,213,255,.22) !important;
+}
+
+/* Smaller headings */
+.about-card h3,
+.trust-card h3,
+.modal-panel h4,
+.cart-box h3,
+.legal-block h4,
+.calc-v2-guide-copy h3,
+.calc-v2-syringe-panel h3,
+.calc-v2-dose-title,
+.calc-v2-result-title{
+  color:#67d5ff !important;
+}
+
+/* FAQ questions = darker blue */
+.faq-question span:first-child{
+  color:#58d8ff !important;
+}
+
+/* FAQ answers = lighter blue */
+.faq-answer,
+.faq-answer p{
+  color:#dff5ff !important;
+}
+
+/* Calculator accordion questions = darker blue */
+.calc-v2-acc-btn{
+  color:#58d8ff !important;
+}
+
+/* Calculator accordion answers = lighter blue */
+.calc-v2-acc-body{
+  color:#dff5ff !important;
+}
+
+/* Reconstitution accordion questions = darker blue */
+.recon-title{
+  color:#58d8ff !important;
+}
+
+/* Reconstitution accordion answers = lighter blue */
+.recon-content{
+  color:#dff5ff !important;
+}
+
+/* Product/card names that were white */
+.card h3,
+.preview-card h3,
+.modal-right h2,
+.calc-v2-card h3{
+  color:#67d5ff !important;
+}
 .about-list{margin:18px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;list-style:none}
 .about-list li{position:relative;padding:13px 16px 13px 42px;border-radius:14px;border:1px solid rgba(103,213,255,.18);background:rgba(2,6,23,.36);color:#eaf1ff}
 .about-list li::before{content:"✦";position:absolute;left:16px;top:12px;color:var(--blue2);font-size:13px}
@@ -1753,7 +1923,7 @@ textarea.field{min-height:96px;resize:vertical}
     left: calc(50% + 105px);
   }/* ==============================
    }
-
+  }
 /* ==============================
    FAQ BLUE POLISH OVERRIDE
 ============================== */

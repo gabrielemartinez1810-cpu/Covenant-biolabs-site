@@ -3010,7 +3010,9 @@ function openProduct(name){
   const purityLine = product.purity ? `<li><strong>Purity:</strong> ${product.purity}</li>` : "";
   const detailsLine = product.details ? `<li><strong>Details:</strong> ${product.details}</li>` : "";
   const coaButtonText = product.hasCOA ? "View Lab Verified COA" : "COA Status";
-
+const isSupplyItem = product.name.toLowerCase().includes("syringe");
+const modalBadge = isSupplyItem ? "" : `<div class="verified-pill">Lab Verified</div>`;
+const modalStatus = isSupplyItem ? "" : `<div class="modal-status">Lab Verified</div>`;
   const coaViewer = `
     <div class="coa-viewer" id="coaViewer">
       <div class="modal-panel">

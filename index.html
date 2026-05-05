@@ -3203,8 +3203,177 @@ function initFaqAccordion(){
 
 initFaqAccordion();
 
-updateCartUI();
-updateCalc();
+/* PREMIUM LIVE PEPTIDE CALCULATOR LOGIC */
+const calcState = {
+  syringeUnits: 100,
+  syringeMl: 1,
+  vialMg: 10,
+  waterMl: 2,
+  doseMcg: 500
+};
+
+function activateCalcButton(group, value){
+  document.querySelectorAll(`[data-calc-group="${group}"]`).forEach(button => {
+    button.classList.toggle("active", String(button.dataset.calcValue) === String(value));
+  });
+}
+
+function selectCalcSyringe(units, ml, button){
+  calcState.syringeUnits = Number(units);
+  calcState.syringeMl = Number(ml);
+  activateCalcButton("syringe", units);
+  updateCalc();
+}
+
+function selectCalcVial(mg, button){
+  calcState.vialMg = Number(mg);
+  activateCalcButton("vial", mg);
+  updateCalc();
+}
+
+function selectCalcWater(ml, button){
+  calcState.waterMl = Number(ml);
+  activateCalcButton("water", ml);
+  updateCalc();
+}
+
+function selectCalcDose(mcg, button){
+  calcState.doseMcg = Number(mcg);
+  activateCalcButton("dose", mcg);
+  updateCalc();
+}
+
+function renderCalcScale(maxUnits){
+  const scale = document.getElementById("calcV2Scale");
+  if(!scale) return;
+
+  let step = 10;
+  if(maxUnits === 30) step = 5;
+  if(maxUnits === 50) step = 10;
+  if(maxUnits === 100) step = 10;
+
+  let html = "";
+
+  for(let unit = maxUnits; unit >= 0; unit -= step){
+    const bottom = (unit / maxUnits) * 100;
+
+    html += `
+      <div class="calc-v2-scale-row" style="bottom:${bottom}%;">
+        <span>${unit}</span>
+      </div>
+    `;
+  }
+
+  scale.innerHTML = html;
+}
+
+function updateCalc(){
+  const concentrationMcgPerMl = (calcState.vialMg * 1000) / calcState.waterMl;
+  const pullMl = calcState.doseMcg / concentrationMcgPerMl;
+  const pullUnits = pullMl * 100;
+
+  const safeUnits = Math.max(0, pullUnits);
+  const fillPercent = Math.min((safeUnits / calcState.syringeUnits) * 100, 100);
+
+  const text = document.getElementById("calcV2Text");
+  const liquid = document.getElementById("calcV2Liquid");
+  const bubble = document.getElementById("calcV2Bubble");
+  const units = document.getElementById("calcV2Units");
+  const ml = document.getElementById("calcV2Ml");
+  const syringeLabel = document.getElementById("calcV2SyringeLabel");
+  const concentration = document.getElementById("calcV2Concentration");
+  const warning = document.getElementById("calcV2Warning");
+
+  renderCalcScale(calcState.syringeUnits);
+
+  if(text){
+    text.innerHTML = `To have a dose of <strong>${calcState.doseMcg} mcg</strong>, pull the syringe to <strong>${safeUnits.toFixed(1)} units</strong>.`;
+  }
+
+  if(liquid){
+    liquid.style.height = `${fillPercent}%`;
+  }
+
+  if(bubble){
+    bubble.textContent = safeUnits.toFixed(1);
+    bubble.style.bottom = `${fillPercent}%`;
+  }
+
+  if(units){
+    units.textContent = `${safeUnits.toFixed(1)} units`;
+  }
+
+  if(ml){
+    ml.textContent = `${pullMl.toFixed(2)} mL`;
+  }
+
+  if(syringeLabel){
+    syringeLabel.textContent = `Selected syringe: ${calcState.syringeMl.toFixed(1)} mL / ${calcState.syringeUnits} units`;
+  }
+
+  if(concentration){
+    concentration.textContent = `Concentration: ${Math.round(concentrationMcgPerMl).toLocaleString()} mcg/mL`;
+  }
+
+  if(warning){
+    if(safeUnits > calcState.syringeUnits){
+      warning.style.display = "block";
+      warning.textContent = `Selected syringe is too small. This dose requires ${safeUnits.toFixed(1)} units, but your syringe only holds ${calcState.syringeUnits} units.`;
+    } else {
+      warning.style.display = "none";
+      warning.textContent = "";
+    }
+  }
+}
+
+function resetPeptideCalc(){
+  calcState.syringeUnits = 100;
+  calcState.syringeMl = 1;
+  calcState.vialMg = 10;
+  calcState.waterMl = 2;
+  calcState.doseMcg = 500;
+
+  activateCalcButton("syringe", 100);
+  activateCalcButton("vial", 10);
+  activateCalcButton("water", 2);
+  activateCalcButton("dose", 500);
+
+  updateCalc();
+}
+
+function setCalcGuideTab(tab, button){
+  document.querySelectorAll(".calc-v2-guide-tab").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+
+  const guidePanel = document.getElementById("calcGuidePanel");
+  const infoPanel = document.getElementById("calcInfoPanel");
+
+  if(guidePanel) guidePanel.classList.toggle("active", tab === "guide");
+  if(infoPanel) infoPanel.classList.toggle("active", tab === "info");
+}
+
+function toggleCalcAccordion(button){
+  const item = button.closest(".calc-v2-acc-item");
+  if(!item) return;
+
+  const isActive = item.classList.contains("active");
+
+  document.querySelectorAll(".calc-v2-acc-item").forEach(acc => {
+    acc.classList.remove("active");
+    const span = acc.querySelector(".calc-v2-acc-btn span");
+    if(span) span.textContent = "+";
+  });
+
+  if(!isActive){
+    item.classList.add("active");
+    const span = item.querySelector(".calc-v2-acc-btn span");
+    if(span) span.textContent = "−";
+  }
+}
+
 updateCartUI();
 updateCalc();
 </script>

@@ -2956,7 +2956,8 @@ const products = [
 let currentProduct = null;
 let currentZoom = 1;
 let cart = [];
-
+const CBL_ORDER_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyd2dl14BEu10NkGcRwKwjX5KGpWl9ktDRY9w3olqmW2QhC4sDv2kbhK0wJVPt_VDI/exec";
+const CBL_ORDER_TOKEN = "CBL1810PRIVATE2026";
 const minZoom = 1;
 const maxZoom = 4;
 
@@ -3296,7 +3297,69 @@ function cartSummaryText(){
 
   return lines.join("\n");
 }
+async function submitCblOrderToSheet(event){
+  event.preventDefault();
 
+  const form = event.target;
+  const submitButton = form.querySelector(".order-submit");
+
+  if(cart.length === 0){
+    alert("Your cart is empty.");
+    return false;
+  }
+
+  if(submitButton){
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting Order...";
+  }
+
+  const firstName = form.querySelector('[name="First Name"]')?.value.trim() || "";
+  const lastName = form.querySelector('[name="Last Name"]')?.value.trim() || "";
+  const email = form.querySelector('[name="Email"]')?.value.trim() || "";
+  const phone = form.querySelector('[name="Phone Number"]')?.value.trim() || "";
+  const shippingAddress = form.querySelector('[name="Shipping Address"]')?.value.trim() || "";
+  const paymentMethod = form.querySelector('[name="Payment Method"]:checked')?.value || "Not Selected";
+
+  const orderId = "CBL-" + Date.now();
+
+  const payload = {
+    token: CBL_ORDER_TOKEN,
+    orderId: orderId,
+    customerName: `${firstName} ${lastName}`.trim(),
+    email: email,
+    phone: phone,
+    paymentMethod: paymentMethod,
+    channel: "Website",
+    paymentStatus: "Pending",
+    fulfillmentStatus: "Not Fulfilled",
+    shippingCharged: 0,
+    shippingCost: 0,
+    discount: 0,
+    notes: `Shipping Address: ${shippingAddress}`,
+    items: cart.map(item => ({
+      sku: item.name,
+      qty: item.quantity,
+      unitPrice: item.price,
+      notes: `Shipping Address: ${shippingAddress}`
+    }))
+  };
+
+  try{
+    await fetch(CBL_ORDER_WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch(error){
+    console.log("Google Sheet submission issue:", error);
+  }
+
+  form.submit();
+  return false;
+}
 function showCartCheckout(){
   renderCartCheckout();
 }
@@ -3326,7 +3389,7 @@ function renderCartCheckout(){
     <div class="modal-panel">
       <h3>Order Request</h3>
 
-      <form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST">
+<form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST" onsubmit="return submitCblOrderToSheet(event)">
         <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="Order Summary" value="${summary}">

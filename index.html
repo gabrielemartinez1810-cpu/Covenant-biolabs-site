@@ -2962,18 +2962,56 @@ const minZoom = 1;
 const maxZoom = 4;
 
 const previewRow = document.getElementById("previewRow");
+function getCartQty(productName){
+  const item = cart.find(item => item.name === productName);
+  return item ? item.quantity : 0;
+}
 
+function refreshProductGrid(){
+  const productGrid = document.getElementById("productGrid");
+  if(!productGrid) return;
+
+  productGrid.innerHTML = "";
+  products.forEach(product => {
+    productGrid.appendChild(renderProductCard(product, false));
+  });
+}
 function renderProductCard(product, preview=false){
   const card = document.createElement("div");
   card.className = preview ? "preview-card" : "card";
   card.onclick = () => openProduct(product.name);
 
+  const qty = getCartQty(product.name);
+
   const badge = product.name.toLowerCase().includes("syringe")
     ? ""
     : `<div class="verified-pill">Lab Verified</div>`;
 
+  const qtyBadge = `
+    <div style="
+      position:absolute;
+      top:10px;
+      left:10px;
+      z-index:3;
+      min-width:32px;
+      height:32px;
+      padding:0 10px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:900;
+      color:#07101d;
+      background:${qty > 0 ? "linear-gradient(180deg,#8beaff,#58d8ff)" : "rgba(255,255,255,.18)"};
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:${qty > 0 ? "0 0 18px rgba(103,213,255,.30)" : "none"};
+    ">${qty}</div>
+  `;
+
   if(preview){
     card.innerHTML = `
+      ${qtyBadge}
       ${badge}
       <img src="${product.img}" alt="${product.name}" onerror="this.style.display='none'">
       <h3>${product.name}</h3>
@@ -2982,15 +3020,19 @@ function renderProductCard(product, preview=false){
   } else {
     card.innerHTML = `
       <div class="product-thumb">
+        ${qtyBadge}
         ${badge}
         <img src="${product.img}" alt="${product.name}" onerror="showImageFallback(this)">
         <div class="img-fallback">${product.name}</div>
       </div>
       <h3>${product.name}</h3>
       <p class="price">${product.price}</p>
-      <button type="button">View Details</button>
+      <button type="button">View Details • Qty: ${qty}</button>
     `;
   }
+
+  return card;
+}
 
   return card;
 }
@@ -3005,7 +3047,8 @@ function openProduct(name){
   if(!product) return;
 
   currentProduct = product;
-
+const qtyInCart = getCartQty(product.name);
+const addButtonLabel = `Add to Cart (${qtyInCart})`;
   const assayLine = product.assay ? `<li><strong>Assay:</strong> ${product.assay}</li>` : "";
   const purityLine = product.purity ? `<li><strong>Purity:</strong> ${product.purity}</li>` : "";
   const detailsLine = product.details ? `<li><strong>Details:</strong> ${product.details}</li>` : "";
@@ -3057,7 +3100,9 @@ ${modalBadge}
 ${modalStatus}
           <h2>${product.name}</h2>
           <div class="modal-price">${product.price}</div>
-
+<div style="margin:-4px 0 16px;color:#67d5ff;font-weight:900;font-size:15px;">
+  Quantity in Cart: ${qtyInCart}
+</div>
           <div class="modal-panel">
             <h4>Product Information</h4>
             <ul>
@@ -3088,7 +3133,7 @@ ${modalStatus}
 
           <div class="modal-actions">
             <button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button>
-            <button class="info-btn" type="button" onclick="addToCart(currentProduct)">Add to Cart</button>
+<button class="info-btn" type="button" onclick="addToCart(currentProduct)">${addButtonLabel}</button>
             <button class="contact-btn" type="button" onclick="copyContactEmail()">Contact for Info</button>
           </div>
 
@@ -3211,6 +3256,14 @@ function addToCart(product){
   }
 
   updateCartUI();
+  refreshProductGrid();
+
+  if(currentProduct && currentProduct.name === product.name){
+    openProduct(product.name);
+  }
+}
+
+  updateCartUI();
 }
 
 function updateCartUI(){
@@ -3225,6 +3278,7 @@ function updateCartUI(){
   if(cart.length === 0){
     itemsDiv.innerHTML = `<p style="color:#dbe8fa;">Your cart is empty.</p>`;
     totalDiv.textContent = "Estimated Total: $0.00";
+    refreshProductGrid();
     return;
   }
 
@@ -3255,6 +3309,7 @@ function updateCartUI(){
   }).join("");
 
   totalDiv.textContent = `Estimated Total: $${total.toFixed(2)}`;
+refreshProductGrid();
 }
 
 function changeCartQuantity(index,amount){

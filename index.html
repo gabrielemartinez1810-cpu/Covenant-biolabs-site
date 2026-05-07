@@ -162,7 +162,6 @@ section{border-radius:var(--radius);border:1px solid rgba(255,255,255,.08);box-s
   70%{opacity:.45}
   100%{transform:translateX(45%);opacity:0}
 }
-}
 .eyebrow{margin:0 0 12px;color:#dbe8fa;font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:900;opacity:.88}
 .about-card h1,
 .about-card h2{
@@ -2963,16 +2962,19 @@ const maxZoom = 4;
 
 const previewRow = document.getElementById("previewRow");
 
+const previewRow = document.getElementById("previewRow");
+const productGrid = document.getElementById("productGrid");
+
 function getCartQty(productName){
   const item = cart.find(item => item.name === productName);
   return item ? item.quantity : 0;
 }
 
 function refreshProductGrid(){
-  const productGrid = document.getElementById("productGrid");
   if(!productGrid) return;
 
   productGrid.innerHTML = "";
+
   products.forEach(product => {
     productGrid.appendChild(renderProductCard(product, false));
   });
@@ -2994,7 +2996,7 @@ function renderProductCard(product, preview=false){
       position:absolute;
       top:10px;
       left:10px;
-      z-index:3;
+      z-index:5;
       min-width:32px;
       height:32px;
       padding:0 10px;
@@ -3036,11 +3038,7 @@ function renderProductCard(product, preview=false){
   return card;
 }
 
-const productGrid = document.getElementById("productGrid");
-
-products.forEach(product => {
-  if(productGrid) productGrid.appendChild(renderProductCard(product, false));
-});
+refreshProductGrid();
 function openProduct(name){
   const product = products.find(item => item.name === name);
   if(!product) return;
@@ -3255,22 +3253,12 @@ function addToCart(product){
   }
 
   updateCartUI();
-
-  if(currentProduct && currentProduct.name === product.name){
-    openProduct(product.name);
-  }
-}
-  updateCartUI();
   refreshProductGrid();
 
   if(currentProduct && currentProduct.name === product.name){
     openProduct(product.name);
   }
 }
-
-  updateCartUI();
-}
-
 function updateCartUI(){
   const count = document.getElementById("cartCount");
   const itemsDiv = document.getElementById("cartItems");

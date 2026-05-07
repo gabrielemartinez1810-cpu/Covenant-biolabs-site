@@ -2962,6 +2962,7 @@ const minZoom = 1;
 const maxZoom = 4;
 
 const previewRow = document.getElementById("previewRow");
+
 function getCartQty(productName){
   const item = cart.find(item => item.name === productName);
   return item ? item.quantity : 0;
@@ -2976,6 +2977,7 @@ function refreshProductGrid(){
     productGrid.appendChild(renderProductCard(product, false));
   });
 }
+
 function renderProductCard(product, preview=false){
   const card = document.createElement("div");
   card.className = preview ? "preview-card" : "card";
@@ -3034,14 +3036,11 @@ function renderProductCard(product, preview=false){
   return card;
 }
 
-  return card;
-}
-  const productGrid = document.getElementById("productGrid");
+const productGrid = document.getElementById("productGrid");
 
 products.forEach(product => {
   if(productGrid) productGrid.appendChild(renderProductCard(product, false));
 });
-
 function openProduct(name){
   const product = products.find(item => item.name === name);
   if(!product) return;
@@ -3255,6 +3254,12 @@ function addToCart(product){
     });
   }
 
+  updateCartUI();
+
+  if(currentProduct && currentProduct.name === product.name){
+    openProduct(product.name);
+  }
+}
   updateCartUI();
   refreshProductGrid();
 

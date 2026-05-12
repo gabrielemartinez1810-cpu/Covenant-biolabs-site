@@ -4198,5 +4198,121 @@ showCblPage();
 updateCartUI();
 updateCalc();
 </script>
+  <style>
+/* FINAL CONTACT SECTION OVERRIDE - MUST STAY AT VERY BOTTOM */
+html body #contact.about-section{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:70px 28px !important;
+  margin-bottom:24px !important;
+  border-radius:34px !important;
+  border:1px solid rgba(103,213,255,.24) !important;
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.38),rgba(3,8,18,.90)),
+    radial-gradient(circle at 18% 32%,rgba(103,213,255,.20),transparent 34%),
+    radial-gradient(circle at 84% 74%,rgba(43,125,255,.22),transparent 34%),
+    url("legal-bg.png") center center / cover no-repeat !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.58),
+    inset 0 0 80px rgba(43,125,255,.08) !important;
+}
+
+html body #contact.about-section::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background:
+    radial-gradient(circle at 12% 22%,rgba(103,213,255,.30) 0 2px,transparent 4px),
+    radial-gradient(circle at 18% 28%,rgba(43,125,255,.28) 0 2px,transparent 4px),
+    radial-gradient(circle at 24% 20%,rgba(103,213,255,.22) 0 2px,transparent 4px),
+    radial-gradient(circle at 82% 28%,rgba(103,213,255,.28) 0 2px,transparent 4px),
+    radial-gradient(circle at 88% 36%,rgba(43,125,255,.24) 0 2px,transparent 4px),
+    radial-gradient(circle at 92% 82%,rgba(103,213,255,.28) 0 2px,transparent 4px);
+  opacity:.75 !important;
+  filter:drop-shadow(0 0 16px rgba(103,213,255,.45)) !important;
+}
+
+html body #contact .about-card{
+  position:relative !important;
+  z-index:2 !important;
+  width:min(1100px,96%) !important;
+  min-height:310px !important;
+  margin:0 auto !important;
+  padding:58px 28px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  border-radius:30px !important;
+  border:1px solid rgba(103,213,255,.22) !important;
+  background:
+    linear-gradient(180deg,rgba(5,15,29,.76),rgba(3,9,20,.92)) !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.52),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 0 44px rgba(61,169,255,.12) !important;
+  backdrop-filter:blur(10px) !important;
+  -webkit-backdrop-filter:blur(10px) !important;
+}
+
+html body #contact .eyebrow{
+  width:100% !important;
+  margin:0 auto 18px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:18px !important;
+  color:#67d5ff !important;
+  text-align:center !important;
+  letter-spacing:.38em !important;
+  font-size:13px !important;
+  line-height:1.2 !important;
+  overflow:visible !important;
+}
+
+html body #contact .eyebrow::before,
+html body #contact .eyebrow::after{
+  content:"" !important;
+  width:74px !important;
+  height:1px !important;
+  display:block !important;
+  background:linear-gradient(90deg,transparent,#67d5ff,transparent) !important;
+  box-shadow:0 0 14px rgba(103,213,255,.45) !important;
+}
+
+html body #contact h2{
+  width:100% !important;
+  margin:0 0 20px !important;
+  text-align:center !important;
+  font-size:clamp(2.6rem,5.4vw,4.9rem) !important;
+  line-height:1 !important;
+  color:transparent !important;
+  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  text-shadow:
+    0 0 24px rgba(43,125,255,.44),
+    0 0 56px rgba(103,213,255,.24) !important;
+}
+
+html body #contact p:not(.eyebrow){
+  max-width:780px !important;
+  margin:0 auto !important;
+  color:#b9d9ff !important;
+  text-align:center !important;
+  font-size:18px !important;
+  line-height:1.7 !important;
+}
+
+html body #contact strong{
+  color:#67d5ff !important;
+  text-shadow:0 0 14px rgba(103,213,255,.34) !important;
+}
+</style>
 </body>
 </html>

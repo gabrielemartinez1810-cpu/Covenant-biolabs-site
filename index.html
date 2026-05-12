@@ -4676,6 +4676,47 @@ html body #shop .catalog-title span{
 /* Remove small research-use sentence */
 html body #shop .sub{
   display:none !important;
+}/* FINAL SHOP IMAGE VISIBILITY FIX */
+html body #shop.catalog{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:72px 28px 62px !important;
+  margin-top:40px !important;
+  border-radius:34px !important;
+  border:1px solid rgba(103,213,255,.24) !important;
+  background:#030812 !important;
+}
+
+html body #shop.catalog::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background:url("shop-catalog-bg.png?v=12") center center / cover no-repeat !important;
+  opacity:1 !important;
+  filter:brightness(1.85) contrast(1.12) saturate(1.18) !important;
+  transform:scale(1.02) !important;
+}
+
+html body #shop.catalog::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.04),rgba(3,8,18,.20) 55%,rgba(3,8,18,.45) 100%) !important;
+}
+
+html body #shop .catalog-inner{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+html body #shop .sub{
+  display:none !important;
 }
 </style>
 </body>

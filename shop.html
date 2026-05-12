@@ -7,7 +7,15 @@
 <meta name="description" content="Covenant Bio Labs research catalog. Research use only.">
 
 <style>
-:root{
+/* SHOP PAGE ONLY — hide every section except the catalog */
+body > .wrap > section:not(#shop){
+  display:none !important;
+}
+
+#shop{
+  display:block !important;
+  margin-top:0 !important;
+}
   --bg:#03060b;
   --bg2:#08111b;
   --line:rgba(103,182,255,.22);

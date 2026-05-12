@@ -4498,6 +4498,117 @@ html body #contact p:not(.eyebrow){
 html body #contact strong{
   color:#67d5ff !important;
   text-shadow:0 0 14px rgba(103,213,255,.34) !important;
+}/* FINAL SHOP CATALOG BACKGROUND OVERRIDE - MUST STAY AT VERY BOTTOM */
+
+html body #shop.catalog{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:72px 28px 62px !important;
+  margin-top:40px !important;
+  border-radius:34px !important;
+  border:1px solid rgba(103,213,255,.24) !important;
+  background:#030812 !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.58),
+    inset 0 0 80px rgba(43,125,255,.08) !important;
+}
+
+/* This is the actual background image layer */
+html body #shop.catalog::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background-image:url("shop-catalog-bg.png?v=777") !important;
+  background-repeat:repeat-y !important;
+  background-position:center top !important;
+  background-size:100% auto !important;
+  opacity:1 !important;
+  filter:saturate(1.15) contrast(1.08) brightness(1.08) !important;
+}
+
+/* This keeps it readable but does NOT hide the background */
+html body #shop.catalog::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.18),rgba(3,8,18,.48) 55%,rgba(3,8,18,.78) 100%),
+    radial-gradient(circle at 50% 20%,rgba(103,213,255,.12),transparent 42%) !important;
+}
+
+/* Keeps your catalog content above the background */
+html body #shop .catalog-inner{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+/* Center the title */
+html body #shop .eyebrow{
+  text-align:center !important;
+  margin:0 auto 18px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:18px !important;
+  color:#67d5ff !important;
+  letter-spacing:.42em !important;
+}
+
+html body #shop .eyebrow::before,
+html body #shop .eyebrow::after{
+  content:"" !important;
+  width:82px !important;
+  height:1px !important;
+  display:block !important;
+  background:linear-gradient(90deg,transparent,#67d5ff,transparent) !important;
+  box-shadow:0 0 14px rgba(103,213,255,.45) !important;
+}
+
+html body #shop .catalog-title{
+  text-align:center !important;
+  margin:0 auto 44px !important;
+  font-size:clamp(3.2rem,6.5vw,6rem) !important;
+  line-height:.95 !important;
+}
+
+html body #shop .catalog-title span{
+  display:block !important;
+}
+
+html body #shop .sub{
+  display:none !important;
+}
+
+/* Product layout */
+html body #shop .grid{
+  position:relative !important;
+  z-index:2 !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:24px !important;
+}
+
+html body #shop .card{
+  background:linear-gradient(180deg,rgba(7,11,20,.72),rgba(9,15,26,.90)) !important;
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
+}
+
+@media(max-width:1100px){
+  html body #shop .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:560px){
+  html body #shop .grid{
+    grid-template-columns:1fr !important;
+  }
 }
 </style>
 </body>

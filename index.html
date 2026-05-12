@@ -4604,6 +4604,78 @@ html body #shop .card{
   html body #shop .grid{
     grid-template-columns:1fr !important;
   }
+}/* FINAL SHOP CATALOG VISIBILITY FIX - PASTE ABOVE LAST </style> */
+
+html body #shop.catalog{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:72px 28px 62px !important;
+  margin-top:40px !important;
+  border-radius:34px !important;
+  border:1px solid rgba(103,213,255,.28) !important;
+  background:#020713 !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.58),
+    inset 0 0 80px rgba(43,125,255,.10) !important;
+}
+
+/* Actual background image — brighter and visible */
+html body #shop.catalog::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+
+  background:url("shop-catalog-bg.png?v=2005") center top / cover no-repeat !important;
+
+  opacity:1 !important;
+  filter:brightness(4.2) contrast(1.45) saturate(1.6) !important;
+}
+
+/* Light readable overlay, not the heavy dark one */
+html body #shop.catalog::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+
+  background:
+    radial-gradient(circle at 50% 18%,rgba(103,213,255,.16),transparent 34%),
+    linear-gradient(180deg,rgba(3,8,18,.02),rgba(3,8,18,.18) 55%,rgba(3,8,18,.38) 100%) !important;
+}
+
+/* Keep catalog content above the background */
+html body #shop .catalog-inner{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+/* Make the cards slightly more transparent so the background shows through */
+html body #shop .card{
+  background:linear-gradient(180deg,rgba(7,11,20,.48),rgba(9,15,26,.72)) !important;
+  border:1px solid rgba(103,213,255,.30) !important;
+  backdrop-filter:blur(5px) !important;
+  -webkit-backdrop-filter:blur(5px) !important;
+}
+
+/* Keep title centered */
+html body #shop .catalog-title{
+  text-align:center !important;
+  margin:0 auto 44px !important;
+  font-size:clamp(3.2rem,6.5vw,6rem) !important;
+  line-height:.95 !important;
+}
+
+html body #shop .catalog-title span{
+  display:block !important;
+}
+
+/* Remove small research-use sentence */
+html body #shop .sub{
+  display:none !important;
 }
 </style>
 </body>

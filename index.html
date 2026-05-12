@@ -38,23 +38,6 @@ body.modal-open{overflow:hidden}
 img{display:block;max-width:100%}
 button,input,textarea{font:inherit}
 
-.molecule-bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:.44}
-.molecule{position:absolute;animation:floatDrift linear infinite;filter:drop-shadow(0 0 10px rgba(103,213,255,.18))}
-.molecule .node{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#8ddfff 35%,#2b7dff 80%);box-shadow:0 0 10px rgba(103,213,255,.4);animation:pulseNode 4s ease-in-out infinite}
-.molecule .bond{position:absolute;height:2px;transform-origin:left center;background:linear-gradient(90deg,rgba(255,255,255,.78),rgba(103,213,255,.45));box-shadow:0 0 7px rgba(103,213,255,.18)}
-
-@keyframes floatDrift{
-  0%{transform:translateY(0) translateX(0) rotate(0deg) scale(1)}
-  25%{transform:translateY(-18px) translateX(10px) rotate(3deg) scale(1.02)}
-  50%{transform:translateY(-34px) translateX(-6px) rotate(6deg) scale(1)}
-  75%{transform:translateY(-20px) translateX(14px) rotate(2deg) scale(.98)}
-  100%{transform:translateY(-52px) translateX(-8px) rotate(0deg) scale(1)}
-}
-@keyframes pulseNode{
-  0%,100%{opacity:.75;box-shadow:0 0 8px rgba(103,213,255,.28)}
-  50%{opacity:1;box-shadow:0 0 18px rgba(103,213,255,.62)}
-}
-
 .wrap{width:min(var(--max),95%);margin:0 auto;padding:18px 0 48px;position:relative;z-index:1}
 
 .topbar{
@@ -2578,7 +2561,6 @@ html body #contact strong{
 </style>
 
 <body>
-<div class="molecule-bg" id="moleculeBg"></div>
 
 <div class="wrap">
 <header class="topbar">
@@ -4137,15 +4119,7 @@ function makeMolecule(top,left,scale,duration,delay){
   `;
 }
 
-document.getElementById("moleculeBg").innerHTML =
-  makeMolecule(6,4,1.15,22,0) +
-  makeMolecule(12,80,1.35,28,-3) +
-  makeMolecule(24,56,.90,20,-6) +
-  makeMolecule(38,12,1,24,-2) +
-  makeMolecule(52,84,1.22,26,-8) +
-  makeMolecule(68,8,.92,19,-4) +
-  makeMolecule(74,52,1.05,22,-5) +
-  makeMolecule(84,88,.82,17,-7);
+
 function initFaqAccordion(){
   const faqItems = document.querySelectorAll(".faq-item");
 

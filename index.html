@@ -2220,9 +2220,16 @@ html body #legal .legal-shell::before {
     radial-gradient(circle at 12% 82%, rgba(43,125,255,.32) 0 2px, transparent 4px),
     radial-gradient(circle at 88% 92%, rgba(103,213,255,.32) 0 2px, transparent 4px);
   filter: drop-shadow(0 0 16px rgba(103,213,255,.55));
+  /* PAGE SPLIT FIX — ONLY SHOW ONE PAGE SECTION AT A TIME */
+body.page-ready .wrap > section{
+  display:none !important;
+}
+
+body.page-ready .wrap > section.page-show{
+  display:block !important;
 }
 </style>
-</style>
+
 <body>
 <div class="molecule-bg" id="moleculeBg"></div>
 
@@ -2230,14 +2237,14 @@ html body #legal .legal-shell::before {
 <header class="topbar">
 <a href="index.html" class="brand"><img src="hero-badge-v2.png" alt="Covenant Bio Labs"></a>
 <nav class="nav">
-  <a href="index.html" class="active">Home</a>
-  <a href="shop.html">Shop Catalog</a>
-  <a href="contact.html">Contact</a>
-  <a href="calculator.html">Peptide Calculator</a>
-  <a href="faq.html">FAQ</a>
-  <a href="legal.html">Legal</a>
+  <a href="#home" class="active">Home</a>
+  <a href="#shop">Shop Catalog</a>
+  <a href="#contact">Contact</a>
+  <a href="#calculator">Peptide Calculator</a>
+  <a href="#faq">FAQ</a>
+  <a href="#legal">Legal</a>
 </nav>
-</nav>
+
   <button class="cart-nav" type="button" onclick="openCart()">Cart <span class="cart-count" id="cartCount">0</span></button>
 </header>
 
@@ -2276,7 +2283,7 @@ html body #legal .legal-shell::before {
   </div>
 </section>
 
-<section class="trust-section">
+<section id="trust" class="trust-section">
   <span class="proton-float p1"></span>
   <span class="proton-float p2"></span>
   <span class="proton-float p3"></span>
@@ -3988,7 +3995,45 @@ function toggleCalcAccordion(button){
     if(span) span.textContent = "−";
   }
 }
+/* PAGE SPLIT FIX — HOME / SHOP / CONTACT / CALCULATOR / FAQ / LEGAL */
+function showCblPage(){
+  const rawHash = window.location.hash || "#home";
+  const hash = rawHash.toLowerCase();
 
+  const pages = {
+    "#home": ["home", "about", "trust"],
+    "#shop": ["shop"],
+    "#contact": ["contact"],
+    "#calculator": ["calculator"],
+    "#faq": ["faq"],
+    "#legal": ["legal"],
+    "#terms": ["legal"],
+    "#privacy": ["legal"],
+    "#shipping": ["legal"]
+  };
+
+  const activeSections = pages[hash] || pages["#home"];
+
+  document.querySelectorAll(".wrap > section").forEach(section => {
+    section.classList.toggle("page-show", activeSections.includes(section.id));
+  });
+
+  document.querySelectorAll(".nav a").forEach(link => {
+    let activeHash = hash;
+
+    if(hash === "#terms" || hash === "#privacy" || hash === "#shipping"){
+      activeHash = "#legal";
+    }
+
+    link.classList.toggle("active", link.getAttribute("href").toLowerCase() === activeHash);
+  });
+
+  document.body.classList.add("page-ready");
+}
+
+window.addEventListener("hashchange", showCblPage);
+window.addEventListener("load", showCblPage);
+showCblPage();
 updateCartUI();
 updateCalc();
 </script>

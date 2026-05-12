@@ -4499,6 +4499,7 @@ html body #contact strong{
   color:#67d5ff !important;
   text-shadow:0 0 14px rgba(103,213,255,.34) !important;
 }/* FINAL SHOP CATALOG BACKGROUND OVERRIDE - MUST STAY AT VERY BOTTOM */
+/* FINAL SHOP CATALOG BACKGROUND OVERRIDE - BRIGHT VERSION */
 
 html body #shop.catalog{
   position:relative !important;
@@ -4514,22 +4515,20 @@ html body #shop.catalog{
     inset 0 0 80px rgba(43,125,255,.08) !important;
 }
 
-/* This is the actual background image layer */
 html body #shop.catalog::before{
   content:"" !important;
   position:absolute !important;
   inset:0 !important;
   z-index:0 !important;
   pointer-events:none !important;
-  background-image:url("shop-catalog-bg.png?v=777") !important;
+  background-image:url("shop-catalog-bg.png?v=999") !important;
   background-repeat:repeat-y !important;
   background-position:center top !important;
   background-size:100% auto !important;
   opacity:1 !important;
-  filter:saturate(1.15) contrast(1.08) brightness(1.08) !important;
+  filter:brightness(2.35) contrast(1.22) saturate(1.35) !important;
 }
 
-/* This keeps it readable but does NOT hide the background */
 html body #shop.catalog::after{
   content:"" !important;
   position:absolute !important;
@@ -4537,17 +4536,14 @@ html body #shop.catalog::after{
   z-index:1 !important;
   pointer-events:none !important;
   background:
-    linear-gradient(180deg,rgba(3,8,18,.18),rgba(3,8,18,.48) 55%,rgba(3,8,18,.78) 100%),
-    radial-gradient(circle at 50% 20%,rgba(103,213,255,.12),transparent 42%) !important;
+    linear-gradient(180deg,rgba(3,8,18,.04),rgba(3,8,18,.18) 55%,rgba(3,8,18,.38) 100%) !important;
 }
 
-/* Keeps your catalog content above the background */
 html body #shop .catalog-inner{
   position:relative !important;
   z-index:2 !important;
 }
 
-/* Center the title */
 html body #shop .eyebrow{
   text-align:center !important;
   margin:0 auto 18px !important;
@@ -4585,7 +4581,6 @@ html body #shop .sub{
   display:none !important;
 }
 
-/* Product layout */
 html body #shop .grid{
   position:relative !important;
   z-index:2 !important;
@@ -4594,9 +4589,9 @@ html body #shop .grid{
 }
 
 html body #shop .card{
-  background:linear-gradient(180deg,rgba(7,11,20,.72),rgba(9,15,26,.90)) !important;
-  backdrop-filter:blur(8px) !important;
-  -webkit-backdrop-filter:blur(8px) !important;
+  background:linear-gradient(180deg,rgba(7,11,20,.62),rgba(9,15,26,.82)) !important;
+  backdrop-filter:blur(7px) !important;
+  -webkit-backdrop-filter:blur(7px) !important;
 }
 
 @media(max-width:1100px){

@@ -2135,25 +2135,205 @@ url("./legal-bg.png") center top / cover no-repeat !important;
   }
 
   .calc-v2-tube-area{
-    margin:0 auto 22px !important;
-  }/* SHOP CATALOG BACKGROUND FIX */
-html body #shop.catalog{
-  background:
-    linear-gradient(180deg, rgba(3,8,18,.18), rgba(3,8,18,.62) 58%, rgba(3,8,18,.95) 100%),
-    radial-gradient(circle at 50% 28%, rgba(103,213,255,.14), transparent 42%),
-    url('shop-catalog-bg.png') center center / cover no-repeat !important;
+  margin:0 auto 22px !important;
 }
 }
-</style>
-<style>/* FINAL LEGAL BACKGROUND FIX — FULL SECTION REPEATING SCIENCE ART */
 
-html body #legal.legal-section {
-  position: relative !important;
-  isolation: isolate !important;
-  overflow: hidden !important;
-  border-radius: 34px !important;
-  padding: 64px 28px !important;
-  background: #030812 !important;
+/* FINAL SHOP CATALOG PREMIUM FIX */
+html body #shop.catalog{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:72px 28px 62px !important;
+  margin-top:40px !important;
+  border-radius:34px !important;
+  border:1px solid rgba(103,213,255,.24) !important;
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.26),rgba(3,8,18,.70) 58%,rgba(3,8,18,.96) 100%),
+    radial-gradient(circle at 18% 28%,rgba(103,213,255,.20),transparent 34%),
+    radial-gradient(circle at 86% 22%,rgba(43,125,255,.22),transparent 32%),
+    url("shop-catalog-bg.png") center center / cover no-repeat !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.58),
+    inset 0 0 80px rgba(43,125,255,.08) !important;
+}
+
+html body #shop.catalog::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  opacity:.70 !important;
+  background:
+    radial-gradient(circle at 9% 18%,rgba(103,213,255,.30) 0 2px,transparent 4px),
+    radial-gradient(circle at 15% 26%,rgba(43,125,255,.25) 0 2px,transparent 4px),
+    radial-gradient(circle at 88% 18%,rgba(103,213,255,.28) 0 2px,transparent 4px),
+    radial-gradient(circle at 82% 32%,rgba(43,125,255,.22) 0 2px,transparent 4px),
+    radial-gradient(circle at 92% 78%,rgba(103,213,255,.26) 0 2px,transparent 4px);
+  filter:drop-shadow(0 0 16px rgba(103,213,255,.45)) !important;
+}
+
+html body #shop .catalog-inner{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+html body #shop .eyebrow{
+  text-align:center !important;
+  margin:0 auto 18px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:18px !important;
+  color:#67d5ff !important;
+  letter-spacing:.42em !important;
+}
+
+html body #shop .eyebrow::before,
+html body #shop .eyebrow::after{
+  content:"" !important;
+  width:82px !important;
+  height:1px !important;
+  display:block !important;
+  background:linear-gradient(90deg,transparent,#67d5ff,transparent) !important;
+  box-shadow:0 0 14px rgba(103,213,255,.45) !important;
+}
+
+html body #shop .catalog-title{
+  text-align:center !important;
+  margin:0 auto 44px !important;
+  font-size:clamp(3.2rem,6.5vw,6rem) !important;
+  line-height:.95 !important;
+}
+
+html body #shop .catalog-title span{
+  display:block !important;
+}
+
+html body #shop .sub{
+  display:none !important;
+}
+
+html body #shop .grid{
+  position:relative !important;
+  z-index:2 !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:24px !important;
+}
+
+@media(max-width:1100px){
+  html body #shop .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:560px){
+  html body #shop .grid{
+    grid-template-columns:1fr !important;
+  }
+}
+.calc-v2-tube-area{
+  margin:0 auto 22px !important;
+}
+}
+
+/* FINAL SHOP CATALOG PREMIUM FIX */
+html body #shop.catalog{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:72px 28px 62px !important;
+  margin-top:40px !important;
+  border-radius:34px !important;
+  border:1px solid rgba(103,213,255,.24) !important;
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.26),rgba(3,8,18,.70) 58%,rgba(3,8,18,.96) 100%),
+    radial-gradient(circle at 18% 28%,rgba(103,213,255,.20),transparent 34%),
+    radial-gradient(circle at 86% 22%,rgba(43,125,255,.22),transparent 32%),
+    url("shop-catalog-bg.png") center center / cover no-repeat !important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.58),
+    inset 0 0 80px rgba(43,125,255,.08) !important;
+}
+
+html body #shop.catalog::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  opacity:.70 !important;
+  background:
+    radial-gradient(circle at 9% 18%,rgba(103,213,255,.30) 0 2px,transparent 4px),
+    radial-gradient(circle at 15% 26%,rgba(43,125,255,.25) 0 2px,transparent 4px),
+    radial-gradient(circle at 88% 18%,rgba(103,213,255,.28) 0 2px,transparent 4px),
+    radial-gradient(circle at 82% 32%,rgba(43,125,255,.22) 0 2px,transparent 4px),
+    radial-gradient(circle at 92% 78%,rgba(103,213,255,.26) 0 2px,transparent 4px);
+  filter:drop-shadow(0 0 16px rgba(103,213,255,.45)) !important;
+}
+
+html body #shop .catalog-inner{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+html body #shop .eyebrow{
+  text-align:center !important;
+  margin:0 auto 18px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:18px !important;
+  color:#67d5ff !important;
+  letter-spacing:.42em !important;
+}
+
+html body #shop .eyebrow::before,
+html body #shop .eyebrow::after{
+  content:"" !important;
+  width:82px !important;
+  height:1px !important;
+  display:block !important;
+  background:linear-gradient(90deg,transparent,#67d5ff,transparent) !important;
+  box-shadow:0 0 14px rgba(103,213,255,.45) !important;
+}
+
+html body #shop .catalog-title{
+  text-align:center !important;
+  margin:0 auto 44px !important;
+  font-size:clamp(3.2rem,6.5vw,6rem) !important;
+  line-height:.95 !important;
+}
+
+html body #shop .catalog-title span{
+  display:block !important;
+}
+
+html body #shop .sub{
+  display:none !important;
+}
+
+html body #shop .grid{
+  position:relative !important;
+  z-index:2 !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:24px !important;
+}
+
+@media(max-width:1100px){
+  html body #shop .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:560px){
+  html body #shop .grid{
+    grid-template-columns:1fr !important;
+  }
+}
 }
 
 /* Hide the old single image so it does not stretch/cut off */

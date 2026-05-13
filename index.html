@@ -4317,6 +4317,7 @@ function toggleCalcAccordion(button){
   }
 }
 /* PAGE SPLIT FIX — HOME / SHOP / CONTACT / CALCULATOR / FAQ / LEGAL */
+/* PAGE SPLIT FIX — HOME / SHOP / CONTACT / CALCULATOR / FAQ / LEGAL */
 function showCblPage(){
   const rawHash = window.location.hash || "#home";
   const hash = rawHash.toLowerCase();
@@ -4336,7 +4337,7 @@ function showCblPage(){
   const activeSections = pages[hash] || pages["#home"];
 
   document.querySelectorAll(".wrap > section").forEach(section => {
-    section.classList.toggle("page-show", activeSections.includes(section.id));
+    section.style.display = activeSections.includes(section.id) ? "" : "none";
   });
 
   document.querySelectorAll(".nav a").forEach(link => {
@@ -4352,8 +4353,23 @@ function showCblPage(){
   document.body.classList.add("page-ready");
 }
 
+document.querySelectorAll(".nav a[href^='#']").forEach(link => {
+  link.addEventListener("click", function(e){
+    e.preventDefault();
+
+    const target = this.getAttribute("href");
+
+    history.pushState(null, "", target);
+    showCblPage();
+
+    window.scrollTo(0, 0);
+  });
+});
+
 window.addEventListener("hashchange", showCblPage);
+window.addEventListener("popstate", showCblPage);
 window.addEventListener("load", showCblPage);
+
 showCblPage();
 updateCartUI();
 updateCalc();

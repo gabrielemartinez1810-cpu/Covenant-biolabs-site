@@ -2391,11 +2391,11 @@ html body #legal .legal-shell::before {
 
 /* CONTACT SECTION FIX */
 }
-/* CONTACT SECTION FIX - PREMIUM BACKGROUND IMAGE */
-#contact.about-section{
+/* CONTACT SECTION FIX - SAME STYLE AS LEGAL / SHOP */
+html body #contact.about-section{
   position:relative !important;
   isolation:isolate !important;
-  min-height:620px !important;
+  min-height:650px !important;
   padding:92px 28px !important;
   display:flex !important;
   align-items:center !important;
@@ -2404,68 +2404,93 @@ html body #legal .legal-shell::before {
   overflow:hidden !important;
   border-radius:34px !important;
   border:1px solid rgba(103,213,255,.24) !important;
-  background:
-    linear-gradient(180deg,rgba(3,8,18,.00),rgba(3,8,18,.10) 42%,rgba(3,8,18,.46) 100%),
-    url("contact-bg.jpg") center center / 100% auto no-repeat !important;
+  background:#030812 !important;
   box-shadow:
     0 28px 80px rgba(0,0,0,.58),
     inset 0 0 80px rgba(43,125,255,.08) !important;
 }
 
-#contact.about-section::before{
+/* Actual contact background image layer */
+html body #contact.about-section::before{
   content:"" !important;
   position:absolute !important;
   inset:0 !important;
   z-index:0 !important;
   pointer-events:none !important;
-  background:
-    radial-gradient(circle at 50% 42%,rgba(103,213,255,.08),transparent 34%),
-    radial-gradient(circle at 12% 32%,rgba(43,125,255,.05),transparent 28%),
-    radial-gradient(circle at 88% 68%,rgba(103,213,255,.06),transparent 30%) !important;
+
+  background-image:url("contact-bg.jpg") !important;
+  background-repeat:repeat-y !important;
+  background-position:center top !important;
+  background-size:100% auto !important;
+
+  opacity:.95 !important;
 }
 
-#contact .about-card{
+/* Dark readable overlay, but still lets the image show */
+html body #contact.about-section::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.10) 0%,rgba(3,8,18,.22) 45%,rgba(3,8,18,.60) 100%),
+    radial-gradient(circle at 50% 42%,rgba(103,213,255,.10),transparent 36%),
+    radial-gradient(circle at 12% 32%,rgba(43,125,255,.08),transparent 30%),
+    radial-gradient(circle at 88% 68%,rgba(103,213,255,.08),transparent 32%) !important;
+}
+
+/* Contact content card */
+html body #contact .about-card{
   position:relative !important;
   z-index:2 !important;
-  width:min(1080px,86%) !important;
-  min-height:300px !important;
+  width:min(1120px,88%) !important;
+  min-height:330px !important;
   margin:0 auto !important;
-  padding:58px 34px !important;
+  padding:62px 36px !important;
+
   display:flex !important;
   flex-direction:column !important;
   align-items:center !important;
   justify-content:center !important;
   text-align:center !important;
-  border-radius:28px !important;
-  border:1px solid rgba(103,213,255,.26) !important;
+
+  border-radius:30px !important;
+  border:1px solid rgba(103,213,255,.28) !important;
   background:
-    linear-gradient(180deg,rgba(5,15,29,.22),rgba(3,9,20,.34)) !important;
+    linear-gradient(180deg,rgba(5,15,29,.20),rgba(3,9,20,.34)) !important;
+
   box-shadow:
-    0 28px 80px rgba(0,0,0,.38),
-    inset 0 1px 0 rgba(255,255,255,.04),
-    0 0 44px rgba(61,169,255,.12) !important;
+    0 28px 80px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 0 48px rgba(61,169,255,.14) !important;
+
   backdrop-filter:blur(2px) !important;
   -webkit-backdrop-filter:blur(2px) !important;
 }
 
-#contact .eyebrow{
+/* CONTACT eyebrow */
+html body #contact .eyebrow{
   width:100% !important;
   margin:0 auto 22px !important;
   padding:0 !important;
+
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
   gap:22px !important;
+
   color:#67d5ff !important;
   text-align:center !important;
   letter-spacing:.48em !important;
   font-size:14px !important;
   line-height:1.2 !important;
-  text-shadow:0 0 18px rgba(103,213,255,.35) !important;
+  text-shadow:0 0 18px rgba(103,213,255,.38) !important;
 }
 
-#contact .eyebrow::before,
-#contact .eyebrow::after{
+html body #contact .eyebrow::before,
+html body #contact .eyebrow::after{
   content:"" !important;
   width:92px !important;
   height:1px !important;
@@ -2474,33 +2499,37 @@ html body #legal .legal-shell::before {
   box-shadow:0 0 14px rgba(103,213,255,.45) !important;
 }
 
-#contact h2{
+/* CONTACT title */
+html body #contact h2{
   text-align:center !important;
   margin:0 auto 24px !important;
-  font-size:clamp(3rem,5.8vw,5.4rem) !important;
-  line-height:.98 !important;
+  font-size:clamp(3.4rem,6.4vw,6rem) !important;
+  line-height:.96 !important;
+
   color:transparent !important;
   background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%) !important;
   -webkit-background-clip:text !important;
   background-clip:text !important;
+
   text-shadow:
-    0 0 26px rgba(43,125,255,.46),
-    0 0 58px rgba(103,213,255,.24) !important;
+    0 0 28px rgba(43,125,255,.50),
+    0 0 62px rgba(103,213,255,.28) !important;
 }
 
-#contact p:not(.eyebrow){
+/* CONTACT paragraph */
+html body #contact p:not(.eyebrow){
   text-align:center !important;
   margin:0 auto !important;
   max-width:850px !important;
   color:#e4f7ff !important;
   line-height:1.7 !important;
   font-size:19px !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.78) !important;
+  text-shadow:0 2px 14px rgba(0,0,0,.82) !important;
 }
 
-#contact strong{
+html body #contact strong{
   color:#67d5ff !important;
-  text-shadow:0 0 16px rgba(103,213,255,.42) !important;
+  text-shadow:0 0 16px rgba(103,213,255,.48) !important;
 }
 </style>
 <body>

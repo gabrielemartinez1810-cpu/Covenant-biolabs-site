@@ -1168,10 +1168,16 @@ url('legal-bg.png') center top / cover no-repeat;
 }/* FAQ SECTION */
 .faq-section{
   padding:42px 22px 50px;
-  background:
-    linear-gradient(180deg,rgba(4,8,15,.78),rgba(4,8,15,.92)),
-    radial-gradient(circle at 50% 14%,rgba(103,213,255,.08),transparent 28%),
-    url("faq-bg.jpg") center center / cover no-repeat;
+  position:relative;
+  overflow:hidden;
+  background-color:#03060b;
+  background-image:
+    linear-gradient(180deg,rgba(4,8,15,.54),rgba(4,8,15,.74) 46%,rgba(4,8,15,.92) 100%),
+    radial-gradient(circle at 50% 32%,rgba(103,213,255,.10),transparent 38%),
+    url("faq-bg.jpg");
+  background-repeat:no-repeat,no-repeat,repeat-y;
+  background-position:center center,center center,center -185px;
+  background-size:100% 100%,100% 100%,100% auto;
   border:1px solid rgba(103,213,255,.16);
   box-shadow:0 24px 70px rgba(0,0,0,.42);
 }

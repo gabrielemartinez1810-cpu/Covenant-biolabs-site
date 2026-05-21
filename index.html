@@ -1302,6 +1302,59 @@ url('legal-bg.png') center top / cover no-repeat;
   .faq-question{
     font-size:17px;
     min-height:66px;
+ /* FINAL FAQ BACKGROUND FRAMING FIX */
+html body #faq.faq-section{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  background:#03060b !important;
+}
+
+/* Full-width image layer — stops bad crop/framing */
+html body #faq.faq-section::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+
+  background-image:url("faq-bg.jpg") !important;
+  background-repeat:repeat-y !important;
+  background-position:center top !important;
+  background-size:100% auto !important;
+
+  opacity:.95 !important;
+}
+
+/* Readability overlay — keeps questions readable but lets the image show */
+html body #faq.faq-section::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.44),rgba(3,8,18,.56) 48%,rgba(3,8,18,.74) 100%),
+    radial-gradient(circle at 50% 36%,rgba(103,213,255,.08),transparent 42%) !important;
+}
+
+/* Keeps all FAQ wording/cards above the image */
+html body #faq .faq-shell{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+/* Lets the image show through the FAQ boxes without hurting readability */
+html body #faq .faq-item{
+  background:rgba(7,13,27,.54) !important;
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
+}
+
+html body #faq .faq-item.active{
+  background:rgba(10,22,38,.68) !important;
+}
   }
 }/* ==============================
    PREMIUM LIVE PEPTIDE CALCULATOR

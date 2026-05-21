@@ -4387,7 +4387,7 @@ function toggleCalcAccordion(button){
 /* PAGE SPLIT FIX — HOME / SHOP / CONTACT / CALCULATOR / FAQ / LEGAL */
 /* PAGE SPLIT FIX — HOME / SHOP / CONTACT / CALCULATOR / FAQ / LEGAL */
 function showCblPage(){
-  const rawHash = window.location.hash || "#home";
+const rawHash = window.location.hash || "#shop"; 
   const hash = rawHash.toLowerCase();
 
   const pages = {
@@ -4402,7 +4402,7 @@ function showCblPage(){
     "#shipping": ["legal"]
   };
 
-  const activeSections = pages[hash] || pages["#home"];
+const activeSections = pages[hash] || pages["#shop"];
 
   document.querySelectorAll(".wrap > section").forEach(section => {
     section.style.display = activeSections.includes(section.id) ? "" : "none";
@@ -4441,43 +4441,6 @@ window.addEventListener("load", showCblPage);
 showCblPage();
 updateCartUI();
 updateCalc();
-</script>
-  <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const freshHomeVisit =
-    !window.location.hash &&
-    (window.location.pathname.endsWith("/") ||
-     window.location.pathname.endsWith("/index.html"));
-
-  if (!freshHomeVisit) return;
-
-  const catalogSection =
-    document.querySelector("#catalog") ||
-    document.querySelector("#shop") ||
-    document.querySelector(".catalog") ||
-    Array.from(document.querySelectorAll("section")).find(section =>
-      section.textContent.includes("Shop Our Catalog") ||
-      section.textContent.includes("Research Catalog")
-    );
-
-  if (!catalogSection) return;
-
-  const originalScrollBehavior = document.documentElement.style.scrollBehavior;
-  document.documentElement.style.scrollBehavior = "auto";
-
-  const topbar = document.querySelector(".topbar");
-  const offset = topbar ? topbar.offsetHeight + 18 : 0;
-  const catalogTop = catalogSection.getBoundingClientRect().top + window.pageYOffset - offset;
-
-  window.scrollTo(0, catalogTop);
-
-  document.documentElement.style.scrollBehavior = originalScrollBehavior;
-
-  document.querySelectorAll(".nav a").forEach(link => {
-    const text = link.textContent.trim().toLowerCase();
-    link.classList.toggle("active", text.includes("shop") || text.includes("catalog"));
-  });
-});
 </script>
 </body>
 </html>

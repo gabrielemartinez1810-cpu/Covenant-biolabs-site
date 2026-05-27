@@ -3366,7 +3366,6 @@ html body header.topbar .mobile-menu-toggle{
       q.includes("dosage") ||
       q.includes("inject") ||
       q.includes("injection") ||
-      q.includes("take") ||
       q.includes("which peptide") ||
       q.includes("weight loss") ||
       q.includes("heal") ||
@@ -3386,8 +3385,8 @@ html body header.topbar .mobile-menu-toggle{
       return "A COA should match the product name, batch or lot details when available, assay amount, purity percentage, testing lab, and report date. For Covenant Bio Labs, compare the COA shown on the product page with the exact product being reviewed. If anything looks unclear, email orders@covenantbiolabs.com and ask us to confirm the matching COA.";
     }
 
-    if(q.includes("shipping") || q.includes("ship") || q.includes("tracking") || q.includes("delivery")){
-      return "Covenant Bio Labs currently ships within the United States only. Orders are generally processed within 1–3 business days after payment confirmation, customer verification, and order review. Tracking may be provided when available, and damaged or incorrect shipments should be reported within 72 hours with clear photos and order details.";
+    if(q.includes("shipping") || q.includes("ship") || q.includes("tracking") || q.includes("delivery") || q.includes("how long")){
+      return "Covenant Bio Labs orders are typically reviewed and processed within 1–3 business days after payment confirmation, customer verification, and order approval. Once the order is approved and shipped, tracking will be provided when available. At this time, Covenant Bio Labs ships within the United States only. If a package arrives damaged, incorrect, or appears delayed, contact orders@covenantbiolabs.com with your order details so it can be reviewed.";
     }
 
     if(q.includes("return") || q.includes("refund")){

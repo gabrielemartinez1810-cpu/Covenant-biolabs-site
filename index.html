@@ -3310,7 +3310,112 @@ html body header.topbar .mobile-menu-toggle{
   </form>
 </div>
 
-<style>
+<script>
+(function(){
+  const form = document.getElementById("cblAiPremiumForm");
+  const input = document.getElementById("cblAiPremiumInput");
+  const messages = document.getElementById("cblAiPremiumMessages");
+  const chips = document.querySelectorAll(".cbl-ai-premium-suggestions button");
+
+  function addCblAiMessage(text, type, label, restricted){
+    if(!messages) return;
+
+    const msg = document.createElement("div");
+    msg.className =
+      "cbl-ai-premium-msg " +
+      (type === "user" ? "cbl-ai-premium-user" : "cbl-ai-premium-bot") +
+      (restricted ? " cbl-ai-premium-restricted" : "");
+
+    msg.innerHTML = `
+      <div class="cbl-ai-premium-label">${label || (type === "user" ? "You" : "Covenant AI")}</div>
+      <div class="cbl-ai-premium-text">${text}</div>
+    `;
+
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+
+    return msg;
+  }
+
+  function updateCblAiMessage(msg, text, label, restricted){
+    if(!msg) return;
+
+    const labelBox = msg.querySelector(".cbl-ai-premium-label");
+    const textBox = msg.querySelector(".cbl-ai-premium-text");
+
+    if(labelBox) labelBox.textContent = label || "Covenant AI";
+    if(textBox) textBox.textContent = text;
+
+    msg.classList.toggle("cbl-ai-premium-restricted", !!restricted);
+  }
+
+  async function askCovenantAi(question){
+    addCblAiMessage(question, "user", "You", false);
+
+    const loading = addCblAiMessage(
+      "Reviewing Covenant Bio Labs website information...",
+      "bot",
+      "Covenant AI",
+      false
+    );
+
+    try{
+      const response = await fetch("/api/covenant-ai", {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          question:question
+        })
+      });
+
+      const data = await response.json();
+
+      if(!response.ok){
+        throw new Error(data.error || "AI request failed.");
+      }
+
+      updateCblAiMessage(
+        loading,
+        data.answer || "Covenant AI could not generate an answer right now.",
+        "Covenant AI",
+        false
+      );
+
+    }catch(error){
+      updateCblAiMessage(
+        loading,
+        "Covenant AI is not fully connected yet. Check that OPENAI_API_KEY is saved in Vercel, then redeploy the newest deployment.",
+        "Connection Check",
+        true
+      );
+    }
+  }
+
+  if(form && input){
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const question = input.value.trim();
+      if(!question) return false;
+
+      input.value = "";
+      askCovenantAi(question);
+
+      return false;
+    });
+  }
+
+  chips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      const question = chip.getAttribute("data-question") || chip.textContent.trim();
+      askCovenantAi(question);
+    });
+  });
+})();
+</script>
+  <style>
   .cbl-ai-premium-launcher,
   .cbl-ai-premium-launcher *,
   .cbl-ai-premium-panel,

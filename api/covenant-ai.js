@@ -22,6 +22,29 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== "POST") {
+  const allowedOrigins = [
+    "https://www.covenantbiolabs.com",
+    "https://covenantbiolabs.com",
+    "https://covenant-biolabs-site-8fjv.vercel.app"
+  ];
+
+  const origin = req.headers.origin || "";
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", "https://www.covenantbiolabs.com");
+  }
+
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
+  if (req.method !== "POST") {
     return res.status(200).json({
       answer: "Covenant AI backend is live. Send a question from the website chat box."
     });

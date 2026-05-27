@@ -986,100 +986,118 @@ textarea.field{min-height:96px;resize:vertical}
     position:sticky !important;
     top:10px !important;
     z-index:99999 !important;
-    border-radius:28px !important;
+    display:flex !important;
     align-items:center !important;
-    flex-direction:row !important;
     justify-content:space-between !important;
     gap:12px !important;
     padding:16px 18px !important;
+    border-radius:34px !important;
     overflow:visible !important;
   }
 
   .brand img{
-    width:120px !important;
-    max-height:48px !important;
+    width:76px !important;
+    max-height:52px !important;
+    object-fit:contain !important;
   }
 
-  .nav{
-    display:none !important;
+  html body .topbar .mobile-menu-toggle{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+    min-height:56px !important;
+    padding:0 24px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(103,213,255,.55) !important;
+    background:
+      radial-gradient(circle at 30% 10%,rgba(103,213,255,.38),transparent 42%),
+      linear-gradient(180deg,rgba(8,24,48,.98),rgba(3,8,18,.98)) !important;
+    color:#dff7ff !important;
+    font-size:18px !important;
+    font-weight:900 !important;
+    letter-spacing:.2px !important;
+    box-shadow:
+      0 0 24px rgba(103,213,255,.24),
+      inset 0 0 18px rgba(103,213,255,.10) !important;
+    cursor:pointer !important;
   }
 
   .cart-nav{
     display:inline-flex !important;
     align-items:center !important;
     justify-content:center !important;
-  }
-
-  .topbar button:first-of-type,
-  .mobile-menu-btn-enhanced{
-    display:inline-flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:8px !important;
-    min-height:54px !important;
+    min-height:56px !important;
     padding:0 22px !important;
-    border-radius:999px !important;
-    border:1px solid rgba(103,213,255,.55) !important;
-    background:
-      radial-gradient(circle at 30% 10%,rgba(103,213,255,.35),transparent 40%),
-      linear-gradient(180deg,rgba(8,24,48,.98),rgba(3,8,18,.98)) !important;
-    color:#dff7ff !important;
-    font-weight:900 !important;
-    font-size:18px !important;
-    letter-spacing:.2px !important;
-    box-shadow:
-      0 0 22px rgba(103,213,255,.22),
-      inset 0 0 18px rgba(103,213,255,.10) !important;
-    cursor:pointer !important;
   }
 
-  .mobile-menu-panel{
+  .mobile-menu-panel,
+  .mobile-menu-panel.open{
     display:none !important;
-    position:absolute !important;
-    top:calc(100% + 12px) !important;
+  }
+
+  html body .topbar .nav{
+    display:none !important;
+  }
+
+  html body .topbar .nav.mobile-open{
+    position:fixed !important;
+    top:118px !important;
     left:18px !important;
-    right:auto !important;
-    width:min(330px, calc(100vw - 36px)) !important;
+    right:18px !important;
     z-index:100000 !important;
-    padding:12px !important;
-    border-radius:24px !important;
-    border:1px solid rgba(103,213,255,.38) !important;
+    width:auto !important;
+    max-width:none !important;
+    display:flex !important;
+    flex:none !important;
+    flex-direction:column !important;
+    gap:10px !important;
+    padding:16px !important;
+    border-radius:28px !important;
+    border:1px solid rgba(103,213,255,.40) !important;
     background:
-      radial-gradient(circle at 50% 0%,rgba(103,213,255,.20),transparent 55%),
+      radial-gradient(circle at 50% 0%,rgba(103,213,255,.22),transparent 58%),
       linear-gradient(180deg,rgba(3,8,18,.98),rgba(6,14,30,.98)) !important;
     box-shadow:
-      0 24px 60px rgba(0,0,0,.70),
-      0 0 28px rgba(103,213,255,.16),
-      inset 0 0 28px rgba(103,213,255,.06) !important;
+      0 26px 70px rgba(0,0,0,.74),
+      0 0 32px rgba(103,213,255,.18),
+      inset 0 0 30px rgba(103,213,255,.06) !important;
     backdrop-filter:blur(18px) !important;
     -webkit-backdrop-filter:blur(18px) !important;
   }
 
-  .mobile-menu-panel.open{
-    display:grid !important;
-    gap:9px !important;
-  }
-
-  .mobile-menu-panel a{
+  html body .topbar .nav.mobile-open a{
     display:flex !important;
     align-items:center !important;
     justify-content:space-between !important;
-    min-height:50px !important;
-    padding:0 16px !important;
-    border-radius:16px !important;
-    color:#dff7ff !important;
-    text-decoration:none !important;
-    font-weight:900 !important;
-    font-size:16px !important;
-    letter-spacing:.3px !important;
+    min-height:54px !important;
+    padding:0 18px !important;
+    border-radius:18px !important;
     border:1px solid rgba(103,213,255,.18) !important;
     background:rgba(255,255,255,.045) !important;
+    color:#dff7ff !important;
+    text-decoration:none !important;
+    font-size:17px !important;
+    font-weight:900 !important;
+    letter-spacing:.25px !important;
   }
 
-  .mobile-menu-panel a:hover,
-  .mobile-menu-panel a:focus{
-    color:#06101f !important;
+  html body .topbar .nav.mobile-open a[href="#home"]{
+    display:none !important;
+  }
+
+  html body .topbar .nav.mobile-open a::after{
+    content:"›";
+    color:#67d5ff;
+    font-size:22px;
+    font-weight:900;
+  }
+
+  html body .topbar .nav.mobile-open a.active,
+  html body .topbar .nav.mobile-open a:hover{
+    color:#07101d !important;
     background:linear-gradient(180deg,#8beaff,#58d8ff 42%,#2b7dff 100%) !important;
+    border-color:rgba(255,255,255,.55) !important;
   }
 
   .about-list{grid-template-columns:1fr}
@@ -4716,7 +4734,7 @@ document.querySelectorAll(".nav a[href^='#']").forEach(link => {
 
     history.pushState(null, "", target);
     showCblPage();
-
+document.querySelector(".nav")?.classList.remove("mobile-open");
     window.scrollTo(0, 0);
   });
 });
@@ -4728,65 +4746,6 @@ window.addEventListener("load", showCblPage);
 showCblPage();
 updateCartUI();
 updateCalc();
-</script>
-  <script>
-(function(){
-  function initCovenantMobileMenu(){
-    const topbar = document.querySelector(".topbar");
-    if(!topbar) return;
-
-    const menuBtn = Array.from(topbar.querySelectorAll("button, [role='button']"))
-      .find(btn => btn.textContent.trim().toLowerCase().includes("menu"));
-
-    if(!menuBtn) return;
-
-    menuBtn.type = "button";
-    menuBtn.classList.add("mobile-menu-btn-enhanced");
-    menuBtn.setAttribute("aria-expanded","false");
-
-    let panel = document.querySelector(".mobile-menu-panel");
-
-    if(!panel){
-      panel = document.createElement("div");
-      panel.className = "mobile-menu-panel";
-      panel.innerHTML = `
-        <a href="#catalog">Shop Catalog <span>›</span></a>
-        <a href="#calculator">Peptide Calculator <span>›</span></a>
-        <a href="#legal">Legal <span>›</span></a>
-        <a href="#faq">FAQ <span>›</span></a>
-        <a href="#contact">Contact <span>›</span></a>
-      `;
-      topbar.appendChild(panel);
-    }
-
-    function closeMenu(){
-      panel.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded","false");
-    }
-
-    menuBtn.addEventListener("click", function(e){
-      e.preventDefault();
-      e.stopPropagation();
-
-      const isOpen = panel.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
-
-    panel.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("click", function(e){
-      if(!topbar.contains(e.target)) closeMenu();
-    });
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", initCovenantMobileMenu);
-  }else{
-    initCovenantMobileMenu();
-  }
-})();
 </script>
 </body>
 </html>

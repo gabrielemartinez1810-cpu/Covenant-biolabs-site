@@ -995,17 +995,94 @@ textarea.field{min-height:96px;resize:vertical}
   .calc-product-mini img{width:56px;height:72px}
 }
 @media(max-width:560px){
-  .wrap{width:95%;padding-top:12px}
+
+  html,
+  body{
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:hidden !important;
+  }
+
+  *{
+    box-sizing:border-box !important;
+  }
+
+  .wrap{
+    width:100% !important;
+    max-width:100% !important;
+    padding-left:14px !important;
+    padding-right:14px !important;
+    padding-top:12px;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    overflow-x:hidden !important;
+  }
+
+  .topbar,
+  .nav,
+  section,
+  .legal-section{
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:hidden !important;
+  }
+
   .about-card{padding:24px 18px}
-  .trust-section{padding:38px 22px}
+  .trust-section{padding:38px 14px}
   .trust-cards{grid-template-columns:1fr}
-  .shop-preview{padding:28px 20px}
+  .shop-preview{padding:28px 18px}
   .preview-row{grid-template-columns:1fr}
   .grid{grid-template-columns:1fr}
   .cart-float{right:14px;bottom:14px}
   .modal-actions,.cart-actions{flex-direction:column}
   .modal-actions button,.cart-actions button{width:100%}
-}/* ==============================
+
+  .legal-section{
+    padding:34px 14px 24px !important;
+    margin:0 auto !important;
+    background-position:center top !important;
+  }
+
+  .legal-shell{
+    width:100% !important;
+    max-width:360px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  .legal-head{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding:30px 18px !important;
+    text-align:center !important;
+    overflow:hidden !important;
+  }
+
+  .legal-head h1,
+  .legal-head h2{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    text-align:center !important;
+    font-size:clamp(36px,10.5vw,44px) !important;
+    line-height:1.05 !important;
+    letter-spacing:-1px !important;
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+
+  .legal-head p,
+  .legal-head a,
+  .legal-head strong{
+    max-width:100% !important;
+    text-align:center !important;
+    overflow-wrap:anywhere !important;
+    word-break:break-word !important;
+  }
+}
   /* CONTACT PAGE MOBILE CENTER FIX */
 @media (max-width:560px){
 

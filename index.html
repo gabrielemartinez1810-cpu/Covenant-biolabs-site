@@ -3312,10 +3312,7 @@ html body header.topbar .mobile-menu-toggle{
 
 <script>
 (function(){
-  const API_ENDPOINTS = [
-    "/api/covenant-ai",
-    "https://covenant-biolabs-site-8fjv.vercel.app/api/covenant-ai"
-  ];
+  const API_ENDPOINT = "/api/covenant-ai";
 
   function addCblAiMessage(text, type, label, restricted){
     const messages = document.getElementById("cblAiPremiumMessages");
@@ -3358,129 +3355,47 @@ html body header.topbar .mobile-menu-toggle{
     if(messages) messages.scrollTop = messages.scrollHeight;
   }
 
-  function localCovenantAnswer(question){
-    const q = String(question || "").toLowerCase();
-
-    if(
-      q.includes("dose") ||
-      q.includes("dosage") ||
-      q.includes("inject") ||
-      q.includes("injection") ||
-      q.includes("which peptide") ||
-      q.includes("weight loss") ||
-      q.includes("heal") ||
-      q.includes("injury") ||
-      q.includes("disease") ||
-      q.includes("hormone") ||
-      q.includes("treatment")
-    ){
-      return "Covenant Bio Labs products are offered strictly for research use only, are not for human consumption, and are not FDA approved. I can help with catalog details, COA verification, ordering, shipping, and research-use-only policy, but I can’t provide dosing, injection instructions, treatment guidance, or human-use recommendations. Please speak with a licensed medical professional for personal health questions.";
-    }
-
-    if(q.includes("coa") && (q.includes("available") || q.includes("which") || q.includes("products"))){
-      return "Products currently marked as COA available on the Covenant Bio Labs catalog include Retatrutide 20mg, NAD+ 500mg, KLOW, Cagrilintide 5mg, MOTS-C 10mg, WOLVERINE, SS-31 10mg, HGH Somatropin 12iu, HGH Somatropin 15iu, IGF-1 LR3 1mg, CJC + IPA, Epithalon 10mg, and Selank 10mg. COA availability may vary by batch, so documentation questions can be sent to orders@covenantbiolabs.com.";
-    }
-
-    if(q.includes("coa") || q.includes("real") || q.includes("verify") || q.includes("certificate")){
-      return "A COA should match the product name, batch or lot details when available, assay amount, purity percentage, testing lab, and report date. For Covenant Bio Labs, compare the COA shown on the product page with the exact product being reviewed. If anything looks unclear, email orders@covenantbiolabs.com and ask us to confirm the matching COA.";
-    }
-
-    if(q.includes("shipping") || q.includes("ship") || q.includes("tracking") || q.includes("delivery") || q.includes("how long")){
-      return "Covenant Bio Labs orders are typically reviewed and processed within 1–3 business days after payment confirmation, customer verification, and order approval. Once the order is approved and shipped, tracking will be provided when available. At this time, Covenant Bio Labs ships within the United States only. If a package arrives damaged, incorrect, or appears delayed, contact orders@covenantbiolabs.com with your order details so it can be reviewed.";
-    }
-
-    if(q.includes("return") || q.includes("refund")){
-      return "Due to the sensitive nature of research products, returns are not accepted once an order has shipped. Refunds are reviewed case by case and are not guaranteed. Damaged, defective, or incorrect shipments should be reported within 72 hours of delivery.";
-    }
-
-    if(q.includes("payment") || q.includes("cash app") || q.includes("venmo")){
-      return "Covenant Bio Labs may accept Cash App or Venmo at checkout. Customers should include their first and last name in the payment note so the payment can be matched to the order request. Payment does not guarantee order approval or shipment because orders are reviewed before fulfillment.";
-    }
-
-    if(q.includes("contact") || q.includes("email")){
-      return "For product questions, order support, shipping issues, or documentation requests, contact Covenant Bio Labs at orders@covenantbiolabs.com.";
-    }
-
-    if(q.includes("catalog") || q.includes("products") || q.includes("price")){
-      return "The Covenant Bio Labs research catalog includes products such as Retatrutide 20mg, NAD+ 500mg, MT-2 10mg, GLOW 70mg, KLOW, Cagrilintide 5mg, MOTS-C 10mg, WOLVERINE, SS-31 10mg, HGH Somatropin, IGF-1 LR3, Tesamorelin, CJC + IPA, Glutathione, Epithalon, KPV, Semax, Selank, Bacteriostatic Water, and insulin syringes. Select any product card to view details, pricing, and COA status.";
-    }
-
-    if(q.includes("research use") || q.includes("fda") || q.includes("human consumption")){
-      return "Research use only means Covenant Bio Labs products are offered for lawful laboratory research purposes only. They are not for human consumption, not for veterinary use, not intended to diagnose, treat, cure, or prevent disease, and are not FDA approved.";
-    }
-
-    return "I can help with Covenant Bio Labs catalog questions, COA verification, ordering, shipping, payment, returns, contact information, and research-use-only policies. For documentation support, email orders@covenantbiolabs.com.";
-  }
-
-  async function callCovenantBackend(question){
-    let lastError = "";
-
-    for(const endpoint of API_ENDPOINTS){
-      try{
-        const response = await fetch(endpoint, {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            question:question
-          })
-        });
-
-        const text = await response.text();
-        let data = null;
-
-        try{
-          data = JSON.parse(text);
-        }catch(parseError){
-          lastError = "Backend did not return JSON from " + endpoint;
-          continue;
-        }
-
-        if(data && data.answer){
-          return data.answer;
-        }
-
-        lastError = "Backend answered but did not include an answer field.";
-      }catch(error){
-        lastError = error.message || "Backend fetch failed.";
-      }
-    }
-
-    throw new Error(lastError || "Backend unavailable.");
-  }
-
   async function askCovenantAi(question){
     addCblAiMessage(question, "user", "You", false);
 
     const loading = addCblAiMessage(
-      "Reviewing Covenant Bio Labs website information...",
+      "Thinking through Covenant Bio Labs website information...",
       "bot",
       "Covenant AI",
       false
     );
 
     try{
-      const answer = await callCovenantBackend(question);
+      const response = await fetch(API_ENDPOINT, {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          question:question
+        })
+      });
+
+      const data = await response.json();
+
+      if(!response.ok){
+        throw new Error(data.error || "Covenant AI backend did not respond correctly.");
+      }
 
       updateCblAiMessage(
         loading,
-        answer,
+        data.answer || "Covenant AI connected, but no answer was returned.",
         "Covenant AI",
         false
       );
 
     }catch(error){
-      const fallbackAnswer = localCovenantAnswer(question);
-
       updateCblAiMessage(
         loading,
-        fallbackAnswer,
-        "Covenant AI",
-        false
+        "Covenant AI reached the website, but the live AI backend is still not responding correctly. This is now a backend setup issue, not a question-by-question code issue. Error: " + error.message,
+        "Backend Connection Error",
+        true
       );
-
-      console.log("Covenant AI backend issue:", error);
     }
   }
 
@@ -3495,6 +3410,7 @@ html body header.topbar .mobile-menu-toggle{
       launcher.onclick = function(){
         panel.classList.add("is-open");
         panel.setAttribute("aria-hidden","false");
+
         setTimeout(function(){
           const currentInput = document.getElementById("cblAiPremiumInput");
           if(currentInput) currentInput.focus();

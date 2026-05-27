@@ -3075,6 +3075,100 @@ html body #contact strong{
     margin-left:auto !important;
     margin-right:auto !important;
   }
+  /* FINAL iPAD / DESKTOP MENU BUTTON REMOVAL */
+@media(min-width:761px){
+
+  html body header.topbar button.mobile-menu-toggle,
+  html body .topbar .mobile-menu-toggle{
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    width:0 !important;
+    min-width:0 !important;
+    max-width:0 !important;
+    height:0 !important;
+    min-height:0 !important;
+    max-height:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+  }
+
+  html body header.topbar #mobileNav,
+  html body header.topbar .nav{
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    position:static !important;
+    flex-direction:row !important;
+    width:auto !important;
+    max-width:none !important;
+    height:auto !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+
+  html body header.topbar #mobileNav a{
+    display:inline-flex !important;
+  }
+
+  html body header.topbar #mobileNav a::after{
+    content:none !important;
+  }
+}
+}
+  /* FINAL FIX — MENU BUTTON ONLY ON PHONE */
+html body header.topbar .mobile-menu-toggle{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  width:0 !important;
+  min-width:0 !important;
+  height:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+}
+
+@media(max-width:600px){
+  html body header.topbar .mobile-menu-toggle{
+    -webkit-appearance:none !important;
+    appearance:none !important;
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    width:auto !important;
+    min-width:auto !important;
+    height:auto !important;
+    min-height:52px !important;
+    padding:0 22px !important;
+    margin:0 !important;
+    pointer-events:auto !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(103,213,255,.65) !important;
+    background:
+      radial-gradient(circle at 30% 10%,rgba(103,213,255,.42),transparent 42%),
+      linear-gradient(180deg,rgba(8,24,48,.98),rgba(3,8,18,.98)) !important;
+    color:#dff7ff !important;
+    font-size:18px !important;
+    font-weight:900 !important;
+    box-shadow:
+      0 0 26px rgba(103,213,255,.30),
+      inset 0 0 18px rgba(103,213,255,.12) !important;
+  }
 }
 </style>
 <body>

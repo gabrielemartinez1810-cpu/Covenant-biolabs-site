@@ -2669,7 +2669,10 @@ html body #contact strong{
 <div class="wrap">
 <header class="topbar">
 <a href="index.html" class="brand"><img src="hero-badge-v2.png" alt="Covenant Bio Labs"></a>
-<nav class="nav">
+  <button class="mobile-menu-toggle" type="button" onclick="document.querySelector('.nav').classList.toggle('mobile-open')">
+  ☰ Menu
+</button>
+<nav class="nav" id="mobileNav">
   <a href="#home" class="active">Home</a>
   <a href="#shop">Shop Catalog</a>
   <a href="#contact">Contact</a>

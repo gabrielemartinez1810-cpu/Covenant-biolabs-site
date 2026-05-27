@@ -981,9 +981,101 @@ textarea.field{min-height:96px;resize:vertical}
 }
 }
 @media(max-width:820px){
-  .topbar{border-radius:22px;align-items:flex-start;flex-direction:column}
-  .nav{width:100%;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .brand img{width:220px}
+
+  .topbar{
+    position:sticky;
+    top:10px;
+    z-index:99999;
+    border-radius:22px;
+    align-items:center;
+    flex-direction:row;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 14px;
+    overflow:visible !important;
+  }
+
+  .brand img{
+    width:170px;
+    max-height:54px;
+  }
+
+  .nav{
+    display:none !important;
+  }
+
+  .cart-nav{
+    display:none !important;
+  }
+
+  .topbar button:first-of-type,
+  .mobile-menu-btn-enhanced{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:8px !important;
+    min-height:46px !important;
+    padding:0 18px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(103,213,255,.52) !important;
+    background:
+      radial-gradient(circle at 30% 10%,rgba(103,213,255,.30),transparent 38%),
+      linear-gradient(180deg,rgba(12,28,55,.96),rgba(4,10,22,.96)) !important;
+    color:#67d5ff !important;
+    font-weight:900 !important;
+    letter-spacing:.3px !important;
+    box-shadow:
+      0 0 22px rgba(103,213,255,.20),
+      inset 0 0 18px rgba(103,213,255,.08) !important;
+    cursor:pointer !important;
+  }
+
+  .mobile-menu-panel{
+    display:none;
+    position:absolute;
+    top:calc(100% + 10px);
+    left:10px;
+    right:10px;
+    z-index:100000;
+    padding:12px;
+    border-radius:22px;
+    border:1px solid rgba(103,213,255,.34);
+    background:
+      radial-gradient(circle at 50% 0%,rgba(103,213,255,.18),transparent 55%),
+      linear-gradient(180deg,rgba(3,8,18,.98),rgba(6,14,30,.98));
+    box-shadow:
+      0 24px 60px rgba(0,0,0,.65),
+      inset 0 0 28px rgba(103,213,255,.05);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+
+  .mobile-menu-panel.open{
+    display:grid;
+    gap:8px;
+  }
+
+  .mobile-menu-panel a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:50px;
+    padding:0 16px;
+    border-radius:16px;
+    color:#dff5ff;
+    text-decoration:none;
+    font-weight:900;
+    letter-spacing:.3px;
+    border:1px solid rgba(103,213,255,.16);
+    background:rgba(255,255,255,.045);
+  }
+
+  .mobile-menu-panel a:hover,
+  .mobile-menu-panel a:focus{
+    color:#07101d;
+    background:linear-gradient(180deg,#8beaff,#58d8ff 42%,#55c9ff 100%);
+  }
+
   .about-list{grid-template-columns:1fr}
   .modal-content{grid-template-columns:1fr}
   .modal-right h2{font-size:38px}
@@ -4630,6 +4722,65 @@ window.addEventListener("load", showCblPage);
 showCblPage();
 updateCartUI();
 updateCalc();
+</script>
+  <script>
+(function(){
+  function initCovenantMobileMenu(){
+    const topbar = document.querySelector(".topbar");
+    if(!topbar) return;
+
+    const menuBtn = Array.from(topbar.querySelectorAll("button, [role='button']"))
+      .find(btn => btn.textContent.trim().toLowerCase().includes("menu"));
+
+    if(!menuBtn) return;
+
+    menuBtn.type = "button";
+    menuBtn.classList.add("mobile-menu-btn-enhanced");
+    menuBtn.setAttribute("aria-expanded","false");
+
+    let panel = document.querySelector(".mobile-menu-panel");
+
+    if(!panel){
+      panel = document.createElement("div");
+      panel.className = "mobile-menu-panel";
+      panel.innerHTML = `
+        <a href="#catalog">Shop Catalog <span>›</span></a>
+        <a href="#calculator">Peptide Calculator <span>›</span></a>
+        <a href="#legal">Legal <span>›</span></a>
+        <a href="#faq">FAQ <span>›</span></a>
+        <a href="#contact">Contact <span>›</span></a>
+      `;
+      topbar.appendChild(panel);
+    }
+
+    function closeMenu(){
+      panel.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded","false");
+    }
+
+    menuBtn.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
+      const isOpen = panel.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    panel.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", function(e){
+      if(!topbar.contains(e.target)) closeMenu();
+    });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", initCovenantMobileMenu);
+  }else{
+    initCovenantMobileMenu();
+  }
+})();
 </script>
 </body>
 </html>

@@ -3124,6 +3124,38 @@ html body #contact strong{
   }
 }
 }
+  /* BRIGHTER FAQ + LEGAL BACKGROUND IMAGES */
+html body #faq.faq-section::before{
+  opacity:1 !important;
+  filter:brightness(1.28) saturate(1.08) !important;
+}
+
+html body #faq.faq-section::after{
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.18),rgba(3,8,18,.28) 48%,rgba(3,8,18,.48) 100%),
+    radial-gradient(circle at 50% 36%,rgba(103,213,255,.10),transparent 42%) !important;
+}
+
+html body #faq .faq-image-card img{
+  filter:brightness(1.18) contrast(1.05) saturate(1.05) !important;
+}
+
+html body #legal.legal-section::before{
+  opacity:.98 !important;
+  filter:brightness(1.24) saturate(1.08) !important;
+}
+
+html body #legal.legal-section::after{
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.14) 0%,rgba(3,8,18,.28) 35%,rgba(3,8,18,.56) 100%),
+    radial-gradient(circle at 50% 20%,rgba(103,213,255,.12),transparent 38%),
+    radial-gradient(circle at 12% 45%,rgba(43,125,255,.12),transparent 28%),
+    radial-gradient(circle at 88% 65%,rgba(103,213,255,.12),transparent 30%) !important;
+}
+
+html body #legal .legal-card{
+  background:linear-gradient(180deg,rgba(5,15,29,.82),rgba(3,9,20,.90)) !important;
+}
   /* FINAL FIX — MENU BUTTON ONLY ON PHONE */
 html body header.topbar .mobile-menu-toggle{
   display:none !important;

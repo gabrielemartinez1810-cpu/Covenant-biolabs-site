@@ -1,24 +1,32 @@
 export default async function handler(req, res) {
-  // Line 1: Covenant Bio Labs AI backend for Vercel
-
   if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed. Use POST only."
+    return res.status(200).json({
+      answer: "Covenant AI backend is live. Send a question from the website chat box."
     });
   }
 
   try {
-    const { question } = req.body || {};
+    let body = req.body;
+
+    if (typeof body === "string") {
+      try {
+        body = JSON.parse(body);
+      } catch (error) {
+        body = {};
+      }
+    }
+
+    const question = body?.question || "";
 
     if (!question || typeof question !== "string") {
-      return res.status(400).json({
-        error: "Missing question."
+      return res.status(200).json({
+        answer: "Covenant AI received the request, but no question was sent."
       });
     }
 
     if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({
-        error: "OPENAI_API_KEY is missing in Vercel environment variables."
+      return res.status(200).json({
+        answer: "Covenant AI reached Vercel, but OPENAI_API_KEY is missing or empty. Add the key in Vercel Environment Variables, save it, then redeploy."
       });
     }
 
@@ -26,9 +34,12 @@ export default async function handler(req, res) {
 COVENANT BIO LABS WEBSITE CONTEXT
 
 Brand:
-Covenant Bio Labs is a premium research-use-only peptide and research compound supplier. Brand tone is clean, professional, premium, blue/silver, science-focused, faith/science/purpose driven.
+Covenant Bio Labs is a premium research-use-only peptide and research compound supplier.
 
-Core brand language:
+Brand tone:
+Premium, clean, professional, blue/silver, science-focused, trustworthy, direct, and polished.
+
+Brand language:
 - Built on Purpose. Driven by Precision.
 - Science You Can Trust.
 - Integrity in every compound, purpose in every decision.
@@ -37,7 +48,7 @@ Core brand language:
 - Research-use transparency.
 - Responsible research standards.
 
-Important compliance language:
+Compliance language:
 - Research Use Only.
 - Not for human consumption.
 - Not for veterinary use.
@@ -51,17 +62,17 @@ orders@covenantbiolabs.com
 Shipping:
 - Domestic United States shipping only.
 - No international shipping at this time.
-- Typical processing time: 1–3 business days after payment confirmation, customer verification, and order review.
+- Typical processing time is 1–3 business days after payment confirmation, customer verification, and order review.
 - Tracking may be provided when available.
 - Lost or damaged shipments are reviewed case by case.
 - Damaged, defective, or incorrect shipments should be reported within 72 hours with clear photos and order details.
 
-Returns / Refunds:
+Returns and refunds:
 - Returns are not accepted once an order has shipped.
 - Refunds are reviewed case by case and are not guaranteed.
 - Damaged, defective, or incorrect shipments may qualify for review if reported within 72 hours.
 
-Age / Buyer Rules:
+Age and buyer rules:
 - Customers must be 21 years of age or older.
 - Customers must confirm research-use-only understanding.
 - Orders are reviewed before fulfillment.
@@ -69,7 +80,7 @@ Age / Buyer Rules:
 
 Payment:
 - Cash App and Venmo may be available.
-- Customers should include first and last name in payment note so payment can be matched to the order request.
+- Customers should include first and last name in the payment note so payment can be matched to the order request.
 - Payment does not guarantee order approval or shipment.
 
 COA Verification:
@@ -78,7 +89,7 @@ COA Verification:
 - A COA should match the product name, batch or lot details if available, assay amount, purity percentage, testing lab, and report date.
 - Customers can email orders@covenantbiolabs.com for documentation questions or matching COA questions.
 
-Catalog:
+Current catalog:
 - Retatrutide 20mg — $120 — COA available
 - NAD+ 500mg — $60 — COA available
 - MT-2 10mg — $50 — COA upload pending
@@ -120,96 +131,65 @@ Website pages:
     const systemPrompt = `
 You are Covenant AI, the premium website assistant for Covenant Bio Labs.
 
-Your job:
-Answer customer questions using:
-1. The Covenant Bio Labs website context provided.
-2. General public internet knowledge when helpful.
-3. A premium, professional, clean brand tone.
+Use the Covenant Bio Labs website context to answer questions about the website, catalog, COAs, ordering, shipping, policies, returns, payments, and contact information.
 
-Tone:
-Premium, calm, confident, clear, concise, helpful, blue-chip, science-focused. Never sound cheap, robotic, or generic.
+Answer in a premium, polished, professional tone. Keep answers clear and helpful.
 
-Compliance rules:
+Important safety rules:
+Do not provide human dosing instructions, injection instructions, medical advice, treatment advice, disease guidance, injury protocols, weight-loss guidance, hormone guidance, healing protocols, or recommendations about which peptide a person should take.
 
-You may answer:
-- Product catalog questions
-- Prices
-- COA availability
-- What COAs are and how to review them
-- Shipping
-- Returns/refunds
-- Ordering
-- Payment support
-- Research-use-only policy
-- Website navigation
-- General non-medical educational explanations
-- Brand questions
-- Contact questions
-- Human dosing instructions
-- Injection instructions
-- Treatment advice
-- Disease guidance
-- Injury protocols
-- Weight-loss advice
-- Hormone advice
-- Healing protocols
-- Human-use recommendations
-- “Which peptide should I take?” guidance
-- Medical claims
+If a customer asks for dosing, injections, treatment, disease, injury, hormone, weight loss, healing, or human-use guidance, respond:
+"Covenant Bio Labs products are offered strictly for research use only, are not for human consumption, and are not FDA approved. I can help with catalog details, COA verification, ordering, shipping, and research-use-only policy, but I can’t provide dosing, injection instructions, treatment guidance, or human-use recommendations. Please speak with a licensed medical professional for personal health questions."
 
-Keep answers short unless the user asks for details.
+Do not sound generic. Match Covenant Bio Labs' premium blue/silver science aesthetic in tone.
 `;
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const openAiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
-        tools: [
+        model: "gpt-4o-mini",
+        messages: [
           {
-            type: "web_search_preview"
+            role: "system",
+            content: systemPrompt
+          },
+          {
+            role: "user",
+            content: `Website context:\n${websiteContext}\n\nCustomer question:\n${question}`
           }
         ],
-        instructions: systemPrompt,
-        input: `
-Website context:
-${websiteContext}
-
-Customer question:
-${question}
-`
+        temperature: 0.4
       })
     });
 
-    const data = await response.json();
+    const data = await openAiResponse.json();
 
-    if (!response.ok) {
-      console.error("OpenAI error:", data);
-      return res.status(500).json({
-        error: "Covenant AI could not answer right now."
+    if (!openAiResponse.ok) {
+      const errorMessage =
+        data?.error?.message ||
+        data?.error ||
+        `OpenAI returned status ${openAiResponse.status}`;
+
+      return res.status(200).json({
+        answer: `Covenant AI reached Vercel, but OpenAI returned this error: ${errorMessage}`
       });
     }
 
     const answer =
-      data.output_text ||
-      data.output?.flatMap(item => item.content || [])
-        ?.map(content => content.text || "")
-        ?.join("\n")
-        ?.trim() ||
-      "Covenant AI could not generate an answer right now.";
+      data?.choices?.[0]?.message?.content?.trim() ||
+      "Covenant AI connected, but no answer was generated.";
 
     return res.status(200).json({
       answer
     });
 
   } catch (error) {
-    console.error("Covenant AI server error:", error);
-
-    return res.status(500).json({
-      error: "Covenant AI server error."
+    return res.status(200).json({
+      answer: `Covenant AI backend error: ${error.message}`
     });
   }
 }

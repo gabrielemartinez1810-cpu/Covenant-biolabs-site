@@ -3248,7 +3248,7 @@ html body header.topbar .mobile-menu-toggle{
 }
 </style>
   <!-- Covenant AI Premium Assistant - DEMO SAFE VERSION -->
-<div class="cbl-ai-premium-launcher" id="cblAiPremiumLauncher">
+<div class="cbl-ai-premium-launcher" id="cblAiPremiumLauncher" onclick="document.getElementById('cblAiPremiumPanel').classList.add('is-open');document.getElementById('cblAiPremiumPanel').setAttribute('aria-hidden','false');">
   <div class="cbl-ai-premium-orb">
     <span>AI</span>
   </div>
@@ -3271,7 +3271,7 @@ html body header.topbar .mobile-menu-toggle{
       </div>
     </div>
 
-    <button class="cbl-ai-premium-close" id="cblAiPremiumClose" type="button" aria-label="Close Covenant AI">
+<button class="cbl-ai-premium-close" id="cblAiPremiumClose" type="button" aria-label="Close Covenant AI" onclick="document.getElementById('cblAiPremiumPanel').classList.remove('is-open');document.getElementById('cblAiPremiumPanel').setAttribute('aria-hidden','true');">
       ×
     </button>
   </div>

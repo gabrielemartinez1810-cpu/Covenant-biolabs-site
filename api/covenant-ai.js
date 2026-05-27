@@ -1,4 +1,26 @@
 export default async function handler(req, res) {
+  const allowedOrigins = [
+    "https://www.covenantbiolabs.com",
+    "https://covenantbiolabs.com",
+    "https://covenant-biolabs-site-8fjv.vercel.app"
+  ];
+
+  const origin = req.headers.origin || "";
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", "https://www.covenantbiolabs.com");
+  }
+
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(200).json({
       answer: "Covenant AI backend is live. Send a question from the website chat box."
@@ -26,7 +48,8 @@ export default async function handler(req, res) {
 
     if (!process.env.OPENAI_API_KEY) {
       return res.status(200).json({
-        answer: "Covenant AI reached Vercel, but OPENAI_API_KEY is missing or empty. Add the key in Vercel Environment Variables, save it, then redeploy."
+        answer:
+          "Covenant AI reached Vercel, but OPENAI_API_KEY is missing or empty. Add the key in Vercel Environment Variables, save it, then redeploy."
       });
     }
 
@@ -115,17 +138,6 @@ Current catalog:
 - Selank 10mg — $50 — COA available
 - Bacteriostatic Water 10mL — $10 — COA upload pending
 - Insulin Syringe 30G 1mL/cc — $1 — supply item, COA not required
-
-Website pages:
-- Home
-- Shop Catalog
-- Contact
-- Peptide Calculator
-- FAQ
-- Legal
-- Terms & Conditions
-- Privacy Policy
-- Shipping Policy
 `;
 
     const systemPrompt = `
@@ -147,16 +159,13 @@ Do not sound generic. Match Covenant Bio Labs' premium blue/silver science aesth
     const openAiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
-          {
-            role: "system",
-            content: systemPrompt
-          },
+          { role: "system", content: systemPrompt },
           {
             role: "user",
             content: `Website context:\n${websiteContext}\n\nCustomer question:\n${question}`
@@ -170,9 +179,7 @@ Do not sound generic. Match Covenant Bio Labs' premium blue/silver science aesth
 
     if (!openAiResponse.ok) {
       const errorMessage =
-        data?.error?.message ||
-        data?.error ||
-        `OpenAI returned status ${openAiResponse.status}`;
+        data?.error?.message || data?.error || `OpenAI returned status ${openAiResponse.status}`;
 
       return res.status(200).json({
         answer: `Covenant AI reached Vercel, but OpenAI returned this error: ${errorMessage}`
@@ -183,10 +190,7 @@ Do not sound generic. Match Covenant Bio Labs' premium blue/silver science aesth
       data?.choices?.[0]?.message?.content?.trim() ||
       "Covenant AI connected, but no answer was generated.";
 
-    return res.status(200).json({
-      answer
-    });
-
+    return res.status(200).json({ answer });
   } catch (error) {
     return res.status(200).json({
       answer: `Covenant AI backend error: ${error.message}`

@@ -3947,6 +3947,152 @@ const API_ENDPOINT = "https://covenant-biolabs-site-8fjv.vercel.app/api/covenant
       border-radius:24px;
     }
   }
+    /* ==============================
+   COVENANT BIO LABS AFFILIATE PROGRAM
+============================== */
+
+.affiliate-section{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  padding:82px 28px;
+  border-radius:34px;
+  border:1px solid rgba(103,213,255,.24);
+  background:
+    linear-gradient(180deg,rgba(3,8,18,.28),rgba(3,8,18,.72) 55%,rgba(3,8,18,.96) 100%),
+    radial-gradient(circle at 18% 22%,rgba(103,213,255,.16),transparent 34%),
+    radial-gradient(circle at 86% 28%,rgba(43,125,255,.18),transparent 36%),
+    url("shop-catalog-bg.jpg") center top / 100% auto repeat-y;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.58),
+    inset 0 0 80px rgba(43,125,255,.08);
+}
+
+.affiliate-shell{
+  width:min(1180px,96%);
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.affiliate-head{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 34px;
+}
+
+.affiliate-head h2{
+  margin:0 0 16px;
+  font-size:clamp(2.8rem,6vw,5.8rem);
+  line-height:.96;
+  color:transparent;
+  background:linear-gradient(90deg,#2b7dff 0%,#58d8ff 45%,#67d5ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  text-shadow:
+    0 0 28px rgba(43,125,255,.50),
+    0 0 62px rgba(103,213,255,.28);
+}
+
+.affiliate-head p{
+  margin:0 auto;
+  max-width:820px;
+  color:#dff5ff;
+  line-height:1.72;
+  font-size:18px;
+}
+
+.affiliate-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin:34px 0 24px;
+}
+
+.affiliate-card{
+  padding:26px 22px;
+  border-radius:22px;
+  border:1px solid rgba(103,213,255,.22);
+  background:
+    radial-gradient(circle at top right,rgba(103,213,255,.09),transparent 34%),
+    rgba(5,15,29,.84);
+  box-shadow:
+    0 22px 58px rgba(0,0,0,.42),
+    inset 0 0 28px rgba(255,255,255,.025);
+}
+
+.affiliate-card h3{
+  margin:0 0 12px;
+  color:#67d5ff;
+  font-size:22px;
+}
+
+.affiliate-card p{
+  margin:0;
+  color:#bfeeff;
+  line-height:1.65;
+  font-size:15px;
+}
+
+.affiliate-notice{
+  margin:26px auto 0;
+  padding:20px;
+  border-radius:20px;
+  border:1px solid rgba(101,223,135,.28);
+  background:rgba(101,223,135,.08);
+  color:#eaf7ff;
+  line-height:1.65;
+  max-width:960px;
+  text-align:center;
+}
+
+.affiliate-code-box{
+  margin:24px auto 0;
+  max-width:780px;
+  padding:18px;
+  border-radius:18px;
+  border:1px solid rgba(103,213,255,.26);
+  background:rgba(3,8,18,.70);
+  color:#dff5ff;
+  text-align:center;
+  line-height:1.6;
+}
+
+.affiliate-code-box code{
+  color:#67d5ff;
+  font-weight:900;
+}
+
+.affiliate-actions{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.affiliate-btn{
+  min-height:50px;
+  padding:0 24px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#07101d;
+  background:var(--btnGrad);
+  text-decoration:none;
+  font-weight:900;
+}
+
+@media(max-width:900px){
+  .affiliate-grid{
+    grid-template-columns:1fr;
+  }
+
+  .affiliate-section{
+    padding:58px 18px;
+  }
+}
 </style>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -4736,7 +4882,64 @@ const API_ENDPOINT = "https://covenant-biolabs-site-8fjv.vercel.app/api/covenant
       <a href="#privacy">Privacy Policy</a>
       <a href="#shipping">Shipping Policy</a>
     </div>
+<section id="affiliate" class="affiliate-section">
+  <div class="affiliate-shell">
 
+    <div class="affiliate-head">
+      <p class="eyebrow">Affiliate Program</p>
+      <h2>Partner With Covenant Bio Labs</h2>
+      <p>
+        Covenant Bio Labs works with select affiliates, educators, gyms, trainers, and research-focused partners
+        who want to share our catalog in a responsible, compliant, research-use-only way.
+      </p>
+    </div>
+
+    <div class="affiliate-grid">
+      <div class="affiliate-card">
+        <h3>How It Works</h3>
+        <p>
+          Approved affiliates receive a unique referral code. When a customer orders through that code,
+          the sale can be tracked inside your Covenant Bio Labs order sheet.
+        </p>
+      </div>
+
+      <div class="affiliate-card">
+        <h3>Tracked in Sheets</h3>
+        <p>
+          Each order can connect the affiliate code, customer order, sale total, product cost,
+          commission owed, and your net profit after payout.
+        </p>
+      </div>
+
+      <div class="affiliate-card">
+        <h3>Compliance First</h3>
+        <p>
+          Affiliates may not make medical claims, dosing claims, treatment claims, human-use claims,
+          or promises of results. All content must remain research-use-only.
+        </p>
+      </div>
+    </div>
+
+    <div class="affiliate-notice">
+      <strong>Affiliate Disclosure:</strong>
+      Approved Covenant Bio Labs affiliates may earn compensation from qualified referrals.
+      All products are sold strictly for laboratory research use only. Not for human or animal use.
+      Not for therapeutic, diagnostic, medical, or consumption purposes.
+    </div>
+
+    <div class="affiliate-code-box">
+      Example affiliate link:<br>
+      <code>https://covenantbiolabs.com/?ref=BUNKER20</code>
+    </div>
+
+    <div class="affiliate-actions">
+      <a class="affiliate-btn" href="mailto:orders@covenantbiolabs.com?subject=Covenant Bio Labs Affiliate Application">
+        Apply to Become an Affiliate
+      </a>
+    </div>
+
+  </div>
+</section>
   </div>
 </section>
 <section id="contact" class="about-section">
@@ -4815,6 +5018,24 @@ let cart = [];
 const CBL_ORDER_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyd2dl14BEu10NkGcRwKwjX5KGpWl9ktDRY9w3olqmW2QhC4sDv2kbhK0wJVPt_VDI/exec";
 const CBL_ORDER_TOKEN = "CBL1810PRIVATE2026";
 const minZoom = 1;
+  function initCblAffiliateTracking(){
+  const params = new URLSearchParams(window.location.search);
+  const refCode = params.get("ref") || params.get("affiliate") || params.get("code");
+
+  if(refCode){
+    const cleanCode = refCode.trim().toUpperCase().replace(/[^A-Z0-9_-]/g,"");
+
+    if(cleanCode){
+      localStorage.setItem("cbl_affiliate_code", cleanCode);
+    }
+  }
+}
+
+function getCblAffiliateCode(){
+  return localStorage.getItem("cbl_affiliate_code") || "";
+}
+
+initCblAffiliateTracking();
 const maxZoom = 4;
 
 const previewRow = document.getElementById("previewRow");
@@ -5226,6 +5447,8 @@ async function submitCblOrderToSheet(event){
 
   const orderId = "CBL-" + Date.now();
 
+  const affiliateCode = getCblAffiliateCode();
+
   const payload = {
     token: CBL_ORDER_TOKEN,
     orderId: orderId,
@@ -5233,13 +5456,14 @@ async function submitCblOrderToSheet(event){
     email: email,
     phone: phone,
     paymentMethod: paymentMethod,
+        affiliateCode: affiliateCode,
     channel: "Website",
     paymentStatus: "Pending",
     fulfillmentStatus: "Not Fulfilled",
     shippingCharged: 0,
     shippingCost: 0,
     discount: 0,
-    notes: `Shipping Address: ${shippingAddress}`,
+    notes: `Shipping Address: ${shippingAddress}${affiliateCode ? "\nAffiliate Code: " + affiliateCode : ""}`,
     items: cart.map(item => ({
       sku: item.name,
       qty: item.quantity,
@@ -5297,7 +5521,20 @@ function renderCartCheckout(){
         <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="Order Summary" value="${summary}">
-
+                <input type="hidden" name="Affiliate Code" value="${getCblAffiliateCode()}">
+        ${getCblAffiliateCode() ? `
+          <div style="
+            margin:0 0 14px;
+            padding:12px 14px;
+            border-radius:14px;
+            border:1px solid rgba(103,213,255,.26);
+            background:rgba(103,213,255,.08);
+            color:#dff5ff;
+            font-weight:900;
+          ">
+            Affiliate Code Applied: ${getCblAffiliateCode()}
+          </div>
+        ` : ""}
         <textarea class="field" name="Products Requested" readonly>${cartSummaryText()}</textarea>
 
         <input class="field" name="First Name" placeholder="First Name" required>
@@ -5746,6 +5983,7 @@ const rawHash = window.location.hash || "#shop";
   const pages = {
     "#home": ["home", "about", "trust"],
     "#shop": ["shop"],
+    "#affiliate": ["affiliate"],
     "#contact": ["contact"],
     "#calculator": ["calculator"],
     "#faq": ["faq"],

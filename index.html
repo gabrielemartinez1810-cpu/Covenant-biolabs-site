@@ -5447,7 +5447,7 @@ async function submitCblOrderToSheet(event){
 
   const orderId = "CBL-" + Date.now();
 
-  const affiliateCode = getCblAffiliateCode();
+const affiliateCode = (form.querySelector('[name="Affiliate Code"]')?.value.trim().toUpperCase() || getCblAffiliateCode()).replace(/[^A-Z0-9_-]/g,"");
 
   const payload = {
     token: CBL_ORDER_TOKEN,
@@ -5521,20 +5521,13 @@ function renderCartCheckout(){
         <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="Order Summary" value="${summary}">
-                <input type="hidden" name="Affiliate Code" value="${getCblAffiliateCode()}">
-        ${getCblAffiliateCode() ? `
-          <div style="
-            margin:0 0 14px;
-            padding:12px 14px;
-            border-radius:14px;
-            border:1px solid rgba(103,213,255,.26);
-            background:rgba(103,213,255,.08);
-            color:#dff5ff;
-            font-weight:900;
-          ">
-            Affiliate Code Applied: ${getCblAffiliateCode()}
-          </div>
-        ` : ""}
+        <input
+          class="field"
+          name="Affiliate Code"
+          placeholder="Affiliate / Referral Code (optional)"
+          value="${getCblAffiliateCode()}"
+          style="text-transform:uppercase;"
+        >
         <textarea class="field" name="Products Requested" readonly>${cartSummaryText()}</textarea>
 
         <input class="field" name="First Name" placeholder="First Name" required>

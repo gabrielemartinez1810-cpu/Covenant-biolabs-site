@@ -6059,6 +6059,450 @@ window.addEventListener("hashchange", showCblPage);
 window.addEventListener("popstate", showCblPage);
 window.addEventListener("load", showCblPage);
 
+/* ==============================
+   CBL AFFILIATE DISCOUNT SYSTEM
+   Customer gets 10% off instantly.
+   Affiliate gets 15% commission.
+============================== */
+
+const CBL_AFFILIATES = {
+  MYPLUGMIKE: {
+    affiliateName: "Michael",
+    discountRate: 0.10,
+    commissionRate: 0.15
+  },
+
+  CBLMIKE: {
+    affiliateName: "Michael",
+    discountRate: 0.10,
+    commissionRate: 0.15
+  }
+};
+
+function cblMoney(amount){
+  return "$" + Number(amount || 0).toFixed(2);
+}
+
+function normalizeCblCode(code){
+  return String(code || "")
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9_-]/g, "");
+}
+
+function getActiveCblAffiliateCode(){
+  const input = document.querySelector('[name="Affiliate Code"]');
+
+  if(input){
+    return normalizeCblCode(input.value);
+  }
+
+  return normalizeCblCode(getCblAffiliateCode());
+}
+
+function getCblCartTotals(rawCode){
+  const subtotal = cart.reduce((sum,item) => {
+    return sum + item.price * item.quantity;
+  }, 0);
+
+  const code = normalizeCblCode(rawCode || getActiveCblAffiliateCode());
+  const affiliate = CBL_AFFILIATES[code] || null;
+
+  const discountAmount = affiliate ? subtotal * affiliate.discountRate : 0;
+  const newTotal = subtotal - discountAmount;
+  const commissionAmount = affiliate ? newTotal * affiliate.commissionRate : 0;
+
+  return {
+    code,
+    affiliate,
+    affiliateName: affiliate ? affiliate.affiliateName : "",
+    subtotal,
+    discountAmount,
+    newTotal,
+    commissionAmount,
+    discountPercent: affiliate ? affiliate.discountRate * 100 : 0,
+    commissionPercent: affiliate ? affiliate.commissionRate * 100 : 0
+  };
+}
+
+function createCblOrderSummary(rawCode){
+  const totals = getCblCartTotals(rawCode);
+
+  const productLines = cart.map(item => {
+    const lineTotal = item.price * item.quantity;
+    return `${item.name} | Qty: ${item.quantity} | Unit: ${cblMoney(item.price)} | Line Total: ${cblMoney(lineTotal)}`;
+  });
+
+  productLines.push("");
+  productLines.push(`Original Total: ${cblMoney(totals.subtotal)}`);
+
+  if(totals.affiliate){
+    productLines.push(`Affiliate Code: ${totals.code}`);
+    productLines.push(`Affiliate Name: ${totals.affiliateName}`);
+    productLines.push(`Customer Discount: ${totals.discountPercent}% OFF`);
+    productLines.push(`Discount Applied: -${cblMoney(totals.discountAmount)}`);
+    productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
+    productLines.push(`Affiliate Commission: ${totals.affiliateName} earns ${totals.commissionPercent}% = ${cblMoney(totals.commissionAmount)}`);
+  } else if(totals.code){
+    productLines.push(`Affiliate Code Entered: ${totals.code} - Not recognized`);
+    productLines.push(`Discount Applied: $0.00`);
+    productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
+    productLines.push(`Affiliate Commission: $0.00`);
+  } else {
+    productLines.push(`Affiliate Code: None`);
+    productLines.push(`Discount Applied: $0.00`);
+    productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
+    productLines.push(`Affiliate Commission: $0.00`);
+  }
+
+  return productLines.join("\n");
+}
+
+function updateCblDiscountDisplay(rawCode){
+  const totals = getCblCartTotals(rawCode);
+
+  const box = document.getElementById("cblDiscountBox");
+  const message = document.getElementById("cblAffiliateMessage");
+
+  const originalTotalInput = document.getElementById("cblOriginalTotalInput");
+  const discountInput = document.getElementById("cblDiscountInput");
+  const newTotalInput = document.getElementById("cblNewTotalInput");
+  const affiliateNameInput = document.getElementById("cblAffiliateNameInput");
+  const commissionInput = document.getElementById("cblAffiliateCommissionInput");
+  const orderSummaryInput = document.getElementById("cblOrderSummaryInput");
+  const productsRequested = document.getElementById("cblProductsRequested");
+
+  const originalText = document.getElementById("cblOriginalTotalText");
+  const discountText = document.getElementById("cblDiscountText");
+  const newTotalText = document.getElementById("cblNewTotalText");
+  const commissionText = document.getElementById("cblCommissionText");
+
+  if(originalText) originalText.textContent = cblMoney(totals.subtotal);
+  if(discountText) discountText.textContent = totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00";
+  if(newTotalText) newTotalText.textContent = cblMoney(totals.newTotal);
+  if(commissionText) commissionText.textContent = totals.commissionAmount > 0 ? cblMoney(totals.commissionAmount) : "$0.00";
+
+  if(box){
+    box.style.display = totals.code ? "block" : "none";
+  }
+
+  if(message){
+    if(totals.affiliate){
+      message.innerHTML = `Code applied: <strong>${totals.code}</strong> — customer receives 10% off.`;
+      message.style.color = "#65df87";
+    } else if(totals.code){
+      message.innerHTML = `Code not recognized. No discount applied.`;
+      message.style.color = "#ffd36a";
+    } else {
+      message.innerHTML = "";
+    }
+  }
+
+  const summary = createCblOrderSummary(totals.code);
+
+  if(originalTotalInput) originalTotalInput.value = cblMoney(totals.subtotal);
+  if(discountInput) discountInput.value = totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00";
+  if(newTotalInput) newTotalInput.value = cblMoney(totals.newTotal);
+  if(affiliateNameInput) affiliateNameInput.value = totals.affiliateName || "None";
+  if(commissionInput) commissionInput.value = totals.commissionAmount > 0 ? cblMoney(totals.commissionAmount) : "$0.00";
+  if(orderSummaryInput) orderSummaryInput.value = summary;
+  if(productsRequested) productsRequested.value = summary;
+}
+
+function handleCblAffiliateInput(input){
+  const code = normalizeCblCode(input.value);
+  input.value = code;
+
+  if(code){
+    localStorage.setItem("cbl_affiliate_code", code);
+  } else {
+    localStorage.removeItem("cbl_affiliate_code");
+  }
+
+  updateCblDiscountDisplay(code);
+  updateCartUI();
+}
+
+cartSummaryText = function(rawCode){
+  if(cart.length === 0) return "";
+  return createCblOrderSummary(rawCode);
+};
+
+updateCartUI = function(){
+  const count = document.getElementById("cartCount");
+  const itemsDiv = document.getElementById("cartItems");
+  const totalDiv = document.getElementById("cartTotal");
+
+  if(!count || !itemsDiv || !totalDiv) return;
+
+  count.textContent = cart.reduce((sum,item) => sum + item.quantity, 0);
+
+  if(cart.length === 0){
+    itemsDiv.innerHTML = `<p style="color:#dbe8fa;">Your cart is empty.</p>`;
+    totalDiv.textContent = "Estimated Total: $0.00";
+    refreshProductGrid();
+    return;
+  }
+
+  itemsDiv.innerHTML = cart.map((item,index) => {
+    const lineTotal = item.price * item.quantity;
+
+    return `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong><br>
+          <span>${item.priceText} each</span>
+        </div>
+
+        <div class="cart-qty">
+          <button type="button" onclick="changeCartQuantity(${index},-1)">-</button>
+          <span>${item.quantity}</span>
+          <button type="button" onclick="changeCartQuantity(${index},1)">+</button>
+        </div>
+
+        <div>${cblMoney(lineTotal)}</div>
+
+        <button class="cart-remove" type="button" onclick="removeCartItem(${index})">Remove</button>
+      </div>
+    `;
+  }).join("");
+
+  const totals = getCblCartTotals();
+
+  if(totals.affiliate){
+    totalDiv.innerHTML = `
+      <div style="font-size:15px;color:#bfeeff;line-height:1.7;">
+        Original Total: <span style="text-decoration:line-through;">${cblMoney(totals.subtotal)}</span><br>
+        Discount Applied: <strong style="color:#65df87;">-${cblMoney(totals.discountAmount)}</strong>
+      </div>
+      <div style="margin-top:6px;color:#65df87;font-size:26px;">
+        New Total: ${cblMoney(totals.newTotal)}
+      </div>
+    `;
+  } else {
+    totalDiv.textContent = `Estimated Total: ${cblMoney(totals.subtotal)}`;
+  }
+
+  refreshProductGrid();
+};
+
+renderCartCheckout = function(){
+  const checkout = document.getElementById("cartCheckout");
+  if(!checkout) return;
+
+  if(cart.length === 0){
+    checkout.innerHTML = `
+      <div class="modal-panel">
+        <h3>Order Request</h3>
+        <p style="color:#dbe8fa;">Add at least one product before submitting an order request.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const startingAffiliateCode = getActiveCblAffiliateCode();
+  const totals = getCblCartTotals(startingAffiliateCode);
+  const summary = createCblOrderSummary(startingAffiliateCode).replace(/"/g,"&quot;");
+
+  checkout.innerHTML = `
+    <div class="modal-panel">
+      <h3>Order Request</h3>
+
+      <form action="https://formsubmit.co/orders@covenantbiolabs.com" method="POST" onsubmit="return submitCblOrderToSheet(event)">
+        <input type="hidden" name="_subject" value="New Covenant Bio Labs Order Inquiry">
+        <input type="hidden" name="_template" value="table">
+
+        <input type="hidden" name="Order Summary" id="cblOrderSummaryInput" value="${summary}">
+        <input type="hidden" name="Original Total" id="cblOriginalTotalInput" value="${cblMoney(totals.subtotal)}">
+        <input type="hidden" name="Discount Applied" id="cblDiscountInput" value="${totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00"}">
+        <input type="hidden" name="New Total" id="cblNewTotalInput" value="${cblMoney(totals.newTotal)}">
+        <input type="hidden" name="Affiliate Name" id="cblAffiliateNameInput" value="${totals.affiliateName || "None"}">
+        <input type="hidden" name="Affiliate Commission" id="cblAffiliateCommissionInput" value="${totals.commissionAmount > 0 ? cblMoney(totals.commissionAmount) : "$0.00"}">
+
+        <input
+          class="field"
+          name="Affiliate Code"
+          placeholder="Affiliate / Referral Code"
+          value="${startingAffiliateCode}"
+          oninput="handleCblAffiliateInput(this)"
+          style="text-transform:uppercase;"
+        >
+
+        <div id="cblDiscountBox" style="
+          display:${startingAffiliateCode ? "block" : "none"};
+          margin:12px 0 16px;
+          padding:18px;
+          border-radius:18px;
+          border:1px solid rgba(103,213,255,.30);
+          background:
+            radial-gradient(circle at top right,rgba(103,213,255,.10),transparent 34%),
+            rgba(3,8,18,.88);
+          box-shadow:
+            0 0 28px rgba(103,213,255,.12),
+            inset 0 0 24px rgba(255,255,255,.025);
+        ">
+          <div id="cblAffiliateMessage" style="font-weight:900;margin-bottom:12px;color:#65df87;"></div>
+
+          <div style="display:grid;gap:8px;color:#dff5ff;font-size:15px;line-height:1.5;">
+            <div style="display:flex;justify-content:space-between;gap:12px;">
+              <span>Original Total</span>
+              <strong id="cblOriginalTotalText">${cblMoney(totals.subtotal)}</strong>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;gap:12px;">
+              <span>Discount Applied</span>
+              <strong id="cblDiscountText" style="color:#65df87;">${totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00"}</strong>
+            </div>
+
+            <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(103,213,255,.45),transparent);margin:6px 0;"></div>
+
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:20px;">
+              <span>New Total</span>
+              <strong id="cblNewTotalText" style="color:#65df87;">${cblMoney(totals.newTotal)}</strong>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#9fdfff;">
+              <span>Affiliate Commission</span>
+              <strong id="cblCommissionText">${totals.commissionAmount > 0 ? cblMoney(totals.commissionAmount) : "$0.00"}</strong>
+            </div>
+          </div>
+        </div>
+
+        <textarea class="field" name="Products Requested" id="cblProductsRequested" readonly>${createCblOrderSummary(startingAffiliateCode)}</textarea>
+
+        <input class="field" name="First Name" placeholder="First Name" required>
+        <input class="field" name="Last Name" placeholder="Last Name" required>
+        <input class="field" name="Email" type="email" placeholder="Email Address" required>
+        <input class="field" name="Phone Number" placeholder="Phone Number" required>
+        <textarea class="field" name="Shipping Address" placeholder="Shipping Address" required></textarea>
+
+        <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:#dbe8fa;font-size:13px;line-height:1.45;">
+          <input type="checkbox" name="21+ Research Use Confirmation" value="Confirmed" required style="margin-top:3px;">
+          <span>I confirm that I am 21 years of age or older and understand these products are sold strictly for lawful laboratory research use only. Not for human or animal use. Not for therapeutic, diagnostic, medical, or consumption purposes.</span>
+        </label>
+
+        <div style="
+          margin:18px 0 16px;
+          padding:18px;
+          border-radius:18px;
+          border:1px solid rgba(103,213,255,.24);
+          background:rgba(3,8,18,.82);
+          box-shadow:0 0 28px rgba(103,213,255,.10);
+        ">
+          <h3 style="margin:0 0 10px;color:#67d5ff;font-size:20px;text-transform:uppercase;letter-spacing:1px;">Payment</h3>
+
+          <p style="margin:0 0 14px;color:#dbe8fa;line-height:1.5;font-size:14px;">
+            Choose Cash App or Venmo, then submit your order request.
+            Please include your first and last name in the payment note.
+          </p>
+
+          <label style="display:block;margin-bottom:10px;padding:13px 14px;border-radius:14px;border:1px solid rgba(103,213,255,.22);background:rgba(255,255,255,.05);color:#fff;font-weight:900;">
+            <input type="radio" name="Payment Method" value="Cash App" checked>
+            Cash App
+          </label>
+
+          <label style="display:block;margin-bottom:14px;padding:13px 14px;border-radius:14px;border:1px solid rgba(103,213,255,.22);background:rgba(255,255,255,.05);color:#fff;font-weight:900;">
+            <input type="radio" name="Payment Method" value="Venmo">
+            Venmo
+          </label>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://cash.app/$CovBioLabs" target="_blank" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:14px;text-decoration:none;color:#07101d;background:var(--btnGrad);font-weight:900;">
+              Pay Cash App
+            </a>
+
+            <a href="https://venmo.com/u/CovBioLabs" target="_blank" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:14px;text-decoration:none;color:#07101d;background:var(--btnGrad);font-weight:900;">
+              Pay Venmo
+            </a>
+          </div>
+
+          <div style="margin-top:12px;color:#67d5ff;font-size:13px;font-weight:800;">
+            Payment note: First and last name from your order
+          </div>
+        </div>
+
+        <button class="order-submit" type="submit">Submit Order Request</button>
+      </form>
+    </div>
+  `;
+
+  updateCblDiscountDisplay(startingAffiliateCode);
+};
+
+submitCblOrderToSheet = async function(event){
+  event.preventDefault();
+
+  const form = event.target;
+  const submitButton = form.querySelector(".order-submit");
+
+  if(cart.length === 0){
+    alert("Your cart is empty.");
+    return false;
+  }
+
+  if(submitButton){
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting Order...";
+  }
+
+  const firstName = form.querySelector('[name="First Name"]')?.value.trim() || "";
+  const lastName = form.querySelector('[name="Last Name"]')?.value.trim() || "";
+  const email = form.querySelector('[name="Email"]')?.value.trim() || "";
+  const phone = form.querySelector('[name="Phone Number"]')?.value.trim() || "";
+  const shippingAddress = form.querySelector('[name="Shipping Address"]')?.value.trim() || "";
+  const paymentMethod = form.querySelector('[name="Payment Method"]:checked')?.value || "Not Selected";
+
+  const affiliateCode = normalizeCblCode(form.querySelector('[name="Affiliate Code"]')?.value || getCblAffiliateCode());
+  const totals = getCblCartTotals(affiliateCode);
+
+  updateCblDiscountDisplay(affiliateCode);
+
+  const orderId = "CBL-" + Date.now();
+
+  const payload = {
+    token: CBL_ORDER_TOKEN,
+    orderId: orderId,
+    customerName: `${firstName} ${lastName}`.trim(),
+    email: email,
+    phone: phone,
+    paymentMethod: paymentMethod,
+    affiliateCode: affiliateCode,
+    affiliateName: totals.affiliateName || "",
+    channel: "Website",
+    paymentStatus: "Pending",
+    fulfillmentStatus: "Not Fulfilled",
+    subtotal: Number(totals.subtotal.toFixed(2)),
+    discount: Number(totals.discountAmount.toFixed(2)),
+    finalTotal: Number(totals.newTotal.toFixed(2)),
+    affiliateCommission: Number(totals.commissionAmount.toFixed(2)),
+    shippingCharged: 0,
+    shippingCost: 0,
+    notes: `Shipping Address: ${shippingAddress}${affiliateCode ? "\nAffiliate Code: " + affiliateCode : ""}\nOriginal Total: ${cblMoney(totals.subtotal)}\nDiscount Applied: ${totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00"}\nNew Total: ${cblMoney(totals.newTotal)}\nAffiliate Commission: ${cblMoney(totals.commissionAmount)}`,
+    items: cart.map(item => ({
+      sku: item.name,
+      qty: item.quantity,
+      unitPrice: item.price,
+      notes: `Shipping Address: ${shippingAddress}`
+    }))
+  };
+
+  try{
+    await fetch(CBL_ORDER_WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch(error){
+    console.log("Google Sheet submission issue:", error);
+  }
+
+  form.submit();
+  return false;
+};
+
 showCblPage();
 updateCartUI();
 updateCalc();

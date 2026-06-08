@@ -6502,7 +6502,451 @@ submitCblOrderToSheet = async function(event){
   form.submit();
   return false;
 };
+/* ==============================
+   CBL VIAL QUANTITY DISCOUNT SYSTEM
+   1 vial = no discount
+   3 vials = 5% off
+   5 vials = 15% off
+   10 vials = 20% off
+============================== */
 
+const CBL_BULK_VIAL_OPTIONS = {
+  1: 0,
+  3: 0.05,
+  5: 0.15,
+  10: 0.20
+};
+
+let selectedCblVialQty = 1;
+
+function getCblBulkRate(qty){
+  return CBL_BULK_VIAL_OPTIONS[Number(qty)] || 0;
+}
+
+function getCblBulkLabel(qty){
+  const rate = getCblBulkRate(qty);
+  return rate > 0 ? `Save ${Math.round(rate * 100)}%` : "";
+}
+
+function getCblLineTotal(item){
+  const vials = item.vialQty || item.quantity || 1;
+  const bundleCount = item.bundleCount || 1;
+  const rate = item.bulkDiscountRate || 0;
+
+  return item.price * vials * bundleCount * (1 - rate);
+}
+
+function getCblTotalVials(item){
+  return (item.vialQty || item.quantity || 1) * (item.bundleCount || 1);
+}
+
+function addCblBulkStyles(){
+  if(document.getElementById("cblBulkVialStyles")) return;
+
+  const style = document.createElement("style");
+  style.id = "cblBulkVialStyles";
+  style.textContent = `
+    .cbl-vial-panel{
+      margin:16px 0;
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(103,213,255,.24);
+      background:rgba(3,8,18,.86);
+      box-shadow:inset 0 0 22px rgba(255,255,255,.025);
+    }
+
+    .cbl-vial-title{
+      margin:0 0 14px;
+      font-size:20px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#67d5ff;
+      font-weight:900;
+    }
+
+    .cbl-vial-options{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .cbl-vial-btn{
+      min-width:120px;
+      min-height:64px;
+      border-radius:24px;
+      border:2px solid rgba(103,213,255,.22);
+      background:rgba(255,255,255,.04);
+      color:#dff7ff;
+      font-size:18px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 0 18px rgba(103,213,255,.06);
+    }
+
+    .cbl-vial-btn span{
+      display:inline-block;
+      margin-top:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(101,223,135,.16);
+      color:#65df87;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .cbl-vial-btn.active{
+      background:linear-gradient(180deg,#1d6eff,#0d4db8);
+      color:#fff;
+      border-color:rgba(103,213,255,.80);
+      box-shadow:0 0 24px rgba(43,125,255,.34);
+    }
+
+    .cbl-vial-price{
+      margin-top:14px;
+      color:#65df87;
+      font-size:18px;
+      font-weight:900;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+addCblBulkStyles();
+
+openProduct = function(name){
+  const product = products.find(item => item.name === name);
+  if(!product) return;
+
+  currentProduct = product;
+  selectedCblVialQty = 1;
+
+  const qtyInCart = getCartQty(product.name);
+  const assayLine = product.assay ? `<li><strong>Assay:</strong> ${product.assay}</li>` : "";
+  const purityLine = product.purity ? `<li><strong>Purity:</strong> ${product.purity}</li>` : "";
+  const detailsLine = product.details ? `<li><strong>Details:</strong> ${product.details}</li>` : "";
+  const coaButtonText = product.hasCOA ? "View Lab Verified COA" : "COA Status";
+  const isSupplyItem = product.name.toLowerCase().includes("syringe");
+  const modalBadge = isSupplyItem ? "" : `<div class="verified-pill">Lab Verified</div>`;
+  const modalStatus = isSupplyItem ? "" : `<div class="modal-status">Lab Verified</div>`;
+
+  const basePrice = priceNumber(product.price);
+
+  const vialOptionsHtml = isSupplyItem ? "" : `
+    <div class="cbl-vial-panel">
+      <div class="cbl-vial-title">Vial Quantity</div>
+
+      <div class="cbl-vial-options">
+        <button class="cbl-vial-btn active" type="button" onclick="selectCblVialQty(1, ${basePrice}, this)">
+          1 Vial
+        </button>
+
+        <button class="cbl-vial-btn" type="button" onclick="selectCblVialQty(3, ${basePrice}, this)">
+          3 Vials<br><span>Save 5%</span>
+        </button>
+
+        <button class="cbl-vial-btn" type="button" onclick="selectCblVialQty(5, ${basePrice}, this)">
+          5 Vials<br><span>Save 15%</span>
+        </button>
+
+        <button class="cbl-vial-btn" type="button" onclick="selectCblVialQty(10, ${basePrice}, this)">
+          10 Vials<br><span>Save 20%</span>
+        </button>
+      </div>
+
+      <div class="cbl-vial-price" id="cblVialPricePreview">
+        Selected Total: ${cblMoney(basePrice)}
+      </div>
+    </div>
+  `;
+
+  const coaViewer = `
+    <div class="coa-viewer" id="coaViewer">
+      <div class="modal-panel">
+        <div class="coa-toolbar">
+          <div>
+            <h4 style="margin:0;">Lab Verification Report</h4>
+            <div class="mini">
+              ${product.hasCOA ? "Certificate of Analysis available. Tap the report to zoom in." : "Lab verified. COA upload pending for this product."}
+            </div>
+          </div>
+          ${product.hasCOA ? `<button type="button" onclick="openCOAZoom()">Zoom In COA</button>` : ""}
+        </div>
+
+        <div class="coa-frame ${product.hasCOA ? "" : "no-coa"}">
+          ${
+            product.hasCOA
+              ? `<img id="modalCOAImage" src="${product.coaFile}" alt="${product.name} COA" onclick="openCOAZoom()" onerror="showCoaError(this)">
+                 <div class="coa-error">COA image not found. Check the filename in your repo.</div>`
+              : `<div class="coa-error" style="display:block;">Lab Verified - COA Upload Pending.</div>`
+          }
+        </div>
+      </div>
+    </div>
+  `;
+
+  const modal = document.getElementById("productModal");
+
+  modal.innerHTML = `
+    <div class="modal-box">
+      <button class="close" onclick="closeModal()">X</button>
+
+      <div class="modal-content">
+        <div class="modal-left">
+          <div class="modal-thumb">
+            ${modalBadge}
+            <img src="${product.img}" alt="${product.name}" onerror="showModalImageFallback(this)">
+            <div class="modal-thumb-fallback">${product.name}</div>
+          </div>
+        </div>
+
+        <div class="modal-right">
+          ${modalStatus}
+          <h2>${product.name}</h2>
+          <div class="modal-price">${product.price}</div>
+
+          <div style="margin:-4px 0 16px;color:#67d5ff;font-weight:900;font-size:15px;">
+            Quantity in Cart: ${qtyInCart}
+          </div>
+
+          ${vialOptionsHtml}
+
+          <div class="modal-panel">
+            <h4>Product Information</h4>
+            <ul>
+              <li><strong>Amount:</strong> ${product.amount}</li>
+              <li><strong>Form:</strong> ${product.form}</li>
+              ${detailsLine}
+              ${assayLine}
+              ${purityLine}
+            </ul>
+          </div>
+
+          <div class="modal-panel">
+            <h4>COA Verification</h4>
+            <ul>
+              <li><strong>Status:</strong> ${product.coaStatus}</li>
+              <li><strong>Lab:</strong> ${product.lab}</li>
+            </ul>
+          </div>
+
+          <div class="modal-panel">
+            <h4>⚠ Important Notice</h4>
+            <ul>
+              <li>This product is sold strictly for laboratory research purposes only.</li>
+              <li>Not for human or animal use.</li>
+              <li>Not intended for therapeutic, diagnostic, medical, or consumption purposes.</li>
+              <li>You must be at least 21 years of age to purchase from Covenant Bio Labs.</li>
+            </ul>
+          </div>
+
+          <div class="modal-actions">
+            <button class="coa-btn" type="button" onclick="toggleCOA()">${coaButtonText}</button>
+            <button class="info-btn" type="button" onclick="addSelectedCblVialsToCart(currentProduct)">Add Selected Vials</button>
+            <button class="contact-btn" type="button" onclick="copyContactEmail()">Contact for Info</button>
+          </div>
+
+          ${coaViewer}
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.style.display = "flex";
+  document.body.classList.add("modal-open");
+};
+
+function selectCblVialQty(qty, basePrice, button){
+  selectedCblVialQty = Number(qty);
+
+  document.querySelectorAll(".cbl-vial-btn").forEach(btn => btn.classList.remove("active"));
+  button.classList.add("active");
+
+  const rate = getCblBulkRate(selectedCblVialQty);
+  const original = basePrice * selectedCblVialQty;
+  const finalTotal = original * (1 - rate);
+
+  const preview = document.getElementById("cblVialPricePreview");
+
+  if(preview){
+    preview.innerHTML = rate > 0
+      ? `Selected Total: <span style="text-decoration:line-through;color:#b9d9ff;">${cblMoney(original)}</span> ${cblMoney(finalTotal)}`
+      : `Selected Total: ${cblMoney(finalTotal)}`;
+  }
+}
+
+function addSelectedCblVialsToCart(product){
+  if(!product) return;
+
+  const vialQty = product.name.toLowerCase().includes("syringe") ? 1 : selectedCblVialQty;
+  const bulkDiscountRate = getCblBulkRate(vialQty);
+
+  const existing = cart.find(item =>
+    item.name === product.name &&
+    Number(item.vialQty || 1) === Number(vialQty) &&
+    Number(item.bulkDiscountRate || 0) === Number(bulkDiscountRate)
+  );
+
+  if(existing){
+    existing.bundleCount = (existing.bundleCount || 1) + 1;
+  } else {
+    cart.push({
+      name: product.name,
+      priceText: product.price,
+      price: priceNumber(product.price),
+      quantity: vialQty,
+      vialQty: vialQty,
+      bundleCount: 1,
+      bulkDiscountRate: bulkDiscountRate
+    });
+  }
+
+  updateCartUI();
+  refreshProductGrid();
+
+  if(currentProduct && currentProduct.name === product.name){
+    openProduct(product.name);
+  }
+}
+
+getCblCartTotals = function(rawCode){
+  const subtotal = cart.reduce((sum,item) => {
+    return sum + item.price * getCblTotalVials(item);
+  }, 0);
+
+  const bulkDiscountAmount = cart.reduce((sum,item) => {
+    return sum + ((item.price * getCblTotalVials(item)) - getCblLineTotal(item));
+  }, 0);
+
+  const afterBulkTotal = subtotal - bulkDiscountAmount;
+
+  const code = normalizeCblCode(rawCode || getActiveCblAffiliateCode());
+  const affiliate = CBL_AFFILIATES[code] || null;
+
+  const affiliateDiscountAmount = affiliate ? afterBulkTotal * affiliate.discountRate : 0;
+  const newTotal = afterBulkTotal - affiliateDiscountAmount;
+  const commissionAmount = affiliate ? newTotal * affiliate.commissionRate : 0;
+
+  return {
+    code,
+    affiliate,
+    affiliateName: affiliate ? affiliate.affiliateName : "",
+    subtotal,
+    bulkDiscountAmount,
+    discountAmount: affiliateDiscountAmount,
+    newTotal,
+    commissionAmount,
+    discountPercent: affiliate ? affiliate.discountRate * 100 : 0,
+    commissionPercent: affiliate ? affiliate.commissionRate * 100 : 0
+  };
+};
+
+createCblOrderSummary = function(rawCode){
+  const totals = getCblCartTotals(rawCode);
+
+  const productLines = cart.map(item => {
+    const totalVials = getCblTotalVials(item);
+    const originalLine = item.price * totalVials;
+    const finalLine = getCblLineTotal(item);
+    const bulkPercent = Math.round((item.bulkDiscountRate || 0) * 100);
+
+    return `${item.name} | Vials: ${totalVials} | Unit: ${cblMoney(item.price)} | Bulk Discount: ${bulkPercent}% | Line Total: ${cblMoney(finalLine)}${bulkPercent ? " | Original: " + cblMoney(originalLine) : ""}`;
+  });
+
+  productLines.push("");
+  productLines.push(`Original Total: ${cblMoney(totals.subtotal)}`);
+  productLines.push(`Bulk Vial Discount: -${cblMoney(totals.bulkDiscountAmount)}`);
+
+  if(totals.affiliate){
+    productLines.push(`Affiliate Code: ${totals.code}`);
+    productLines.push(`Affiliate Name: ${totals.affiliateName}`);
+    productLines.push(`Affiliate Customer Discount: ${totals.discountPercent}% OFF`);
+    productLines.push(`Affiliate Discount Applied: -${cblMoney(totals.discountAmount)}`);
+    productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
+    productLines.push(`Affiliate Commission: ${totals.affiliateName} earns ${totals.commissionPercent}% = ${cblMoney(totals.commissionAmount)}`);
+  } else if(totals.code){
+    productLines.push(`Affiliate Code Entered: ${totals.code} - Not recognized`);
+    productLines.push(`Affiliate Discount Applied: $0.00`);
+    productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
+    productLines.push(`Affiliate Commission: $0.00`);
+  } else {
+    productLines.push(`Affiliate Code: None`);
+    productLines.push(`Affiliate Discount Applied: $0.00`);
+    productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
+    productLines.push(`Affiliate Commission: $0.00`);
+  }
+
+  return productLines.join("\n");
+};
+
+updateCartUI = function(){
+  const count = document.getElementById("cartCount");
+  const itemsDiv = document.getElementById("cartItems");
+  const totalDiv = document.getElementById("cartTotal");
+
+  if(!count || !itemsDiv || !totalDiv) return;
+
+  count.textContent = cart.reduce((sum,item) => sum + getCblTotalVials(item), 0);
+
+  if(cart.length === 0){
+    itemsDiv.innerHTML = `<p style="color:#dbe8fa;">Your cart is empty.</p>`;
+    totalDiv.textContent = "Estimated Total: $0.00";
+    refreshProductGrid();
+    return;
+  }
+
+  itemsDiv.innerHTML = cart.map((item,index) => {
+    const totalVials = getCblTotalVials(item);
+    const lineTotal = getCblLineTotal(item);
+    const bulkPercent = Math.round((item.bulkDiscountRate || 0) * 100);
+
+    return `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong><br>
+          <span>${totalVials} vial(s) • ${item.priceText} each ${bulkPercent ? "• Save " + bulkPercent + "%" : ""}</span>
+        </div>
+
+        <div class="cart-qty">
+          <button type="button" onclick="changeCartQuantity(${index},-1)">-</button>
+          <span>${item.bundleCount || 1}</span>
+          <button type="button" onclick="changeCartQuantity(${index},1)">+</button>
+        </div>
+
+        <div>${cblMoney(lineTotal)}</div>
+
+        <button class="cart-remove" type="button" onclick="removeCartItem(${index})">Remove</button>
+      </div>
+    `;
+  }).join("");
+
+  const totals = getCblCartTotals();
+
+  totalDiv.innerHTML = `
+    <div style="font-size:15px;color:#bfeeff;line-height:1.7;">
+      Original Total: ${cblMoney(totals.subtotal)}<br>
+      Bulk Vial Discount: <strong style="color:#65df87;">-${cblMoney(totals.bulkDiscountAmount)}</strong><br>
+      Affiliate Discount: <strong style="color:#65df87;">-${cblMoney(totals.discountAmount)}</strong>
+    </div>
+    <div style="margin-top:6px;color:#65df87;font-size:26px;">
+      New Total: ${cblMoney(totals.newTotal)}
+    </div>
+  `;
+
+  refreshProductGrid();
+};
+
+changeCartQuantity = function(index,amount){
+  if(!cart[index]) return;
+
+  cart[index].bundleCount = (cart[index].bundleCount || 1) + amount;
+
+  if(cart[index].bundleCount <= 0){
+    cart.splice(index,1);
+  }
+
+  updateCartUI();
+  renderCartCheckoutIfOpen();
+};
 showCblPage();
 updateCartUI();
 updateCalc();

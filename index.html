@@ -8,30 +8,32 @@
 
 <style>
 :root{
-  --bg:#141414;
-  --bg2:#0b0d11;
-  --card:#101820;
-  --blue:#153D86;
-  --blue2:#2b7dff;
-  --white:#ffffff;
-  --text:#ffffff;
-  --muted:#b8c7dc;
-  --line:rgba(21,61,134,.55);
-  --glow:0 0 28px rgba(43,125,255,.35);
-  --shadow:0 24px 70px rgba(0,0,0,.65);
-  --radius:26px;
+  --bg:#03060b;
+  --bg2:#08111b;
+  --line:rgba(103,182,255,.22);
+  --lineStrong:rgba(103,213,255,.46);
+  --blue:#2b7dff;
+  --blue2:#67d5ff;
+  --green:#65df87;
+  --text:#b9d9ff;
+  --shadow:0 24px 70px rgba(0,0,0,.55);
+  --radius:28px;
+  --max:1440px;
+  --btnGrad:linear-gradient(180deg,#8beaff,#58d8ff 42%,#55c9ff 100%);
+  --verifiedGrad:linear-gradient(135deg,#fff3a6 0%,#65df87 55%,#5fd7ff 100%);
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:radial-gradient(circle at 10% 8%,rgba(43,125,255,.14),transparent 22%),
+  radial-gradient(circle at 88% 12%,rgba(103,213,255,.10),transparent 18%),
+  linear-gradient(180deg,var(--bg),var(--bg2));
   overflow-x:hidden;
   min-height:100vh;
-  background:
-    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.86)),
-    url("BIO-WALLPAPER.png") center/cover fixed;
-  color:var(--text);
-  font-family:'Montserrat', Arial, sans-serif;
 }
 body.modal-open{overflow:hidden}
 img{display:block;max-width:100%}

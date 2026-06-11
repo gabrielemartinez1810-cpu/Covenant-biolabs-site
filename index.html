@@ -2650,7 +2650,41 @@ html body #shop .grid{
 html body #legal .legal-bg-art {
   display: none !important;
 }
+@media (max-width: 600px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
+  #contact,
+  #contact .card,
+  #contact .contact-card,
+  #contact .panel {
+    width: 100% !important;
+    max-width: calc(100vw - 28px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-align: center !important;
+  }
+
+  #contact h1 {
+    font-size: 54px !important;
+    line-height: 1.05 !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  #contact p,
+  #contact a {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    text-align: center !important;
+  }
+}
 /* Repeating legal background image through the WHOLE legal section */
 html body #legal.legal-section::before {
   content: "" !important;

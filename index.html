@@ -2965,7 +2965,19 @@ const API_ENDPOINT = "https://covenant-biolabs-site-8fjv.vercel.app/api/covenant
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
-<body>
+<body>\n<div id="cbl-age-gate" role="dialog" aria-modal="true" aria-labelledby="cbl-age-title">
+  <div class="cbl-age-card">
+    <p class="cbl-age-kicker">Covenant Bio Labs</p>
+    <h2 id="cbl-age-title">Age Verification</h2>
+    <p>You must be 21 years of age or older to enter this website.</p>
+    <p>By entering, you confirm that you are at least 21 years old.</p>
+    <p class="cbl-age-ruo">Research Use Only • Not for Human Consumption</p>
+    <div class="cbl-age-actions">
+      <button id="cbl-age-yes" class="cbl-age-btn cbl-age-btn-primary" type="button">I am 21 or older</button>
+      <button id="cbl-age-no" class="cbl-age-btn cbl-age-btn-secondary" type="button">I am under 21</button>
+    </div>
+  </div>
+</div>
 <div class="wrap">
 <header class="topbar">
 <a href="index.html" class="brand"><img src="hero-badge-v2.png" alt="Covenant Bio Labs"></a>
@@ -5425,5 +5437,5 @@ showCblPage();
 updateCartUI();
 
 </script>
-</body>
+  <script src="age-gate.js"></script>\n</body>
 </html>

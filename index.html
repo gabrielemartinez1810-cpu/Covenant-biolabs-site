@@ -3729,9 +3729,6 @@ const products = [
   {name:"SLU-PP-332 5mg",price:"$90",img:"slu-pp-332-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
   {name:"WOLVERINE",price:"$50",img:"wolverine.jpg",amount:"BPC-157 5mg + TB-500 5mg",form:"Lyophilized powder",details:"Blend presentation",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-bpc-tb500-v.jpg",hasCOA:true},
   {name:"SS-31 10mg",price:"$40",img:"ss-31-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"10.31 mg",purity:"99.694%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-ss31-10mg-v.jpg",hasCOA:true},
-  {name:"HGH Somatropin 10iu",price:"$45",img:"hgh-somatropin-10iu.jpg",amount:"10iu",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-  {name:"HGH Somatropin 12iu",price:"$55",img:"hgh-somatropin-12iu.jpg",amount:"12iu",form:"Lyophilized powder",assay:"5.07 mg / 12.00 IU",purity:"96.363%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-hgh-somatropin-12iu-v.jpg",hasCOA:true},
-  {name:"HGH Somatropin 15iu",price:"$65",img:"hgh-somatropin-15iu.jpg",amount:"15iu",form:"Lyophilized powder",assay:"5.77 mg / 17.31 IU",purity:"97.483%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-hgh-somatropin-15iu-v.jpg",hasCOA:true},
   {name:"IGF-1 LR3 1mg",price:"$75",img:"igf1-lr3-1mg.jpg",amount:"1mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-igf1-lr3-1mg-v.jpg",hasCOA:true},
   {name:"Tesamorelin 5mg",price:"$40",img:"tesamorelin-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
   {name:"CJC + IPA",price:"$50",img:"cjc-ipa-5mg.jpg",amount:"5mg + 5mg (No DAC)",form:"Lyophilized powder",assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-cjc-ipa-5mg-v.jpg",hasCOA:true},
@@ -3741,8 +3738,6 @@ const products = [
   {name:"5 Amino Q 5mg",price:"$50",img:"5-amino-q-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
   {name:"Semax 10mg",price:"$50",img:"semax-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
   {name:"Selank 10mg",price:"$50",img:"selank-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"11.55 mg",purity:"99.793%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-selank-10mg-v.jpg",hasCOA:true},
-  {name:"Bacteriostatic Water 10mL",price:"$10",img:"bacteriostatic-water-10ml.jpg",amount:"10mL",form:"Sterile water",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"Insulin Syringe 30G 1mL/cc",price:"$1",img:"insulin-syringe.jpg",amount:"1mL/cc",form:"Individually packaged syringe",details:"Insulin syringe • 30G • 5/16 inch / 8mm needle",coaStatus:"Supply Item - COA Not Required",lab:"N/A",coaFile:"",hasCOA:false},
 ];
 
 
@@ -3797,9 +3792,9 @@ function renderProductCard(product, preview=false){
 
   const qty = getCartQty(product.name);
 
-  const badge = product.name.toLowerCase().includes("syringe")
-    ? ""
-    : `<div class="verified-pill">Lab Verified</div>`;
+  const badge = product.hasCOA
+    ? `<div class="verified-pill">Lab Verified</div>`
+    : "";
 
   const qtyBadge = `
     <div style="
@@ -3860,9 +3855,8 @@ const addButtonLabel = `Add to Cart (${qtyInCart})`;
   const purityLine = product.purity ? `<li><strong>Purity:</strong> ${product.purity}</li>` : "";
   const detailsLine = product.details ? `<li><strong>Details:</strong> ${product.details}</li>` : "";
   const coaButtonText = product.hasCOA ? "View Lab Verified COA" : "COA Status";
-const isSupplyItem = product.name.toLowerCase().includes("syringe");
-const modalBadge = isSupplyItem ? "" : `<div class="verified-pill">Lab Verified</div>`;
-const modalStatus = isSupplyItem ? "" : `<div class="modal-status">Lab Verified</div>`;
+const modalBadge = product.hasCOA ? `<div class="verified-pill">Lab Verified</div>` : "";
+const modalStatus = product.hasCOA ? `<div class="modal-status">Lab Verified</div>` : "";
   const coaViewer = `
     <div class="coa-viewer" id="coaViewer">
       <div class="modal-panel">
@@ -3870,7 +3864,7 @@ const modalStatus = isSupplyItem ? "" : `<div class="modal-status">Lab Verified<
           <div>
             <h4 style="margin:0;">Lab Verification Report</h4>
             <div class="mini">
-              ${product.hasCOA ? "Certificate of Analysis available. Tap the report to zoom in." : "Lab verified. COA upload pending for this product."}
+              ${product.hasCOA ? "Certificate of Analysis available. Tap the report to zoom in." : "COA is not yet available online for this product."}
             </div>
           </div>
           ${product.hasCOA ? `<button type="button" onclick="openCOAZoom()">Zoom In COA</button>` : ""}
@@ -3881,7 +3875,7 @@ const modalStatus = isSupplyItem ? "" : `<div class="modal-status">Lab Verified<
             product.hasCOA
               ? `<img id="modalCOAImage" src="${product.coaFile}" alt="${product.name} COA" onclick="openCOAZoom()" onerror="showCoaError(this)">
                  <div class="coa-error">COA image not found. Check the filename in your repo.</div>`
-              : `<div class="coa-error" style="display:block;">Lab Verified - COA Upload Pending.</div>`
+              : `<div class="coa-error" style="display:block;">COA not yet available online.</div>`
           }
         </div>
       </div>
@@ -3932,6 +3926,7 @@ ${modalStatus}
 <div class="modal-panel">
   <h4>⚠ Important Notice</h4>
   <ul>
+    <li><strong>All products currently listed on this site are for research purposes only.</strong></li>
     <li>This product is sold strictly for laboratory research purposes only.</li>
     <li>Not for human or animal use.</li>
     <li>Not intended for therapeutic, diagnostic, medical, or consumption purposes.</li>
@@ -4177,6 +4172,8 @@ async function submitCblOrderToSheet(event){
   const email = form.querySelector('[name="Email"]')?.value.trim() || "";
   const phone = form.querySelector('[name="Phone Number"]')?.value.trim() || "";
   const shippingAddress = form.querySelector('[name="Shipping Address"]')?.value.trim() || "";
+  const companyName = form.querySelector('[name="Company Name"]')?.value.trim() || "";
+  const researchField = form.querySelector('[name="Research Field"]')?.value || "";
   const paymentMethod = form.querySelector('[name="Payment Method"]:checked')?.value || "Not Selected";
 
   const orderId = "CBL-" + Date.now();
@@ -4202,7 +4199,7 @@ const affiliateCode = (form.querySelector('[name="Affiliate Code"]')?.value.trim
       sku: item.name,
       qty: item.quantity,
       unitPrice: item.price,
-      notes: `Shipping Address: ${shippingAddress}`
+      notes: `Shipping Address: ${shippingAddress} | Company: ${companyName} | Research Field: ${researchField}`
     }))
   };
 
@@ -4269,10 +4266,27 @@ function renderCartCheckout(){
         <input class="field" name="Email" type="email" placeholder="Email Address" required>
         <input class="field" name="Phone Number" placeholder="Phone Number" required>
         <textarea class="field" name="Shipping Address" placeholder="Shipping Address" required></textarea>
-<label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:#dbe8fa;font-size:13px;line-height:1.45;">
-  <input type="checkbox" name="21+ Research Use Confirmation" value="Confirmed" required style="margin-top:3px;">
-  <span>I confirm that I am 21 years of age or older and understand these products are sold strictly for lawful laboratory research use only. Not for human or animal use. Not for therapeutic, diagnostic, medical, or consumption purposes.</span>
-</label>
+        <input class="field" name="Company Name" placeholder="Company / Organization Name" required>
+        <select class="field" name="Research Field" required>
+          <option value="" selected disabled>Select Research Field</option>
+          <option value="Pharmacology">Pharmacology</option>
+          <option value="Molecular Biology">Molecular Biology</option>
+          <option value="Medicinal Chemistry">Medicinal Chemistry</option>
+          <option value="Biochemistry">Biochemistry</option>
+          <option value="Biotechnology">Biotechnology</option>
+          <option value="Analytical Chemistry">Analytical Chemistry</option>
+          <option value="Academic / Institutional Research">Academic / Institutional Research</option>
+          <option value="Other Laboratory Research">Other Laboratory Research</option>
+        </select>
+        <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:#dbe8fa;font-size:13px;line-height:1.45;">
+          <input type="checkbox" name="Research Use Acknowledgment" value="Confirmed" required style="margin-top:3px;">
+          <span>I confirm that I am 21 years of age or older and that chemicals purchased shall not be used for human therapeutic purposes and are for research purposes only.</span>
+        </label>
+        <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:#dbe8fa;font-size:13px;line-height:1.45;">
+          <input type="checkbox" name="Terms and Conditions Accepted" value="Accepted" required style="margin-top:3px;">
+          <span>I have read and agree to the <a href="#terms" style="color:#67d5ff;font-weight:900;">Terms &amp; Conditions</a>, Privacy Policy, Shipping Policy, Refund Policy, and Returns Policy.</span>
+        </label>
+
         <div style="
           margin:18px 0 16px;
           padding:18px;
@@ -4373,10 +4387,7 @@ function renderCartCheckout(){
           </div>
         </div>
 
-<label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:#dbe8fa;font-size:13px;line-height:1.45;">
-  <input type="checkbox" name="21+ Research Use Confirmation" value="Confirmed" required style="margin-top:3px;">
-  <span>I confirm that I am 21 years of age or older and understand these products are sold strictly for lawful laboratory research use only. Not for human or animal use. Not for therapeutic, diagnostic, medical, or consumption purposes.</span>
-</label>
+
 
 <button class="order-submit" type="submit">Submit Order Request</button>
       </form>
@@ -4862,10 +4873,7 @@ renderCartCheckout = function(){
         <input class="field" name="Phone Number" placeholder="Phone Number" required>
         <textarea class="field" name="Shipping Address" placeholder="Shipping Address" required></textarea>
 
-        <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:#dbe8fa;font-size:13px;line-height:1.45;">
-          <input type="checkbox" name="21+ Research Use Confirmation" value="Confirmed" required style="margin-top:3px;">
-          <span>I confirm that I am 21 years of age or older and understand these products are sold strictly for lawful laboratory research use only. Not for human or animal use. Not for therapeutic, diagnostic, medical, or consumption purposes.</span>
-        </label>
+        
 
         <div style="
           margin:18px 0 16px;
@@ -5152,7 +5160,7 @@ openProduct = function(name){
           <div>
             <h4 style="margin:0;">Lab Verification Report</h4>
             <div class="mini">
-              ${product.hasCOA ? "Certificate of Analysis available. Tap the report to zoom in." : "Lab verified. COA upload pending for this product."}
+              ${product.hasCOA ? "Certificate of Analysis available. Tap the report to zoom in." : "COA is not yet available online for this product."}
             </div>
           </div>
           ${product.hasCOA ? `<button type="button" onclick="openCOAZoom()">Zoom In COA</button>` : ""}
@@ -5163,7 +5171,7 @@ openProduct = function(name){
             product.hasCOA
               ? `<img id="modalCOAImage" src="${product.coaFile}" alt="${product.name} COA" onclick="openCOAZoom()" onerror="showCoaError(this)">
                  <div class="coa-error">COA image not found. Check the filename in your repo.</div>`
-              : `<div class="coa-error" style="display:block;">Lab Verified - COA Upload Pending.</div>`
+              : `<div class="coa-error" style="display:block;">COA not yet available online.</div>`
           }
         </div>
       </div>

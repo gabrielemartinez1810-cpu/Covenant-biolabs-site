@@ -2111,6 +2111,12 @@ function cartSummaryText(){
   return lines.join("\n");
 }
 async function submitCblOrderToSheet(event){
+  if(!window.cblAuthUser){
+    event.preventDefault();
+    if(window.cblOpenAuthModal) window.cblOpenAuthModal();
+    alert("A customer account is required before submitting an order request.");
+    return false;
+  }
   event.preventDefault();
 
   const form = event.target;
@@ -2176,6 +2182,10 @@ async function submitCblOrderToSheet(event){
   return false;
 }
 function showCartCheckout(){
+  if(window.cblRequireAuthForCheckout){
+    window.cblRequireAuthForCheckout(renderCartCheckout);
+    return;
+  }
   renderCartCheckout();
 }
 
@@ -2463,5 +2473,5 @@ initFaqAccordion();
 updateCartUI();
 
 </script>
-  <script src="age-gate.js"></script>\n</body>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>\n  <script src="customer-auth.js"></script>\n  <script src="age-gate.js"></script>\n</body>
 </html>

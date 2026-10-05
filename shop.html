@@ -1094,10 +1094,10 @@ html body #legal .legal-shell::before {
 <nav class="nav">
   <a href="index.html" class="active">Home</a>
   <a href="shop.html">Shop Catalog</a>
-  <a href="contact.html">Contact</a>
+  <a href="#contact">Contact</a>
 
-  <a href="faq.html">FAQ</a>
-  <a href="legal.html">Legal</a>
+  <a href="#faq">FAQ</a>
+  <a href="#legal">Legal</a>
 </nav>
 </nav>
   <button class="cart-nav" type="button" onclick="openCart()">Cart <span class="cart-count" id="cartCount">0</span></button>
@@ -1152,7 +1152,7 @@ html body #legal .legal-shell::before {
 </div>
 
   <div class="trust-cards">
-    <div class="trust-card"><div class="trust-icon">✓</div><h3>Third-Party COA Verification</h3><p>Selected products include certificate review for purity and identity.</p></div>
+    <div class="trust-card"><div class="trust-icon">✓</div><h3>Third-Party COA Verification</h3><p>Every listed product includes an online Certificate of Analysis for review.</p></div>
     <div class="trust-card"><div class="trust-icon">⚗</div><h3>Small-Batch Sourcing</h3><p>Focused batches for consistency, quality, and presentation.</p></div>
     <div class="trust-card"><div class="trust-icon">🔎</div><h3>Research-Use Transparency</h3><p>Products are intended strictly for laboratory research use only.</p></div>
     <div class="trust-card"><div class="trust-icon">!</div><h3>Responsible Standards</h3><p>Not for human consumption. Keep out of reach of children.</p></div>
@@ -1164,7 +1164,7 @@ html body #legal .legal-shell::before {
   <div class="catalog-inner">
     <p class="eyebrow" style="text-align:center;">Research Catalog</p>
     <h2 class="catalog-title">Shop Our <span>Catalog</span></h2>
-    <p class="sub">Research Use Only • Lab Verified Where COA Is Available</p>
+    <p class="sub">Research Use Only • Online COA Available for Every Listed Product</p>
     <div class="grid" id="productGrid"></div>
   </div>
 </section>
@@ -1706,23 +1706,14 @@ html body #legal .legal-shell::before {
 const products = [
   {name:"RT20 20mg",price:"$120",img:"rt20-20mg.jpg",amount:"20mg",form:"Lyophilized powder",assay:"21.67 mg",purity:"99.566%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-rt20-20mg-v.jpg",hasCOA:true},
   {name:"NAD+ 500mg",price:"$60",img:"nad-500mg.jpg",amount:"500mg",form:"Lyophilized powder",assay:"536.16 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-nad-500mg-v.jpg",hasCOA:true},
-  {name:"MT-2 10mg",price:"$50",img:"mt-2-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-  {name:"GLOW 70mg",price:"$100",img:"glow.jpg",amount:"70mg",form:"Lyophilized powder",details:"Blend presentation",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-{name:"KLOW",price:"$120",img:"klow.jpg",amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg",form:"Lyophilized powder",details:"Blend presentation",assay:"GHK-Cu 68.55 mg / BPC-157 11.83 mg / TB-500 11.56 mg / KPV 12.78 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-klow-v.jpg",hasCOA:true},
+{name:"GHK-Cu + BPC-157 + TB-500 + KPV Blend",price:"$120",img:"klow.jpg",amount:"BT 10mg + BPC 10mg + CU 50mg + KP 10mg",form:"Lyophilized powder",details:"Blend presentation",assay:"GHK-Cu 68.55 mg / BPC-157 11.83 mg / TB-500 11.56 mg / KPV 12.78 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-klow-v.jpg",hasCOA:true},
   {name:"Cagrilintide 5mg",price:"$70",img:"cagrilintide-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-cagrilintide-5mg-v.jpg",hasCOA:true},
-  {name:"DISP 10mg",price:"$70",img:"disp-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
   {name:"MOTS-C 10mg",price:"$50",img:"mots-c-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"10.63 mg",purity:"99.009%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-mots-c-10mg-v.jpg",hasCOA:true},
-  {name:"SLU-PP-332 5mg",price:"$90",img:"slu-pp-332-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-  {name:"WOLVERINE",price:"$50",img:"wolverine.jpg",amount:"BPC-157 5mg + TB-500 5mg",form:"Lyophilized powder",details:"Blend presentation",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-bpc-tb500-v.jpg",hasCOA:true},
+  {name:"BPC-157 + TB-500 Blend 10mg",price:"$50",img:"wolverine.jpg",amount:"BPC-157 5mg + TB-500 5mg",form:"Lyophilized powder",details:"Blend presentation",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-bpc-tb500-v.jpg",hasCOA:true},
   {name:"SS-31 10mg",price:"$40",img:"ss-31-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"10.31 mg",purity:"99.694%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-ss31-10mg-v.jpg",hasCOA:true},
   {name:"IGF-1 LR3 1mg",price:"$75",img:"igf1-lr3-1mg.jpg",amount:"1mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-igf1-lr3-1mg-v.jpg",hasCOA:true},
-  {name:"Tesamorelin 5mg",price:"$40",img:"tesamorelin-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-  {name:"CJC + IPA",price:"$50",img:"cjc-ipa-5mg.jpg",amount:"5mg + 5mg (No DAC)",form:"Lyophilized powder",assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-cjc-ipa-5mg-v.jpg",hasCOA:true},
-  {name:"Glutathione 1500mg",price:"$50",img:"glutathione-1500mg.jpg",amount:"1500mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
+  {name:"CJC-1295 + Ipamorelin 10mg",price:"$50",img:"cjc-ipa-5mg.jpg",amount:"5mg + 5mg (No DAC)",form:"Lyophilized powder",assay:"Ipamorelin 5.13 mg / CJC-1295 6.24 mg",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-cjc-ipa-5mg-v.jpg",hasCOA:true},
   {name:"Epithalon 10mg",price:"$50",img:"epithalon-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"9.81 mg",purity:"99.686%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-epithalon-10mg-v.jpg",hasCOA:true},
-  {name:"KPV 10mg",price:"$50",img:"kpv-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-  {name:"5 Amino Q 5mg",price:"$50",img:"5-amino-q-5mg.jpg",amount:"5mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
-  {name:"Semax 10mg",price:"$50",img:"semax-10mg.jpg",amount:"10mg",form:"Lyophilized powder",coaStatus:"Lab Verified - COA Upload Pending",lab:"Janoshik",coaFile:"",hasCOA:false},
   {name:"Selank 10mg",price:"$50",img:"selank-10mg.jpg",amount:"10mg",form:"Lyophilized powder",assay:"11.55 mg",purity:"99.793%",coaStatus:"Lab Verified - COA Available",lab:"Janoshik",coaFile:"coa-selank-10mg-v.jpg",hasCOA:true},
 ];
 

@@ -1,4 +1,9 @@
 (() => {
+  const authStyles = document.createElement("link");
+  authStyles.rel = "stylesheet";
+  authStyles.href = "customer-auth.css";
+  document.head.appendChild(authStyles);
+
   const SUPABASE_URL = "https://lznalvinoyxesjsncuqv.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_PhihFUquAY7-MnN16oMLig_t2h0PFrO";
   let client = null;

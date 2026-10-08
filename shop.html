@@ -1618,7 +1618,7 @@ html body #legal .legal-shell::before {
       <div class="legal-block">
         <h4>4. Shipping Rates</h4>
         <ul>
-          <li>Shipping charges may be calculated at checkout or communicated during order review.</li>
+          <li>A flat $10 shipping charge is added once per shipped order at checkout.</li>
           <li>Free or discounted shipping may be offered at our discretion and may change at any time.</li>
         </ul>
       </div>
@@ -1997,6 +1997,42 @@ function showCoaError(img){
   if(err) err.style.display = "block";
 }
 
+// All current checkout orders require a shipping address; charge once per order.
+const CBL_FLAT_SHIPPING = 10;
+function getCblShippingCharge(){
+  return cart.length > 0 ? CBL_FLAT_SHIPPING : 0;
+}
+
+function getCblBasicCartTotals(){
+  const subtotal = Number(cart.reduce((sum,item) => sum + item.price * item.quantity, 0).toFixed(2));
+  const shipping = getCblShippingCharge();
+  return {subtotal, shipping, newTotal: Number((subtotal + shipping).toFixed(2))};
+}
+
+// Refresh both delivery channels from the same totals immediately before posting.
+function syncCblOrderForm(form, totals){
+  const values = {
+    "Subtotal": totals.subtotal.toFixed(2),
+    "Bulk Vial Discount": (totals.bulkDiscountAmount || 0).toFixed(2),
+    "Total Discount": ((totals.bulkDiscountAmount || 0) + (totals.discountAmount || 0)).toFixed(2),
+    "Shipping Charged": totals.shipping.toFixed(2),
+    "Shipping Cost": totals.shipping.toFixed(2),
+    "Final Total": totals.newTotal.toFixed(2),
+    "Order Summary": cartSummaryText(),
+    "Products Requested": cartSummaryText()
+  };
+  Object.entries(values).forEach(([name,value]) => {
+    let input = form.elements.namedItem(name);
+    if(!input){
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      form.appendChild(input);
+    }
+    input.value = value;
+  });
+}
+
 function priceNumber(price){
   return Number(String(price).replace(/[^0-9.]/g,"")) || 0;
 }
@@ -2018,6 +2054,7 @@ function addToCart(product){
   }
 
   updateCartUI();
+  renderCartCheckoutIfOpen();
   refreshProductGrid();
 
   if(currentProduct && currentProduct.name === product.name){
@@ -2040,11 +2077,10 @@ function updateCartUI(){
     return;
   }
 
-  let total = 0;
+  const totals = getCblBasicCartTotals();
 
   itemsDiv.innerHTML = cart.map((item,index) => {
     const lineTotal = item.price * item.quantity;
-    total += lineTotal;
 
     return `
       <div class="cart-item">
@@ -2066,7 +2102,7 @@ function updateCartUI(){
     `;
   }).join("");
 
-  totalDiv.textContent = `Estimated Total: $${total.toFixed(2)}`;
+  totalDiv.innerHTML = `Subtotal: $${totals.subtotal.toFixed(2)}<br>Shipping: $${totals.shipping.toFixed(2)}<br>Estimated Total: $${totals.newTotal.toFixed(2)}`;
 refreshProductGrid();
 }
 
@@ -2105,8 +2141,10 @@ function cartSummaryText(){
     `${item.name} | Qty: ${item.quantity} | Unit: ${item.priceText} | Line Total: $${(item.price * item.quantity).toFixed(2)}`
   );
 
-  const total = cart.reduce((sum,item) => sum + item.price * item.quantity, 0);
-  lines.push(`Estimated Total: $${total.toFixed(2)}`);
+  const totals = getCblBasicCartTotals();
+  lines.push(`Subtotal: $${totals.subtotal.toFixed(2)}`);
+  lines.push(`Shipping: $${totals.shipping.toFixed(2)}`);
+  lines.push(`Estimated Total: $${totals.newTotal.toFixed(2)}`);
 
   return lines.join("\n");
 }
@@ -2141,6 +2179,8 @@ async function submitCblOrderToSheet(event){
   const researchField = form.querySelector('[name="Research Field"]')?.value || "";
   const paymentMethod = form.querySelector('[name="Payment Method"]:checked')?.value || "Not Selected";
 
+  const totals = getCblBasicCartTotals();
+  syncCblOrderForm(form, totals);
   const orderId = "CBL-" + Date.now();
 
   const payload = {
@@ -2153,8 +2193,10 @@ async function submitCblOrderToSheet(event){
     channel: "Website",
     paymentStatus: "Pending",
     fulfillmentStatus: "Not Fulfilled",
-    shippingCharged: 0,
-    shippingCost: 0,
+    shippingCharged: totals.shipping,
+    shippingCost: totals.shipping,
+    subtotal: totals.subtotal,
+    finalTotal: totals.newTotal,
     discount: 0,
     notes: `Shipping Address: ${shippingAddress} | Company: ${companyName} | Research Field: ${researchField}`,
     items: cart.map(item => ({
@@ -2353,6 +2395,7 @@ function renderCartCheckout(){
       </form>
     </div>
   `;
+  syncCblOrderForm(checkout.querySelector("form"), getCblBasicCartTotals());
 }
 document.getElementById("productModal").addEventListener("click", e => {
   if(e.target.id === "productModal") closeModal();

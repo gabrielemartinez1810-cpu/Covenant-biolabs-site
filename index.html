@@ -3518,7 +3518,7 @@ const API_ENDPOINT = "https://covenant-biolabs-site-8fjv.vercel.app/api/covenant
       <div class="legal-block">
         <h4>4. Shipping Rates</h4>
         <ul>
-          <li>Shipping charges may be calculated at checkout or communicated during order review.</li>
+          <li>A flat $10 shipping charge is added once per shipped order at checkout.</li>
           <li>Free or discounted shipping may be offered at our discretion and may change at any time.</li>
         </ul>
       </div>
@@ -3951,6 +3951,42 @@ function showCoaError(img){
   if(err) err.style.display = "block";
 }
 
+// All current checkout orders require a shipping address; charge once per order.
+const CBL_FLAT_SHIPPING = 10;
+function getCblShippingCharge(){
+  return cart.length > 0 ? CBL_FLAT_SHIPPING : 0;
+}
+
+function getCblBasicCartTotals(){
+  const subtotal = Number(cart.reduce((sum,item) => sum + item.price * item.quantity, 0).toFixed(2));
+  const shipping = getCblShippingCharge();
+  return {subtotal, shipping, newTotal: Number((subtotal + shipping).toFixed(2))};
+}
+
+// Refresh both delivery channels from the same totals immediately before posting.
+function syncCblOrderForm(form, totals){
+  const values = {
+    "Subtotal": totals.subtotal.toFixed(2),
+    "Bulk Vial Discount": (totals.bulkDiscountAmount || 0).toFixed(2),
+    "Total Discount": ((totals.bulkDiscountAmount || 0) + (totals.discountAmount || 0)).toFixed(2),
+    "Shipping Charged": totals.shipping.toFixed(2),
+    "Shipping Cost": totals.shipping.toFixed(2),
+    "Final Total": totals.newTotal.toFixed(2),
+    "Order Summary": cartSummaryText(),
+    "Products Requested": cartSummaryText()
+  };
+  Object.entries(values).forEach(([name,value]) => {
+    let input = form.elements.namedItem(name);
+    if(!input){
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      form.appendChild(input);
+    }
+    input.value = value;
+  });
+}
+
 function priceNumber(price){
   return Number(String(price).replace(/[^0-9.]/g,"")) || 0;
 }
@@ -3972,6 +4008,7 @@ function addToCart(product){
   }
 
   updateCartUI();
+  renderCartCheckoutIfOpen();
   refreshProductGrid();
 
   if(currentProduct && currentProduct.name === product.name){
@@ -3994,11 +4031,10 @@ function updateCartUI(){
     return;
   }
 
-  let total = 0;
+  const totals = getCblBasicCartTotals();
 
   itemsDiv.innerHTML = cart.map((item,index) => {
     const lineTotal = item.price * item.quantity;
-    total += lineTotal;
 
     return `
       <div class="cart-item">
@@ -4020,7 +4056,7 @@ function updateCartUI(){
     `;
   }).join("");
 
-  totalDiv.textContent = `Estimated Total: $${total.toFixed(2)}`;
+  totalDiv.innerHTML = `Subtotal: $${totals.subtotal.toFixed(2)}<br>Shipping: $${totals.shipping.toFixed(2)}<br>Estimated Total: $${totals.newTotal.toFixed(2)}`;
 refreshProductGrid();
 }
 
@@ -4059,8 +4095,10 @@ function cartSummaryText(){
     `${item.name} | Qty: ${item.quantity} | Unit: ${item.priceText} | Line Total: $${(item.price * item.quantity).toFixed(2)}`
   );
 
-  const total = cart.reduce((sum,item) => sum + item.price * item.quantity, 0);
-  lines.push(`Estimated Total: $${total.toFixed(2)}`);
+  const totals = getCblBasicCartTotals();
+  lines.push(`Subtotal: $${totals.subtotal.toFixed(2)}`);
+  lines.push(`Shipping: $${totals.shipping.toFixed(2)}`);
+  lines.push(`Estimated Total: $${totals.newTotal.toFixed(2)}`);
 
   return lines.join("\n");
 }
@@ -4095,6 +4133,8 @@ async function submitCblOrderToSheet(event){
   const researchField = form.querySelector('[name="Research Field"]')?.value || "";
   const paymentMethod = form.querySelector('[name="Payment Method"]:checked')?.value || "Not Selected";
 
+  const totals = getCblBasicCartTotals();
+  syncCblOrderForm(form, totals);
   const orderId = "CBL-" + Date.now();
 
 const affiliateCode = (form.querySelector('[name="Affiliate Code"]')?.value.trim().toUpperCase() || getCblAffiliateCode()).replace(/[^A-Z0-9_-]/g,"");
@@ -4110,8 +4150,10 @@ const affiliateCode = (form.querySelector('[name="Affiliate Code"]')?.value.trim
     channel: "Website",
     paymentStatus: "Pending",
     fulfillmentStatus: "Not Fulfilled",
-    shippingCharged: 0,
-    shippingCost: 0,
+    shippingCharged: totals.shipping,
+    shippingCost: totals.shipping,
+    subtotal: totals.subtotal,
+    finalTotal: totals.newTotal,
     discount: 0,
     notes: `Shipping Address: ${shippingAddress}${affiliateCode ? "\nAffiliate Code: " + affiliateCode : ""}`,
     items: cart.map(item => ({
@@ -4316,6 +4358,7 @@ function renderCartCheckout(){
       </form>
     </div>
   `;
+  syncCblOrderForm(checkout.querySelector("form"), getCblBasicCartTotals());
 }
 document.getElementById("productModal").addEventListener("click", e => {
   if(e.target.id === "productModal") closeModal();
@@ -4529,8 +4572,10 @@ function getCblCartTotals(rawCode){
   const affiliate = CBL_AFFILIATES[code] || null;
 
   const discountAmount = affiliate ? subtotal * affiliate.discountRate : 0;
-  const newTotal = subtotal - discountAmount;
-  const commissionAmount = affiliate ? newTotal * affiliate.commissionRate : 0;
+  const merchandiseTotal = Number((subtotal - discountAmount).toFixed(2));
+  const shipping = getCblShippingCharge();
+  const newTotal = Number((merchandiseTotal + shipping).toFixed(2));
+  const commissionAmount = affiliate ? merchandiseTotal * affiliate.commissionRate : 0;
 
   return {
     code,
@@ -4539,6 +4584,7 @@ function getCblCartTotals(rawCode){
     subtotal,
     discountAmount,
     newTotal,
+    shipping,
     commissionAmount,
     discountPercent: affiliate ? affiliate.discountRate * 100 : 0,
     commissionPercent: affiliate ? affiliate.commissionRate * 100 : 0
@@ -4561,16 +4607,19 @@ function createCblOrderSummary(rawCode){
     productLines.push(`Affiliate Name: ${totals.affiliateName}`);
     productLines.push(`Customer Discount: ${totals.discountPercent}% OFF`);
     productLines.push(`Discount Applied: -${cblMoney(totals.discountAmount)}`);
+    productLines.push(`Shipping: ${cblMoney(totals.shipping)}`);
     productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
     productLines.push(`Affiliate Commission: ${totals.affiliateName} earns ${totals.commissionPercent}% = ${cblMoney(totals.commissionAmount)}`);
   } else if(totals.code){
     productLines.push(`Affiliate Code Entered: ${totals.code} - Not recognized`);
     productLines.push(`Discount Applied: $0.00`);
+    productLines.push(`Shipping: ${cblMoney(totals.shipping)}`);
     productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
     productLines.push(`Affiliate Commission: $0.00`);
   } else {
     productLines.push(`Affiliate Code: None`);
     productLines.push(`Discount Applied: $0.00`);
+    productLines.push(`Shipping: ${cblMoney(totals.shipping)}`);
     productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
     productLines.push(`Affiliate Commission: $0.00`);
   }
@@ -4598,13 +4647,15 @@ function updateCblDiscountDisplay(rawCode){
   const commissionText = document.getElementById("cblCommissionText");
 
   if(originalText) originalText.textContent = cblMoney(totals.subtotal);
+  const bulkDiscountText = document.getElementById("cblBulkDiscountText");
+  if(bulkDiscountText) bulkDiscountText.textContent = "-" + cblMoney(totals.bulkDiscountAmount || 0);
   if(discountText) discountText.textContent = totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00";
   if(newTotalText) newTotalText.textContent = cblMoney(totals.newTotal);
   if(commissionText) commissionText.textContent = totals.commissionAmount > 0 ? cblMoney(totals.commissionAmount) : "$0.00";
 
-  if(box){
-    box.style.display = totals.code ? "block" : "none";
-  }
+  if(box) box.style.display = "block";
+  const shippingText = document.getElementById("cblShippingText");
+  if(shippingText) shippingText.textContent = cblMoney(totals.shipping);
 
   if(message){
     if(totals.affiliate){
@@ -4627,6 +4678,8 @@ function updateCblDiscountDisplay(rawCode){
   if(commissionInput) commissionInput.value = totals.commissionAmount > 0 ? cblMoney(totals.commissionAmount) : "$0.00";
   if(orderSummaryInput) orderSummaryInput.value = summary;
   if(productsRequested) productsRequested.value = summary;
+  const form = productsRequested?.form;
+  if(form) syncCblOrderForm(form, totals);
 }
 
 function handleCblAffiliateInput(input){
@@ -4693,14 +4746,15 @@ updateCartUI = function(){
     totalDiv.innerHTML = `
       <div style="font-size:15px;color:#bfeeff;line-height:1.7;">
         Original Total: <span style="text-decoration:line-through;">${cblMoney(totals.subtotal)}</span><br>
-        Discount Applied: <strong style="color:#65df87;">-${cblMoney(totals.discountAmount)}</strong>
+        Discount Applied: <strong style="color:#65df87;">-${cblMoney(totals.discountAmount)}</strong><br>
+        Shipping: ${cblMoney(totals.shipping)}
       </div>
       <div style="margin-top:6px;color:#65df87;font-size:26px;">
         New Total: ${cblMoney(totals.newTotal)}
       </div>
     `;
   } else {
-    totalDiv.textContent = `Estimated Total: ${cblMoney(totals.subtotal)}`;
+    totalDiv.innerHTML = `Subtotal: ${cblMoney(totals.subtotal)}<br>Shipping: ${cblMoney(totals.shipping)}<br>Estimated Total: ${cblMoney(totals.newTotal)}`;
   }
 
   refreshProductGrid();
@@ -4749,7 +4803,7 @@ renderCartCheckout = function(){
         >
 
         <div id="cblDiscountBox" style="
-          display:${startingAffiliateCode ? "block" : "none"};
+          display:block;
           margin:12px 0 16px;
           padding:18px;
           border-radius:18px;
@@ -4770,8 +4824,18 @@ renderCartCheckout = function(){
             </div>
 
             <div style="display:flex;justify-content:space-between;gap:12px;">
-              <span>Discount Applied</span>
+              <span>Bulk Vial Discount</span>
+              <strong id="cblBulkDiscountText">-${cblMoney(totals.bulkDiscountAmount || 0)}</strong>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;gap:12px;">
+              <span>Affiliate Discount Applied</span>
               <strong id="cblDiscountText" style="color:#65df87;">${totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00"}</strong>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;gap:12px;">
+              <span>Shipping</span>
+              <strong id="cblShippingText">${cblMoney(totals.shipping)}</strong>
             </div>
 
             <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(103,213,255,.45),transparent);margin:6px 0;"></div>
@@ -4889,15 +4953,15 @@ submitCblOrderToSheet = async function(event){
     paymentStatus: "Pending",
     fulfillmentStatus: "Not Fulfilled",
     subtotal: Number(totals.subtotal.toFixed(2)),
-    discount: Number(totals.discountAmount.toFixed(2)),
+    discount: Number(((totals.bulkDiscountAmount || 0) + totals.discountAmount).toFixed(2)),
     finalTotal: Number(totals.newTotal.toFixed(2)),
     affiliateCommission: Number(totals.commissionAmount.toFixed(2)),
-    shippingCharged: 0,
-    shippingCost: 0,
-    notes: `Shipping Address: ${shippingAddress}${affiliateCode ? "\nAffiliate Code: " + affiliateCode : ""}\nOriginal Total: ${cblMoney(totals.subtotal)}\nDiscount Applied: ${totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00"}\nNew Total: ${cblMoney(totals.newTotal)}\nAffiliate Commission: ${cblMoney(totals.commissionAmount)}`,
+    shippingCharged: totals.shipping,
+    shippingCost: totals.shipping,
+    notes: `Shipping Address: ${shippingAddress}${affiliateCode ? "\nAffiliate Code: " + affiliateCode : ""}\nOriginal Total: ${cblMoney(totals.subtotal)}\nBulk Vial Discount: -${cblMoney(totals.bulkDiscountAmount || 0)}\nAffiliate Discount Applied: ${totals.discountAmount > 0 ? "-" + cblMoney(totals.discountAmount) : "$0.00"}\nShipping: ${cblMoney(totals.shipping)}\nNew Total: ${cblMoney(totals.newTotal)}\nAffiliate Commission: ${cblMoney(totals.commissionAmount)}`,
     items: cart.map(item => ({
       sku: item.name,
-      qty: item.quantity,
+      qty: getCblTotalVials(item),
       unitPrice: item.price,
       notes: `Shipping Address: ${shippingAddress}`
     }))
@@ -5218,6 +5282,7 @@ function addSelectedCblVialsToCart(product){
   }
 
   updateCartUI();
+  renderCartCheckoutIfOpen();
   refreshProductGrid();
 
   if(currentProduct && currentProduct.name === product.name){
@@ -5240,8 +5305,10 @@ getCblCartTotals = function(rawCode){
   const affiliate = CBL_AFFILIATES[code] || null;
 
   const affiliateDiscountAmount = affiliate ? afterBulkTotal * affiliate.discountRate : 0;
-  const newTotal = afterBulkTotal - affiliateDiscountAmount;
-  const commissionAmount = affiliate ? newTotal * affiliate.commissionRate : 0;
+  const merchandiseTotal = Number((afterBulkTotal - affiliateDiscountAmount).toFixed(2));
+  const shipping = getCblShippingCharge();
+  const newTotal = Number((merchandiseTotal + shipping).toFixed(2));
+  const commissionAmount = affiliate ? merchandiseTotal * affiliate.commissionRate : 0;
 
   return {
     code,
@@ -5251,6 +5318,7 @@ getCblCartTotals = function(rawCode){
     bulkDiscountAmount,
     discountAmount: affiliateDiscountAmount,
     newTotal,
+    shipping,
     commissionAmount,
     discountPercent: affiliate ? affiliate.discountRate * 100 : 0,
     commissionPercent: affiliate ? affiliate.commissionRate * 100 : 0
@@ -5278,16 +5346,19 @@ createCblOrderSummary = function(rawCode){
     productLines.push(`Affiliate Name: ${totals.affiliateName}`);
     productLines.push(`Affiliate Customer Discount: ${totals.discountPercent}% OFF`);
     productLines.push(`Affiliate Discount Applied: -${cblMoney(totals.discountAmount)}`);
+    productLines.push(`Shipping: ${cblMoney(totals.shipping)}`);
     productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
     productLines.push(`Affiliate Commission: ${totals.affiliateName} earns ${totals.commissionPercent}% = ${cblMoney(totals.commissionAmount)}`);
   } else if(totals.code){
     productLines.push(`Affiliate Code Entered: ${totals.code} - Not recognized`);
     productLines.push(`Affiliate Discount Applied: $0.00`);
+    productLines.push(`Shipping: ${cblMoney(totals.shipping)}`);
     productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
     productLines.push(`Affiliate Commission: $0.00`);
   } else {
     productLines.push(`Affiliate Code: None`);
     productLines.push(`Affiliate Discount Applied: $0.00`);
+    productLines.push(`Shipping: ${cblMoney(totals.shipping)}`);
     productLines.push(`New Total: ${cblMoney(totals.newTotal)}`);
     productLines.push(`Affiliate Commission: $0.00`);
   }
@@ -5342,7 +5413,8 @@ updateCartUI = function(){
     <div style="font-size:15px;color:#bfeeff;line-height:1.7;">
       Original Total: ${cblMoney(totals.subtotal)}<br>
       Bulk Vial Discount: <strong style="color:#65df87;">-${cblMoney(totals.bulkDiscountAmount)}</strong><br>
-      Affiliate Discount: <strong style="color:#65df87;">-${cblMoney(totals.discountAmount)}</strong>
+      Affiliate Discount: <strong style="color:#65df87;">-${cblMoney(totals.discountAmount)}</strong><br>
+      Shipping: ${cblMoney(totals.shipping)}
     </div>
     <div style="margin-top:6px;color:#65df87;font-size:26px;">
       New Total: ${cblMoney(totals.newTotal)}
